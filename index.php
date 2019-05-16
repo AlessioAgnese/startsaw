@@ -262,7 +262,7 @@
 <script>
     $(document).ready(function() {
         $('#submitlogin').click(function() {
-            console.log("Clicked");
+            
             $.ajax({
                 url: 'http://localhost/php/function/login.php',
                 type: 'POST',
