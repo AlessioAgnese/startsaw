@@ -95,7 +95,7 @@
               <div class="field">
                 <label class="label">Username</label>
                 <p class="control has-icons-left has-icons-right">
-                  <input class="input" type="text" id="username" placeholder="Nome Utente">
+                  <input class="input" type="text" id="usernameL" placeholder="Nome Utente">
                   <span class="icon is-small is-left">
                     <i class="fas fa-user"></i>
                   </span>
@@ -107,23 +107,23 @@
               <div class="field">
                 <label class="label">Password</label>
                 <p class="control has-icons-left">
-                  <input class="input" type="password" id="pwd" placeholder="Password">
+                  <input class="input" type="password" id="pwdL" placeholder="Password">
                   <span class="icon is-small is-left">
                     <i class="fas fa-lock"></i>
                   </span>
                 </p>
               </div>
               <br>
-              <button class="button is-warning " id="submit">
+              <button class="button is-warning " id="submitlogin">
                 Login
               </button>
           </div>
           <div class="tile is-parent is-vertical">
-            <form name="registerUser" action="/php/register.php" method="POST">
+            
               <div class="field">
                 <label class="label">Username</label>
                 <p class="control has-icons-left has-icons-right">
-                  <input name="username" class="input" type="text" placeholder="Nome Utente"
+                  <input id="usernameR" class="input" type="text" placeholder="Nome Utente"
                     pattern="^(?!.*__.*)(?!.*\.\..*)[a-z0-9_.]+$" required>
                   <span class="icon is-small is-left">
                     <i class="fas fa-user"></i>
@@ -139,7 +139,7 @@
               <div class="field">
                 <label class="label">Email</label>
                 <p class="control has-icons-left has-icons-right">
-                  <input name="email" class="input" type="email" placeholder="esempio@domain.com"
+                  <input id="email" class="input" type="email" placeholder="esempio@domain.com"
                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
                   <span class="icon is-small is-left">
                     <i class="fas fa-envelope"></i>
@@ -156,7 +156,7 @@
               <div class="field">
                 <label class="label">Password</label>
                 <p class="control has-icons-left">
-                  <input name="psw" class="input" type="password" placeholder="Password"
+                  <input id=pwdR class="input" type="password" placeholder="Password"
                     title="Deve contenere almeno un numero ,una lettera minuscola , una maiuscola ed un simbolo e la lunghezza deve essere almeno di 8 caratteri "
                     path="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
                   <span class="icon is-small is-left">
@@ -183,10 +183,10 @@
                 </div>
               </div>
               <br>
-              <button id="registerButton" class="button is-danger " type="submit">
+              <button class="button is-danger " id="submitRegister">
                 Registrati
               </button>
-            </form>
+
           </div>
         </div>
       </section>
@@ -266,13 +266,13 @@
 
 <script>
   $(document).ready(function(){
-    $('#submit').click(function(){
+    $('#submitlogin').click(function(){
       console.log("Clicked");
       $.ajax({
         url:'http://localhost/php/function/login.php',
         type:'POST',
         dataType:'json',
-        data: JSON.stringify({username: $('#username').val(), pwd:$('#pwd').val()}),
+        data: JSON.stringify({username: $('#usernameL').val(), pwd:$('#pwdL').val()}),
         success:function(data){
           if(data.ok==true){
            $('#userLogged').text(data.username);
@@ -280,6 +280,29 @@
           }
           else{
             alert("email or password wrong");
+          }
+        }
+      })
+    })
+  })
+  
+  $(document).ready(function(){
+    $('#submitRegister').click(function(){
+      console.log("Clicked");
+      $.ajax({
+        url:'http://localhost/php/function/register.php',
+        type:'POST',
+        dataType:'json',
+        data: JSON.stringify({username: $('#usernameR').val(), pwd:$('#pwdR').val(), email:$('#email').val()}),
+        success:function(data){
+            console.log("Registrato con successo2");//registra ma non passa dall'if?
+          if(data.ok==true){
+            $('#submitRegister').text('Registrato con successo');
+            console.log("Registrato con successo");
+           $('#submitRegister').removeClass("is-active");
+          }
+          else{
+            alert("Registrazione fallita");
           }
         }
       })
