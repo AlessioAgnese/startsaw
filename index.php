@@ -296,11 +296,9 @@
                     email: $('#email').val()
                 }),
                 success: function(data) {
-                    console.log("Registrato con successo2"); //registra ma non passa dall'if?
                     if (data.ok == true) {
                         $('#submitRegister').text('Registrato con successo');
-                        console.log("Registrato con successo");
-                        $('#submitRegister').removeClass("is-active");
+                        $('#submitRegister').attr("disabled", true);
                     } else {
                         alert("Registrazione fallita");
                     }
