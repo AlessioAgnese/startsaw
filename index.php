@@ -285,7 +285,6 @@
 
     $(document).ready(function() {
         $('#submitRegister').click(function() {
-            console.log("Clicked");
             $.ajax({
                 url: 'http://localhost/php/function/register.php',
                 type: 'POST',
