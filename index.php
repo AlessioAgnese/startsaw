@@ -128,7 +128,7 @@
                                     <i class="fas fa-user"></i>
                                 </span>
                                 <span class="icon is-small is-right">
-                                    <i id="statusU" style="display: none" class="fas"></i> 
+                                    <i id="statusU" style="display: none" class="fas"></i>
                                 </span>
                                 <label id="name_response" class="label"></label>
                             </p>
@@ -143,7 +143,7 @@
                                     <i class="fas fa-envelope"></i>
                                 </span>
                                 <span class="icon is-small is-right">
-                                    <i id="statusE"style="display: none" class="fas"></i>
+                                    <i id="statusE" style="display: none" class="fas"></i>
                                 </span>
                                 <label id="email_response" class="label"></label>
                             </p>
@@ -166,7 +166,7 @@
                             <p class="control has-icons-left">
                                 <input id="rePwdR" class="input" type="password" placeholder="Password" title="Deve essere uguale alla password inserita precedentemente" path="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
                                 <span class="icon is-small is-left">
-                                    <i id="statusP"class="fas fa-lock"></i>
+                                    <i id="statusP" class="fas fa-lock"></i>
                                 </span>
                                 <label id="pwd_response" class="label"></label>
                             </p>
@@ -300,13 +300,13 @@
                         $('#submitRegister').text('Registrato con successo');
                         $('#submitRegister').attr("disabled", true);
                         //setTimeout(function(){
-                            //window.location.href="home.html";//Non ho capito perche?
+                        //window.location.href="home.html";//Non ho capito perche?
                         //},1000);
                     } else {
                         $('#submitRegister').text('Si è verificato un problema');
                     }
                 },
-                error:function(errorThrown){
+                error: function(errorThrown) {
                     console.log(errorThrown);
                 }
             })
@@ -318,42 +318,42 @@
             var name = $("#usernameR").val()
             if (name != '') {
                 $("#name_response").show();
-                
+
                 $.ajax({
                     url: 'http://localhost/php/checkusr.php',
                     type: 'post',
-                    dataType:'json', 
+                    dataType: 'json',
                     data: JSON.stringify({
                         username: $('#usernameR').val().toString(),
                     }),
-                    
+
                     success: function(response) {
                         if (!response.ok) {
                             $('#statusU').removeClass('fa-check').addClass('fa-times');
-                            $('#statusU').css('display','block');
-                            $('#statusU').css('color','red');
+                            $('#statusU').css('display', 'block');
+                            $('#statusU').css('color', 'red');
                             $("#name_response").text("Username gia in uso");
-                            $("#name_response").css('color','red');
+                            $("#name_response").css('color', 'red');
                             $('#submitRegister').attr("disabled", true);
                         } else {
                             $('#statusU').removeClass('fa-times').addClass('fa-check');
-                            $('#statusU').css('display','block');
-                            $('#statusU').css('color','green');
+                            $('#statusU').css('display', 'block');
+                            $('#statusU').css('color', 'green');
                             $("#name_response").text("Username disponibile");
                             $('#submitRegister').attr("disabled", false);
-                            $("#name_response").css('color','green')
+                            $("#name_response").css('color', 'green')
                         }
 
                     },
-                    error:function(errorThrown){
+                    error: function(errorThrown) {
                         console.log(errorThrown);
                     }
                 });
             } else {
                 $("#name_response").hide();
                 $('#submitRegister').attr("disabled", false);
-                $("#name_response").css('color','black');
-                $('#statusU').css('display','none');
+                $("#name_response").css('color', 'black');
+                $('#statusU').css('display', 'none');
             }
 
         });
@@ -365,75 +365,70 @@
             var mail = $("#email").val().trim()
             if (mail != '') {
                 $("#email_response").show();
-                
+
                 $.ajax({
                     url: 'http://localhost/php/checkmail.php',
                     type: 'post',
-                    dataType:'json', 
+                    dataType: 'json',
                     data: JSON.stringify({
                         mail: $('#email').val().toString(),
                     }),
                     success: function(response) {
                         if (!response.ok) {
                             $('#statusE').removeClass('fa-check').addClass('fa-times');
-                            $('#statusE').css('display','block');
-                            $('#statusE').css('color','red');
+                            $('#statusE').css('display', 'block');
+                            $('#statusE').css('color', 'red');
                             $("#email_response").text("Email gia in uso");
-                            $("#email_response").css('color','red');
+                            $("#email_response").css('color', 'red');
                             $('#submitRegister').attr("disabled", true);
                         } else {
                             $('#statusE').removeClass('fa-times').addClass('fa-check');
-                            $('#statusE').css('display','none');
-                            $('#statusE').css('color','green');
+                            $('#statusE').css('display', 'none');
+                            $('#statusE').css('color', 'green');
                             $("#email_response").text("");
                             $('#submitRegister').attr("disabled", false);
-                            $("#email_response").css('color','green')
+                            $("#email_response").css('color', 'green')
                         }
 
                     },
-                    error:function(errorThrown){
+                    error: function(errorThrown) {
                         console.log(errorThrown);
                     }
                 });
             } else {
                 $("#email_response").hide();
                 $('#submitRegister').attr("disabled", false);
-                $("#email_response").css('color','black');
-                $('#statusE').css('display','none');
+                $("#email_response").css('color', 'black');
+                $('#statusE').css('display', 'none');
             }
 
         });
 
     });
-</script>
-<script>
-   $(document).ready(function() {
+
+
+    $(document).ready(function() {
         $("#rePwdR").keyup(function() {
             var pwd = $("#pwdR").val();
-            var rePwd=$("#rePwdR").val();
-            //console.log(pwd);
-            //console.log(rePwd);
-            if ( pwd != rePwd) {
+            var rePwd = $("#rePwdR").val();
+            if (pwd != rePwd) {
                 $('#statusP').removeClass('fa-check').addClass('fa-times');
-                $('#statusP').css('display','block');
-                $('#statusP').css('color','red');
+                $('#statusP').css('display', 'block');
+                $('#statusP').css('color', 'red');
                 $("#pwd_response").text("Le password non corrispondono");
-                $("#pwd_response").css('color','red');
+                $("#pwd_response").css('color', 'red');
                 $('#submitRegister').attr("disabled", true);
-                        } else {
+            } else {
                 $('#statusP').removeClass('fa-times').addClass('fa-check');
-                $('#statusP').css('display','');
-                $('#statusP').css('color','green');
+                $('#statusP').css('display', '');
+                $('#statusP').css('color', 'green');
                 $("#pwd_response").text("");
                 $('#submitRegister').attr("disabled", false);
-                $("#pwd_response").css('color','green')
-                        }
-                });
-
+                $("#pwd_response").css('color', 'green')
+            }
         });
 
-    
- 
-    </script>
+    });
+</script>
 
 </html>
