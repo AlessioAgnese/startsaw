@@ -298,8 +298,11 @@
                     if (data.ok) {
                         $('#submitRegister').text('Registrato con successo');
                         $('#submitRegister').attr("disabled", true);
+                        setTimeout(function(){
+                            window.location.href="home.html";
+                        },1000);
                     } else {
-                        alert("Registrazione fallita");
+                        $('#submitRegister').text('Si è verificato un problema');
                     }
                 },
                 error:function(errorThrown){
