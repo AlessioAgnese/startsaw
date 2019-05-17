@@ -128,7 +128,7 @@
                                     <i class="fas fa-user"></i>
                                 </span>
                                 <span class="icon is-small is-right">
-                                    <i id="status" style="display: none" class="fas"></i> 
+                                    <i id="statusU" style="display: none" class="fas"></i> 
                                 </span>
                                 <label id="name_response" class="label"></label>
                             </p>
@@ -164,10 +164,11 @@
                         <div class="field">
                             <label class="label">Ripeti Password</label>
                             <p class="control has-icons-left">
-                                <input name="rePsw" class="input" type="password" placeholder="Password" title="Deve essere uguale alla password inserita precedentemente" path="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                                <input id="rePwdR" class="input" type="password" placeholder="Password" title="Deve essere uguale alla password inserita precedentemente" path="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
                                 <span class="icon is-small is-left">
-                                    <i class="fas fa-lock"></i>
+                                    <i id="statusP"class="fas fa-lock"></i>
                                 </span>
+                                <label id="pwd_response" class="label"></label>
                             </p>
                             <div class="checkPswField" style="visibility: block ;text-align:justify">
                                 <h3>La password deve contenere:</h3>
@@ -299,7 +300,7 @@
                         $('#submitRegister').text('Registrato con successo');
                         $('#submitRegister').attr("disabled", true);
                         //setTimeout(function(){
-                            //window.location.href="index.php";
+                            //window.location.href="home.html";//Non ho capito perche?
                         //},1000);
                     } else {
                         $('#submitRegister').text('Si è verificato un problema');
@@ -328,16 +329,16 @@
                     
                     success: function(response) {
                         if (!response.ok) {
-                            $('#status').removeClass('fa-check').addClass('fa-times');
-                            $('#status').css('display','block');
-                            $('#status').css('color','red');
+                            $('#statusU').removeClass('fa-check').addClass('fa-times');
+                            $('#statusU').css('display','block');
+                            $('#statusU').css('color','red');
                             $("#name_response").text("Username gia in uso");
                             $("#name_response").css('color','red');
                             $('#submitRegister').attr("disabled", true);
                         } else {
-                            $('#status').removeClass('fa-times').addClass('fa-check');
-                            $('#status').css('display','block');
-                            $('#status').css('color','green');
+                            $('#statusU').removeClass('fa-times').addClass('fa-check');
+                            $('#statusU').css('display','block');
+                            $('#statusU').css('color','green');
                             $("#name_response").text("Username disponibile");
                             $('#submitRegister').attr("disabled", false);
                             $("#name_response").css('color','green')
@@ -352,7 +353,7 @@
                 $("#name_response").hide();
                 $('#submitRegister').attr("disabled", false);
                 $("#name_response").css('color','black');
-                $('#status').css('display','none');
+                $('#statusU').css('display','none');
             }
 
         });
@@ -361,8 +362,8 @@
 
     $(document).ready(function() {
         $("#email").keyup(function() {
-            var name = $("#email").val().trim()
-            if (name != '') {
+            var mail = $("#email").val().trim()
+            if (mail != '') {
                 $("#email_response").show();
                 
                 $.ajax({
@@ -382,9 +383,9 @@
                             $('#submitRegister').attr("disabled", true);
                         } else {
                             $('#statusE').removeClass('fa-times').addClass('fa-check');
-                            $('#statusE').css('display','block');
+                            $('#statusE').css('display','none');
                             $('#statusE').css('color','green');
-                            $("#email_response").text("Email libera");
+                            $("#email_response").text("");
                             $('#submitRegister').attr("disabled", false);
                             $("#email_response").css('color','green')
                         }
@@ -405,5 +406,34 @@
 
     });
 </script>
+<script>
+   $(document).ready(function() {
+        $("#rePwdR").keyup(function() {
+            var pwd = $("#pwdR").val();
+            var rePwd=$("#rePwdR").val();
+            //console.log(pwd);
+            //console.log(rePwd);
+            if ( pwd != rePwd) {
+                $('#statusP').removeClass('fa-check').addClass('fa-times');
+                $('#statusP').css('display','block');
+                $('#statusP').css('color','red');
+                $("#pwd_response").text("Le password non corrispondono");
+                $("#pwd_response").css('color','red');
+                $('#submitRegister').attr("disabled", true);
+                        } else {
+                $('#statusP').removeClass('fa-times').addClass('fa-check');
+                $('#statusP').css('display','');
+                $('#statusP').css('color','green');
+                $("#pwd_response").text("");
+                $('#submitRegister').attr("disabled", false);
+                $("#pwd_response").css('color','green')
+                        }
+                });
+
+        });
+
+    
+ 
+    </script>
 
 </html>
