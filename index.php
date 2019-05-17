@@ -316,12 +316,13 @@
                 $.ajax({
                     url: 'http://localhost/php/function/checkusr.php',
                     type: 'post',
+                    dataType: 'json',
                     data: JSON.stringify({
                         username: $('#usernameR').val(),
                     }),
                     
                     success: function(response) {
-                        if (response > 0) {
+                        if (response.count == 1) {
                             $("#name_response").text("Username gia in uso");
                             $('#submitRegister').attr("disabled", true);
                         } else {
