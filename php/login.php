@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '..\dbconfig.php';
+require '.\dbconfig.php';
 $data = file_get_contents('php://input');
 $json = json_decode($data, true);
 $name = mysqli_real_escape_string($link, $json["username"]);

@@ -123,14 +123,14 @@
                         <div class="field">
                             <label class="label">Username</label>
                             <p class="control has-icons-left has-icons-right">
-                                <input id="usernameR" class="input" type="text" placeholder="Nome Utente" pattern="^(?!.*__.*)(?!.*\.\..*)[a-z0-9_.]+$" required>
+                                <input id="usernameR" class="input is-loading" type="text" placeholder="Nome Utente" pattern="^(?!.*__.*)(?!.*\.\..*)[a-z0-9_.]+$" required>
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-user"></i>
                                 </span>
                                 <span class="icon is-small is-right">
-                                    <i class="fas fa-check"></i>
+                                    <i id="status" style="display: none" class="fas"></i> 
                                 </span>
-                                <label class="label" id=name_response></label>
+                                <label id="name_response" class="label"></label>
                             </p>
                             <p id="errorUser" class="is-size-7 has-text-danger" style="visibility: hidden">Caratteri non ammessi
                             </p>
@@ -138,14 +138,14 @@
                         <div class="field">
                             <label class="label">Email</label>
                             <p class="control has-icons-left has-icons-right">
-                                <input id="email" class="input" type="email" placeholder="esempio@domain.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+                                <input id="email" class="input is-loading" type="email" placeholder="esempio@domain.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-envelope"></i>
                                 </span>
                                 <span class="icon is-small is-right">
-                                    <i class="fas fa-check"></i>
+                                    <i id="statusE"style="display: none" class="fas"></i>
                                 </span>
-
+                                <label id="email_response" class="label"></label>
                             </p>
                             <p id="errorMail" class="is-size-7 has-text-danger" style="visibility: hidden">Non rispetta le
                                 caratteristiche della Email
@@ -295,19 +295,24 @@
                     email: $('#email').val()
                 }),
                 success: function(data) {
-                    if (data.ok == true) {
+                    if (data.ok) {
                         $('#submitRegister').text('Registrato con successo');
                         $('#submitRegister').attr("disabled", true);
+                        //setTimeout(function(){
+                            //window.location.href="index.php";
+                        //},1000);
                     } else {
-                        alert("Registrazione fallita");
+                        $('#submitRegister').text('Si è verificato un problema');
                     }
+                },
+                error:function(errorThrown){
+                    console.log(errorThrown);
                 }
             })
         })
     })
 
     $(document).ready(function() {
-
         $("#usernameR").keyup(function() {
             var name = $("#usernameR").val()
             if (name != '') {
@@ -316,26 +321,84 @@
                 $.ajax({
                     url: 'http://localhost/php/checkusr.php',
                     type: 'post',
-                    dataType: 'json',
+                    dataType:'json', 
                     data: JSON.stringify({
-                        username: $('#usernameR').val(),
+                        username: $('#usernameR').val().toString(),
                     }),
                     
                     success: function(response) {
-                        if (response.ok == true) {
+                        if (!response.ok) {
+                            $('#status').removeClass('fa-check').addClass('fa-times');
+                            $('#status').css('display','block');
+                            $('#status').css('color','red');
+                            $("#name_response").text("Username gia in uso");
+                            $("#name_response").css('color','red');
+                            $('#submitRegister').attr("disabled", true);
+                        } else {
+                            $('#status').removeClass('fa-times').addClass('fa-check');
+                            $('#status').css('display','block');
+                            $('#status').css('color','green');
                             $("#name_response").text("Username disponibile");
                             $('#submitRegister').attr("disabled", false);
-                        } else {
-                            $("#name_response").text("Username gia in uso");
-                            $('#submitRegister').attr("disabled", true);
-
+                            $("#name_response").css('color','green')
                         }
 
+                    },
+                    error:function(errorThrown){
+                        console.log(errorThrown);
                     }
                 });
             } else {
                 $("#name_response").hide();
                 $('#submitRegister').attr("disabled", false);
+                $("#name_response").css('color','black');
+                $('#status').css('display','none');
+            }
+
+        });
+
+    });
+
+    $(document).ready(function() {
+        $("#email").keyup(function() {
+            var name = $("#email").val().trim()
+            if (name != '') {
+                $("#email_response").show();
+                
+                $.ajax({
+                    url: 'http://localhost/php/checkmail.php',
+                    type: 'post',
+                    dataType:'json', 
+                    data: JSON.stringify({
+                        mail: $('#email').val().toString(),
+                    }),
+                    success: function(response) {
+                        if (!response.ok) {
+                            $('#statusE').removeClass('fa-check').addClass('fa-times');
+                            $('#statusE').css('display','block');
+                            $('#statusE').css('color','red');
+                            $("#email_response").text("Email gia in uso");
+                            $("#email_response").css('color','red');
+                            $('#submitRegister').attr("disabled", true);
+                        } else {
+                            $('#statusE').removeClass('fa-times').addClass('fa-check');
+                            $('#statusE').css('display','block');
+                            $('#statusE').css('color','green');
+                            $("#email_response").text("Email libera");
+                            $('#submitRegister').attr("disabled", false);
+                            $("#email_response").css('color','green')
+                        }
+
+                    },
+                    error:function(errorThrown){
+                        console.log(errorThrown);
+                    }
+                });
+            } else {
+                $("#email_response").hide();
+                $('#submitRegister').attr("disabled", false);
+                $("#email_response").css('color','black');
+                $('#statusE').css('display','none');
             }
 
         });

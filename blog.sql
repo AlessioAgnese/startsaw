@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 16, 2019 alle 22:23
+-- Creato il: Mag 17, 2019 alle 20:14
 -- Versione del server: 10.1.38-MariaDB
 -- Versione PHP: 7.3.3
 
@@ -88,7 +88,7 @@ INSERT INTO `ruoli` (`Id_R`, `Ruolo`) VALUES
 CREATE TABLE `utenti` (
   `User` varchar(16) NOT NULL,
   `Psw` varchar(64) NOT NULL,
-  `Mail` varchar(16) NOT NULL,
+  `Mail` varchar(64) NOT NULL,
   `Nome` varchar(10) NOT NULL,
   `Cognome` varchar(16) NOT NULL,
   `Residenza` varchar(16) NOT NULL,
@@ -101,9 +101,7 @@ CREATE TABLE `utenti` (
 --
 
 INSERT INTO `utenti` (`User`, `Psw`, `Mail`, `Nome`, `Cognome`, `Residenza`, `Biografia`, `Id_R`) VALUES
-('luigi', '$2y$10$6enhk9GNWtlhGpKnIp7LeeylLyVWqu198nzlror/3cTsZBOHvFRA6', 'alessio.agnese.i', '', '', '', '', 1),
-('luigi2', '$2y$10$X6m4IrLhjeYgvVvyeks2e.nqQO7YD17Wsmk7SOfAeUDtVaP42Vsci', 'alessio.agnese.i', '', '', '', '', 1),
-('luigi3', '$2y$10$yrko3/6L9DUrZvemZODDsukR/WspvLTNRKC6H80Y5yFJz0PgwwXjm', 'alessio.agnese.i', '', '', '', '', 1);
+('Alessio', '$2y$10$rRlDTWtGGWbWAaf9Wo6p4ui4F1ld9tReFT79KKU6l8fA8rOe3QrsG', 'alessio.agnese.iic97@gmail.com', '', '', '', '', 1);
 
 --
 -- Indici per le tabelle scaricate
