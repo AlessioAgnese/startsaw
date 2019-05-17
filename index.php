@@ -75,7 +75,6 @@
 
             });
         });
-        
     </script>
 
     <script type="text/javascript" language="javascript">
@@ -131,7 +130,7 @@
                                 <span class="icon is-small is-right">
                                     <i class="fas fa-check"></i>
                                 </span>
-
+                                <label class="label" id=name_response></label>
                             </p>
                             <p id="errorUser" class="is-size-7 has-text-danger" style="visibility: hidden">Caratteri non ammessi
                             </p>
@@ -263,7 +262,7 @@
 <script>
     $(document).ready(function() {
         $('#submitlogin').click(function() {
-            
+
             $.ajax({
                 url: 'http://localhost/php/function/login.php',
                 type: 'POST',
@@ -306,6 +305,40 @@
             })
         })
     })
+
+    $(document).ready(function() {
+
+        $("#usernameR").keyup(function() {
+            var name = $("#usernameR").val()
+            if (name != '') {
+                $("#name_response").show();
+                
+                $.ajax({
+                    url: 'http://localhost/php/function/checkusr.php',
+                    type: 'post',
+                    data: JSON.stringify({
+                        username: $('#usernameR').val(),
+                    }),
+                    
+                    success: function(response) {
+                        if (response > 0) {
+                            $("#name_response").text("Username gia in uso");
+                            $('#submitRegister').attr("disabled", true);
+                        } else {
+                            $("#name_response").text("Username disponibile");
+                            $('#submitRegister').attr("disabled", false);
+                        }
+
+                    }
+                });
+            } else {
+                $("#name_response").hide();
+                $('#submitRegister').attr("disabled", false);
+            }
+
+        });
+
+    });
 </script>
 
 </html>
