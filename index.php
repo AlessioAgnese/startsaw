@@ -264,7 +264,7 @@
         $('#submitlogin').click(function() {
 
             $.ajax({
-                url: 'http://localhost/php/function/login.php',
+                url: 'http://localhost/php/login.php',
                 type: 'POST',
                 dataType: 'json',
                 data: JSON.stringify({
@@ -286,7 +286,7 @@
     $(document).ready(function() {
         $('#submitRegister').click(function() {
             $.ajax({
-                url: 'http://localhost/php/function/register.php',
+                url: 'http://localhost/php/register.php',
                 type: 'POST',
                 dataType: 'json',
                 data: JSON.stringify({
@@ -314,7 +314,7 @@
                 $("#name_response").show();
                 
                 $.ajax({
-                    url: 'http://localhost/php/function/checkusr.php',
+                    url: 'http://localhost/php/checkusr.php',
                     type: 'post',
                     dataType: 'json',
                     data: JSON.stringify({
@@ -322,12 +322,13 @@
                     }),
                     
                     success: function(response) {
-                        if (response.count == 1) {
-                            $("#name_response").text("Username gia in uso");
-                            $('#submitRegister').attr("disabled", true);
-                        } else {
+                        if (response.ok == true) {
                             $("#name_response").text("Username disponibile");
                             $('#submitRegister').attr("disabled", false);
+                        } else {
+                            $("#name_response").text("Username gia in uso");
+                            $('#submitRegister').attr("disabled", true);
+
                         }
 
                     }
