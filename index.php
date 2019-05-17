@@ -19,7 +19,7 @@
                 $(".navbar-burger,#navbarBasicExample").toggleClass("is-active");
             });
         });
-        //funzione per il menu dropdown
+        //funzione per il menu dropdown l
         $(document).ready(function() {
             $(".navbar-link").click(function() {
                 $("#navbar-menu").toggleClass("is-active");
