@@ -1,4 +1,3 @@
-
 <?php
 //NESSUN TEST PER MANCANZA FORM
 session_start();
