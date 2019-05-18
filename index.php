@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="it">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -187,7 +186,7 @@ if (empty($_SESSION["utente"])) {
                             </div>
                         </div>
                         <br>
-                        <button class="button is-danger " id="submitRegister">
+                        <button class="button is-danger " id="submitRegister" disabled="true">
                             Registrati
                         </button>
 
@@ -282,7 +281,7 @@ if (empty($_SESSION["utente"])) {
                 type: 'POST',
                 dataType: 'json',
                 data: JSON.stringify({
-                    username: $('#usernameL').val(),
+                    username: $('#usernameL').val().trim().toString(),
                     pwd: $('#pwdL').val()
                 }),
                 success: function(data) {
@@ -304,9 +303,9 @@ if (empty($_SESSION["utente"])) {
                 type: 'POST',
                 dataType: 'json',
                 data: JSON.stringify({
-                    username: $('#usernameR').val(),
+                    username: $('#usernameR').val().trim().toString(),
                     pwd: $('#pwdR').val(),
-                    email: $('#email').val()
+                    email: $('#email').val().trim().toString()
                 }),
                 success: function(data) {
                     if (data.ok) {
@@ -328,7 +327,7 @@ if (empty($_SESSION["utente"])) {
 
     $(document).ready(function() {
         $("#usernameR").keyup(function() {
-            var name = $("#usernameR").val()
+            var name = $("#usernameR").val().trim().toString();
             if (name != '') {
                 $("#name_response").show();
 
@@ -337,7 +336,7 @@ if (empty($_SESSION["utente"])) {
                     type: 'post',
                     dataType: 'json',
                     data: JSON.stringify({
-                        username: $('#usernameR').val().toString(),
+                        username: name,
                     }),
 
                     success: function(response) {
@@ -364,7 +363,7 @@ if (empty($_SESSION["utente"])) {
                 });
             } else {
                 $("#name_response").hide();
-                $('#submitRegister').attr("disabled", false);
+                $('#submitRegister').attr("disabled", true);
                 $("#name_response").css('color', 'black');
                 $('#statusU').css('display', 'none');
             }
