@@ -81,7 +81,15 @@
     </script>
 </head>
 
+
 <body>
+<?php
+session_start();
+if (empty($_SESSION["utente"])) {
+    $_SESSION["utente"] = "Guest";
+    echo $_SESSION["utente"];
+}
+?>
     <div class="modal">
         <div class="modal-background"></div>
         <div class="modal-card ">
@@ -243,7 +251,12 @@
                 <div class="navbar-item">
                     <div class="buttons">
                         <a id="loginRegisterButton" class="button is-warning is-outlined">
-                            <strong id="userLogged">Log in/Registrati</strong>
+                            <strong id="userLogged">
+                                <?php if ($_SESSION["utente"] == "Guest")
+                                    echo $_SESSION["utente"];
+                                else
+                                    echo 'Log in/Registrati'; ?>
+                            </strong>
                         </a>
                     </div>
                 </div>
@@ -254,7 +267,7 @@
     <footer class="footer">
         <div class="content has-text-centered has-text-white">
             <p>
-                <strong class="has-text-warning">&copy 2019 Saw</strong> by Simone Risso & Alessio Agnese.
+                <strong class="has-text-warning">&copy 2019 Saw</strong> by Alessio Agnese & Simone Risso.
             </p>
         </div>
     </footer>
@@ -405,7 +418,6 @@
         });
 
     });
-
 
     $(document).ready(function() {
         $("#rePwdR").keyup(function() {
