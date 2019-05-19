@@ -39,7 +39,7 @@ if (empty($_SESSION["utente"])) {
                             <div class="field">
                                 <label class="label">Username</label>
                                 <p class="control has-icons-left has-icons-right">
-                                    <input class="input" type="text" id="usernameL" placeholder="Nome Utente">
+                                    <input class="input" autocomplete="username" type="text" id="usernameL" placeholder="Nome Utente">
                                     <span class="icon is-small is-left">
                                         <i class="fas fa-user"></i>
                                     </span>
@@ -51,7 +51,7 @@ if (empty($_SESSION["utente"])) {
                             <div class="field">
                                 <label class="label">Password</label>
                                 <p class="control has-icons-left">
-                                    <input class="input" type="password" id="pwdL" placeholder="Password">
+                                    <input class="input" autocomplete="current-password" type="password" id="pwdL" placeholder="Password">
                                     <span class="icon is-small is-left">
                                         <i class="fas fa-lock"></i>
                                     </span>
@@ -68,7 +68,7 @@ if (empty($_SESSION["utente"])) {
                             <div class="field">
                                 <label class="label">Username</label>
                                 <p class="control has-icons-left has-icons-right">
-                                    <input id="usernameR" class="input is-loading" type="text" placeholder="Nome Utente"
+                                    <input id="usernameR" autocomplete="username" class="input is-loading" type="text" placeholder="Nome Utente"
                                         pattern="^(?!.*__.*)(?!.*\.\..*)[a-z0-9_.]+$" required>
                                     <span class="icon is-small is-left">
                                         <i class="fas fa-user"></i>
@@ -86,7 +86,7 @@ if (empty($_SESSION["utente"])) {
                             <div class="field">
                                 <label class="label">Email</label>
                                 <p class="control has-icons-left has-icons-right">
-                                    <input id="email" class="input is-loading" type="email"
+                                    <input id="email" autocomplete="email" class="input is-loading" type="email"
                                         placeholder="esempio@domain.com"
                                         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
                                     <span class="icon is-small is-left">
@@ -106,7 +106,7 @@ if (empty($_SESSION["utente"])) {
                             <div class="field">
                                 <label class="label">Password</label>
                                 <p class="control has-icons-left">
-                                    <input id=pwdR class="input" type="password" placeholder="Password"
+                                    <input id=pwdR autocomplete="new-password" class="input" type="password" placeholder="Password"
                                         title="Deve contenere almeno un numero ,una lettera minuscola , una maiuscola ed un simbolo e la lunghezza deve essere almeno di 8 caratteri "
                                         path="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
                                     <span class="icon is-small is-left">
@@ -118,7 +118,7 @@ if (empty($_SESSION["utente"])) {
                             <div class="field">
                                 <label class="label">Ripeti Password</label>
                                 <p class="control has-icons-left">
-                                    <input id="rePwdR" class="input" type="password" placeholder="Password"
+                                    <input id="rePwdR" autocomplete="new-password" class="input" type="password" placeholder="Password"
                                         title="Deve essere uguale alla password inserita precedentemente"
                                         path="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
                                     <span class="icon is-small is-left">
@@ -265,7 +265,7 @@ if (empty($_SESSION["utente"])) {
                     pwd: $('#pwdL').val()
                 }),
                 success: function (data) {
-                    if (data.ok == true) {
+                    if (data.ok) {
                         $('#userLogged').text(data.username);
                         $('.modal').removeClass("is-active");
                     } else {
