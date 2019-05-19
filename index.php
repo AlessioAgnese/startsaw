@@ -21,8 +21,9 @@
 session_start();
 if (empty($_SESSION["utente"])) {
     $_SESSION["utente"] = "Guest";
-    echo $_SESSION["utente"];
+    
 }
+echo $_SESSION["utente"];//a fini di test
 ?>
     <div class="modal">
         <div class="modal-background"></div>
