@@ -305,10 +305,10 @@ if (empty($_SESSION["utente"])) {
             })
         })
     })
-
+    //controllo dei caratteri ammessi , e controllo della presenza o meno dell'user inserito
     $(document).ready(function() {
         $("#usernameR").keyup(function() {
-            var regexUser = /^(?!.*__.*)(?!.*\.\..*)[a-z0-9_.]+$/;
+            var regexUser = /^(?!.*__.*)(?!.*\.\..*)[a-zA-Z0-9_.]+$/;
             
             if ( $("#usernameR").val().match(regexUser) != null ) {
                 var name = $("#usernameR").val().trim().toString();
