@@ -11,70 +11,7 @@
     <link rel="stylesheet" type="text/css" href="./css/style.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"> </script>
-    <script>
-        //funzione per il menu burger
-        $(document).ready(function() {
-            $(".navbar-burger").click(function() {
-                $(".navbar-burger,#navbarBasicExample").toggleClass("is-active");
-            });
-        });
-        //funzione per il menu dropdown l
-        $(document).ready(function() {
-            $(".navbar-link").click(function() {
-                $("#navbar-menu").toggleClass("is-active");
-            });
-        });
-        //funzione per il menu modal(show),e per resettare i campi del form una volta chiusa la "card"
-        $(document).ready(function() {
-            $(".delete,#loginRegisterButton,.modal-background").click(function() {
-                $(".modal").toggleClass("is-active");
-                $("[name='registerUser'],[name='loginUser']").trigger("reset");
-                $("#errorUser,#errorMail").css("visibility", "hidden");
-                $("[name='username'],[name='email']").removeClass("is-danger");
 
-            });
-        });
-        //controllo che l'input nel campo utente non contenga caratteri vietati
-        $(document).ready(function() {
-            $("[name='username']").keyup(function() {
-                var regexUser = /^(?!.*__.*)(?!.*\.\..*)[a-z0-9_.]+$/;
-                if (document.forms["registerUser"]["username"].value.match(regexUser) == null) {
-                    $("#errorUser").css("visibility", "visible");
-                    $("[name='username']").addClass("is-danger");
-                } else {
-                    $("#errorUser").css("visibility", "hidden");
-                    $("[name='username']").removeClass("is-danger");
-                }
-
-            });
-        });
-        $(document).ready(function() {
-            $("[name='email']").keyup(function() {
-                var regexMail = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
-                if (document.forms["registerUser"]["email"].value.match(regexMail) == null) {
-                    $("#errorMail").css("visibility", "visible");
-                    $("[name='email']").addClass("is-danger");
-                } else {
-                    $("#errorMail").css("visibility", "hidden");
-                    $("[name='email']").removeClass("is-danger");
-                }
-
-            });
-        });
-        $(document).ready(function() {
-            $("[name='psw']").keyup(function() {
-                var regexMail = /[a-z0-9._%+-]+$/;
-                if (document.forms["registerUser"]["email"].value.match(regexMail) == null) {
-                    $("#errorMail").css("visibility", "visible");
-                    $("[name='email']").addClass("is-danger");
-                } else {
-                    $("#errorMail").css("visibility", "hidden");
-                    $("[name='email']").removeClass("is-danger");
-                }
-
-            });
-        });
-    </script>
 
     <script type="text/javascript" language="javascript">
     </script>
@@ -137,22 +74,23 @@ if (empty($_SESSION["utente"])) {
                                 <span class="icon is-small is-right">
                                     <i id="statusU" style="display: none" class="fas"></i>
                                 </span>
-                                <label id="name_response" class="label"></label>
+                                
                             </p>
                             <p id="errorUser" class="is-size-7 has-text-danger" style="visibility: hidden">Caratteri non ammessi
                             </p>
+                            <label id="name_response" class="label is-size-7" style="visibility:hidden"></label>
                         </div>
                         <div class="field">
                             <label class="label">Email</label>
                             <p class="control has-icons-left has-icons-right">
-                                <input id="email" class="input is-loading" type="email" placeholder="esempio@domain.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+                                <input id="email"  class="input is-loading" type="email" placeholder="esempio@domain.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-envelope"></i>
                                 </span>
                                 <span class="icon is-small is-right">
                                     <i id="statusE" style="display: none" class="fas"></i>
                                 </span>
-                                <label id="email_response" class="label"></label>
+                                <label id="email_response" style="visibility:hidden" class="label"></label>
                             </p>
                             <p id="errorMail" class="is-size-7 has-text-danger" style="visibility: hidden">Non rispetta le
                                 caratteristiche della Email
@@ -176,7 +114,7 @@ if (empty($_SESSION["utente"])) {
                                     <i id="statusP" class="fas fa-lock"></i>
                                 </span>
                                 <label id="pwd_response" class="label"></label>
-                            </p>
+                        </p>   
                             <div class="checkPswField" style="visibility: block ;text-align:justify">
                                 <h3>La password deve contenere:</h3>
                                 <p id="upLetter" class="is-size-7 has-text-danger">1 Lettera maiuscola</p>
@@ -273,7 +211,50 @@ if (empty($_SESSION["utente"])) {
 </body>
 
 <script>
-    $(document).ready(function() {
+        //funzione per il menu burger
+        $(document).ready(function() {
+            $(".navbar-burger").click(function() {
+                $(".navbar-burger,#navbarBasicExample").toggleClass("is-active");
+            });
+        });
+        //funzione per il menu dropdown l
+        $(document).ready(function() {
+            $(".navbar-link").click(function() {
+                $("#navbar-menu").toggleClass("is-active");
+            });
+        });
+        //funzione per il menu modal(show) e per resettare i campi del form una volta chiusa la "card"
+        $(document).ready(function() {
+            $(".delete,#loginRegisterButton,.modal-background").click(function() {
+                $(".modal").toggleClass("is-active");
+                $("#usernameR,#email").val("");
+                $("#errorUser,#errorMail").css("visibility", "hidden");
+                $("#usernameR,#email").removeClass("is-danger");
+                $("#name_response").css("visibility","hidden");
+                $('#submitRegister').attr("disabled", true);
+                $("#name_response").css('color', 'black');
+                $('#statusU').css('display', 'none');
+
+            });
+        });
+        //controllo che l'input nel campo utente non contenga caratteri vietati
+       
+        
+        $(document).ready(function() {
+            $("[name='psw']").keyup(function() {
+                var regexMail = /[a-z0-9._%+-]+$/;
+                if (document.forms["registerUser"]["email"].value.match(regexMail) == null) {
+                    $("#errorMail").css("visibility", "visible");
+                    $("[name='email']").addClass("is-danger");
+                } else {
+                    $("#errorMail").css("visibility", "hidden");
+                    $("[name='email']").removeClass("is-danger");
+                }
+
+            });
+        });
+
+        $(document).ready(function() {
         $('#submitlogin').click(function() {
 
             $.ajax({
@@ -327,9 +308,13 @@ if (empty($_SESSION["utente"])) {
 
     $(document).ready(function() {
         $("#usernameR").keyup(function() {
-            var name = $("#usernameR").val().trim().toString();
-            if (name != '') {
-                $("#name_response").show();
+            var regexUser = /^(?!.*__.*)(?!.*\.\..*)[a-z0-9_.]+$/;
+            
+            if ( $("#usernameR").val().match(regexUser) != null ) {
+                var name = $("#usernameR").val().trim().toString();
+                $("#errorUser").css("visibility", "hidden");
+                $("#usernameR").removeClass("is-danger");    
+                $("#name_response").css("visibility","visible");
 
                 $.ajax({
                     url: 'http://localhost/php/checkusr.php',
@@ -362,21 +347,26 @@ if (empty($_SESSION["utente"])) {
                     }
                 });
             } else {
-                $("#name_response").hide();
+                $("#errorUser").css("visibility", "visible");
+                $("#usernameR").addClass("is-danger");
+                $("#name_response").css("visibility","hidden");
                 $('#submitRegister').attr("disabled", true);
                 $("#name_response").css('color', 'black');
                 $('#statusU').css('display', 'none');
             }
-
+        
         });
 
     });
 
     $(document).ready(function() {
         $("#email").keyup(function() {
-            var mail = $("#email").val().trim()
-            if (mail != '') {
-                $("#email_response").show();
+            var regexMail = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+            if ($("#email").val().match(regexMail) != null) {
+                var mail = $("#email").val().trim()
+                $("#errorMail").css("visibility", "hidden");
+                $("#email").removeClass("is-danger");
+                $("#email_response").css("visibility","visible");
 
                 $.ajax({
                     url: 'http://localhost/php/checkmail.php',
@@ -408,7 +398,9 @@ if (empty($_SESSION["utente"])) {
                     }
                 });
             } else {
-                $("#email_response").hide();
+                $("#errorMail").css("visibility", "visible");
+                $("#email").addClass("is-danger");
+                $("#email_response").css("visibility","hidden");
                 $('#submitRegister').attr("disabled", false);
                 $("#email_response").css('color', 'black');
                 $('#statusE').css('display', 'none');
@@ -440,6 +432,6 @@ if (empty($_SESSION["utente"])) {
         });
 
     });
-</script>
+    </script>
 
 </html>
