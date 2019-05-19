@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
     <title>
         Progetto SAW
@@ -12,14 +14,11 @@
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"> </script>
 
-
-    <script type="text/javascript" language="javascript">
-    </script>
 </head>
 
 
 <body>
-<?php
+    <?php
 session_start();
 if (empty($_SESSION["utente"])) {
     $_SESSION["utente"] = "Guest";
@@ -35,100 +34,114 @@ if (empty($_SESSION["utente"])) {
             </header>
             <section class="modal-card-body">
                 <div class="tile is-ancestor ">
+
                     <div class="tile  is-parent is-vertical">
-                        <div class="field">
-                            <label class="label">Username</label>
-                            <p class="control has-icons-left has-icons-right">
-                                <input class="input" type="text" id="usernameL" placeholder="Nome Utente">
-                                <span class="icon is-small is-left">
-                                    <i class="fas fa-user"></i>
-                                </span>
-                                <span class="icon is-small is-right">
-                                    <i class="fas fa-check"></i>
-                                </span>
-                            </p>
-                        </div>
-                        <div class="field">
-                            <label class="label">Password</label>
-                            <p class="control has-icons-left">
-                                <input class="input" type="password" id="pwdL" placeholder="Password">
-                                <span class="icon is-small is-left">
-                                    <i class="fas fa-lock"></i>
-                                </span>
-                            </p>
-                        </div>
-                        <br>
-                        <button class="button is-warning " id="submitlogin">
-                            Login
-                        </button>
+                        <form class="loginUser">
+                            <div class="field">
+                                <label class="label">Username</label>
+                                <p class="control has-icons-left has-icons-right">
+                                    <input class="input" type="text" id="usernameL" placeholder="Nome Utente">
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-user"></i>
+                                    </span>
+                                    <span class="icon is-small is-right">
+                                        <i class="fas fa-check"></i>
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="field">
+                                <label class="label">Password</label>
+                                <p class="control has-icons-left">
+                                    <input class="input" type="password" id="pwdL" placeholder="Password">
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-lock"></i>
+                                    </span>
+                                </p>
+                            </div>
+                            <br>
+                            <button class="button is-warning " id="submitlogin">
+                                Login
+                            </button>
+                        </form>
                     </div>
                     <div class="tile is-parent is-vertical">
+                        <form class="registerUser">
+                            <div class="field">
+                                <label class="label">Username</label>
+                                <p class="control has-icons-left has-icons-right">
+                                    <input id="usernameR" class="input is-loading" type="text" placeholder="Nome Utente"
+                                        pattern="^(?!.*__.*)(?!.*\.\..*)[a-z0-9_.]+$" required>
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-user"></i>
+                                    </span>
+                                    <span class="icon is-small is-right">
+                                        <i id="statusU" style="display: none" class="fas"></i>
+                                    </span>
 
-                        <div class="field">
-                            <label class="label">Username</label>
-                            <p class="control has-icons-left has-icons-right">
-                                <input id="usernameR" class="input is-loading" type="text" placeholder="Nome Utente" pattern="^(?!.*__.*)(?!.*\.\..*)[a-z0-9_.]+$" required>
-                                <span class="icon is-small is-left">
-                                    <i class="fas fa-user"></i>
-                                </span>
-                                <span class="icon is-small is-right">
-                                    <i id="statusU" style="display: none" class="fas"></i>
-                                </span>
-                                
-                            </p>
-                            <p id="errorUser" class="is-size-7 has-text-danger" style="visibility: hidden">Caratteri non ammessi
-                            </p>
-                            <label id="name_response" class="label is-size-7" style="visibility:hidden"></label>
-                        </div>
-                        <div class="field">
-                            <label class="label">Email</label>
-                            <p class="control has-icons-left has-icons-right">
-                                <input id="email"  class="input is-loading" type="email" placeholder="esempio@domain.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
-                                <span class="icon is-small is-left">
-                                    <i class="fas fa-envelope"></i>
-                                </span>
-                                <span class="icon is-small is-right">
-                                    <i id="statusE" style="display: none" class="fas"></i>
-                                </span>
-                                <label id="email_response" style="visibility:hidden" class="label"></label>
-                            </p>
-                            <p id="errorMail" class="is-size-7 has-text-danger" style="visibility: hidden">Non rispetta le
-                                caratteristiche della Email
-                            </p>
-                        </div>
-                        <div class="field">
-                            <label class="label">Password</label>
-                            <p class="control has-icons-left">
-                                <input id=pwdR class="input" type="password" placeholder="Password" title="Deve contenere almeno un numero ,una lettera minuscola , una maiuscola ed un simbolo e la lunghezza deve essere almeno di 8 caratteri " path="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
-                                <span class="icon is-small is-left">
-                                    <i class="fas fa-lock"></i>
-                                </span>
-
-                            </p>
-                        </div>
-                        <div class="field">
-                            <label class="label">Ripeti Password</label>
-                            <p class="control has-icons-left">
-                                <input id="rePwdR" class="input" type="password" placeholder="Password" title="Deve essere uguale alla password inserita precedentemente" path="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
-                                <span class="icon is-small is-left">
-                                    <i id="statusP" class="fas fa-lock"></i>
-                                </span>
-                                <label id="pwd_response" class="label"></label>
-                        </p>   
-                            <div class="checkPswField" style="visibility: block ;text-align:justify">
-                                <h3>La password deve contenere:</h3>
-                                <p id="upLetter" class="is-size-7 has-text-danger">1 Lettera maiuscola</p>
-                                <p id="lowLetter" class="is-size-7 has-text-danger">1 Lettera minuscola</p>
-                                <p id="symbol" class="is-size-7 has-text-danger">1 Simbolo</p>
-                                <p id="length" class="is-size-7 has-text-danger">Minimo 8 caratteri</p>
+                                </p>
+                                <p id="errorUser" class="is-size-7 has-text-danger" style="visibility: hidden">Caratteri
+                                    non ammessi
+                                </p>
+                                <label id="name_response" class="label is-size-7" style="visibility:hidden"></label>
                             </div>
-                        </div>
-                        <br>
-                        <button class="button is-danger " id="submitRegister" disabled="true">
-                            Registrati
-                        </button>
+                            <div class="field">
+                                <label class="label">Email</label>
+                                <p class="control has-icons-left has-icons-right">
+                                    <input id="email" class="input is-loading" type="email"
+                                        placeholder="esempio@domain.com"
+                                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-envelope"></i>
+                                    </span>
+                                    <span class="icon is-small is-right">
+                                        <i id="statusE" style="display: none" class="fas"></i>
+                                    </span>
+                                    <label id="email_response" style="visibility:hidden" class="label"></label>
+                                </p>
+                                <p id="errorMail" class="is-size-7 has-text-danger" style="visibility: hidden">Non
+                                    rispetta
+                                    le
+                                    caratteristiche della Email
+                                </p>
+                            </div>
+                            <div class="field">
+                                <label class="label">Password</label>
+                                <p class="control has-icons-left">
+                                    <input id=pwdR class="input" type="password" placeholder="Password"
+                                        title="Deve contenere almeno un numero ,una lettera minuscola , una maiuscola ed un simbolo e la lunghezza deve essere almeno di 8 caratteri "
+                                        path="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-lock"></i>
+                                    </span>
 
+                                </p>
+                            </div>
+                            <div class="field">
+                                <label class="label">Ripeti Password</label>
+                                <p class="control has-icons-left">
+                                    <input id="rePwdR" class="input" type="password" placeholder="Password"
+                                        title="Deve essere uguale alla password inserita precedentemente"
+                                        path="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                                    <span class="icon is-small is-left">
+                                        <i id="statusP" class="fas fa-lock"></i>
+                                    </span>
+                                    <label id="pwd_response" class="label"></label>
+                                </p>
+                                <div class="checkPswField" style="visibility: block ;text-align:justify">
+                                    <h3>La password deve contenere:</h3>
+                                    <p id="upLetter" class="is-size-7 has-text-danger">1 Lettera maiuscola</p>
+                                    <p id="lowLetter" class="is-size-7 has-text-danger">1 Lettera minuscola</p>
+                                    <p id="symbol" class="is-size-7 has-text-danger">1 Simbolo</p>
+                                    <p id="length" class="is-size-7 has-text-danger">Minimo 8 caratteri</p>
+                                </div>
+                            </div>
+                            <br>
+                            <button class="button is-danger " id="submitRegister" disabled="true">
+                                Registrati
+                            </button>
+                        </form>
                     </div>
+
                 </div>
             </section>
             <footer class="modal-card-foot ">
@@ -142,7 +155,8 @@ if (empty($_SESSION["utente"])) {
                 <img src="./img/logo.png" width="30" height="28">
             </a>
 
-            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+                data-target="navbarBasicExample">
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
@@ -211,51 +225,51 @@ if (empty($_SESSION["utente"])) {
 </body>
 
 <script>
-        //funzione per il menu burger
-        $(document).ready(function() {
-            $(".navbar-burger").click(function() {
-                $(".navbar-burger,#navbarBasicExample").toggleClass("is-active");
-            });
+    //funzione per il menu burger
+    $(document).ready(function () {
+        $(".navbar-burger").click(function () {
+            $(".navbar-burger,#navbarBasicExample").toggleClass("is-active");
         });
-        //funzione per il menu dropdown l
-        $(document).ready(function() {
-            $(".navbar-link").click(function() {
-                $("#navbar-menu").toggleClass("is-active");
-            });
+    });
+    //funzione per il menu dropdown l
+    $(document).ready(function () {
+        $(".navbar-link").click(function () {
+            $("#navbar-menu").toggleClass("is-active");
         });
-        //funzione per il menu modal(show) e per resettare i campi del form una volta chiusa la "card"
-        $(document).ready(function() {
-            $(".delete,#loginRegisterButton,.modal-background").click(function() {
-                $(".modal").toggleClass("is-active");
-                $("#usernameR,#email").val("");
-                $("#errorUser,#errorMail").css("visibility", "hidden");
-                $("#usernameR,#email").removeClass("is-danger");
-                $("#name_response").css("visibility","hidden");
-                $('#submitRegister').attr("disabled", true);
-                $("#name_response").css('color', 'black');
-                $('#statusU').css('display', 'none');
+    });
+    //funzione per il menu modal(show) e per resettare i campi del form una volta chiusa la "card"
+    $(document).ready(function () {
+        $(".delete,#loginRegisterButton,.modal-background").click(function () {
+            $(".modal").toggleClass("is-active");
+            $(".loginUser,.registerUser").trigger("reset");
+            $("#errorUser,#errorMail").css("visibility", "hidden");
+            $("#usernameR,#email").removeClass("is-danger");
+            $("#name_response").css("visibility", "hidden");
+            $('#submitRegister').attr("disabled", true);
+            $("#name_response").css('color', 'black');
+            $('#statusU').css('display', 'none');
 
-            });
         });
-        //controllo che l'input nel campo utente non contenga caratteri vietati
-       
-        
-        $(document).ready(function() {
-            $("[name='psw']").keyup(function() {
-                var regexMail = /[a-z0-9._%+-]+$/;
-                if (document.forms["registerUser"]["email"].value.match(regexMail) == null) {
-                    $("#errorMail").css("visibility", "visible");
-                    $("[name='email']").addClass("is-danger");
-                } else {
-                    $("#errorMail").css("visibility", "hidden");
-                    $("[name='email']").removeClass("is-danger");
-                }
+    });
+    //controllo che l'input nel campo utente non contenga caratteri vietati
 
-            });
+
+    $(document).ready(function () {
+        $("[name='psw']").keyup(function () {
+            var regexMail = /[a-z0-9._%+-]+$/;
+            if (document.forms["registerUser"]["email"].value.match(regexMail) == null) {
+                $("#errorMail").css("visibility", "visible");
+                $("[name='email']").addClass("is-danger");
+            } else {
+                $("#errorMail").css("visibility", "hidden");
+                $("[name='email']").removeClass("is-danger");
+            }
+
         });
+    });
 
-        $(document).ready(function() {
-        $('#submitlogin').click(function() {
+    $(document).ready(function () {
+        $('#submitlogin').click(function () {
 
             $.ajax({
                 url: 'http://localhost/php/login.php',
@@ -265,7 +279,7 @@ if (empty($_SESSION["utente"])) {
                     username: $('#usernameL').val().trim().toString(),
                     pwd: $('#pwdL').val()
                 }),
-                success: function(data) {
+                success: function (data) {
                     if (data.ok == true) {
                         $('#userLogged').text(data.username);
                         $('.modal').removeClass("is-active");
@@ -277,8 +291,8 @@ if (empty($_SESSION["utente"])) {
         })
     })
 
-    $(document).ready(function() {
-        $('#submitRegister').click(function() {
+    $(document).ready(function () {
+        $('#submitRegister').click(function () {
             $.ajax({
                 url: 'http://localhost/php/register.php',
                 type: 'POST',
@@ -288,7 +302,7 @@ if (empty($_SESSION["utente"])) {
                     pwd: $('#pwdR').val(),
                     email: $('#email').val().trim().toString()
                 }),
-                success: function(data) {
+                success: function (data) {
                     if (data.ok) {
                         $('#submitRegister').text('Registrato con successo');
                         $('#submitRegister').attr("disabled", true);
@@ -299,22 +313,22 @@ if (empty($_SESSION["utente"])) {
                         $('#submitRegister').text('Si è verificato un problema');
                     }
                 },
-                error: function(errorThrown) {
+                error: function (errorThrown) {
                     console.log(errorThrown);
                 }
             })
         })
     })
     //controllo dei caratteri ammessi , e controllo della presenza o meno dell'user inserito
-    $(document).ready(function() {
-        $("#usernameR").keyup(function() {
+    $(document).ready(function () {
+        $("#usernameR").keyup(function () {
             var regexUser = /^(?!.*__.*)(?!.*\.\..*)[a-zA-Z0-9_.]+$/;
-            
-            if ( $("#usernameR").val().match(regexUser) != null ) {
+
+            if ($("#usernameR").val().match(regexUser) != null) {
                 var name = $("#usernameR").val().trim().toString();
                 $("#errorUser").css("visibility", "hidden");
-                $("#usernameR").removeClass("is-danger");    
-                $("#name_response").css("visibility","visible");
+                $("#usernameR").removeClass("is-danger");
+                $("#name_response").css("visibility", "visible");
 
                 $.ajax({
                     url: 'http://localhost/php/checkusr.php',
@@ -324,7 +338,7 @@ if (empty($_SESSION["utente"])) {
                         username: name,
                     }),
 
-                    success: function(response) {
+                    success: function (response) {
                         if (!response.ok) {
                             $('#statusU').removeClass('fa-check').addClass('fa-times');
                             $('#statusU').css('display', 'block');
@@ -342,31 +356,31 @@ if (empty($_SESSION["utente"])) {
                         }
 
                     },
-                    error: function(errorThrown) {
+                    error: function (errorThrown) {
                         console.log(errorThrown);
                     }
                 });
             } else {
                 $("#errorUser").css("visibility", "visible");
                 $("#usernameR").addClass("is-danger");
-                $("#name_response").css("visibility","hidden");
+                $("#name_response").css("visibility", "hidden");
                 $('#submitRegister').attr("disabled", true);
                 $("#name_response").css('color', 'black');
                 $('#statusU').css('display', 'none');
             }
-        
+
         });
 
     });
-
-    $(document).ready(function() {
-        $("#email").keyup(function() {
+    //controllo dei caratteri ammessi , e controllo della presenza o meno della mail inserito
+    $(document).ready(function () {
+        $("#email").keyup(function () {
             var regexMail = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
             if ($("#email").val().match(regexMail) != null) {
                 var mail = $("#email").val().trim()
                 $("#errorMail").css("visibility", "hidden");
                 $("#email").removeClass("is-danger");
-                $("#email_response").css("visibility","visible");
+                $("#email_response").css("visibility", "visible");
 
                 $.ajax({
                     url: 'http://localhost/php/checkmail.php',
@@ -375,7 +389,7 @@ if (empty($_SESSION["utente"])) {
                     data: JSON.stringify({
                         mail: $('#email').val().toString(),
                     }),
-                    success: function(response) {
+                    success: function (response) {
                         if (!response.ok) {
                             $('#statusE').removeClass('fa-check').addClass('fa-times');
                             $('#statusE').css('display', 'block');
@@ -393,14 +407,14 @@ if (empty($_SESSION["utente"])) {
                         }
 
                     },
-                    error: function(errorThrown) {
+                    error: function (errorThrown) {
                         console.log(errorThrown);
                     }
                 });
             } else {
                 $("#errorMail").css("visibility", "visible");
                 $("#email").addClass("is-danger");
-                $("#email_response").css("visibility","hidden");
+                $("#email_response").css("visibility", "hidden");
                 $('#submitRegister').attr("disabled", false);
                 $("#email_response").css('color', 'black');
                 $('#statusE').css('display', 'none');
@@ -410,8 +424,8 @@ if (empty($_SESSION["utente"])) {
 
     });
 
-    $(document).ready(function() {
-        $("#rePwdR").keyup(function() {
+    $(document).ready(function () {
+        $("#rePwdR").keyup(function () {
             var pwd = $("#pwdR").val();
             var rePwd = $("#rePwdR").val();
             if (pwd != rePwd) {
@@ -432,6 +446,6 @@ if (empty($_SESSION["utente"])) {
         });
 
     });
-    </script>
+</script>
 
 </html>
