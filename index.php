@@ -35,7 +35,7 @@ if (empty($_SESSION["utente"])) {
                 <div class="tile is-ancestor ">
 
                     <div class="tile  is-parent is-vertical">
-                        <form class="loginUser">
+                        <form class="loginUser" action="javascript:void(0);">
                             <div class="field">
                                 <label class="label">Username</label>
                                 <p class="control has-icons-left has-icons-right">

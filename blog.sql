@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 17, 2019 alle 20:14
+-- Creato il: Mag 19, 2019 alle 20:51
 -- Versione del server: 10.1.38-MariaDB
 -- Versione PHP: 7.3.3
 
@@ -31,7 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `articoli` (
   `Id_A` int(11) NOT NULL,
   `Testo` mediumtext NOT NULL,
-  `Data` date NOT NULL,
+  `Data` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `User` varchar(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -93,15 +93,15 @@ CREATE TABLE `utenti` (
   `Cognome` varchar(16) NOT NULL,
   `Residenza` varchar(16) NOT NULL,
   `Biografia` mediumtext NOT NULL,
-  `Id_R` int(11) NOT NULL
+  `Id_R` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `utenti`
 --
 
-INSERT INTO `utenti` (`User`, `Psw`, `Mail`, `Nome`, `Cognome`, `Residenza`, `Biografia`, `Id_R`) VALUES
-('Alessio', '$2y$10$rRlDTWtGGWbWAaf9Wo6p4ui4F1ld9tReFT79KKU6l8fA8rOe3QrsG', 'alessio.agnese.iic97@gmail.com', '', '', '', '', 1);
+INSERT INTO `utenti` (`User`, `Psw`, `Mail`, `Nome`, `Cognome`, `Residenza`, `Biografia`) VALUES
+('Alessio', '$2y$10$rRlDTWtGGWbWAaf9Wo6p4ui4F1ld9tReFT79KKU6l8fA8rOe3QrsG', 'alessio.agnese.iic97@gmail.com', '', '', '', '');
 
 --
 -- Indici per le tabelle scaricate
