@@ -122,9 +122,9 @@ if (empty($_SESSION["utente"])) {
                                         title="Deve essere uguale alla password inserita precedentemente"
                                         path="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
                                     <span class="icon is-small is-left">
-                                        <i id="statusP" class="fas fa-lock"></i>
+                                        <i id="statusP" style="visibility: hidden" class="fas fa-lock"></i>
                                     </span>
-                                    <label id="pwd_response" class="label"></label>
+                                    <label id="pwd_response" style="visibility: hidden"  class="label"></label>
                                 </p>
                                 <div class="checkPswField" style="visibility: block ;text-align:justify">
                                     <h3>La password deve contenere:</h3>
@@ -247,25 +247,11 @@ if (empty($_SESSION["utente"])) {
             $('#submitRegister').attr("disabled", true);
             $("#name_response").css('color', 'black');
             $('#statusU').css('display', 'none');
+            $("#pwd_response").css("visibility", "hidden");
 
         });
     });
-    //controllo che l'input nel campo utente non contenga caratteri vietati
-
-
-    $(document).ready(function () {
-        $("[name='psw']").keyup(function () {
-            var regexMail = /[a-z0-9._%+-]+$/;
-            if (document.forms["registerUser"]["email"].value.match(regexMail) == null) {
-                $("#errorMail").css("visibility", "visible");
-                $("[name='email']").addClass("is-danger");
-            } else {
-                $("#errorMail").css("visibility", "hidden");
-                $("[name='email']").removeClass("is-danger");
-            }
-
-        });
-    });
+   
 
     $(document).ready(function () {
         $('#submitlogin').click(function () {
@@ -422,21 +408,22 @@ if (empty($_SESSION["utente"])) {
         });
 
     });
-
+//da fare : fare in modo che l'elemento #pwd_response sia visibility", "visible o visibility", "hidden"
     $(document).ready(function () {
         $("#rePwdR").keyup(function () {
             var pwd = $("#pwdR").val();
             var rePwd = $("#rePwdR").val();
+            $("#pwd_response").css("visibility", "visible");
             if (pwd != rePwd) {
                 $('#statusP').removeClass('fa-check').addClass('fa-times');
-                $('#statusP').css('display', 'block');
+                $('#statusP').css("visibility", "visible");
                 $('#statusP').css('color', 'red');
                 $("#pwd_response").text("Le password non corrispondono");
                 $("#pwd_response").css('color', 'red');
                 $('#submitRegister').attr("disabled", true);
             } else {
                 $('#statusP').removeClass('fa-times').addClass('fa-check');
-                $('#statusP').css('display', '');
+                $('#statusP').css("visibility", "hidden");
                 $('#statusP').css('color', 'green');
                 $("#pwd_response").text("");
                 $('#submitRegister').attr("disabled", false);
