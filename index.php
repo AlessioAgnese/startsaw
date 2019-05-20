@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <title>
         Progetto SAW
     </title>
@@ -40,7 +41,8 @@ echo $_SESSION["utente"];//a fini di test
                             <div class="field">
                                 <label class="label">Username</label>
                                 <p class="control has-icons-left has-icons-right">
-                                    <input class="input" autocomplete="username" type="text" id="usernameL" placeholder="Nome Utente">
+                                    <input class="input" autocomplete="username" type="text" id="usernameL"
+                                        placeholder="Nome Utente">
                                     <span class="icon is-small is-left">
                                         <i class="fas fa-user"></i>
                                     </span>
@@ -52,7 +54,8 @@ echo $_SESSION["utente"];//a fini di test
                             <div class="field">
                                 <label class="label">Password</label>
                                 <p class="control has-icons-left">
-                                    <input class="input" autocomplete="current-password" type="password" id="pwdL" placeholder="Password">
+                                    <input class="input" autocomplete="current-password" type="password" id="pwdL"
+                                        placeholder="Password">
                                     <span class="icon is-small is-left">
                                         <i class="fas fa-lock"></i>
                                     </span>
@@ -69,8 +72,10 @@ echo $_SESSION["utente"];//a fini di test
                             <div class="field">
                                 <label class="label">Username</label>
                                 <p class="control has-icons-left has-icons-right">
-                                    <input id="usernameR" autocomplete="username" class="input is-loading" type="text" placeholder="Nome Utente"
-                                        pattern="^(?!.*__.*)(?!.*\.\..*)[a-z0-9_.]+$" required>
+                                    <input id="usernameR" autocomplete="username" class="input is-loading" type="text"
+                                        placeholder="Nome Utente" pattern="^(?!.*__.*)(?!.*\.\..*)[a-z0-9_.]+$"
+                                        title="Deve contenere almeno un numero una lettera maiuscola una minuscola "
+                                        required>
                                     <span class="icon is-small is-left">
                                         <i class="fas fa-user"></i>
                                     </span>
@@ -96,18 +101,20 @@ echo $_SESSION["utente"];//a fini di test
                                     <span class="icon is-small is-right">
                                         <i id="statusE" style="display: none" class="fas"></i>
                                     </span>
-                                    <label id="email_response" style="visibility:hidden" class="label"></label>
+
                                 </p>
                                 <p id="errorMail" class="is-size-7 has-text-danger" style="visibility: hidden">Non
                                     rispetta
                                     le
-                                    caratteristiche della Email
+                                    caratteristiche di una Email
                                 </p>
+                                <label id="email_response" style="visibility:hidden" class="label is-size-7"></label>
                             </div>
                             <div class="field">
                                 <label class="label">Password</label>
                                 <p class="control has-icons-left">
-                                    <input id=pwdR autocomplete="new-password" class="input" type="password" placeholder="Password"
+                                    <input id=pwdR autocomplete="new-password" class="input" type="password"
+                                        placeholder="Password"
                                         title="Deve contenere almeno un numero ,una lettera minuscola , una maiuscola ed un simbolo e la lunghezza deve essere almeno di 8 caratteri "
                                         path="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
                                     <span class="icon is-small is-left">
@@ -119,15 +126,16 @@ echo $_SESSION["utente"];//a fini di test
                             <div class="field">
                                 <label class="label">Ripeti Password</label>
                                 <p class="control has-icons-left">
-                                    <input id="rePwdR" autocomplete="new-password" class="input" type="password" placeholder="Password"
+                                    <input id="rePwdR" autocomplete="new-password" class="input" type="password"
+                                        placeholder="Password"
                                         title="Deve essere uguale alla password inserita precedentemente"
                                         path="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
                                     <span class="icon is-small is-left">
-                                        <i id="statusP" style="visibility: hidden" class="fas fa-lock"></i>
+                                        <i id="statusP" style="visibility:hidden" class="fas fa-lock"></i>
                                     </span>
-                                    <label id="pwd_response" style="visibility: hidden"  class="label"></label>
                                 </p>
-                                <div class="checkPswField" style="visibility: block ;text-align:justify">
+                                <label id="pwd_response" style="visibility:visible" class="label is-size-7"></label>
+                                <div class="checkPswField" style="visibility:hidden">
                                     <h3>La password deve contenere:</h3>
                                     <p id="upLetter" class="is-size-7 has-text-danger">1 Lettera maiuscola</p>
                                     <p id="lowLetter" class="is-size-7 has-text-danger">1 Lettera minuscola</p>
@@ -252,7 +260,7 @@ echo $_SESSION["utente"];//a fini di test
 
         });
     });
-   
+
 
     $(document).ready(function () {
         $('#submitlogin').click(function () {
@@ -331,13 +339,13 @@ echo $_SESSION["utente"];//a fini di test
                             $('#statusU').css('color', 'red');
                             $("#name_response").text("Username gia in uso");
                             $("#name_response").css('color', 'red');
-                            $('#submitRegister').attr("disabled", true);
+                            //$('#submitRegister').attr("disabled", true);
                         } else {
                             $('#statusU').removeClass('fa-times').addClass('fa-check');
                             $('#statusU').css('display', 'block');
                             $('#statusU').css('color', 'green');
                             $("#name_response").text("Username disponibile");
-                            $('#submitRegister').attr("disabled", false);
+                            // $('#submitRegister').attr("disabled", false);
                             $("#name_response").css('color', 'green')
                         }
 
@@ -350,7 +358,7 @@ echo $_SESSION["utente"];//a fini di test
                 $("#errorUser").css("visibility", "visible");
                 $("#usernameR").addClass("is-danger");
                 $("#name_response").css("visibility", "hidden");
-                $('#submitRegister').attr("disabled", true);
+                // $('#submitRegister').attr("disabled", true);
                 $("#name_response").css('color', 'black');
                 $('#statusU').css('display', 'none');
             }
@@ -382,13 +390,13 @@ echo $_SESSION["utente"];//a fini di test
                             $('#statusE').css('color', 'red');
                             $("#email_response").text("Email gia in uso");
                             $("#email_response").css('color', 'red');
-                            $('#submitRegister').attr("disabled", true);
+                            //$('#submitRegister').attr("disabled", true);
                         } else {
                             $('#statusE').removeClass('fa-times').addClass('fa-check');
-                            $('#statusE').css('display', 'none');
+                            $('#statusE').css('display', 'block');
                             $('#statusE').css('color', 'green');
                             $("#email_response").text("");
-                            $('#submitRegister').attr("disabled", false);
+                            //$('#submitRegister').attr("disabled", false);
                             $("#email_response").css('color', 'green')
                         }
 
@@ -401,7 +409,7 @@ echo $_SESSION["utente"];//a fini di test
                 $("#errorMail").css("visibility", "visible");
                 $("#email").addClass("is-danger");
                 $("#email_response").css("visibility", "hidden");
-                $('#submitRegister').attr("disabled", false);
+                //$('#submitRegister').attr("disabled", false);
                 $("#email_response").css('color', 'black');
                 $('#statusE').css('display', 'none');
             }
@@ -409,8 +417,26 @@ echo $_SESSION["utente"];//a fini di test
         });
 
     });
-//da fare : fare in modo che l'elemento #pwd_response sia visibility", "visible o visibility", "hidden"
+    //working in progress --(controllo che la password rispetti le condizioni date)
     $(document).ready(function () {
+        $("#pwdr").on({
+
+            keyup: function () {
+                var regexPsw = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+                if ($("#pwdr").val().match(regexPsw) != null) {
+
+                }
+
+
+            },
+            focus: function () {
+                $(".checkPswField").css("visibility", "visible");
+            }
+        });
+    });
+    //da fare : fare in modo che l'elemento #pwd_response sia visibility", "visible o visibility", "hidden"
+    $(document).ready(function () {
+        $("#pwdr").keyup()
         $("#rePwdR").keyup(function () {
             var pwd = $("#pwdR").val();
             var rePwd = $("#rePwdR").val();
@@ -421,17 +447,38 @@ echo $_SESSION["utente"];//a fini di test
                 $('#statusP').css('color', 'red');
                 $("#pwd_response").text("Le password non corrispondono");
                 $("#pwd_response").css('color', 'red');
-                $('#submitRegister').attr("disabled", true);
+                //$('#submitRegister').attr("disabled", true);
             } else {
                 $('#statusP').removeClass('fa-times').addClass('fa-check');
                 $('#statusP').css("visibility", "hidden");
                 $('#statusP').css('color', 'green');
                 $("#pwd_response").text("");
-                $('#submitRegister').attr("disabled", false);
+                // $('#submitRegister').attr("disabled", false);
                 $("#pwd_response").css('color', 'green')
+
+
             }
         });
 
+    });
+    // working in progress --controllo che tutti i campi siano compilati coorettamente e abilito il bottene per registrarsi(da finire il controllo sulla password)
+    $(document).ready(function () {
+        $("#usernameR,#email,#pwdR,#rePwdR").keyup(function () {
+            var name = $("#usernameR").val().trim().toString();
+            var mail = $("#email").val().trim()
+            var psw = $("#pwdR").val();
+            var rePsw = $("#rePwdR").val();
+            if (name != '' && $("#name_response").text() === 'Username disponibile' && mail != '' && !$(
+                    '#email').hasClass('is-danger')) {
+
+                $('#submitRegister').attr("disabled", false);
+
+            } else {
+                $('#submitRegister').attr("disabled", true);
+            }
+
+
+        });
     });
 </script>
 
