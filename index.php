@@ -132,14 +132,23 @@ echo $_SESSION["utente"];//a fini di test
                                     </span>
                                 </p>
                                 <label id="pwd_response" style="visibility:visible" class="label is-size-7"></label>
-                                <div class="checkPswField" style="visibility:hidden">
+                                <div class="checkPswField" style="visibility:visible">
                                     <h3>La password deve contenere:</h3>
-                                    <p id="upLetter" class="is-size-7 has-text-danger">1 Lettera maiuscola</p>
+                                    
+                                    
+                                    
+                                          
+                                                <span class="icon is-small is-left">
+                                                        <i class="fas fa-times"></i>
+
+                                                       
+                                                </span>
+                                                <label >1 Lettera minuscola</label>
                                     <p id="lowLetter" class="is-size-7 has-text-danger">1 Lettera minuscola</p>
                                     <p id="symbol" class="is-size-7 has-text-danger">1 Simbolo</p>
                                     <p id="length" class="is-size-7 has-text-danger">Minimo 8 caratteri</p>
                                 </div>
-                            </div>
+                                </div>
                             <br>
                             <button class="button is-danger " id="submitRegister" disabled="true">
                                 Registrati
@@ -460,13 +469,12 @@ echo $_SESSION["utente"];//a fini di test
     });
     // working in progress --controllo che tutti i campi siano compilati coorettamente e abilito il bottene per registrarsi(da finire il controllo sulla password)
     $(document).ready(function () {
-        $("#usernameR,#email,#pwdR,#rePwdR").keyup(function () {
+        $("#rePwdR").keyup(function () {
             var name = $("#usernameR").val().trim().toString();
             var mail = $("#email").val().trim()
             var psw = $("#pwdR").val();
             var rePsw = $("#rePwdR").val();
-            if (name != '' && $("#errorUser").text() === 'Username disponibile' && mail != '' && !$(
-                    '#email').hasClass('is-danger')) {
+            if (name != '' && $("#errorUser").text() === 'Username disponibile' && mail != '' && !$('#email').hasClass('is-danger')) {
 
                 $('#submitRegister').attr("disabled", false);
 
