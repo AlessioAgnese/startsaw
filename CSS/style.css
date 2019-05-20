@@ -996,15 +996,15 @@ a.has-text-info:hover, a.has-text-info:focus {
 }
 
 .has-text-success {
-  color: #23d160 !important;
+  color: #14b64d !important;
 }
 
 a.has-text-success:hover, a.has-text-success:focus {
-  color: #1ca64c !important;
+  color: #129b42 !important;
 }
 
 .has-background-success {
-  background-color: #23d160 !important;
+  background-color: #149c44 !important;
 }
 
 .has-text-warning {

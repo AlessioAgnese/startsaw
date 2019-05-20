@@ -9,7 +9,7 @@
     <title>
         Progetto SAW
     </title>
-    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link rel="stylesheet" type="text/css" href="./CSS/style.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"> </script>
     <script type="text/javascript" language="javascript">
@@ -84,10 +84,9 @@ echo $_SESSION["utente"];//a fini di test
                                     </span>
 
                                 </p>
-                                <p id="errorUser" class="is-size-7 has-text-danger" style="visibility: hidden">Caratteri
-                                    non ammessi
+                                <p id="errorUser" class="is-size-6 " style="visibility: hidden">
+                                    erroreUser
                                 </p>
-                                <label id="name_response" class="label is-size-7" style="visibility:hidden"></label>
                             </div>
                             <div class="field">
                                 <label class="label">Email</label>
@@ -103,10 +102,8 @@ echo $_SESSION["utente"];//a fini di test
                                     </span>
 
                                 </p>
-                                <p id="errorMail" class="is-size-7 has-text-danger" style="visibility: hidden">Non
-                                    rispetta
-                                    le
-                                    caratteristiche di una Email
+                                <p id="errorMail" class="is-size-6" style="visibility: hidden">
+                                    errorMail
                                 </p>
                                 <label id="email_response" style="visibility:hidden" class="label is-size-7"></label>
                             </div>
@@ -256,6 +253,7 @@ echo $_SESSION["utente"];//a fini di test
             $('#submitRegister').attr("disabled", true);
             $("#name_response").css('color', 'black');
             $('#statusU').css('display', 'none');
+            $('#statusE').css('display', 'none');
             $("#pwd_response").css("visibility", "hidden");
 
         });
@@ -320,9 +318,8 @@ echo $_SESSION["utente"];//a fini di test
 
             if ($("#usernameR").val().match(regexUser) != null) {
                 var name = $("#usernameR").val().trim().toString();
-                $("#errorUser").css("visibility", "hidden");
+                $("#errorUser").css("visibility", "visible");
                 $("#usernameR").removeClass("is-danger");
-                $("#name_response").css("visibility", "visible");
 
                 $.ajax({
                     url: 'http://localhost/php/checkusr.php',
@@ -336,17 +333,17 @@ echo $_SESSION["utente"];//a fini di test
                         if (!response.ok) {
                             $('#statusU').removeClass('fa-check').addClass('fa-times');
                             $('#statusU').css('display', 'block');
-                            $('#statusU').css('color', 'red');
-                            $("#name_response").text("Username gia in uso");
-                            $("#name_response").css('color', 'red');
+                            $('#statusU').css('color', 'hsl(348, 100%, 61%)');
+                            $("#errorUser").text("Username gia in uso");
+                            $("#errorUser").removeClass('has-text-success').addClass('has-text-danger');
                             //$('#submitRegister').attr("disabled", true);
                         } else {
                             $('#statusU').removeClass('fa-times').addClass('fa-check');
                             $('#statusU').css('display', 'block');
-                            $('#statusU').css('color', 'green');
-                            $("#name_response").text("Username disponibile");
+                            $('#statusU').css('color', '#14b64d');
+                            $("#errorUser").text("Username disponibile");
                             // $('#submitRegister').attr("disabled", false);
-                            $("#name_response").css('color', 'green')
+                            $("#errorUser").removeClass('has-text-danger').addClass('has-text-success');
                         }
 
                     },
@@ -355,11 +352,9 @@ echo $_SESSION["utente"];//a fini di test
                     }
                 });
             } else {
-                $("#errorUser").css("visibility", "visible");
-                $("#usernameR").addClass("is-danger");
-                $("#name_response").css("visibility", "hidden");
-                // $('#submitRegister').attr("disabled", true);
-                $("#name_response").css('color', 'black');
+               $("#errorUser").removeClass('has-text-success').addClass('has-text-danger');
+                $("#usernameR").addClass('is-danger');
+                $("#errorUser").text("Caratteri non ammessi");
                 $('#statusU').css('display', 'none');
             }
 
@@ -372,9 +367,8 @@ echo $_SESSION["utente"];//a fini di test
             var regexMail = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
             if ($("#email").val().match(regexMail) != null) {
                 var mail = $("#email").val().trim()
-                $("#errorMail").css("visibility", "hidden");
+                
                 $("#email").removeClass("is-danger");
-                $("#email_response").css("visibility", "visible");
 
                 $.ajax({
                     url: 'http://localhost/php/checkmail.php',
@@ -385,19 +379,22 @@ echo $_SESSION["utente"];//a fini di test
                     }),
                     success: function (response) {
                         if (!response.ok) {
+                            
                             $('#statusE').removeClass('fa-check').addClass('fa-times');
                             $('#statusE').css('display', 'block');
-                            $('#statusE').css('color', 'red');
-                            $("#email_response").text("Email gia in uso");
-                            $("#email_response").css('color', 'red');
+                            $('#statusE').css('color', 'hsl(348, 100%, 61%)');
+                            $("#errorMail").css("visibility", "visible");
+                            $("#errorMail").text("Email gia in uso");
+                            $("#errorMail").addClass('has-text-danger');
                             //$('#submitRegister').attr("disabled", true);
                         } else {
                             $('#statusE').removeClass('fa-times').addClass('fa-check');
                             $('#statusE').css('display', 'block');
-                            $('#statusE').css('color', 'green');
-                            $("#email_response").text("");
+                            $('#statusE').css('color', '#14b64d');
+                            $("#errorMail").css("visibility", "hidden");
+                            $("#errorMail").text("errorMail");
                             //$('#submitRegister').attr("disabled", false);
-                            $("#email_response").css('color', 'green')
+                            
                         }
 
                     },
@@ -408,9 +405,9 @@ echo $_SESSION["utente"];//a fini di test
             } else {
                 $("#errorMail").css("visibility", "visible");
                 $("#email").addClass("is-danger");
-                $("#email_response").css("visibility", "hidden");
+                $("#errorMail").addClass('has-text-danger');
+                $("#errorMail").text("Email non valida");
                 //$('#submitRegister').attr("disabled", false);
-                $("#email_response").css('color', 'black');
                 $('#statusE').css('display', 'none');
             }
 
@@ -468,7 +465,7 @@ echo $_SESSION["utente"];//a fini di test
             var mail = $("#email").val().trim()
             var psw = $("#pwdR").val();
             var rePsw = $("#rePwdR").val();
-            if (name != '' && $("#name_response").text() === 'Username disponibile' && mail != '' && !$(
+            if (name != '' && $("#errorUser").text() === 'Username disponibile' && mail != '' && !$(
                     '#email').hasClass('is-danger')) {
 
                 $('#submitRegister').attr("disabled", false);
