@@ -230,10 +230,7 @@ echo $_SESSION["utente"];//a fini di test
                     <div class="buttons">
                         <a id="loginRegisterButton" class="button is-warning is-outlined">
                             <strong id="userLogged">
-                                <?php if ($_SESSION["utente"] == "Guest")
-                                    echo $_SESSION["utente"];
-                                else
-                                    echo 'Log in/Registrati'; ?>
+                                    Log in/Registrati
                             </strong>
                         </a>
                     </div>
@@ -282,7 +279,7 @@ echo $_SESSION["utente"];//a fini di test
         });
     });
 
-
+    //funzione per correto login
     $(document).ready(function () {
         $('#submitlogin').click(function () {
 
@@ -298,6 +295,8 @@ echo $_SESSION["utente"];//a fini di test
                     if (data.ok) {
                         $('#userLogged').text(data.username);
                         $('.modal').removeClass("is-active");
+                        $('#loginRegisterButton').attr("href", "./php/controlpanel.php");
+
                     } else {
                         alert("username o password errati");
                     }
