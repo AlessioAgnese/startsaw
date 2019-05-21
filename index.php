@@ -438,7 +438,7 @@ echo $_SESSION["utente"];//a fini di test
         });
 
     });
-    //working in progress --(controllo che la password rispetti le condizioni date)
+    //working in press --(controllo che la password rispetti le condizioni date)
     $(document).ready(function () {
         $("#pwdR").on({
 
