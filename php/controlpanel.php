@@ -8,12 +8,9 @@
 <div class="container">
 
 <?php 
-session_start();
+                                        session_start();
                                         // richiamo il file di configurazione
-                                        require 'config.php';
-                                        // richiamo lo script responsabile della connessione a MySQL
-                                        require 'connect.php';
-                                        
+                                        require 'dbconfig.php';
                                         $name= $_SESSION["utente"];
                                         $sql = "SELECT ddn,nome FROM utenti WHERE user = '$name'";
                                         $query = mysqli_query($link,$sql);
