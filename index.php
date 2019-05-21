@@ -85,7 +85,7 @@ echo $_SESSION["utente"];//a fini di test
 
                                 </p>
                                 <p id="errorUser" class="is-size-6 " style="visibility: hidden">
-                                    
+
                                 </p>
                             </div>
                             <div class="field">
@@ -103,7 +103,7 @@ echo $_SESSION["utente"];//a fini di test
 
                                 </p>
                                 <p id="errorMail" class="is-size-6" style="visibility: hidden">
-                                   
+
                                 </p>
                                 <label id="email_response" style="visibility:hidden" class="label is-size-7"></label>
                             </div>
@@ -113,57 +113,59 @@ echo $_SESSION["utente"];//a fini di test
                                     <input id=pwdR autocomplete="new-password" class="input" type="password"
                                         placeholder="Password"
                                         title="Deve contenere almeno un numero ,una lettera minuscola , una maiuscola ed un simbolo e la lunghezza deve essere almeno di 8 caratteri "
-                                        path="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                                        path="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$" required>
                                     <span class="icon is-small is-left">
                                         <i class="fas fa-lock"></i>
                                     </span>
 
                                 </p>
                             </div>
+                            
+                            
                             <div class="field">
                                 <label class="label">Ripeti Password</label>
                                 <p class="control has-icons-left">
                                     <input id="rePwdR" autocomplete="new-password" class="input" type="password"
                                         placeholder="Password"
                                         title="Deve essere uguale alla password inserita precedentemente"
-                                        path="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                                        path="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$" required>
                                     <span class="icon is-small is-left">
                                         <i id="statusP" style="visibility:hidden" class="fas fa-lock"></i>
                                     </span>
                                 </p>
                                 <label id="pwd_response" style="visibility:visible" class="label is-size-6"></label>
-                                <div class="checkPswField" style="visibility:visible">
+                                <button class="button is-danger " id="submitRegister" disabled="true">
+                                    Registrati
+                                </button>
+                                <div class="checkPswField" style="visibility:hidden">
                                     <h3>La password deve contenere:</h3>
-                                <p class="has-text-danger">
-                                    <span class="icon is-small is-left ">
-                                        <i id="upLetterIcon" class="fas fa-times "></i>  
-                                    </span>
-                                    <label id="upLetter" class="is-size-6 " >1 Lettera minuscola</label>
-                                </p>
-                                <p class="has-text-danger">
-                                    <span class="icon is-small is-left">
-                                        <i id="lowLetterIcon" class="fas fa-times"></i>  
-                                    </span>
-                                    <label id="lowLetter" class="is-size-6 ">1 Lettera minuscola</p>
-                                </p>
-                                <p class="has-text-danger"> 
-                                    <span class="icon is-small is-left">
-                                        <i id="symbolIcon" class="fas fa-times "></i>  
-                                    </span>
-                                    <label id="symbol" class="is-size-6 ">1 Simbolo</p>
-                                </p>
-                                <p class="has-text-danger">
-                                    <span class="icon is-small is-left">
-                                        <i id="lengthIcon" class="fas fa-times "></i>  
-                                    </span>
-                                    <label id="length" class="is-size-6 ">Minimo 8 caratteri</p>
-                                </p>
+                                    <p class="has-text-danger">
+                                        <span class="icon is-small is-left ">
+                                            <i id="upLetterIcon" class="fas fa-times "></i>
+                                        </span>
+                                        <label id="upLetter" class="is-size-6 ">1 Lettera minuscola</label>
+                                    </p>
+                                    <p class="has-text-danger">
+                                        <span class="icon is-small is-left">
+                                            <i id="lowLetterIcon" class="fas fa-times"></i>
+                                        </span>
+                                        <label id="lowLetter" class="is-size-6 ">1 Lettera minuscola</p>
+                                    </p>
+                                    <p class="has-text-danger">
+                                        <span class="icon is-small is-left">
+                                            <i id="numberIcon" class="fas fa-times "></i>
+                                        </span>
+                                        <label id="number" class="is-size-6 ">1 Numero</p>
+                                    </p>
+                                    <p class="has-text-danger">
+                                        <span class="icon is-small is-left">
+                                            <i id="lengthIcon" class="fas fa-times "></i>
+                                        </span>
+                                        <label id="length" class="is-size-6 ">Minimo 8 caratteri</p>
+                                    </p>
                                 </div>
-                                </div>
-                            <br>
-                            <button class="button is-danger " id="submitRegister" disabled="true">
-                                Registrati
-                            </button>
+                            </div>
+                            
                         </form>
                     </div>
 
@@ -330,7 +332,7 @@ echo $_SESSION["utente"];//a fini di test
                 }
             })
         })
-    })
+    });
     //controllo dei caratteri ammessi , e controllo della presenza o meno dell'user inserito
     $(document).ready(function () {
         $("#usernameR").keyup(function () {
@@ -355,7 +357,8 @@ echo $_SESSION["utente"];//a fini di test
                             $('#statusU').css('display', 'block');
                             $('#statusU').css('color', 'hsl(348, 100%, 61%)');
                             $("#errorUser").text("Username gia in uso");
-                            $("#errorUser").removeClass('has-text-success').addClass('has-text-danger');
+                            $("#errorUser").removeClass('has-text-success').addClass(
+                                'has-text-danger');
                             //$('#submitRegister').attr("disabled", true);
                         } else {
                             $('#statusU').removeClass('fa-times').addClass('fa-check');
@@ -363,7 +366,8 @@ echo $_SESSION["utente"];//a fini di test
                             $('#statusU').css('color', '#14b64d');
                             $("#errorUser").text("Username disponibile");
                             // $('#submitRegister').attr("disabled", false);
-                            $("#errorUser").removeClass('has-text-danger').addClass('has-text-success');
+                            $("#errorUser").removeClass('has-text-danger').addClass(
+                                'has-text-success');
                         }
 
                     },
@@ -372,7 +376,7 @@ echo $_SESSION["utente"];//a fini di test
                     }
                 });
             } else {
-               $("#errorUser").removeClass('has-text-success').addClass('has-text-danger');
+                $("#errorUser").removeClass('has-text-success').addClass('has-text-danger');
                 $("#usernameR").addClass('is-danger');
                 $("#errorUser").text("Caratteri non ammessi");
                 $('#statusU').css('display', 'none');
@@ -387,7 +391,7 @@ echo $_SESSION["utente"];//a fini di test
             var regexMail = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
             if ($("#email").val().match(regexMail) != null) {
                 var mail = $("#email").val().trim()
-                
+
                 $("#email").removeClass("is-danger");
 
                 $.ajax({
@@ -399,7 +403,7 @@ echo $_SESSION["utente"];//a fini di test
                     }),
                     success: function (response) {
                         if (!response.ok) {
-                            
+
                             $('#statusE').removeClass('fa-check').addClass('fa-times');
                             $('#statusE').css('display', 'block');
                             $('#statusE').css('color', 'hsl(348, 100%, 61%)');
@@ -414,7 +418,7 @@ echo $_SESSION["utente"];//a fini di test
                             $("#errorMail").css("visibility", "hidden");
                             $("#errorMail").text("errorMail");
                             //$('#submitRegister').attr("disabled", false);
-                            
+
                         }
 
                     },
@@ -436,29 +440,45 @@ echo $_SESSION["utente"];//a fini di test
     });
     //working in progress --(controllo che la password rispetti le condizioni date)
     $(document).ready(function () {
-        $("#pwdr").on({
+        $("#pwdR").on({
 
-            keyup: function () {
-                var regexPsw = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
-                if ($("#pwdr").val().match(regexPsw) != null) {
-                    if ($("#pwdr").val().match(/[A-Z]/)) {
-                        $("#upLetter,#upLetterIcon").removeClass("has-text-danger").addClass("has-text-success");
-                    }else{
-                        $("#upLetter,#upLetterIcon").removeClass("has-text-success").addClass("has-text-danger");
-                    }   
+            keyup: function(){
+            
+             //var regexPsw = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+            //if ($("#pwdR").val().match(regexPsw) != null) {
+                if ($("#pwdR").val().match(/[A-Z]/) != null) {
+                    $("#upLetter, #upLetterIcon").removeClass("has-text-danger").addClass(
+                        "has-text-success");
+                } else {
+                    $("#upLetter, #upLetterIcon").removeClass("has-text-success").addClass(
+                        "has-text-danger");
                 }
+                if ($("#pwdr").val().match(/[a-z]/) != null) {
+                    $("#lowLetter, #lowLetterIcon").removeClass("has-text-danger").addClass(
+                        "has-text-success");
+                } else {
+                    $("#lowLetter, #lowLetterIcon").removeClass("has-text-success").addClass(
+                        "has-text-danger");
+                }
+                if ($("#pwdr").val().match(/[0-9]/) != null) {
+                    $("#number, #numberIcon").removeClass("has-text-danger").addClass(
+                    "has-text-success");
+                } else {
+                    $("#number, #numberIcon").removeClass("has-text-success").addClass(
+                    "has-text-danger");
+                }
+            //}
+        },
 
-
-            },
-            focus: function () {
-                $(".checkPswField").css("visibility", "visible");
-            }
-        });
+        focus:function(){
+            $(".checkPswField").css("visibility","visible");
+        }
     });
+});
     //da fare : fare in modo che l'elemento #pwd_response sia visibility", "visible o visibility", "hidden"
     $(document).ready(function () {
-        $("#pwdr").keyup()
         $("#rePwdR").keyup(function () {
+            alert("requa");
             var pwd = $("#pwdR").val();
             var rePwd = $("#rePwdR").val();
             $("#pwd_response").css("visibility", "visible");
@@ -484,12 +504,13 @@ echo $_SESSION["utente"];//a fini di test
     });
     // working in progress --controllo che tutti i campi siano compilati coorettamente e abilito il bottene per registrarsi(da finire il controllo sulla password)
     $(document).ready(function () {
-        $("#usernameR,#email,#pwdr,rePwdR").keyup(function () {
+        $("#usernameR,#email,#pwdr,#rePwdR").keyup(function () {
             var name = $("#usernameR").val().trim().toString();
             var mail = $("#email").val().trim()
             var psw = $("#pwdR").val();
             var rePsw = $("#rePwdR").val();
-            if (name != '' && $("#errorUser").text() === 'Username disponibile' && mail != '' && !$('#email').hasClass('is-danger')) {
+            if (name != '' && $("#errorUser").text() === 'Username disponibile' && mail != '' && !$(
+                    '#email').hasClass('is-danger')) {
 
                 $('#submitRegister').attr("disabled", false);
 
