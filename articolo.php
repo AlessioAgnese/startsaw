@@ -26,4 +26,5 @@ $idA = $_REQUEST['id'];
 $idA = mysqli_real_escape_string($link,$idA);
 $query="SELECT a.titolo,a.data,a.autoreArticolo,a.testo,i.link 
         FROM articoli 
-        WHERE Id_A=$idA";
+        WHERE Id_A='$idA'";
+        mysqli_close($link);
