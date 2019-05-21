@@ -1,4 +1,4 @@
-//funzione per il menu burger
+//funzione per il menu burge
 $(document).ready(function () {
     $(".navbar-burger").click(function () {
         $(".navbar-burger,#navbarBasicExample").toggleClass("is-active");
