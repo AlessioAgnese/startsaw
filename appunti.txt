@@ -1,0 +1,59 @@
+<?php
+    function createToken($array){
+        $date = new date('Y-m-d');
+        $array["utente"] = $date;
+        $json = json_encode($array);
+        $json = sha1($json);
+        return $json;
+    }
+    function checkAuth($token){
+        //SELECT * FROM Utenti WHERE AuthToken = $token;
+        /*
+        $username = $row[0];
+
+        return $username;
+        */
+    }
+
+
+
+    //----------------------------[ALTRA PAGINA]------------------------------------
+
+    function insertArticle(){
+        $username = checkAuth($token);
+
+    }
+    
+        |JS|
+        localStorage.setItem('utente');
+        localStorage.getItem('utente');
+        |JS|
+        $.ajax(
+            url:'http//dio.it',
+            type:'GET',
+            dataType:'json',
+            data:JSON.stringify({
+                auth: localStorage.getItem('utente'),
+                info ...
+            })
+        )
+
+        $(document).ready(function(){
+            if('utente' in localStorage){
+                //USER IS AUTHENTICATED
+            }
+            else{
+                //USER IS GUEST
+            }
+        })
+    }
+
+
+    array.forEach(element=>{
+        console.log(element);
+        console.log(element.name);
+        $('div').append('<div class="container is-fluid"><h1 class="title">'+element.name+'</h1></div>')
+    })
+
+
+?>
