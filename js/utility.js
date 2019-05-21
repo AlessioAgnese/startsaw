@@ -44,7 +44,7 @@ $(document).ready(function () {
                 if (data.ok) {
                     $('#userLogged').text(data.username);
                     $('.modal').removeClass("is-active");
-                    localStorage.setItem('utente');
+                    //localStorage.setItem('utente');
                     $('#loginRegisterButton').attr("href", "./php/controlpanel.php");
 
                 } else {
