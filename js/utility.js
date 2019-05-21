@@ -229,6 +229,10 @@ $(document).ready(function () {
                 $("#length, #lengthIcon").removeClass("has-text-success").addClass(
                 "has-text-danger");
             }
+            //if($("#upLetterIcon,#lowLetterIcon,#numberIcon,#lengthIcon").hasClass("fa-check"))
+              //  {console.log("password che rispestta i requisiti"); $('#submitRegister').attr("disabled", false);} 
+            //else
+              //  {console.log("password che non rispetta i requisiti"); $('#submitRegister').attr("disabled", false);} 
         
         },
 
@@ -267,13 +271,15 @@ $(document).ready(function () {
 
 });
 // working in progress --controllo che tutti i campi siano compilati coorettamente e abilito il bottene per registrarsi(da finire il controllo sulla password)
+//aggiunto controllo su password ma mail fa passare anche se errata
 $(document).ready(function () {
-    $("#usernameR,#email,#pwdR,#rePwdR").keyup(function () {
+    $("#usernameR,#email,#pwdR,#rePwdR").change(function () {
         var name = $("#usernameR").val().trim().toString();
         var mail = $("#email").val().trim()
         var psw = $("#pwdR").val();
         var rePsw = $("#rePwdR").val();
-        if (name != '' && $("#errorUser").text() === 'Username disponibile' && mail != '' && !$('#email').hasClass('is-danger') && psw!='' && $("#upLetter,#lowLetter,#number,#length").hasClass('has-text-success') && rePsw!="" && !$('#statusP').hasClass('has-text-danger')  )  {
+        //&& $("#upLetter,#lowLetter,#number,#length").hasClass('has-text-success') && !$('#email').hasClass('is-danger') && !$('#statusP').hasClass('has-text-danger')
+        if ($("#upLetterIcon,#lowLetterIcon,#numberIcon,#lengthIcon,#email,#statusU,#statusP").hasClass("fa-check") && name != '' && mail != ''  && psw!=''  && rePsw!='')  {
 
             $('#submitRegister').attr("disabled", false);
 
