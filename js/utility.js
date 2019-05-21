@@ -241,13 +241,12 @@ $(document).ready(function () {
     }
 });
 });
+
 //da fare : fare in modo che l'elemento #pwd_response sia visibility", "visible o visibility", "hidden"
 $(document).ready(function () {
-    $("#rePwdR").keyup(function () {
-        var pwd = $("#pwdR").val();
-        var rePwd = $("#rePwdR").val();
+    $("#rePwdR , #pwdR").keyup(function () {
         $("#pwd_response").css("visibility", "visible");
-        if (pwd != rePwd) {
+        if ($("#pwdR").val() != $("#rePwdR").val()) {
             $('#statusP').removeClass('fa-check').addClass('fa-times');
             $('#statusP').css("visibility", "visible");
             $('#statusP').removeClass('has-text-success').addClass('has-text-danger');
@@ -269,7 +268,7 @@ $(document).ready(function () {
 });
 // working in progress --controllo che tutti i campi siano compilati coorettamente e abilito il bottene per registrarsi(da finire il controllo sulla password)
 $(document).ready(function () {
-    $("#usernameR,#email,#pwdr,#rePwdR").keyup(function () {
+    $("#usernameR,#email,#pwdR,#rePwdR").keyup(function () {
         var name = $("#usernameR").val().trim().toString();
         var mail = $("#email").val().trim()
         var psw = $("#pwdR").val();
