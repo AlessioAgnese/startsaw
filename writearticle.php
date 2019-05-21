@@ -6,7 +6,6 @@ session_start();
 ?>
 
 <head>
-    <!--<script src="https://cloud.tinymce.com/5/tinymce.min.js" apiKey=d4cxhl8d1f1x9a3g76ks6c1zk61f65dwy2yopjtc0d7woiwd></script>-->
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=d4cxhl8d1f1x9a3g76ks6c1zk61f65dwy2yopjtc0d7woiwd"></script>
     <script>
         tinymce.init({

@@ -139,6 +139,7 @@ ALTER TABLE `ruoli`
 --
 ALTER TABLE `utenti`
   ADD PRIMARY KEY (`User`),
+  ADD UNIQUE KEY `Mail` (`Mail`),
   ADD KEY `utente_ruolo` (`Id_R`);
 
 --
