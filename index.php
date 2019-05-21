@@ -113,7 +113,7 @@ echo $_SESSION["utente"];//a fini di test
                                     <input id=pwdR autocomplete="new-password" class="input" type="password"
                                         placeholder="Password"
                                         title="Deve contenere almeno un numero ,una lettera minuscola , una maiuscola ed un simbolo e la lunghezza deve essere almeno di 8 caratteri "
-                                        path="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$" required>
+                                        path="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
                                     <span class="icon is-small is-left">
                                         <i class="fas fa-lock"></i>
                                     </span>
@@ -143,7 +143,7 @@ echo $_SESSION["utente"];//a fini di test
                                         <span class="icon is-small is-left ">
                                             <i id="upLetterIcon" class="fas fa-times "></i>
                                         </span>
-                                        <label id="upLetter" class="is-size-6 ">1 Lettera minuscola</label>
+                                        <label id="upLetter" class="is-size-6 ">1 Lettera maiuscola</label>
                                     </p>
                                     <p class="has-text-danger">
                                         <span class="icon is-small is-left">
@@ -269,15 +269,16 @@ echo $_SESSION["utente"];//a fini di test
         $(".delete,#loginRegisterButton,.modal-background").click(function () {
             $(".modal").toggleClass("is-active");
             $(".loginUser,.registerUser").trigger("reset");
-            $("#errorUser,#errorMail").css("visibility", "hidden");
+            $("#errorUser,#errorMail,#name_response,#pwd_response,.checkPswField").css("visibility", "hidden");
             $("#usernameR,#email").removeClass("is-danger");
-            $("#name_response").css("visibility", "hidden");
+            //$("#name_response,#pwd_response,.checkPswField").css("visibility", "hidden");
             $('#submitRegister').attr("disabled", true);
             $("#name_response").css('color', 'black');
-            $('#statusU').css('display', 'none');
-            $('#statusE').css('display', 'none');
-            $("#pwd_response").css("visibility", "hidden");
-
+            $('#statusU,#statusE').css('display', 'none');
+           // $('#statusE').css('display', 'none');
+            //$(".checkPswField").css("visibility","hidden");
+            $("#upLetterIcon,#lowLetterIcon,#numberIcon,#lengthIcon").removeClass('fa-check has-text-success').addClass('fa-times has-text-danger');
+            $("#upLetter,#lowLetter,#number,#length").removeClass('has-text-success').addClass('has-text-danger');
         });
     });
 
@@ -298,7 +299,7 @@ echo $_SESSION["utente"];//a fini di test
                         $('#userLogged').text(data.username);
                         $('.modal').removeClass("is-active");
                     } else {
-                        alert("email or password wrong");
+                        alert("username o password errati");
                     }
                 }
             })
@@ -410,14 +411,14 @@ echo $_SESSION["utente"];//a fini di test
                             $("#errorMail").css("visibility", "visible");
                             $("#errorMail").text("Email gia in uso");
                             $("#errorMail").addClass('has-text-danger');
-                            //$('#submitRegister').attr("disabled", true);
+                            
                         } else {
                             $('#statusE').removeClass('fa-times').addClass('fa-check');
                             $('#statusE').css('display', 'block');
                             $('#statusE').css('color', '#14b64d');
                             $("#errorMail").css("visibility", "hidden");
                             $("#errorMail").text("errorMail");
-                            //$('#submitRegister').attr("disabled", false);
+                            
 
                         }
 
@@ -443,56 +444,71 @@ echo $_SESSION["utente"];//a fini di test
         $("#pwdR").on({
 
             keyup: function(){
-            
-             //var regexPsw = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
-            //if ($("#pwdR").val().match(regexPsw) != null) {
                 if ($("#pwdR").val().match(/[A-Z]/) != null) {
+                    $("#upLetterIcon").removeClass('fa-times').addClass('fa-check');
                     $("#upLetter, #upLetterIcon").removeClass("has-text-danger").addClass(
                         "has-text-success");
                 } else {
+                    $("#upLetterIcon").removeClass('fa-check').addClass('fa-times');
                     $("#upLetter, #upLetterIcon").removeClass("has-text-success").addClass(
                         "has-text-danger");
                 }
-                if ($("#pwdr").val().match(/[a-z]/) != null) {
+                if ($("#pwdR").val().match(/[a-z]/) != null) {
+                    $("#lowLetterIcon").removeClass('fa-times').addClass('fa-check');
                     $("#lowLetter, #lowLetterIcon").removeClass("has-text-danger").addClass(
                         "has-text-success");
                 } else {
+                    $("#lowLetterIcon").removeClass('fa-check').addClass('fa-times');
                     $("#lowLetter, #lowLetterIcon").removeClass("has-text-success").addClass(
                         "has-text-danger");
                 }
-                if ($("#pwdr").val().match(/[0-9]/) != null) {
+                if ($("#pwdR").val().match(/[0-9]/) != null) {
+                    $("#numberIcon").removeClass('fa-times').addClass('fa-check');
                     $("#number, #numberIcon").removeClass("has-text-danger").addClass(
                     "has-text-success");
                 } else {
+                    $("#numberIcon").removeClass('fa-check').addClass('fa-times');
                     $("#number, #numberIcon").removeClass("has-text-success").addClass(
                     "has-text-danger");
                 }
-            //}
-        },
+                if($('#pwdR').val().length >7){
+                    $("#lengthIcon").removeClass('fa-times').addClass('fa-check');
+                    $("#length, #lengthIcon").removeClass("has-text-danger").addClass(
+                    "has-text-success");
+                }else{
+                    $("#lengthIcon").removeClass('fa-check').addClass('fa-times');
+                    $("#length, #lengthIcon").removeClass("has-text-success").addClass(
+                    "has-text-danger");
+                }
+            
+            },
 
         focus:function(){
             $(".checkPswField").css("visibility","visible");
+        },
+
+        blur:function(){
+            $(".checkPswField").css("visibility","hidden");
         }
     });
 });
     //da fare : fare in modo che l'elemento #pwd_response sia visibility", "visible o visibility", "hidden"
     $(document).ready(function () {
         $("#rePwdR").keyup(function () {
-            alert("requa");
             var pwd = $("#pwdR").val();
             var rePwd = $("#rePwdR").val();
             $("#pwd_response").css("visibility", "visible");
             if (pwd != rePwd) {
                 $('#statusP').removeClass('fa-check').addClass('fa-times');
                 $('#statusP').css("visibility", "visible");
-                $('#statusP').css('color', 'red');
+                $('#statusP').removeClass('has-text-success').addClass('has-text-danger');
                 $("#pwd_response").text("Le password non corrispondono");
                 $("#pwd_response").css('color', 'red');
                 //$('#submitRegister').attr("disabled", true);
             } else {
                 $('#statusP').removeClass('fa-times').addClass('fa-check');
                 $('#statusP').css("visibility", "hidden");
-                $('#statusP').css('color', 'green');
+                $('#statusP').removeClass('has-text-danger').addClass('has-text-success');
                 $("#pwd_response").text("");
                 // $('#submitRegister').attr("disabled", false);
                 $("#pwd_response").css('color', 'green')
@@ -509,8 +525,7 @@ echo $_SESSION["utente"];//a fini di test
             var mail = $("#email").val().trim()
             var psw = $("#pwdR").val();
             var rePsw = $("#rePwdR").val();
-            if (name != '' && $("#errorUser").text() === 'Username disponibile' && mail != '' && !$(
-                    '#email').hasClass('is-danger')) {
+            if (name != '' && $("#errorUser").text() === 'Username disponibile' && mail != '' && !$('#email').hasClass('is-danger') && psw!='' && $("#upLetter,#lowLetter,#number,#length").hasClass('has-text-success') && rePsw!="" && !$('#statusP').hasClass('has-text-danger')  )  {
 
                 $('#submitRegister').attr("disabled", false);
 
