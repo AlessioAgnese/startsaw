@@ -85,7 +85,7 @@ echo $_SESSION["utente"];//a fini di test
 
                                 </p>
                                 <p id="errorUser" class="is-size-6 " style="visibility: hidden">
-                                    erroreUser
+                                    
                                 </p>
                             </div>
                             <div class="field">
@@ -103,7 +103,7 @@ echo $_SESSION["utente"];//a fini di test
 
                                 </p>
                                 <p id="errorMail" class="is-size-6" style="visibility: hidden">
-                                    errorMail
+                                   
                                 </p>
                                 <label id="email_response" style="visibility:hidden" class="label is-size-7"></label>
                             </div>
@@ -131,22 +131,33 @@ echo $_SESSION["utente"];//a fini di test
                                         <i id="statusP" style="visibility:hidden" class="fas fa-lock"></i>
                                     </span>
                                 </p>
-                                <label id="pwd_response" style="visibility:visible" class="label is-size-7"></label>
+                                <label id="pwd_response" style="visibility:visible" class="label is-size-6"></label>
                                 <div class="checkPswField" style="visibility:visible">
                                     <h3>La password deve contenere:</h3>
-                                    
-                                    
-                                    
-                                          
-                                                <span class="icon is-small is-left">
-                                                        <i class="fas fa-times"></i>
-
-                                                       
-                                                </span>
-                                                <label >1 Lettera minuscola</label>
-                                    <p id="lowLetter" class="is-size-7 has-text-danger">1 Lettera minuscola</p>
-                                    <p id="symbol" class="is-size-7 has-text-danger">1 Simbolo</p>
-                                    <p id="length" class="is-size-7 has-text-danger">Minimo 8 caratteri</p>
+                                <p class="has-text-danger">
+                                    <span class="icon is-small is-left ">
+                                        <i id="upLetterIcon" class="fas fa-times "></i>  
+                                    </span>
+                                    <label id="upLetter" class="is-size-6 " >1 Lettera minuscola</label>
+                                </p>
+                                <p class="has-text-danger">
+                                    <span class="icon is-small is-left">
+                                        <i id="lowLetterIcon" class="fas fa-times"></i>  
+                                    </span>
+                                    <label id="lowLetter" class="is-size-6 ">1 Lettera minuscola</p>
+                                </p>
+                                <p class="has-text-danger"> 
+                                    <span class="icon is-small is-left">
+                                        <i id="symbolIcon" class="fas fa-times "></i>  
+                                    </span>
+                                    <label id="symbol" class="is-size-6 ">1 Simbolo</p>
+                                </p>
+                                <p class="has-text-danger">
+                                    <span class="icon is-small is-left">
+                                        <i id="lengthIcon" class="fas fa-times "></i>  
+                                    </span>
+                                    <label id="length" class="is-size-6 ">Minimo 8 caratteri</p>
+                                </p>
                                 </div>
                                 </div>
                             <br>
@@ -430,7 +441,11 @@ echo $_SESSION["utente"];//a fini di test
             keyup: function () {
                 var regexPsw = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
                 if ($("#pwdr").val().match(regexPsw) != null) {
-
+                    if ($("#pwdr").val().match(/[A-Z]/)) {
+                        $("#upLetter,#upLetterIcon").removeClass("has-text-danger").addClass("has-text-success");
+                    }else{
+                        $("#upLetter,#upLetterIcon").removeClass("has-text-success").addClass("has-text-danger");
+                    }   
                 }
 
 
@@ -469,7 +484,7 @@ echo $_SESSION["utente"];//a fini di test
     });
     // working in progress --controllo che tutti i campi siano compilati coorettamente e abilito il bottene per registrarsi(da finire il controllo sulla password)
     $(document).ready(function () {
-        $("#rePwdR").keyup(function () {
+        $("#usernameR,#email,#pwdr,rePwdR").keyup(function () {
             var name = $("#usernameR").val().trim().toString();
             var mail = $("#email").val().trim()
             var psw = $("#pwdR").val();
