@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
+
 <?php
 session_start();
 ?>
@@ -9,8 +10,11 @@ session_start();
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=d4cxhl8d1f1x9a3g76ks6c1zk61f65dwy2yopjtc0d7woiwd"></script>
     <script>
         tinymce.init({
-            selector: 'textarea'
-        });
+            selector: 'textarea',
+            language_url: './tinymce/it_IT.js',
+            language: 'it_IT',
+
+             });
     </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -35,27 +39,11 @@ session_start();
 
 
 <script>
-    //WORK IN PROGRESS : FUNZIONE PER DISATTIVARE BOTTONE SE IL TESTO E VUOTO O SOLO SPAZI (E MAGARI MENO DI X CARATTERI)
-    //tinymce.activeEditor.on('keyup', function(ed, e) {
-      //  console.debug(
-      //      tinyMCE.activeEditor.getContent({format : 'text'})
-      //  )
-   // });
-    /*
-    tinymce.activeEditor.on('keyup', function() {
-        var articolo = tinymce.get("articolo").getContent({format : 'text'});;
-            console.log(articolo);
-            if (articolo != '') {
-                console.log("2");
-                $('#publish').attr("disabled", false);
-            } else {
-                console.log("3");
-                $('#publish').attr("disabled", true);
-            }
-        });*/
 
     $(document).ready(function() {
         $('#publish').click(function() {
+            tmp=tinymce.get('articolo').getContent().toString().length;
+           if(tmp>0 && tmp<3200){
             $.ajax({
                 url: 'http://localhost/php/pubarticle.php',
                 type: 'POST',
@@ -64,7 +52,6 @@ session_start();
                     articolo: tinymce.get("articolo").getContent(),
                 }),
                 success: function(data) {
-                    console.log(l);
                     if (data.ok) {
                         alert("articolo pubblicato");
                     } else {
@@ -75,6 +62,12 @@ session_start();
                     console.log(errorThrown);
                 }
             })
+           }else{
+               if(tmp>0)
+                alert("Articolo troppo lungo");
+               else 
+                alert("Impossibile pubblicare articolo vuoto");
+               }
         })
     })
 </script>

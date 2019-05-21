@@ -1,6 +1,7 @@
 <?php
 session_start();
 require '.\dbconfig.php';
+$_SESSION["utente"]='Alessio';
 $data = file_get_contents('php://input');
 $json = json_decode($data, true);
 $articolo = mysqli_real_escape_string($link, $json["articolo"]);
