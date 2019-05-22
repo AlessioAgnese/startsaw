@@ -8,7 +8,7 @@
     $select->execute(array(":user"=>$json["email"]));
     if($select){
         $user = $select->fetch(PDO::FETCH_ASSOC);
-        if($user["User"] != null){
+        if($user["user"] != null){
             if(password_verify($json["password"], $user["Psw"])){
                 $array = array(
                     "user"=>$user["User"]

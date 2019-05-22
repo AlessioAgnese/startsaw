@@ -1,6 +1,6 @@
 <?php
-include_once('../mlml/functions/dbconfig.php');
-include_once('../mlml/functions/tokenizer.php');
+include_once('dbconfig.php');
+include_once('tokenizer.php');
 global $conn;
 $data = file_get_contents('php://input');
 $json = json_decode($data, true);

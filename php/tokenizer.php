@@ -29,7 +29,7 @@
 
     function getUser($token){
         global $conn;
-        $user = $conn->prepare("SELECT User FROM Utenti WHERE Token =:token");
+        $user = $conn->prepare("SELECT User FROM Utenti WHERE token =:token");
         $user->execute(array(":token"=>$token));
         if($user){
             $array = array(

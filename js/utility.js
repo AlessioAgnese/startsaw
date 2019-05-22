@@ -63,7 +63,7 @@ $(document).ready(function () {
             type: "post",
             dataType: 'json',
             data: JSON.stringify({
-                email: $('#usernameL').val().trim().toString(),
+                name: $('#usernameL').val().trim().toString(),
                 password: $('#pwdL').val()
             }),
             success: function (data) {

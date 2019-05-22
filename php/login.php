@@ -4,8 +4,9 @@
     global $conn;
     $content = file_get_contents('php://input');
     $json = json_decode($content,true);
-    $select = $conn->prepare("SELECT * FROM Utenti WHERE User =:user");
-    $select->execute(array(":user"=>$json["email"]));
+    $select = $conn->prepare("SELECT User,Psw FROM Utenti WHERE User = :user");
+    $select->bindParam(":user",$json["name"]);
+    $select->execute();
     if($select){
         $user = $select->fetch(PDO::FETCH_ASSOC);
         if($user["User"] != null){

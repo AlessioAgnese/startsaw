@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '.\dbconfig.php';
+require '.\dbconfig2.php';
 $data = file_get_contents('php://input');
 $json = json_decode($data, true);
 $mail = mysqli_real_escape_string($link, $json["mail"]);
