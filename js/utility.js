@@ -30,11 +30,14 @@ $(document).ready(function () {
     });
 });
 
+
+
+
 $(document).ready(function () {
     $('#submitlogin').click(function () {
         $.ajax({
             url: 'http://localhost/php/login.php',
-            type: "post",
+            type: "POST",
             dataType: 'json',
             data: JSON.stringify({
                 name: $('#usernameL').val().trim().toString(),
@@ -43,21 +46,36 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.ok) {
                     console.log(data);
+                    console.log(data.user.user);
                     $('#userLogged').text(data.user.user);
                     $('.modal').removeClass("is-active");
                     localStorage.setItem('token', data.token);
-                    $('#loginRegisterButton').attr("href", "./php/controlpanel.php");
-                    $("#logOutButton").css("visibility : visible");
+                    //$('#loginRegisterButton').attr("href", "./php/controlpanel.php");
+                    //$("#logOutButton").css("visibility : visible");
                 } else {
                     alert("Username o password errata");
                 }
             },
             error: function (errorThrown) {
+                console.log(errorThrown);
                 alert("Errore durante il login, riprovare tra poco");
             }
         })
     });
 });
+
+
+
+
+$(document).ready(function () {
+    $('#logout2').click(function () {
+        localStorage.setItem('token', null);
+        window.location.reload();
+        })
+    })
+
+
+
 
 $(document).ready(function () {
     $('#submitRegister').click(function () {
@@ -72,6 +90,7 @@ $(document).ready(function () {
             }),
             success: function (data) {
                 if (data.ok) {
+                    console.log(data);
                     //$('#submitRegister').text('Registrato con successo');
                     //$('#submitRegister').attr("disabled", true);
                     $('#userLogged').text(data.user.user);

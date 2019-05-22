@@ -7,7 +7,7 @@
         $date = date('Y-m-d');
         $utente["date"]=$date;
         $json = sha1(json_encode($utente));
-        $insert = $conn->prepare("UPDATE Utenti SET Token = :token WHERE User = :user");
+        $insert = $conn->prepare("UPDATE Utenti SET token = :token WHERE User = :user");
         $insert->bindParam(":token",$json);
         $insert->bindParam(":user",$utente["user"]);
         $insert->execute();
