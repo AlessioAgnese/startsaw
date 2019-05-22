@@ -50,7 +50,7 @@ $(document).ready(function () {
                     $('#userLogged').text(data.user.user);
                     $('.modal').removeClass("is-active");
                     localStorage.setItem('token', data.token);
-                    //$('#loginRegisterButton').attr("href", "./php/controlpanel.php");
+                    $('#loginRegisterButton').attr("href", "./controlpanel.html");
                     //$("#logOutButton").css("visibility : visible");
                 } else {
                     alert("Username o password errata");
@@ -96,7 +96,7 @@ $(document).ready(function () {
                     $('#userLogged').text(data.user.user);
                     localStorage.setItem('token', data.token);
                     $('.modal').removeClass("is-active");
-                    $('#loginRegisterButton').attr("href", "./php/controlpanel.php");
+                    $('#loginRegisterButton').attr("href", "./controlpanel.html");
 
                 } else {
                     $('#submitRegister').text('Si è verificato un problema');
