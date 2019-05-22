@@ -1,13 +1,17 @@
 <?php
-session_start();
-require '.\dbconfig.php';
-$_SESSION["utente"]='Alessio';
+include_once('dbconfig.php');
+include_once('tokenizer.php');
+global $conn;
 $data = file_get_contents('php://input');
 $json = json_decode($data, true);
-$articolo = mysqli_real_escape_string($link, $json["articolo"]);
-$autore=$_SESSION["utente"];
-$query = "INSERT INTO articoli (Testo,User) VALUES ('$articolo','$autore')";
-if (mysqli_query($link, $query)) {
+$array=getUser($json["token"]);
+$autore=implode(" ",$array["utente"]);
+//echo $autore;
+$insert = $conn->prepare("INSERT INTO Articoli(Testo,User)VALUES(:testo,:autore)");
+$insert->bindParam(":testo", $json["articolo"]);
+$insert->bindParam(":autore",$autore);
+$insert->execute();
+if ($insert) {
 	$array = array(
 		"ok" => true
 	);
