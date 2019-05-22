@@ -11,7 +11,7 @@
         if($user["User"] != null){
             if(password_verify($json["password"], $user["Psw"])){
                 $array = array(
-                    "User"=>$user["User"]
+                    "user"=>$user["User"]
                 );
                 echo genToken($array);
             }

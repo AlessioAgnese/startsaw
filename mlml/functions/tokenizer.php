@@ -9,7 +9,7 @@
         $json = sha1(json_encode($utente));
         $insert = $conn->prepare("UPDATE Utenti SET token = :token WHERE User = :user");
         $insert->bindParam(":token",$json);
-        $insert->bindParam(":user",$utente["User"]);
+        $insert->bindParam(":user",$utente["user"]);
         $insert->execute();
         if($insert){
             $ar = array(
