@@ -1,6 +1,6 @@
 <?php
-    include_once('functions/dbconfig.php');
-    include_once('functions/tokenizer.php');
+    include_once('dbconfig.php');
+    include_once('tokenizer.php');
     global $conn;
     $content = file_get_contents('php://input');
     $json = json_decode($content,true);

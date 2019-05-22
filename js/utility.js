@@ -86,32 +86,7 @@ $(document).ready(function () {
     });
 });
 
-$(document).ready(function(){
-    if('token' in localStorage){
-        $('body').append("Token is in localstorage<br>");
-    }
-    else{
-        $('body').append('Token is not in localstorage<br>');
-    }
-    $.ajax({
-        url:'http://localhost/php/checklogin.php',
-        type:'POST',
-        dataType:'json',
-        data:JSON.stringify({token:localStorage.getItem('token')}),
-        success:function(data){
-            if(data.ok && data.utente != false){
-                console.log(data);
-                $('body').append('logged in');
-            }
-            else{
-                $('body').append('not logged in');
-            }
-        },
-        error:function(errorThrown){
-            console.log(errorThrown)
-        }
-    });
-});
+
 
 $(document).ready(function () {
     $('#submitRegister').click(function () {
