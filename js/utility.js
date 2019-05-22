@@ -129,9 +129,12 @@ $(document).ready(function () {
             $("#usernameR").removeClass("is-danger");
 
             $.ajax({
-                url: 'http://localhost/php/checkusr.php',
+                url: 'http://localhost/php/checker.php',
                 type: 'post',
                 dataType: 'json',
+                beforeSend:function(xhr){
+                    xhr.setRequestHeader('X-Type', 'user');
+                },
                 data: JSON.stringify({
                     username: name,
                 }),
@@ -180,9 +183,12 @@ $(document).ready(function () {
             $("#email").removeClass("is-danger");
 
             $.ajax({
-                url: 'http://localhost/php/checkmail.php',
+                url: 'http://localhost/php/checker.php',
                 type: 'post',
                 dataType: 'json',
+                beforeSend:function(xhr){
+                    xhr.setRequestHeader('X-Type', 'mail');
+                },
                 data: JSON.stringify({
                     mail: $('#email').val().toString(),
                 }),
