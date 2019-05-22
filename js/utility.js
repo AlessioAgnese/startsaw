@@ -28,28 +28,62 @@ $(document).ready(function () {
     });
 });
 
+//funzione controllo utente loggato
+
+$(document).ready(function(){
+    if('token' in localStorage){
+        $.ajax({
+            url:'http://localhost/mlml/checklogin.php',
+            type:'post',
+            dataType:'json',
+            data:JSON.stringify({
+                token:localStorage.getItem('token')
+            }),
+            success:function(data){
+                if(data.ok && data.utente != false){
+                    $('#userLogged').text(data.utente.User);
+                    $('#loginRegisterButton').attr("href", "./php/controlpanel.php");
+                }
+                else{
+                    alert("La sessione è scaduta");
+                    localStorage.removeItem('token');
+                }
+            },
+            error:function(errorThrown){
+                console.log(errorThrown);
+            }
+        })
+    }
+})
+
 //funzione per corretto login
 $(document).ready(function () {
     $('#submitlogin').click(function () {
 
         $.ajax({
-            url: 'http://localhost/php/login.php',
+            url: 'http://localhost/mlml/login.php',
             type: 'POST',
             dataType: 'json',
             data: JSON.stringify({
-                username: $('#usernameL').val().trim().toString(),
-                pwd: $('#pwdL').val()
+                email: $('#usernameL').val().trim().toString(),
+                password: $('#pwdL').val()
             }),
             success: function (data) {
                 if (data.ok) {
-                    $('#userLogged').text(data.username);
+                    console.log(data);
+                    $('#userLogged').text(data.user.User);
                     $('.modal').removeClass("is-active");
-                    //localStorage.setItem('utente');
+                    localStorage.setItem('token', data.token);
                     $('#loginRegisterButton').attr("href", "./php/controlpanel.php");
 
                 } else {
-                    alert("username o password errati");
+                    $('#loginAppender').empty();
+                    $('#loginAppender').append('<b class="has-text-danger">Username o password errate. Riprova.</b>');
+                    
                 }
+            },
+            error:function(errorThrown){
+                console.log(errorThrown)
             }
         })
     })
@@ -67,6 +101,7 @@ $(document).ready(function () {
                 email: $('#email').val().trim().toString()
             }),
             success: function (data) {
+                console.log(data);
                 if (data.ok) {
                     $('#submitRegister').text('Registrato con successo');
                     $('#submitRegister').attr("disabled", true);
