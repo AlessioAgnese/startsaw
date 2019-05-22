@@ -69,7 +69,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $('#logout2').click(function () {
-        localStorage.setItem('token', null);
+        localStorage.removeItem('token');
         window.location.reload();
         })
     })
