@@ -28,16 +28,17 @@ $(document).ready(function () {
     });
 });
 
-//funzione controllo utente loggato
+//funzione per corretto login
+/*$(document).ready(function () {
+    $('#submitlogin').click(function () {
 
-$(document).ready(function(){
-    if('token' in localStorage){
         $.ajax({
-            url:'http://localhost/mlml/checklogin.php',
-            type:'post',
-            dataType:'json',
-            data:JSON.stringify({
-                token:localStorage.getItem('token')
+            url: 'http://localhost/php/login.php',
+            type: 'POST',
+            dataType: 'json',
+            data: JSON.stringify({
+                username: $('#usernameL').val().trim().toString(),
+                pwd: $('#pwdL').val()
             }),
             success:function(data){
                 if(data.ok && data.user != false){
@@ -53,41 +54,64 @@ $(document).ready(function(){
                 console.log(errorThrown);
             }
         })
-    }
-})
-
-//funzione per corretto login
+    })
+})*/
 $(document).ready(function () {
     $('#submitlogin').click(function () {
-
         $.ajax({
-            url: 'http://localhost/mlml/login.php',
-            type: 'POST',
+            url: 'http://localhost/php/login.php',
+            type: "post",
             dataType: 'json',
             data: JSON.stringify({
                 email: $('#usernameL').val().trim().toString(),
                 password: $('#pwdL').val()
             }),
             success: function (data) {
-                if (data.ok) {
+                if(data.ok){
                     console.log(data);
                     $('#userLogged').text(data.user.user);
                     $('.modal').removeClass("is-active");
-                    localStorage.setItem('token', data.token);
                     $('#loginRegisterButton').attr("href", "./php/controlpanel.php");
-
-                } else {
-                    $('#loginAppender').empty();
-                    $('#loginAppender').append('<b class="has-text-danger">Username o password errate. Riprova.</b>');
-                    
+                    $("#logOutButton").css("visibility : visible");
+                // window.location.href="protetta.html"
+                }
+                else{
+                    alert("Username o password errata");
                 }
             },
-            error:function(errorThrown){
-                console.log(errorThrown)
+            error: function (errorThrown) {
+                alert("Errore durante il login, riprovare tra poco");
             }
         })
-    })
-})
+    });
+});
+
+$(document).ready(function(){
+    if('token' in localStorage){
+        $('body').append("Token is in localstorage<br>");
+    }
+    else{
+        $('body').append('Token is not in localstorage<br>');
+    }
+    $.ajax({
+        url:'http://localhost/php/checklogin.php',
+        type:'POST',
+        dataType:'json',
+        data:JSON.stringify({token:localStorage.getItem('token')}),
+        success:function(data){
+            if(data.ok && data.utente != false){
+                console.log(data);
+                $('body').append('logged in');
+            }
+            else{
+                $('body').append('not logged in');
+            }
+        },
+        error:function(errorThrown){
+            console.log(errorThrown)
+        }
+    });
+});
 
 $(document).ready(function () {
     $('#submitRegister').click(function () {
@@ -101,7 +125,6 @@ $(document).ready(function () {
                 email: $('#email').val().trim().toString()
             }),
             success: function (data) {
-                console.log(data);
                 if (data.ok) {
                     //$('#submitRegister').text('Registrato con successo');
                     //$('#submitRegister').attr("disabled", true);
@@ -146,13 +169,13 @@ $(document).ready(function () {
                         $("#errorUser").text("Username gia in uso");
                         $("#errorUser").removeClass('has-text-success').addClass(
                             'has-text-danger');
-                        //$('#submitRegister').attr("disabled", true);
+                        
                     } else {
                         $('#statusU').removeClass('fa-times').addClass('fa-check');
                         $('#statusU').css('display', 'block');
                         $('#statusU').css('color', '#14b64d');
                         $("#errorUser").text("Username disponibile");
-                        // $('#submitRegister').attr("disabled", false);
+                    
                         $("#errorUser").removeClass('has-text-danger').addClass(
                             'has-text-success');
                     }
@@ -218,7 +241,6 @@ $(document).ready(function () {
             $("#email").addClass("is-danger");
             $("#errorMail").addClass('has-text-danger');
             $("#errorMail").text("Email non valida");
-            //$('#submitRegister').attr("disabled", false);
             $('#statusE').css('display', 'none');
         }
 
@@ -266,10 +288,7 @@ $(document).ready(function () {
                 $("#length, #lengthIcon").removeClass("has-text-success").addClass(
                 "has-text-danger");
             }
-            //if($("#upLetterIcon,#lowLetterIcon,#numberIcon,#lengthIcon").hasClass("fa-check"))
-              //  {console.log("password che rispestta i requisiti"); $('#submitRegister').attr("disabled", false);} 
-            //else
-              //  {console.log("password che non rispetta i requisiti"); $('#submitRegister').attr("disabled", false);} 
+
         
         },
 
@@ -327,3 +346,5 @@ $(document).ready(function () {
 
     });
 });
+
+
