@@ -15,28 +15,13 @@
                     "user"=>$user["User"]
                     
                 );
-                echo genToken($array);//<-qui e il prob
+                echo genToken($array);
+                exit();
             }
-            else{
-                $arr= array(
-                    "ok"=>false
-                );
-                echo json_encode($arr);
-            }
-        }
-        else{
-            $arr= array(
-                "ok"=>false
-            );
-            echo json_encode($arr);
         }
     }
-    else{
         $arr= array(
             "ok"=>false
         );
         echo json_encode($arr);
-    }
-
-
 ?>

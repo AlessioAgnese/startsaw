@@ -85,23 +85,14 @@
                     "ok" => true,
                     );
                     echo json_encode($array);
-                }else{
-                    $array = array(
-                    "ok" => false,
-                    );
-                    echo json_encode($array);
+                    exit();
                 }
-            }else{
-                $array = array(
-                    "ok" => false,
-                    );
-                    echo json_encode($array);
             }
-
-        }else{
+        }
             $array = array(
                 "ok" => false,
                 );
                 echo json_encode($array);
-        }
     }
+
+    
