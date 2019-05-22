@@ -6,7 +6,6 @@ $data = file_get_contents('php://input');
 $json = json_decode($data, true);
 $array=getUser($json["token"]);
 $autore=implode(" ",$array["utente"]);
-//echo $autore;
 $insert = $conn->prepare("INSERT INTO Articoli(Testo,User)VALUES(:testo,:autore)");
 $insert->bindParam(":testo", $json["articolo"]);
 $insert->bindParam(":autore",$autore);
