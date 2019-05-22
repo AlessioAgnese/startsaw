@@ -4,9 +4,22 @@
     $type = $headers["X-Type"];
     $content = file_get_contents('php://input');
     $json = json_decode($content,true);
-    if($type=='view') viewInfo($json["token"]);
-    else editInfo($json);
-    
+    switch ($type) {
+        case 'view':
+            viewInfo($json["token"]);
+            break;
+        case 'edit':
+            editInfo($json);
+            break;
+        case 'change':
+            changePwd($json);
+            break;
+        default:
+            $array = array(
+            "ok" => false,);
+            echo json_encode($array);
+            break;        
+    } 
     
     function viewInfo($token){
         global $conn;
@@ -51,5 +64,44 @@
     
         );
         echo json_encode($array);
+        }
+    }
+
+    function changePwd($json){
+        global $conn;
+        $select = $conn->prepare("SELECT Psw FROM Utenti WHERE token=:token");
+        $select->bindParam(":token",$json["token"]);
+        $select->execute();
+        if($select){
+            $pwd=$select->fetch(PDO::FETCH_ASSOC);
+            if(password_verify($json["oldPwd"],$pwd["Psw"])){
+                $passwordHashed = password_hash($json["newPwd"], PASSWORD_BCRYPT);
+                $update = $conn->prepare("UPDATE Utenti SET Psw=:psw WHERE token = :token");
+                $update->bindParam(":token",$json["token"]);
+                $update->bindParam(":psw",$passwordHashed);
+                $update->execute();
+                if($update){
+                    $array = array(
+                    "ok" => true,
+                    );
+                    echo json_encode($array);
+                }else{
+                    $array = array(
+                    "ok" => false,
+                    );
+                    echo json_encode($array);
+                }
+            }else{
+                $array = array(
+                    "ok" => false,
+                    );
+                    echo json_encode($array);
+            }
+
+        }else{
+            $array = array(
+                "ok" => false,
+                );
+                echo json_encode($array);
         }
     }

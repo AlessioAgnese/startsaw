@@ -63,4 +63,33 @@ $(document).ready(function () {
     })
 });
 
+$(document).ready(function () {
+    $('#ChangePdw').click(function () {
+        $.ajax({
+            url:'http://localhost/php/userinfo.php',
+            type:'post',
+            dataType:'json',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-Type', 'change');
+            },
+            data:JSON.stringify({
+                token:localStorage.getItem('token'),
+                oldPwd:$('#oldPwd').val().toString(),
+                newPwd:$('#newPwd').val().toString(),
+            }),
+            success: function (data) {
+                if (data.ok) {
+                    alert("Cambio");
+                    window.location.reload();
+                } else {
+                    alert("Failure");
+                }
+            },
+            error: function (errorThrown) {
+                console.log(errorThrown);
+            }
+        })
+    })
+});
+
 
