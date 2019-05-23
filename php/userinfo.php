@@ -2,12 +2,15 @@
     include_once('dbconfig.php');
     $headers = apache_request_headers();
     $type = $headers["X-Type"];
-    $token = $headers["Authentication"];
+    $token;
     $content;
     $json;
-    if($_REQUEST['type']=='POST'){
+    if($_SERVER['REQUEST_METHOD']=='GET'){
+        $token = $headers["X-Authentication"];
+    }
+    if($_SERVER['REQUEST_METHOD']=='POST'){
         $content = file_get_contents('php://input');
-        $json = json_decode($content);
+        $json = json_decode($content,true);
     }
     switch ($type) {
         case 'view':
