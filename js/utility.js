@@ -4,12 +4,14 @@ $(document).ready(function () {
         $(".navbar-burger,#navbarBasicExample").toggleClass("is-active");
     });
 });
+
 //funzione per il menu dropdown l
 $(document).ready(function () {
     $(".navbar-link").click(function () {
         $("#navbar-menu").toggleClass("is-active");
     });
 });
+
 //funzione per il menu modal(show) e per resettare i campi del form una volta chiusa la "card"
 $(document).ready(function () {
     $(".delete,#loginRegisterButton,.modal-background").click(function () {
@@ -21,57 +23,34 @@ $(document).ready(function () {
         $('#submitRegister').attr("disabled", true);
         $("#name_response").css('color', 'black');
         $('#statusU,#statusE').css('display', 'none');
-       // $('#statusE').css('display', 'none');
+        // $('#statusE').css('display', 'none');
         //$(".checkPswField").css("visibility","hidden");
         $("#upLetterIcon,#lowLetterIcon,#numberIcon,#lengthIcon").removeClass('fa-check has-text-success').addClass('fa-times has-text-danger');
         $("#upLetter,#lowLetter,#number,#length").removeClass('has-text-success').addClass('has-text-danger');
     });
 });
 
-//funzione per corretto login
-/*$(document).ready(function () {
-    $('#submitlogin').click(function () {
 
-        $.ajax({
-            url: 'http://localhost/php/login.php',
-            type: 'POST',
-            dataType: 'json',
-            data: JSON.stringify({
-                username: $('#usernameL').val().trim().toString(),
-                pwd: $('#pwdL').val()
-            }),
-            success:function(data){
-                if(data.ok && data.user != false){
-                    $('#userLogged').text(data.utente.User);
-                    $('#loginRegisterButton').attr("href", "./php/controlpanel.php");
-                }   
-                else{
-                    alert("La sessione è scaduta");
-                    localStorage.removeItem('token');
-                }
-            },
-            error:function(errorThrown){
-                console.log(errorThrown);
-            }
-        })
-    })
-})*/
+
+
 $(document).ready(function () {
     $('#submitlogin').click(function () {
         
         $.ajax({
             url: 'http://localhost/php/login.php',
-            type: "post",
+            type: "POST",
             dataType: 'json',
             data: JSON.stringify({
                 name: $('#usernameL').val().trim().toString(),
                 password: $('#pwdL').val()
             }),
             success: function (data) {
-                if(data.ok){
+                if (data.ok) {
                     console.log(data);
+                    console.log(data.user.user);
                     $('#userLogged').text(data.user.user);
                     $('.modal').removeClass("is-active");
+<<<<<<< HEAD
                     $('#loginRegisterButton').attr("href", "./php/controlpanel.php");
                     $("#logOutButton").css("display : block");
                 // window.location.href="protetta.html"
@@ -79,14 +58,33 @@ $(document).ready(function () {
                 else{
                     $("#loginAppender").empty();
                     $("#loginAppender").append("Username o password errati");
+=======
+                    localStorage.setItem('token', data.token);
+                    $('#loginRegisterButton').attr("href", "./controlpanel.html");
+                    //$("#logOutButton").css("visibility : visible");
+                } else {
+                    alert("Username o password errata");
+>>>>>>> 03e5f78f73deb32d685be9951f229d77bf17244c
                 }
             },
             error: function (errorThrown) {
+                console.log(errorThrown);
                 alert("Errore durante il login, riprovare tra poco");
             }
         })
     });
 });
+
+
+
+
+$(document).ready(function () {
+    $('#logout2').click(function () {
+        localStorage.removeItem('token');
+        window.location.reload();
+        })
+    })
+
 
 
 
@@ -103,12 +101,13 @@ $(document).ready(function () {
             }),
             success: function (data) {
                 if (data.ok) {
+                    console.log(data);
                     //$('#submitRegister').text('Registrato con successo');
                     //$('#submitRegister').attr("disabled", true);
                     $('#userLogged').text(data.user.user);
                     localStorage.setItem('token', data.token);
                     $('.modal').removeClass("is-active");
-                    $('#loginRegisterButton').attr("href", "./php/controlpanel.php");
+                    $('#loginRegisterButton').attr("href", "./controlpanel.html");
 
                 } else {
                     $('#submitRegister').text('Si è verificato un problema');
@@ -120,6 +119,7 @@ $(document).ready(function () {
         })
     })
 });
+
 //controllo dei caratteri ammessi , e controllo della presenza o meno dell'user inserito
 $(document).ready(function () {
     $("#usernameR").keyup(function () {
@@ -131,9 +131,12 @@ $(document).ready(function () {
             $("#usernameR").removeClass("is-danger");
 
             $.ajax({
-                url: 'http://localhost/php/checkusr.php',
+                url: 'http://localhost/php/checker.php',
                 type: 'post',
                 dataType: 'json',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('X-Type', 'user');
+                },
                 data: JSON.stringify({
                     username: name,
                 }),
@@ -146,13 +149,13 @@ $(document).ready(function () {
                         $("#errorUser").text("Username gia in uso");
                         $("#errorUser").removeClass('has-text-success').addClass(
                             'has-text-danger');
-                        
+
                     } else {
                         $('#statusU').removeClass('fa-times').addClass('fa-check');
                         $('#statusU').css('display', 'block');
                         $('#statusU').css('color', '#14b64d');
                         $("#errorUser").text("Username disponibile");
-                    
+
                         $("#errorUser").removeClass('has-text-danger').addClass(
                             'has-text-success');
                     }
@@ -172,6 +175,7 @@ $(document).ready(function () {
     });
 
 });
+
 //controllo dei caratteri ammessi , e controllo della presenza o meno della mail inserito
 $(document).ready(function () {
     $("#email").keyup(function () {
@@ -182,9 +186,12 @@ $(document).ready(function () {
             $("#email").removeClass("is-danger");
 
             $.ajax({
-                url: 'http://localhost/php/checkmail.php',
+                url: 'http://localhost/php/checker.php',
                 type: 'post',
                 dataType: 'json',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('X-Type', 'mail');
+                },
                 data: JSON.stringify({
                     mail: $('#email').val().toString(),
                 }),
@@ -197,14 +204,14 @@ $(document).ready(function () {
                         $("#errorMail").css("visibility", "visible");
                         $("#errorMail").text("Email gia in uso");
                         $("#errorMail").addClass('has-text-danger');
-                        
+
                     } else {
                         $('#statusE').removeClass('fa-times').addClass('fa-check');
                         $('#statusE').css('display', 'block');
                         $('#statusE').css('color', '#14b64d');
                         $("#errorMail").css("visibility", "hidden");
                         $("#errorMail").text("errorMail");
-                        
+
 
                     }
 
@@ -220,15 +227,14 @@ $(document).ready(function () {
             $("#errorMail").text("Email non valida");
             $('#statusE').css('display', 'none');
         }
-
     });
-
 });
+
 //working in press --(controllo che la password rispetti le condizioni date)
 $(document).ready(function () {
     $("#pwdR").on({
 
-        keyup: function(){
+        keyup: function () {
             if ($("#pwdR").val().match(/[A-Z]/) != null) {
                 $("#upLetterIcon").removeClass('fa-times').addClass('fa-check');
                 $("#upLetter, #upLetterIcon").removeClass("has-text-danger").addClass(
@@ -250,33 +256,33 @@ $(document).ready(function () {
             if ($("#pwdR").val().match(/[0-9]/) != null) {
                 $("#numberIcon").removeClass('fa-times').addClass('fa-check');
                 $("#number, #numberIcon").removeClass("has-text-danger").addClass(
-                "has-text-success");
+                    "has-text-success");
             } else {
                 $("#numberIcon").removeClass('fa-check').addClass('fa-times');
                 $("#number, #numberIcon").removeClass("has-text-success").addClass(
-                "has-text-danger");
+                    "has-text-danger");
             }
-            if($('#pwdR').val().length >7){
+            if ($('#pwdR').val().length > 7) {
                 $("#lengthIcon").removeClass('fa-times').addClass('fa-check');
                 $("#length, #lengthIcon").removeClass("has-text-danger").addClass(
-                "has-text-success");
-            }else{
+                    "has-text-success");
+            } else {
                 $("#lengthIcon").removeClass('fa-check').addClass('fa-times');
                 $("#length, #lengthIcon").removeClass("has-text-success").addClass(
-                "has-text-danger");
+                    "has-text-danger");
             }
 
-        
+
         },
 
-    focus:function(){
-        $(".checkPswField").css("visibility","visible");
-    },
+        focus: function () {
+            $(".checkPswField").css("visibility", "visible");
+        },
 
-    blur:function(){
-        $(".checkPswField").css("visibility","hidden");
-    }
-});
+        blur: function () {
+            $(".checkPswField").css("visibility", "hidden");
+        }
+    });
 });
 
 //da fare : fare in modo che l'elemento #pwd_response sia visibility", "visible o visibility", "hidden"
@@ -312,7 +318,7 @@ $(document).ready(function () {
         var psw = $("#pwdR").val();
         var rePsw = $("#rePwdR").val();
         //&& $("#upLetter,#lowLetter,#number,#length").hasClass('has-text-success') && !$('#email').hasClass('is-danger') && !$('#statusP').hasClass('has-text-danger')
-        if ($("#upLetterIcon,#lowLetterIcon,#numberIcon,#lengthIcon,#email,#statusU,#statusP").hasClass("fa-check") && name != '' && mail != ''  && psw!=''  && rePsw!='')  {
+        if ($("#upLetterIcon,#lowLetterIcon,#numberIcon,#lengthIcon,#email,#statusU,#statusP").hasClass("fa-check") && name != '' && mail != '' && psw != '' && rePsw != '') {
 
             $('#submitRegister').attr("disabled", false);
 
@@ -323,5 +329,3 @@ $(document).ready(function () {
 
     });
 });
-
-

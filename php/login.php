@@ -12,30 +12,16 @@
         if($user["User"] != null){
             if(password_verify($json["password"], $user["Psw"])){
                 $array = array(
-                    "User"=>$user["User"]
+                    "user"=>$user["User"]
+                    
                 );
                 echo genToken($array);
+                exit();
             }
-            else{
-                $arr= array(
-                    "ok"=>false
-                );
-                echo json_encode($arr);
-            }
-        }
-        else{
-            $arr= array(
-                "ok"=>false
-            );
-            echo json_encode($arr);
         }
     }
-    else{
         $arr= array(
             "ok"=>false
         );
         echo json_encode($arr);
-    }
-
-
 ?>
