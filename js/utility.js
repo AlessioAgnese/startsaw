@@ -82,10 +82,6 @@ $(document).ready(function(){
             }),
             success:function(data){
                 if(data.ok && data.utente != false){
-<<<<<<< HEAD
-=======
-                   
->>>>>>> 0d5c3f3b39669816f204c9c0596be5a2dfc904c8
                     $('#userNameNav').text(data.utente.User);
                     $('.modal').removeClass("is-active");
                     $('#userProfile').attr("href", "controlpanel.html");
