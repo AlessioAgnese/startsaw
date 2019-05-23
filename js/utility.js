@@ -83,6 +83,8 @@ $(document).ready(function(){
                 else{
                     alert("La sessione è scaduta");
                     localStorage.removeItem('token');
+                    window.location.reload();
+
                 }
             },
             error:function(errorThrown){
