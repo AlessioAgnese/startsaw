@@ -48,12 +48,12 @@ $(document).ready(function () {
                 if (data.ok) {
                     console.log(data);
                     console.log(data.user.user);
+                    localStorage.setItem('token',data.token);
                     $('#userNameNav').text(data.user.user);
                     $('.modal').removeClass("is-active");
                     $('#userProfile').attr("href", "controlpanel.html");
                     $("#navbar-menu").css("visibility", "visible");
-                    $('#loginRegisterButton').css("display", "none");
-                // window.location.href="protetta.html"
+                    $('#loginRegisterButton').css("display", "none"); 
                 }
                 else{
                     $("#loginAppender").empty();
@@ -67,6 +67,30 @@ $(document).ready(function () {
         })
     });
 });
+$(document).ready(function(){
+    if('token' in localStorage){
+        $.ajax({
+            url:'http://localhost/php/checklogin.php',
+            type:'post',
+            dataType:'json',
+            data:JSON.stringify({
+                token:localStorage.getItem('token')
+            }),
+            success:function(data){
+                if(data.ok && data.utente != false){
+                    alert("Still logged");   
+                }
+                else{
+                    alert("La sessione è scaduta");
+                    localStorage.removeItem('token');
+                }
+            },
+            error:function(errorThrown){
+                console.log(errorThrown);
+            }
+        })
+    }
+})
 
 
 
