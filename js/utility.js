@@ -79,7 +79,7 @@ $(document).ready(function(){
             }),
             success:function(data){
                 if(data.ok && data.utente != false){
-                    $('#userNameNav').text(data.user.user);
+                    $('#userNameNav').text(data.utente.User);
                     $('.modal').removeClass("is-active");
                     $('#userProfile').attr("href", "controlpanel.html");
                     $("#navbar-menu").css("visibility", "visible");
