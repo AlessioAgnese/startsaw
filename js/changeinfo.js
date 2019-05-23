@@ -2,14 +2,13 @@ $(document).ready(function(){
     if('token' in localStorage){
         $.ajax({
             url:'http://localhost/php/userinfo.php',
-            type:'post',
+            type:'get',
             dataType:'json',
             beforeSend: function (xhr) {
                 xhr.setRequestHeader('X-Type', 'view');
+                xhr.setRequestHeader('Authentication',localStorage.getItem('token'));
+
             },
-            data:JSON.stringify({
-                token:localStorage.getItem('token')
-            }),
             success:function(data){
                 if(data.ok){
                     $('#nome').attr("placeholder",data.nome);

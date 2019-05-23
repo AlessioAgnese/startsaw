@@ -2,11 +2,16 @@
     include_once('dbconfig.php');
     $headers = apache_request_headers();
     $type = $headers["X-Type"];
-    $content = file_get_contents('php://input');
-    $json = json_decode($content,true);
+    $token = $headers["Authentication"];
+    $content;
+    $json;
+    if($_REQUEST['type']=='POST'){
+        $content = file_get_contents('php://input');
+        $json = json_decode($content);
+    }
     switch ($type) {
         case 'view':
-            viewInfo($json["token"]);
+            viewInfo($token);
             break;
         case 'edit':
             editInfo($json);
@@ -15,9 +20,7 @@
             changePwd($json);
             break;
         default:
-            $array = array(
-            "ok" => false,);
-            echo json_encode($array);
+            echo json_encode(array('ok'=>false));
             break;        
     } 
     
