@@ -79,11 +79,18 @@ $(document).ready(function(){
             }),
             success:function(data){
                 if(data.ok && data.utente != false){
-                    alert("Still logged");   
+                    $('#userNameNav').text(data.user.user);
+                    $('.modal').removeClass("is-active");
+                    $('#userProfile').attr("href", "controlpanel.html");
+                    $("#navbar-menu").css("visibility", "visible");
+                    $('#loginRegisterButton').css("display", "none");   
                 }
                 else{
                     alert("La sessione è scaduta");
                     localStorage.removeItem('token');
+                    $('#userProfile').removeAttr("href", "controlpanel.html");
+                    $("#navbar-menu").css("visibility", "hidden");
+                    $('#loginRegisterButton').css("display", "block");
                     window.location.reload();
 
                 }
