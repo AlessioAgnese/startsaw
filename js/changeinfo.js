@@ -6,7 +6,7 @@ $(document).ready(function(){
             dataType:'json',
             beforeSend: function (xhr) {
                 xhr.setRequestHeader('X-Type', 'view');
-                xhr.setRequestHeader('Authentication',localStorage.getItem('token'));
+                xhr.setRequestHeader('X-Authentication',localStorage.getItem('token'));
 
             },
             success:function(data){
