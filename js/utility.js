@@ -34,6 +34,8 @@ $(document).ready(function () {
 
 
 
+
+
 $(document).ready(function () {
     $('#submitlogin').click(function () {
         
@@ -68,6 +70,7 @@ $(document).ready(function () {
         })
     });
 });
+
 $(document).ready(function(){
     if('token' in localStorage){
         $.ajax({
@@ -79,11 +82,16 @@ $(document).ready(function(){
             }),
             success:function(data){
                 if(data.ok && data.utente != false){
+<<<<<<< HEAD
+=======
+                   
+>>>>>>> 0d5c3f3b39669816f204c9c0596be5a2dfc904c8
                     $('#userNameNav').text(data.utente.User);
                     $('.modal').removeClass("is-active");
                     $('#userProfile').attr("href", "controlpanel.html");
                     $("#navbar-menu").css("visibility", "visible");
-                    $('#loginRegisterButton').css("display", "none");   
+                    $('#loginRegisterButton').css("display", "none");  
+                
                 }
                 else{
                     alert("La sessione è scaduta");
@@ -100,7 +108,7 @@ $(document).ready(function(){
             }
         })
     }
-})
+});
 
 
 
@@ -113,7 +121,7 @@ $(document).ready(function () {
         $('#loginRegisterButton').css("display", "block");
         window.location.reload();
         })
-    })
+   });
 
 
 
@@ -344,13 +352,14 @@ $(document).ready(function () {
 // working in progress --controllo che tutti i campi siano compilati coorettamente e abilito il bottene per registrarsi(da finire il controllo sulla password)
 //aggiunto controllo su password ma mail fa passare anche se errata
 $(document).ready(function () {
-    $("#usernameR,#email,#pwdR,#rePwdR").change(function () {
+    $("#usernameR,#email,#pwdR,#rePwdR").on({
+        change :function () {
         var name = $("#usernameR").val().trim().toString();
         var mail = $("#email").val().trim()
         var psw = $("#pwdR").val();
         var rePsw = $("#rePwdR").val();
-        //&& $("#upLetter,#lowLetter,#number,#length").hasClass('has-text-success') && !$('#email').hasClass('is-danger') && !$('#statusP').hasClass('has-text-danger')
-        if ($("#upLetterIcon,#lowLetterIcon,#numberIcon,#lengthIcon,#email,#statusU,#statusP").hasClass("fa-check") && name != '' && mail != '' && psw != '' && rePsw != '') {
+        
+        if ($("#upLetterIcon,#lowLetterIcon,#numberIcon,#lengthIcon,#email,#statusU,#statusP").hasClass("fa-check") && name != '' && mail != '' && psw != '' && rePsw != '' && $("#upLetter,#lowLetter,#number,#length").hasClass('has-text-success') && !$('#email').hasClass('is-danger') && !$('#statusP').hasClass('has-text-danger')) {
 
             $('#submitRegister').attr("disabled", false);
 
@@ -359,5 +368,21 @@ $(document).ready(function () {
         }
 
 
-    });
+    },
+
+    keyup :function () {
+        var name = $("#usernameR").val().trim().toString();
+        var mail = $("#email").val().trim()
+        var psw = $("#pwdR").val();
+        var rePsw = $("#rePwdR").val();
+        
+        if ($("#upLetterIcon,#lowLetterIcon,#numberIcon,#lengthIcon,#email,#statusU,#statusP").hasClass("fa-check") && name != '' && mail != '' && psw != '' && rePsw != '' && $("#upLetter,#lowLetter,#number,#length").hasClass('has-text-success') && !$('#email').hasClass('is-danger') && !$('#statusP').hasClass('has-text-danger')) {
+
+            $('#submitRegister').attr("disabled", false);
+
+        } else {
+            $('#submitRegister').attr("disabled", true);
+        }
+    }
+});
 });
