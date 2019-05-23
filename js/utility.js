@@ -23,6 +23,7 @@ $(document).ready(function () {
         $('#submitRegister').attr("disabled", true);
         $("#name_response").css('color', 'black');
         $('#statusU,#statusE').css('display', 'none');
+        $('#statusP').css("visibility", "hidden");
         // $('#statusE').css('display', 'none');
         //$(".checkPswField").css("visibility","hidden");
         $("#upLetterIcon,#lowLetterIcon,#numberIcon,#lengthIcon").removeClass('fa-check has-text-success').addClass('fa-times has-text-danger');
