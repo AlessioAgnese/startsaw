@@ -321,7 +321,7 @@ $(document).ready(function () {
     });
 });
 
-//da fare : fare in modo che l'elemento #pwd_response sia visibility", "visible o visibility", "hidden"
+//da fare : fare in modo che l'elemento #pwd_response sia visibility", "visible o visibility", "hidde
 $(document).ready(function () {
     $("#rePwdR , #pwdR").keyup(function () {
         $("#pwd_response").css("visibility", "visible");
