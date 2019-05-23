@@ -58,6 +58,7 @@ $(document).ready(function () {
 })*/
 $(document).ready(function () {
     $('#submitlogin').click(function () {
+        
         $.ajax({
             url: 'http://localhost/php/login.php',
             type: "post",
@@ -72,11 +73,12 @@ $(document).ready(function () {
                     $('#userLogged').text(data.user.user);
                     $('.modal').removeClass("is-active");
                     $('#loginRegisterButton').attr("href", "./php/controlpanel.php");
-                    $("#logOutButton").css("visibility : visible");
+                    $("#logOutButton").css("display : block");
                 // window.location.href="protetta.html"
                 }
                 else{
-                    alert("Username o password errata");
+                    $("#loginAppender").empty();
+                    $("#loginAppender").append("Username o password errati");
                 }
             },
             error: function (errorThrown) {
