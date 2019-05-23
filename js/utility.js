@@ -48,10 +48,11 @@ $(document).ready(function () {
                 if (data.ok) {
                     console.log(data);
                     console.log(data.user.user);
-                    $('#userLogged').text(data.user.user);
+                    $('#userNameNav').text(data.user.user);
                     $('.modal').removeClass("is-active");
-                    $('#loginRegisterButton').attr("href", "controlpanel.html");
-                    $("#logout2").css("display", "block");
+                    $('#userProfile').attr("href", "controlpanel.html");
+                    $("#navbar-menu").css("visibility", "visible");
+                    $('#loginRegisterButton').css("display", "none");
                 // window.location.href="protetta.html"
                 }
                 else{
@@ -73,6 +74,9 @@ $(document).ready(function () {
 $(document).ready(function () {
     $('#logout2').click(function () {
         localStorage.removeItem('token');
+        $('#userProfile').removeAttr("href", "controlpanel.html");
+        $("#navbar-menu").css("visibility", "hidden");
+        $('#loginRegisterButton').css("display", "block");
         window.location.reload();
         })
     })
@@ -96,10 +100,12 @@ $(document).ready(function () {
                     console.log(data);
                     //$('#submitRegister').text('Registrato con successo');
                     //$('#submitRegister').attr("disabled", true);
-                    $('#userLogged').text(data.user.user);
+                    $('#r').text(data.user.user);
                     localStorage.setItem('token', data.token);
                     $('.modal').removeClass("is-active");
-                    $('#loginRegisterButton').attr("href", "./controlpanel.html");
+                    $('#userProfile').attr("href", "controlpanel.html");
+                    $("#navbar-menu").css("visibility", "visible");
+                    $('#loginRegisterButton').css("display", "none");
 
                 } else {
                     $('#submitRegister').text('Si è verificato un problema');
