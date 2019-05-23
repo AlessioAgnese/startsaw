@@ -50,21 +50,13 @@ $(document).ready(function () {
                     console.log(data.user.user);
                     $('#userLogged').text(data.user.user);
                     $('.modal').removeClass("is-active");
-<<<<<<< HEAD
-                    $('#loginRegisterButton').attr("href", "./php/controlpanel.php");
-                    $("#logOutButton").css("display : block");
+                    $('#loginRegisterButton').attr("href", "controlpanel.html");
+                    $("#logout2").css("display", "block");
                 // window.location.href="protetta.html"
                 }
                 else{
                     $("#loginAppender").empty();
                     $("#loginAppender").append("Username o password errati");
-=======
-                    localStorage.setItem('token', data.token);
-                    $('#loginRegisterButton').attr("href", "./controlpanel.html");
-                    //$("#logOutButton").css("visibility : visible");
-                } else {
-                    alert("Username o password errata");
->>>>>>> 03e5f78f73deb32d685be9951f229d77bf17244c
                 }
             },
             error: function (errorThrown) {
