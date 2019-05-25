@@ -7,6 +7,7 @@ $(document).ready(function () {
 
 //funzione per il menu dropdown l
 $(document).ready(function () {
+    $("#content").load("description.html");
     $(".navbar-link").click(function () {
         $("#navbar-menu").toggleClass("is-active");
     });
@@ -368,7 +369,7 @@ $(document).ready(function () {
 
     keyup :function () {
         var name = $("#usernameR").val().trim().toString();
-        var mail = $("#email").val().trim()
+        var mail = $("#email").val().trim();
         var psw = $("#pwdR").val();
         var rePsw = $("#rePwdR").val();
         
@@ -382,3 +383,50 @@ $(document).ready(function () {
     }
 });
 });
+
+
+
+//caricamento dei contenuti della seconda navbar direttamente su index e animazione dei "bottini" della navbar
+$(document).ready(function () {  
+    var container = $("#content");
+    $("#contentSelector li a").click(function(){
+        $("#contentSelector li[class='is-active']").removeClass("is-active");
+        $(this).parent().addClass("is-active");
+        var $this = $(this);
+        target=$this.data("target");
+
+        container.load(target + ".html");
+
+            return false;
+        
+    })
+})
+
+//work in progress  implemetazione slideshow
+
+$(document).ready(function(){
+
+    bulmaCarousel.attach('#carousel-demo', {
+        slidesToScroll: 1,
+        slidesToShow: 4
+    });
+// Initialize all div with carousel class
+var carousels = bulmaCarousel.attach('.carousel', options);
+
+// Loop on each carousel initialized
+for(var i = 0; i < carousels.length; i++) {
+	// Add listener to  event
+	carousels[i].on('before:show', state => {
+		console.log(state);
+	});
+}
+
+// Access to bulmaCarousel instance of an element
+var element = document.querySelector('#my-element');
+if (element && element.bulmaCarousel) {
+	// bulmaCarousel instance is available as element.bulmaCarousel
+	element.bulmaCarousel.on('before-show', function(state) {
+		console.log(state);
+	});
+}
+})
