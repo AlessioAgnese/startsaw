@@ -12,9 +12,7 @@ $(document).ready(function() {
                         console.log(data.rows[index].User);
                         console.log(data.rows[index].Id_A);
                         console.log(data.rows[index].Data);});
-                        //alert("pubblicato?");
-                        //$('#parent').append('<div>hello</div>');    
-                        //$windows.body.append( data.rows[0].Data );
+                        //riesco a recuperare i dati nell'array come si publicano nella pagina???
                     } else {
                         alert("errore nella pubblicazione");
                     }
