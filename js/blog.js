@@ -2,7 +2,7 @@
 $(document).ready(function() {
     $.ajax({
                 url: 'http://localhost/php/getblog.php',
-                type: 'POST',
+                type: 'GET',
                 dataType: 'json',
                 data: JSON.stringify({}),
                 success: function(data) {
