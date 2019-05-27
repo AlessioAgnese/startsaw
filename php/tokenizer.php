@@ -4,18 +4,19 @@
 
     function genToken($utente){
         global $conn;
-        $date = date('Y-m-d');
-        $utente["date"]=$date;
-        $json = sha1(json_encode($utente));
+        //$date = date('Y-m-d');
+        //$utente["date"]=$date;
+        //$json = sha1(json_encode($utente));
+        $json=password_hash($utente, PASSWORD_BCRYPT);
         $insert = $conn->prepare("UPDATE Utenti SET token = :token WHERE User = :user");
         $insert->bindParam(":token",$json);
-        $insert->bindParam(":user",$utente["user"]);
+        $insert->bindParam(":user",$utente);//["user"]
         $insert->execute();
         if($insert){
             $ar = array(
                 "ok"=>true,
                 "token"=>$json,
-                "user"=>$utente
+                //"user"=>$utente
             );
             return json_encode($ar);
         }

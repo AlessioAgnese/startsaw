@@ -1,7 +1,6 @@
-
 $(document).ready(function(){
     if('token' in localStorage){
-        
+
             $.ajax({
                 url:'http://localhost/php/checklogin.php',
                 type:'post',
@@ -10,14 +9,14 @@ $(document).ready(function(){
                     token:localStorage.getItem('token')
                 }),
                 success:function(data){
-                    if(data.ok && data.utente != false && data.perm==3){
+                    if(data.ok && data.utente != null && data.perm==3){
                         tinymce.init({
                             selector: 'textarea',
                             language_url: './js/it_IT.js',
                             language: 'it_IT',});
-                    $('#articolo').css("visibility", "visible");
-                    $('#publish').css("visibility", "visible");        
-                }
+                            $('#articolo').css("visibility", "visible");
+                            $('#publish').css("visibility", "visible"); 
+                    }
                     else{
                         alert("Non hai i permessi per accedere a questa pagina");
                         window.location.replace("http://localhost");
