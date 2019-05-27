@@ -52,14 +52,21 @@ $(document).ready(function () {
             }),
             success: function (data) {
                 if (data.ok) {
-                    console.log(data);
+                    /*console.log(data);
                     console.log(data.user.user);
-                    localStorage.setItem('token',data.token);
                     $('#userNameNav').text(data.user.user);
                     $('.modal').removeClass("is-active");
                     $('#userProfile').attr("href", "controlpanel.html");
                     $("#navbar-menu").css("visibility", "visible");
                     $('#loginRegisterButton').css("visibility", "hidden"); 
+                    $('#loginRegisterButton').css("display", "none");
+                    if(data.user.perm>2){
+                    $("#write").css("visibility", "visible");
+                    $('#write').attr("href", "writearticle.html");}*/
+                    //Semplificata la funzione di login???
+                    
+                    localStorage.setItem('token',data.token);
+                    location.reload();   
                 }
                 else{
                     $("#loginAppender").empty();
@@ -85,11 +92,14 @@ $(document).ready(function(){
             }),
             success:function(data){
                 if(data.ok && data.utente != false){
-                    $('#userNameNav').text(data.utente.User);
+                    $('#userNameNav').text(data.utente);
                     $('.modal').removeClass("is-active");
                     $('#userProfile').attr("href", "controlpanel.html");
                     $("#navbar-menu").css("visibility", "visible");
-                    $('#loginRegisterButton').css("display", "none");  
+                    $('#loginRegisterButton').css("display", "none");
+                    if(data.perm>2){
+                        $("#write").css("visibility", "visible");
+                        $('#write').attr("href", "writearticle.html");}   
                 
                 }
                 else{
@@ -113,10 +123,11 @@ $(document).ready(function(){
 
 
 $(document).ready(function () {
-    $('#logout2').click(function () {
+    $('#logout').click(function () {
         localStorage.removeItem('token');
         $('#userProfile').removeAttr("href", "controlpanel.html");
         $("#navbar-menu").css("visibility", "hidden");
+        $("#write").css("visibility", "hidden"); 
         $('#loginRegisterButton').css("display", "block");
         window.location.reload();
         })
