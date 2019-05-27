@@ -1,5 +1,7 @@
 //funzione per il menu burger
+
 $(document).ready(function () {
+    $("#content").load("description.html");
     $(".navbar-burger").click(function () {
         $(".navbar-burger,#navbarBasicExample").toggleClass("is-active");
     });
@@ -7,7 +9,7 @@ $(document).ready(function () {
 
 //funzione per il menu dropdown l
 $(document).ready(function () {
-    $("#content").load("description.html");
+   
     $(".navbar-link").click(function () {
         $("#navbar-menu").toggleClass("is-active");
     });
@@ -57,7 +59,7 @@ $(document).ready(function () {
                     $('.modal').removeClass("is-active");
                     $('#userProfile').attr("href", "controlpanel.html");
                     $("#navbar-menu").css("visibility", "visible");
-                    $('#loginRegisterButton').css("display", "none"); 
+                    $('#loginRegisterButton').css("visibility", "hidden"); 
                 }
                 else{
                     $("#loginAppender").empty();
@@ -267,9 +269,9 @@ $(document).ready(function () {
     });
 });
 
-//working in press --(controllo che la password rispetti le condizioni date)
+//controllo che la password rispetti le condizioni date
 $(document).ready(function () {
-    $("#pwdR").on({
+    $("#pwdR,#oldPwd").on({
 
         keyup: function () {
             if ($("#pwdR").val().match(/[A-Z]/) != null) {
@@ -308,6 +310,13 @@ $(document).ready(function () {
                 $("#length, #lengthIcon").removeClass("has-text-success").addClass(
                     "has-text-danger");
             }
+            if ($("#pwdR").val()!=$("#oldPwd").val()) {
+                $("#pwd_checkEqual").removeClass("has-text-danger").addClass("has-text-success");
+                $("#pwd_checkEqual").text("");
+            } else {
+                $("#pwd_checkEqual").removeClass("has-text-success").addClass("has-text-danger");
+                $("#pwd_checkEqual").text("La nuova password deve essere diversa da quella vecchia");
+            }
 
 
         },
@@ -322,7 +331,7 @@ $(document).ready(function () {
     });
 });
 
-//da fare : fare in modo che l'elemento #pwd_response sia visibility", "visible o visibility", "hidde
+
 $(document).ready(function () {
     $("#rePwdR , #pwdR").keyup(function () {
         $("#pwd_response").css("visibility", "visible");
@@ -331,7 +340,7 @@ $(document).ready(function () {
             $('#statusP').css("visibility", "visible");
             $('#statusP').removeClass('has-text-success').addClass('has-text-danger');
             $("#pwd_response").text("Le password non corrispondono");
-            $("#pwd_response").css('color', 'red');
+           // $("#pwd_response").css('color', 'red');
             //$('#submitRegister').attr("disabled", true);
         } else {
             $('#statusP').removeClass('fa-times').addClass('fa-check');
@@ -339,15 +348,15 @@ $(document).ready(function () {
             $('#statusP').removeClass('has-text-danger').addClass('has-text-success');
             $("#pwd_response").text("");
             // $('#submitRegister').attr("disabled", false);
-            $("#pwd_response").css('color', 'green')
+           //$("#pwd_response").css('color', 'green')
 
 
         }
     });
 
 });
-// working in progress --controllo che tutti i campi siano compilati coorettamente e abilito il bottene per registrarsi(da finire il controllo sulla password)
-//aggiunto controllo su password ma mail fa passare anche se errata
+
+
 $(document).ready(function () {
     $("#usernameR,#email,#pwdR,#rePwdR").on({
         change :function () {
@@ -402,31 +411,75 @@ $(document).ready(function () {
     })
 })
 
-//work in progress  implemetazione slideshow
 
-$(document).ready(function(){
 
-    bulmaCarousel.attach('#carousel-demo', {
-        slidesToScroll: 1,
-        slidesToShow: 4
+$(document).ready(function () {
+    $("#pwdR,#rePwdR,#oldPwd").on({
+        change :function () {
+        var oldPsw = $("#oldPwd").val();
+        var psw = $("#pwdR").val();
+        var rePsw = $("#rePwdR").val();
+        
+        if ($("#upLetterIcon,#lowLetterIcon,#numberIcon,#lengthIcon,#statusP").hasClass("fa-check") && psw != '' && rePsw != '' && oldPsw !='' && $("#upLetter,#lowLetter,#number,#length").hasClass('has-text-success')  && !$('#statusP').hasClass('has-text-danger') && $('#pwd_checkEqual').hasClass("has-text-success")) {
+
+            $('#ChangePdw').attr("disabled", false);
+
+        } else {
+            $('#ChangePdw').attr("disabled", true);
+        }
+
+
+    },
+
+    keyup :function () {
+        var oldPsw = $("#oldPwd").val();
+        var psw = $("#pwdR").val();
+        var rePsw = $("#rePwdR").val();
+        
+        if ($("#upLetterIcon,#lowLetterIcon,#numberIcon,#lengthIcon,#statusP").hasClass("fa-check")  && psw != '' && rePsw != '' && oldPsw !='' && $("#upLetter,#lowLetter,#number,#length").hasClass('has-text-success')  && !$('#statusP').hasClass('has-text-danger') && $('#pwd_checkEqual').hasClass("has-text-success")) {
+
+            $('#ChangePdw').attr("disabled", false);
+
+        } else {
+            $('#ChangePdw').attr("disabled", true);
+        }
+    }
+});
+});
+
+//funzioni controlpanel.html
+$(document).ready(function () {
+    $("#btnImg").click(function (){
+        $("#menuImg").toggleClass("is-active");
     });
-// Initialize all div with carousel class
-var carousels = bulmaCarousel.attach('.carousel', options);
+});
 
-// Loop on each carousel initialized
-for(var i = 0; i < carousels.length; i++) {
-	// Add listener to  event
-	carousels[i].on('before:show', state => {
-		console.log(state);
-	});
-}
+$(document).ready(function () {
+    $("#closeNotif").click(function (){
+        $("#notif").css("display", "none");
+        window.location.reload();
+    });
+});
 
-// Access to bulmaCarousel instance of an element
-var element = document.querySelector('#my-element');
-if (element && element.bulmaCarousel) {
-	// bulmaCarousel instance is available as element.bulmaCarousel
-	element.bulmaCarousel.on('before-show', function(state) {
-		console.log(state);
-	});
-}
-})
+
+$(document).ready(function () { 
+    $("#upImg").click(function (){
+var file = document.getElementById("fileI");
+file.onchange = function(){
+    if(file.files.length > 0)
+    {
+
+      document.getElementById('filename').innerHTML = 					file.files[0].name;
+
+    }
+
+};
+});
+});
+
+grecaptcha.ready(function() {
+    grecaptcha.execute('reCAPTCHA_site_key', {action: 'homepage'}).then(function(token) {
+       
+    });
+});
+
