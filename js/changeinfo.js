@@ -82,10 +82,13 @@ $(document).ready(function () {
             }),
             success: function (data) {
                 if (data.ok) {
-                    alert("Cambio psw");
-                    window.location.reload();
+                    $("#notif").removeClass("is-danger").addClass("is-link");
+                    $("#notif").css("display","block");
+                    $("#notifText").text("Password modificata con successo");
                 } else {
-                    alert("Failure");
+                    $("#notif").removeClass("is-link").addClass("is-danger");
+                    $("#notif").css("display","block");
+                    $("#notifText").text("Qualcosa è andato storto, ricontrolla i campi");
                 }
             },
             error: function (errorThrown) {
