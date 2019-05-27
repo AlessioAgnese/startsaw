@@ -48,11 +48,15 @@ $(document).ready(function () {
             }),
             success: function (data) {
                 if (data.ok) {
-                    alert("Cambio");
-                    window.location.reload();
+                    $("#notif").removeClass("is-danger").addClass("is-link");
+                    $("#notif").css("display","block");
+                    $("#notifText").text("Modifiche effettuate con successo");
+                   
 
                 } else {
-                    alert("Failure");
+                    $("#notif").removeClass("is-link").addClass("is-danger");
+                    $("#notif").css("display","block");
+                    $("#notifText").text("Qualcosa è andato storto, ricontrolla i campi");
                 }
             },
             error: function (errorThrown) {
@@ -74,11 +78,11 @@ $(document).ready(function () {
             data:JSON.stringify({
                 token:localStorage.getItem('token'),
                 oldPwd:$('#oldPwd').val().toString(),
-                newPwd:$('#newPwd').val().toString(),
+                newPwd:$('#pwdR').val().toString(),
             }),
             success: function (data) {
                 if (data.ok) {
-                    alert("Cambio");
+                    alert("Cambio psw");
                     window.location.reload();
                 } else {
                     alert("Failure");
