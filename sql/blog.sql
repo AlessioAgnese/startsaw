@@ -21,6 +21,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `blog`
 --
+DROP DATABASE IF EXISTS `blog`;
 CREATE DATABASE IF NOT EXISTS `blog` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `blog`;
 
@@ -30,12 +31,12 @@ USE `blog`;
 -- Struttura della tabella `articoli`
 --
 
-DROP TABLE IF EXISTS `articoli`;
+
 CREATE TABLE `articoli` (
   `Id_A` int(11) NOT NULL,
   `Testo` mediumtext NOT NULL,
   `Data` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `User` varchar(16) NOT NULL
+  `User` varchar(16) 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -54,13 +55,13 @@ INSERT INTO `articoli` (`Id_A`, `Testo`, `Data`, `User`) VALUES
 -- Struttura della tabella `commenti`
 --
 
-DROP TABLE IF EXISTS `commenti`;
+
 CREATE TABLE `commenti` (
   `Id_C` int(11) NOT NULL,
   `Testo` mediumtext NOT NULL,
   `Data` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `Id_A` int(11) NOT NULL,
-  `User` varchar(16) NOT NULL
+  `User` varchar(16) 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -79,7 +80,7 @@ INSERT INTO `commenti` (`Id_C`, `Testo`, `Data`, `Id_A`, `User`) VALUES
 -- Struttura della tabella `ruoli`
 --
 
-DROP TABLE IF EXISTS `ruoli`;
+
 CREATE TABLE `ruoli` (
   `Id_R` int(11) NOT NULL,
   `Ruolo` varchar(10) NOT NULL
@@ -100,7 +101,7 @@ INSERT INTO `ruoli` (`Id_R`, `Ruolo`) VALUES
 -- Struttura della tabella `utenti`
 --
 
-DROP TABLE IF EXISTS `utenti`;
+
 CREATE TABLE `utenti` (
   `User` varchar(16) NOT NULL,
   `Psw` varchar(64) NOT NULL,
@@ -185,14 +186,14 @@ ALTER TABLE `ruoli`
 -- Limiti per la tabella `articoli`
 --
 ALTER TABLE `articoli`
-  ADD CONSTRAINT `articolo_utente` FOREIGN KEY (`User`) REFERENCES `utenti` (`User`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `articolo_utente` FOREIGN KEY (`User`) REFERENCES `utenti` (`User`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Limiti per la tabella `commenti`
 --
 ALTER TABLE `commenti`
   ADD CONSTRAINT `commento_articolo` FOREIGN KEY (`Id_A`) REFERENCES `articoli` (`Id_A`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `commento_utente` FOREIGN KEY (`User`) REFERENCES `utenti` (`User`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `commento_utente` FOREIGN KEY (`User`) REFERENCES `utenti` (`User`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Limiti per la tabella `utenti`
