@@ -29,12 +29,14 @@
 
     function getUser($token){
         global $conn;
-        $user = $conn->prepare("SELECT User FROM Utenti WHERE token =:token");
+        $user = $conn->prepare("SELECT User,Id_R FROM Utenti WHERE token =:token");
         $user->execute(array(":token"=>$token));
         if($user){
+            $result=$user->fetch(PDO::FETCH_ASSOC);
             $array = array(
                 "ok"=>true,
-                "utente"=>$user->fetch(PDO::FETCH_ASSOC)
+                "utente"=>$result["User"],
+                "perm"=>$result["Id_R"]
             );
             return $array;
         }
