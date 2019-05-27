@@ -60,10 +60,7 @@ CREATE TABLE utenti (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO utenti (`User`, Psw, Mail, Nome, Cognome, Residenza, Biografia, Id_R, token) VALUES
-('Alessio', '$2y$10$zH1u4oA82b1DAx06PIrM6uKnFpLaqANQMoCMl4by5swZ4DRjYTjsG', 'alessio.agnese.iic97@gmail.com', 'Test2', 'Test2', 'Test2', 'Test2', 3, '$2y$10$R8vusKxOuVSOtR3BTw8jbuHrepSRSMEAzM0yVtO072d0g0Zgnbqni'),
-('Alessio5', '$2y$10$VRL1G/hyJfAwoQBcEWB0zOsNui7qnm8C8/PiYQH9L/XjE3HOVJyhe', 'alessio.agnese.iic97@gmail.cf', '', '', '', '', 1, 'cdfbc5833e40ed18908f311b642a20bb4f671c86'),
-('Alessio6', '$2y$10$8Nuu5um8Q6SE14ZJoqz5IOYN3Jey6426cDmFXD3V2RzM44SYlgpOq', 'alessio.nese.iic97@gmail.com', '', '', '', '', 1, '$2y$10$DkN9FZyRP5hGt3WAuFZuxe/vWslPhLlxXM9pmTosz6AJGlU9rdMM2');
-
+('root', '$2y$10$WDyxiKq8qrGKnfPM/pzr4eTYvxflt1ZsJh/6nczz6qsioDIs8Xz5y', '', '', '', '', '', 3, '');
 
 ALTER TABLE articoli
   ADD PRIMARY KEY (Id_A),
