@@ -57,7 +57,7 @@
         $update->bindParam(":nome",$json["nome"]);
         $update->bindParam(":cognome",$json["cognome"]);
         $update->bindParam(":residenza",$json["residenza"]);
-        $update->bindParam(":biografia",$json["nome"]);
+        $update->bindParam(":biografia",$json["biografia"]);
         $update->execute();
         if($update){
             $array = array(
