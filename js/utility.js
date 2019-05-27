@@ -63,8 +63,7 @@ $(document).ready(function () {
                     if(data.user.perm>2){
                     $("#write").css("visibility", "visible");
                     $('#write').attr("href", "writearticle.html");}*/
-                    //Semplificata la funzione di login???
-                    
+                    //Semplificata la funzione di login???                    
                     localStorage.setItem('token',data.token);
                     location.reload();   
                 }

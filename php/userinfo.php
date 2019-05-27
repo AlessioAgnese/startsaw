@@ -2,9 +2,6 @@
     include_once('dbconfig.php');
     $headers = apache_request_headers();
     $type = $headers["X-Type"];
-    $token;
-    $content;
-    $json;
     if($_SERVER['REQUEST_METHOD']=='GET'){
         $token = $headers["X-Authentication"];
     }

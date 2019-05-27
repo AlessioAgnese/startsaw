@@ -2,15 +2,20 @@
     include_once('dbconfig.php');
     $headers = apache_request_headers();
     $type = $headers["X-Type"];
-    $content = file_get_contents('php://input');
-    $json = json_decode($content,true);
+    if($_SERVER['REQUEST_METHOD']=='POST'){
+        $content = file_get_contents('php://input');
+        $json = json_decode($content,true);
+    }
     switch ($type) {
         case 'article':
             getArticle($json);
             break;
         case 'comments':
-            //editInfo($json);
+            getComments($json);
             break;
+        case 'blog':
+            getBlog();
+            break;    
         default:
             echo json_encode(array('ok'=>false));
             break;        
@@ -36,27 +41,31 @@
             echo json_encode($array);
         }
     }
-/*
     function getComments($json){
         global $conn;
-        $update = $conn->prepare("UPDATE Utenti SET Nome =:nome,Cognome=:cognome,Residenza=:residenza,Biografia=:biografia WHERE token = :token");
-        $update->bindParam(":token",$json["token"]);
-        $update->bindParam(":nome",$json["nome"]);
-        $update->bindParam(":cognome",$json["cognome"]);
-        $update->bindParam(":residenza",$json["residenza"]);
-        $update->bindParam(":biografia",$json["nome"]);
-        $update->execute();
-        if($update){
-            $array = array(
-                "ok" => true,
-            );
+        $select = $conn->prepare("SELECT Testo,Data,User FROM Commenti WHERE Id_A=:id");
+        $select->bindParam(":id",$json["articolo"]);
+        $select->execute();
+        if($select){
+            $rows = $select->fetchAll(PDO::FETCH_ASSOC);
+            $array = array("ok" => true, "rows"=>$rows);
             echo json_encode($array);
         }else{
-            $array = array(
-                "ok" => false,
-    
-        );
-        echo json_encode($array);
+            $array = array("ok" => false);
+            echo json_encode($array);
         }
     }
-    */
+
+    function getBlog(){
+        global $conn;
+        $select = $conn->prepare("SELECT * FROM Articoli ORDER BY Data DESC");
+        $select->execute();
+        if($select){
+            $rows = $select->fetchAll(PDO::FETCH_ASSOC);
+            $array=array("ok"=>true,"rows"=>$rows); 
+            echo json_encode($array);       
+        }else{
+            $array=array("ok"=>false);
+            echo json_encode($array);}    
+        }
+    

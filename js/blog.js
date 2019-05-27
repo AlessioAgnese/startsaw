@@ -1,9 +1,12 @@
 //WORKIN PROGRESS
 $(document).ready(function() {
     $.ajax({
-                url: 'http://localhost/php/getblog.php',
+                url: 'http://localhost/php/getnews.php',
                 type: 'GET',
                 dataType: 'json',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('X-Type', 'blog');
+                },
                 data: JSON.stringify({}),
                 success: function(data) {
                     if (data.ok) {
