@@ -9,7 +9,7 @@ $(document).ready(function(){
                     token:localStorage.getItem('token')
                 }),
                 success:function(data){
-                    if(data.ok && data.utente != false && data.perm==3){
+                    if(data.ok && data.utente != null && data.perm==3){
                         tinymce.init({
                             selector: 'textarea',
                             language_url: './js/it_IT.js',

@@ -91,7 +91,7 @@ $(document).ready(function(){
                 token:localStorage.getItem('token')
             }),
             success:function(data){
-                if(data.ok && data.utente != false){
+                if(data.ok && data.utente != null){
                     $('#userNameNav').text(data.utente);
                     $('.modal').removeClass("is-active");
                     $('#userProfile').attr("href", "controlpanel.html");
