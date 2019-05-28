@@ -11,10 +11,10 @@ $(document).ready(function(){
             },
             success:function(data){
                 if(data.ok){
-                    $('#nome').attr("placeholder",data.nome);
-                    $('#cognome').attr("placeholder",data.cognome);
-                    $('#residenza').attr("placeholder",data.residenza);
-                    $('#bio').attr("placeholder",data.biografia);
+                    $('#nome').text(data.nome);
+                    $('#cognome').text(data.cognome);
+                    $('#residenza').text(data.residenza);
+                    $('#bio').text(data.biografia);
                 }
                 else{
                     alert("La sessione è scaduta");
