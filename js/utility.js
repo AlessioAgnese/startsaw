@@ -151,12 +151,13 @@ $(document).ready(function () {
                     console.log(data);
                     //$('#submitRegister').text('Registrato con successo');
                     //$('#submitRegister').attr("disabled", true);
-                    $('#r').text(data.user.user);
+                    //$('#r').text(data.user.user);
                     localStorage.setItem('token', data.token);
-                    $('.modal').removeClass("is-active");
-                    $('#userProfile').attr("href", "controlpanel.html");
-                    $("#navbar-menu").css("visibility", "visible");
-                    $('#loginRegisterButton').css("display", "none");
+                    //$('.modal').removeClass("is-active");
+                    //$('#userProfile').attr("href", "controlpanel.html");
+                    //$("#navbar-menu").css("visibility", "visible");
+                    //$('#loginRegisterButton').css("display", "none");
+                    window.location.reload();
 
                 } else {
                     $('#submitRegister').text('Si è verificato un problema');
