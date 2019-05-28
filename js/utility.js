@@ -43,18 +43,11 @@ $(document).ready(function () {
                 password: $('#pwdL').val()
             }),
             success: function (data) {
-<<<<<<< HEAD
-                if (data.ok) {
-                    localStorage.setItem('token', data.token);
-                    location.reload();
-                } else {
-=======
                 if (data.ok) {                  
                     localStorage.setItem('token',data.token);
                     location.reload();   
                 }
                 else{
->>>>>>> e636923bcc876c9d716988bb16ca238690723f5c
                     $("#loginAppender").empty();
                     $("#loginAppender").append("Username o password errati");
                 }
@@ -65,8 +58,6 @@ $(document).ready(function () {
             }
         })
     });
-<<<<<<< HEAD
-=======
 });
 $(document).ready(function () {
     $('#submitRegister').click(function () {
@@ -101,7 +92,6 @@ $(document).ready(function () {
         })
     })
 });
->>>>>>> e636923bcc876c9d716988bb16ca238690723f5c
 
 
 
@@ -113,34 +103,20 @@ $(document).ready(function () {
             data: JSON.stringify({
                 token: localStorage.getItem('token')
             }),
-<<<<<<< HEAD
-            success: function (data) {
-                if (data.ok && data.utente != null) {
-=======
         
             success:function(data){
                 if(data.ok && data.utente != null){            
->>>>>>> e636923bcc876c9d716988bb16ca238690723f5c
                     $('#userNameNav').text(data.utente);
                     $('.modal').removeClass("is-active");
                     $('#userProfile').attr("href", "controlpanel.html");
                     $("#navbar-menu").css("visibility", "visible");
                     $('#loginRegisterButton').css("display", "none");
-<<<<<<< HEAD
-                    if (data.perm > 2) {
-                        $("#write").css("visibility", "visible");
-                        $('#write').attr("href", "writearticle.html");
-                    }
-
-                } else {
-=======
                     if(data.perm>2){
                         $("#write").css("display", "block");
                         $('#write').attr("href", "writearticle.html");}   
                 
                 }
                 else{
->>>>>>> e636923bcc876c9d716988bb16ca238690723f5c
                     alert("La sessione è scaduta");
                     localStorage.removeItem('token');
                     $('#userProfile').removeAttr("href", "controlpanel.html");
@@ -168,34 +144,6 @@ $(document).ready(function () {
 
 
 
-<<<<<<< HEAD
-    $('#submitRegister').click(function () {
-        $.ajax({
-            url: 'http://localhost/php/register.php',
-            type: 'POST',
-            dataType: 'json',
-            data: JSON.stringify({
-                username: $('#usernameR').val().trim().toString(),
-                pwd: $('#pwdR').val(),
-                email: $('#email').val().trim().toString()
-            }),
-            success: function (data) {
-                if (data.ok) {
-                    console.log(data);
-                    localStorage.setItem('token', data.token);
-                    window.location.reload();
-
-                } else {
-                    $('#submitRegister').text('Si è verificato un problema');
-                }
-            },
-            error: function (errorThrown) {
-                console.log(errorThrown);
-            }
-        })
-    })
-=======
->>>>>>> e636923bcc876c9d716988bb16ca238690723f5c
 
 
     //controllo dei caratteri ammessi , e controllo della presenza o meno dell'user inserito
