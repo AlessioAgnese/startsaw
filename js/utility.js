@@ -51,19 +51,7 @@ $(document).ready(function () {
                 password: $('#pwdL').val()
             }),
             success: function (data) {
-                if (data.ok) {
-                    /*console.log(data);
-                    console.log(data.user.user);
-                    $('#userNameNav').text(data.user.user);
-                    $('.modal').removeClass("is-active");
-                    $('#userProfile').attr("href", "controlpanel.html");
-                    $("#navbar-menu").css("visibility", "visible");
-                    $('#loginRegisterButton').css("visibility", "hidden"); 
-                    $('#loginRegisterButton').css("display", "none");
-                    if(data.user.perm>2){
-                    $("#write").css("visibility", "visible");
-                    $('#write').attr("href", "writearticle.html");}*/
-                    //Semplificata la funzione di login???                    
+                if (data.ok) {                  
                     localStorage.setItem('token',data.token);
                     location.reload();   
                 }
@@ -79,6 +67,39 @@ $(document).ready(function () {
         })
     });
 });
+$(document).ready(function () {
+    $('#submitRegister').click(function () {
+        $.ajax({
+            url: 'http://localhost/php/register.php',
+            type: 'POST',
+            dataType: 'json',
+            data: JSON.stringify({
+                username: $('#usernameR').val().trim().toString(),
+                pwd: $('#pwdR').val(),
+                email: $('#email').val().trim().toString()
+            }),
+            success: function (data) {
+                if (data.ok) {
+                    //console.log(data);
+                    //$('#submitRegister').text('Registrato con successo');
+                    //$('#submitRegister').attr("disabled", true);
+                    //$('#r').text(data.user.user);
+                    //$('.modal').removeClass("is-active");
+                    //$('#userProfile').attr("href", "controlpanel.html");
+                    //$("#navbar-menu").css("visibility", "visible");
+                    //$('#loginRegisterButton').css("display", "none");
+                    localStorage.setItem('token',data.token);
+                    window.location.reload();
+                } else {
+                    $('#submitRegister').text('Si è verificato un problema');
+                }
+            },
+            error: function (errorThrown) {
+                console.log(errorThrown);
+            }
+        })
+    })
+});
 
 $(document).ready(function(){
     if('token' in localStorage){
@@ -89,8 +110,9 @@ $(document).ready(function(){
             data:JSON.stringify({
                 token:localStorage.getItem('token')
             }),
+        
             success:function(data){
-                if(data.ok && data.utente != null){
+                if(data.ok && data.utente != null){            
                     $('#userNameNav').text(data.utente);
                     $('.modal').removeClass("is-active");
                     $('#userProfile').attr("href", "controlpanel.html");
@@ -135,40 +157,6 @@ $(document).ready(function () {
 
 
 
-$(document).ready(function () {
-    $('#submitRegister').click(function () {
-        $.ajax({
-            url: 'http://localhost/php/register.php',
-            type: 'POST',
-            dataType: 'json',
-            data: JSON.stringify({
-                username: $('#usernameR').val().trim().toString(),
-                pwd: $('#pwdR').val(),
-                email: $('#email').val().trim().toString()
-            }),
-            success: function (data) {
-                if (data.ok) {
-                    console.log(data);
-                    //$('#submitRegister').text('Registrato con successo');
-                    //$('#submitRegister').attr("disabled", true);
-                    //$('#r').text(data.user.user);
-                    localStorage.setItem('token', data.token);
-                    //$('.modal').removeClass("is-active");
-                    //$('#userProfile').attr("href", "controlpanel.html");
-                    //$("#navbar-menu").css("visibility", "visible");
-                    //$('#loginRegisterButton').css("display", "none");
-                    window.location.reload();
-
-                } else {
-                    $('#submitRegister').text('Si è verificato un problema');
-                }
-            },
-            error: function (errorThrown) {
-                console.log(errorThrown);
-            }
-        })
-    })
-});
 
 //controllo dei caratteri ammessi , e controllo della presenza o meno dell'user inserito
 $(document).ready(function () {

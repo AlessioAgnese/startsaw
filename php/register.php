@@ -15,7 +15,7 @@ if ($insert){
 		"ok"=>true,
 		"user"=>$json["username"],
 	);
-	echo genToken($array);
+	echo genToken($json["username"]);
 }else{
 	$arr= array(
 		"ok"=>false,
