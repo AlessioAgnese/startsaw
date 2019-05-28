@@ -5,43 +5,35 @@ $(document).ready(function () {
     $(".navbar-burger").click(function () {
         $(".navbar-burger,#navbarBasicExample").toggleClass("is-active");
     });
-});
 
-//funzione per il menu dropdown l
-$(document).ready(function () {
-   
+
+    //funzione per il menu dropdown l
+
+
     $(".navbar-link").click(function () {
         $("#navbar-menu").toggleClass("is-active");
     });
-});
 
-//funzione per il menu modal(show) e per resettare i campi del form una volta chiusa la "card"
-$(document).ready(function () {
+
+    //funzione per il menu modal(show) e per resettare i campi del form una volta chiusa la "card"
+
     $(".delete,#loginRegisterButton,.modal-background").click(function () {
         $(".modal").toggleClass("is-active");
         $(".loginUser,.registerUser").trigger("reset");
         $("#errorUser,#errorMail,#name_response,#pwd_response,.checkPswField").css("visibility", "hidden");
         $("#usernameR,#email").removeClass("is-danger");
-        //$("#name_response,#pwd_response,.checkPswField").css("visibility", "hidden");
         $('#submitRegister').attr("disabled", true);
         $("#name_response").css('color', 'black');
         $('#statusU,#statusE').css('display', 'none');
         $('#statusP').css("visibility", "hidden");
-        // $('#statusE').css('display', 'none');
-        //$(".checkPswField").css("visibility","hidden");
         $("#upLetterIcon,#lowLetterIcon,#numberIcon,#lengthIcon").removeClass('fa-check has-text-success').addClass('fa-times has-text-danger');
         $("#upLetter,#lowLetter,#number,#length").removeClass('has-text-success').addClass('has-text-danger');
     });
-});
 
 
 
-
-
-
-$(document).ready(function () {
     $('#submitlogin').click(function () {
-        
+
         $.ajax({
             url: 'http://localhost/php/login.php',
             type: "POST",
@@ -52,22 +44,9 @@ $(document).ready(function () {
             }),
             success: function (data) {
                 if (data.ok) {
-                    /*console.log(data);
-                    console.log(data.user.user);
-                    $('#userNameNav').text(data.user.user);
-                    $('.modal').removeClass("is-active");
-                    $('#userProfile').attr("href", "controlpanel.html");
-                    $("#navbar-menu").css("visibility", "visible");
-                    $('#loginRegisterButton').css("visibility", "hidden"); 
-                    $('#loginRegisterButton').css("display", "none");
-                    if(data.user.perm>2){
-                    $("#write").css("visibility", "visible");
-                    $('#write').attr("href", "writearticle.html");}*/
-                    //Semplificata la funzione di login???                    
-                    localStorage.setItem('token',data.token);
-                    location.reload();   
-                }
-                else{
+                    localStorage.setItem('token', data.token);
+                    location.reload();
+                } else {
                     $("#loginAppender").empty();
                     $("#loginAppender").append("Username o password errati");
                 }
@@ -78,30 +57,30 @@ $(document).ready(function () {
             }
         })
     });
-});
 
-$(document).ready(function(){
-    if('token' in localStorage){
+
+
+    if ('token' in localStorage) {
         $.ajax({
-            url:'http://localhost/php/checklogin.php',
-            type:'post',
-            dataType:'json',
-            data:JSON.stringify({
-                token:localStorage.getItem('token')
+            url: 'http://localhost/php/checklogin.php',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                token: localStorage.getItem('token')
             }),
-            success:function(data){
-                if(data.ok && data.utente != null){
+            success: function (data) {
+                if (data.ok && data.utente != null) {
                     $('#userNameNav').text(data.utente);
                     $('.modal').removeClass("is-active");
                     $('#userProfile').attr("href", "controlpanel.html");
                     $("#navbar-menu").css("visibility", "visible");
                     $('#loginRegisterButton').css("display", "none");
-                    if(data.perm>2){
+                    if (data.perm > 2) {
                         $("#write").css("visibility", "visible");
-                        $('#write').attr("href", "writearticle.html");}   
-                
-                }
-                else{
+                        $('#write').attr("href", "writearticle.html");
+                    }
+
+                } else {
                     alert("La sessione è scaduta");
                     localStorage.removeItem('token');
                     $('#userProfile').removeAttr("href", "controlpanel.html");
@@ -111,31 +90,24 @@ $(document).ready(function(){
 
                 }
             },
-            error:function(errorThrown){
+            error: function (errorThrown) {
                 console.log(errorThrown);
             }
         })
     }
-});
 
 
-
-
-$(document).ready(function () {
     $('#logout').click(function () {
         localStorage.removeItem('token');
         $('#userProfile').removeAttr("href", "controlpanel.html");
         $("#navbar-menu").css("visibility", "hidden");
-        $("#write").css("visibility", "hidden"); 
+        $("#write").css("visibility", "hidden");
         $('#loginRegisterButton').css("display", "block");
         window.location.reload();
-        })
-   });
+    })
 
 
 
-
-$(document).ready(function () {
     $('#submitRegister').click(function () {
         $.ajax({
             url: 'http://localhost/php/register.php',
@@ -149,14 +121,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.ok) {
                     console.log(data);
-                    //$('#submitRegister').text('Registrato con successo');
-                    //$('#submitRegister').attr("disabled", true);
-                    //$('#r').text(data.user.user);
                     localStorage.setItem('token', data.token);
-                    //$('.modal').removeClass("is-active");
-                    //$('#userProfile').attr("href", "controlpanel.html");
-                    //$("#navbar-menu").css("visibility", "visible");
-                    //$('#loginRegisterButton').css("display", "none");
                     window.location.reload();
 
                 } else {
@@ -168,16 +133,16 @@ $(document).ready(function () {
             }
         })
     })
-});
 
-//controllo dei caratteri ammessi , e controllo della presenza o meno dell'user inserito
-$(document).ready(function () {
-    $("#usernameR").on("keyup change" ,function () {
+
+    //controllo dei caratteri ammessi , e controllo della presenza o meno dell'user inserito
+
+    $("#usernameR").on("keyup change", function () {
         var regexUser = /^(?!.*__.*)(?!.*\.\..*)[a-zA-Z0-9_.]+$/;
         $("#errorUser").css("visibility", "visible");
         if ($("#usernameR").val().match(regexUser) != null) {
             var name = $("#usernameR").val().trim().toString();
-           // $("#errorUser").css("visibility", "visible");
+
             $("#usernameR").removeClass("is-danger");
 
             $.ajax({
@@ -216,7 +181,7 @@ $(document).ready(function () {
                 }
             });
         } else {
-           //("#errorUser").css("visibility", "visible");
+
             $("#errorUser").removeClass('has-text-success').addClass('has-text-danger');
             $("#usernameR").addClass('is-danger');
             $("#errorUser").text("Caratteri non ammessi");
@@ -225,10 +190,8 @@ $(document).ready(function () {
 
     });
 
-});
+    //controllo dei caratteri ammessi , e controllo della presenza o meno della mail inserito
 
-//controllo dei caratteri ammessi , e controllo della presenza o meno della mail inserito
-$(document).ready(function () {
     $("#email").keyup(function () {
         var regexMail = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
         if ($("#email").val().match(regexMail) != null) {
@@ -279,10 +242,10 @@ $(document).ready(function () {
             $('#statusE').css('display', 'none');
         }
     });
-});
 
-//controllo che la password rispetti le condizioni date
-$(document).ready(function () {
+
+    //controllo che la password rispetti le condizioni date
+
     $("#pwdR,#oldPwd").on({
 
         keyup: function () {
@@ -322,7 +285,7 @@ $(document).ready(function () {
                 $("#length, #lengthIcon").removeClass("has-text-success").addClass(
                     "has-text-danger");
             }
-            if ($("#pwdR").val()!=$("#oldPwd").val()) {
+            if ($("#pwdR").val() != $("#oldPwd").val()) {
                 $("#pwd_checkEqual").removeClass("has-text-danger").addClass("has-text-success");
                 $("#pwd_checkEqual").text("");
             } else {
@@ -341,10 +304,10 @@ $(document).ready(function () {
             $(".checkPswField").css("visibility", "hidden");
         }
     });
-});
 
 
-$(document).ready(function () {
+
+
     $("#rePwdR , #pwdR").keyup(function () {
         $("#pwd_response").css("visibility", "visible");
         if ($("#pwdR").val() != $("#rePwdR").val()) {
@@ -352,31 +315,25 @@ $(document).ready(function () {
             $('#statusP').css("visibility", "visible");
             $('#statusP').removeClass('has-text-success').addClass('has-text-danger');
             $("#pwd_response").text("Le password non corrispondono");
-           // $("#pwd_response").css('color', 'red');
-            //$('#submitRegister').attr("disabled", true);
         } else {
             $('#statusP').removeClass('fa-times').addClass('fa-check');
             $('#statusP').css("visibility", "hidden");
             $('#statusP').removeClass('has-text-danger').addClass('has-text-success');
             $("#pwd_response").text("");
-            // $('#submitRegister').attr("disabled", false);
-           //$("#pwd_response").css('color', 'green')
+
 
 
         }
     });
 
-});
 
+    $("#usernameR,#email,#pwdR,#rePwdR").on("change keyup", function () {
 
-$(document).ready(function () {
-    $("#usernameR,#email,#pwdR,#rePwdR").on("change keyup",function(){
-       
         var name = $("#usernameR").val().trim().toString();
         var mail = $("#email").val().trim()
         var psw = $("#pwdR").val();
         var rePsw = $("#rePwdR").val();
-        
+
         if ($("#upLetterIcon,#lowLetterIcon,#numberIcon,#lengthIcon,#email,#statusU,#statusP").hasClass("fa-check") && name != '' && mail != '' && psw != '' && rePsw != '' && $("#upLetter,#lowLetter,#number,#length,#errorUser").hasClass('has-text-success') && !$('#email').hasClass('is-danger') && !$('#statusP').hasClass('has-text-danger')) {
 
             $('#submitRegister').attr("disabled", false);
@@ -386,95 +343,70 @@ $(document).ready(function () {
         }
 
     });
-});
 
+    //caricamento dei contenuti della seconda navbar direttamente su index e animazione dei "bottini" della navbar
 
-
-//caricamento dei contenuti della seconda navbar direttamente su index e animazione dei "bottini" della navbar
-$(document).ready(function () {  
     var container = $("#content");
-    $("#contentSelector li a").click(function(){
+    $("#contentSelector li a").click(function () {
         $("#contentSelector li[class='is-active']").removeClass("is-active");
         $(this).parent().addClass("is-active");
         var $this = $(this);
-        target=$this.data("target");
+        target = $this.data("target");
 
         container.load(target + ".html");
 
-            return false;
-        
+        return false;
+
     })
-})
 
-
-
-$(document).ready(function () {
-    $("#pwdR,#rePwdR,#oldPwd").on({
-        change :function () {
+    $("#pwdR,#rePwdR,#oldPwd").on("change keyup", function () {
         var oldPsw = $("#oldPwd").val();
         var psw = $("#pwdR").val();
         var rePsw = $("#rePwdR").val();
-        
-        if ($("#upLetterIcon,#lowLetterIcon,#numberIcon,#lengthIcon,#statusP").hasClass("fa-check") && psw != '' && rePsw != '' && oldPsw !='' && $("#upLetter,#lowLetter,#number,#length").hasClass('has-text-success')  && !$('#statusP').hasClass('has-text-danger') && $('#pwd_checkEqual').hasClass("has-text-success")) {
+
+        if ($("#upLetterIcon,#lowLetterIcon,#numberIcon,#lengthIcon,#statusP").hasClass("fa-check") && psw != '' && rePsw != '' && oldPsw != '' && $("#upLetter,#lowLetter,#number,#length").hasClass('has-text-success') && !$('#statusP').hasClass('has-text-danger') && $('#pwd_checkEqual').hasClass("has-text-success")) {
 
             $('#ChangePdw').attr("disabled", false);
 
         } else {
             $('#ChangePdw').attr("disabled", true);
         }
+    });
 
+    //funzioni controlpanel.html
 
-    },
-
-    keyup :function () {
-        var oldPsw = $("#oldPwd").val();
-        var psw = $("#pwdR").val();
-        var rePsw = $("#rePwdR").val();
-        
-        if ($("#upLetterIcon,#lowLetterIcon,#numberIcon,#lengthIcon,#statusP").hasClass("fa-check")  && psw != '' && rePsw != '' && oldPsw !='' && $("#upLetter,#lowLetter,#number,#length").hasClass('has-text-success')  && !$('#statusP').hasClass('has-text-danger') && $('#pwd_checkEqual').hasClass("has-text-success")) {
-
-            $('#ChangePdw').attr("disabled", false);
-
-        } else {
-            $('#ChangePdw').attr("disabled", true);
-        }
-    }
-});
-});
-
-//funzioni controlpanel.html
-$(document).ready(function () {
-    $("#btnImg").click(function (){
+    $("#btnImg").click(function () {
         $("#menuImg").toggleClass("is-active");
     });
-});
 
-$(document).ready(function () {
-    $("#closeNotif").click(function (){
+
+
+    $("#closeNotif").click(function () {
         $("#notif").css("display", "none");
         window.location.reload();
     });
-});
 
 
-$(document).ready(function () { 
-    $("#upImg").click(function (){
-var file = document.getElementById("fileI");
-file.onchange = function(){
-    if(file.files.length > 0)
-    {
 
-      document.getElementById('filename').innerHTML = 					file.files[0].name;
+    //funzione per caricare il file dell'avatr del'utente
+    $("#upImg").click(function () {
+        var file = document.getElementById("fileI");
+        file.onchange = function () {
+            if (file.files.length > 0) {
 
-    }
+                document.getElementById('filename').innerHTML = file.files[0].name;
 
-};
-});
-});
+            }
 
-grecaptcha.ready(function() {
-    grecaptcha.execute('reCAPTCHA_site_key', {action: 'homepage'}).then(function(token) {
-       
+        };
     });
-});
 
+    grecaptcha.ready(function () {
+        grecaptcha.execute('reCAPTCHA_site_key', {
+            action: 'homepage'
+        }).then(function (token) {
+
+        });
+    });
+
+});
