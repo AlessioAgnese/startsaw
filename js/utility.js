@@ -1,6 +1,8 @@
-//funzione per il menu burger
+
 
 $(document).ready(function () {
+    
+    //funzione per il menu burger    
     $("#content").load("description.html");
     $(".navbar-burger").click(function () {
         $(".navbar-burger,#navbarBasicExample").toggleClass("is-active");
@@ -8,15 +10,12 @@ $(document).ready(function () {
 
 
     //funzione per il menu dropdown l
-
-
     $(".navbar-link").click(function () {
         $("#navbar-menu").toggleClass("is-active");
     });
 
 
     //funzione per il menu modal(show) e per resettare i campi del form una volta chiusa la "card"
-
     $(".delete,#loginRegisterButton,.modal-background").click(function () {
         $(".modal").toggleClass("is-active");
         $(".loginUser,.registerUser").trigger("reset");
@@ -31,9 +30,7 @@ $(document).ready(function () {
     });
 
 
-
     $('#submitlogin').click(function () {
-
         $.ajax({
             url: 'http://localhost/php/login.php',
             type: "POST",
@@ -59,6 +56,8 @@ $(document).ready(function () {
         })
     });
 });
+
+
 $(document).ready(function () {
     $('#submitRegister').click(function () {
         $.ajax({
@@ -72,14 +71,6 @@ $(document).ready(function () {
             }),
             success: function (data) {
                 if (data.ok) {
-                    //console.log(data);
-                    //$('#submitRegister').text('Registrato con successo');
-                    //$('#submitRegister').attr("disabled", true);
-                    //$('#r').text(data.user.user);
-                    //$('.modal').removeClass("is-active");
-                    //$('#userProfile').attr("href", "controlpanel.html");
-                    //$("#navbar-menu").css("visibility", "visible");
-                    //$('#loginRegisterButton').css("display", "none");
                     localStorage.setItem('token',data.token);
                     window.location.reload();
                 } else {
@@ -147,7 +138,6 @@ $(document).ready(function () {
 
 
     //controllo dei caratteri ammessi , e controllo della presenza o meno dell'user inserito
-
     $("#usernameR").on("keyup change", function () {
         var regexUser = /^(?!.*__.*)(?!.*\.\..*)[a-zA-Z0-9_.]+$/;
         $("#errorUser").css("visibility", "visible");
