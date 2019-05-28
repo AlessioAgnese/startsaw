@@ -28,9 +28,8 @@ $(document).ready(function(){
             }
         })
     }
-});
 
-$(document).ready(function () {
+
     $('#submitChange').click(function () {
         $.ajax({
             url:'http://localhost/php/userinfo.php',
@@ -64,9 +63,9 @@ $(document).ready(function () {
             }
         })
     })
-});
 
-$(document).ready(function () {
+
+
     $('#ChangePdw').click(function () {
         $.ajax({
             url:'http://localhost/php/userinfo.php',

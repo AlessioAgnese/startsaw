@@ -28,8 +28,7 @@ $(document).ready(function() {
                     console.log(errorThrown);
                 }
             })
-        })
-        $(document).ready(function() {
+            
             $.ajax({
                         url: 'http://localhost/php/getnews.php',
                         type: 'POST',
@@ -55,8 +54,7 @@ $(document).ready(function() {
                             console.log(errorThrown);
                         }
                     })
-                })    
-$(document).ready(function(){
+                    
         if('token' in localStorage){
             $.ajax({
                      url:'http://localhost/php/checklogin.php',
@@ -86,9 +84,6 @@ $(document).ready(function(){
                         }
                     })
                 }
-            })
-
-    $(document).ready(function() {
             $('#publish').click(function() {
                 tmp=tinymce.get('articolo').getContent().toString().length;
                if(tmp>0 && tmp<500){
