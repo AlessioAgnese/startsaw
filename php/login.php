@@ -11,11 +11,7 @@
         $user = $select->fetch(PDO::FETCH_ASSOC);
         if($user["User"] != null){
             if(password_verify($json["password"], $user["Psw"])){
-                //$array = array(
-                    //"user"=>$user["User"],
-                    //"perm"=>$user["Id_R"]
-                //);
-                echo genToken($user["User"]);//$array
+                echo genToken($user["User"]);
                 exit();
             }
         }

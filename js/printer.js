@@ -30,9 +30,8 @@ $(document).ready(function(){
             alert("Devi effetuare il login");
             window.location.replace("http://localhost");
         }
-    })
+    
 
-$(document).ready(function() {
         $('#publish').click(function() {
             tmp=tinymce.get('articolo').getContent().toString().length;
            if(tmp>0 && tmp<3200){
@@ -62,4 +61,4 @@ $(document).ready(function() {
                 alert("Impossibile pubblicare articolo vuoto");
                }
         })
-    })
+})
