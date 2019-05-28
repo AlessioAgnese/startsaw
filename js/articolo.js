@@ -85,7 +85,7 @@ $(document).ready(function() {
                     })
                 }
             $('#publish').click(function() {
-                tmp=tinymce.get('articolo').getContent().toString().length;
+                tmp=tinymce.get('commento').getContent().toString().length;
                if(tmp>0 && tmp<500){
                 $.ajax({
                     url: 'http://localhost/php/pubcomment.php',
