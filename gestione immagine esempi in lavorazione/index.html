@@ -13,6 +13,22 @@
 </html>
 <script>
 $(document).ready(function(){
+    $.ajax({
+            url: 'http://localhost/get.php',
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                if (data.ok) {
+                    console.log("prese");
+                } else {
+                    console.log("problemi");
+                }
+            },
+            error: function (errorThrown) {
+                console.log(errorThrown);
+            }
+        })
+
     $('#insert').click(function(){
         if($('#image').val() == '') {
             alert('select image');

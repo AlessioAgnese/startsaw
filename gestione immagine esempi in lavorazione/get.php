@@ -1,9 +1,17 @@
 <?php
-//MANCA ADATTAMENTO
-$query ="SELECT * FROM Img ORDER BY id DESC";
-    $result=mysqli_query($conn,$query);
-    while($row=mysqli_fetch_array($result)){
-        echo '<img src="data:image/jpeg;base64,'.base64_encode($row['tmp']).'">';
-        //echo 'image?';  
-    }
+$dsn = 'mysql:host=localhost;dbname=test';
+$username = 'root';
+$password = '';
+$conn = new PDO($dsn, $username, $password);
+$select=$conn->prepare("SELECT * FROM Img ORDER BY id DESC");
+$select->execute();
+if($select){
+    $rows=$select->fetchAll(PDO::FETCH_ASSOC);
+    $array = array("ok" => true, "rows"=>$rows);
+    echo json_encode($array);
+}else{
+    $array = array("ok" => false);
+    echo json_encode($array);
+}
+
         ?>
