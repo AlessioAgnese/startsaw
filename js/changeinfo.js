@@ -98,4 +98,41 @@ $(document).ready(function () {
     })
 });
 
+/*
 
+
+
+$(document).ready(function () {
+    $('#fileI').change(function () {
+        if ($("#fileI").val().files.length > 0) {
+        $.ajax({
+            url:'http://localhost/php/userinfo.php',
+            type:'post',
+            dataType:'json',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-Type', 'change');
+            },
+            data:JSON.stringify({
+                token:localStorage.getItem('token'),
+                img:file.files[0].name,
+            }),
+            success: function (data) {
+                if (data.ok) {
+                    $("#notif").removeClass("is-danger").addClass("is-link");
+                    $("#notif").css("display","block");
+                    $("#notifText").text("Password modificata con successo");
+                } else {
+                    $("#notif").removeClass("is-link").addClass("is-danger");
+                    $("#notif").css("display","block");
+                    $("#notifText").text("Qualcosa è andato storto, ricontrolla i campi");
+                }
+            },
+            error: function (errorThrown) {
+                console.log(errorThrown);
+            }
+        })
+        }
+    })
+});
+
+*/

@@ -58,7 +58,7 @@ $(document).ready(function () {
             }
         })
     });
-});
+
 $(document).ready(function () {
     $('#submitRegister').click(function () {
         $.ajax({
@@ -398,25 +398,28 @@ $(document).ready(function () {
     });
 
 
+    $('#fileI').on('change',function(e){
+        var formdata = new FormData();
+        formdata.append('image', $('input[type=file]')[0]);
+        e.preventDefault();
+        $.ajax({
+            url:'http://localhost/php/userinfo.php',
+            type:'POST',
+            beforeSend:function(xhr){
+                xhr.setRequestHeader('X-Type','avt');
+                xhr.setRequestHeader('X-Authentication',localStorage.getItem('token'));
+            },
+            data:formdata,
+            cache:false,
+            processData:false,
+            success:function(data){
 
-    //funzione per caricare il file dell'avatr del'utente
-    $("#upImg").click(function () {
-        var file = document.getElementById("fileI");
-        file.onchange = function () {
-            if (file.files.length > 0) {
-
-                document.getElementById('filename').innerHTML = file.files[0].name;
-
+            },
+            error:function(errorThrown){
+                console.log(errorThrown);
             }
+        })
+    })
+});
 
-        };
-    });
-
-    grecaptcha.ready(function () {
-        grecaptcha.execute('reCAPTCHA_site_key', {
-            action: 'homepage'
-        }).then(function (token) {
-
-        });
-    });
 
