@@ -172,12 +172,12 @@ $(document).ready(function () {
 
 //controllo dei caratteri ammessi , e controllo della presenza o meno dell'user inserito
 $(document).ready(function () {
-    $("#usernameR").keyup(function () {
+    $("#usernameR").on("keyup change" ,function () {
         var regexUser = /^(?!.*__.*)(?!.*\.\..*)[a-zA-Z0-9_.]+$/;
-
+        $("#errorUser").css("visibility", "visible");
         if ($("#usernameR").val().match(regexUser) != null) {
             var name = $("#usernameR").val().trim().toString();
-            $("#errorUser").css("visibility", "visible");
+           // $("#errorUser").css("visibility", "visible");
             $("#usernameR").removeClass("is-danger");
 
             $.ajax({
@@ -195,7 +195,7 @@ $(document).ready(function () {
                     if (!response.ok) {
                         $('#statusU').removeClass('fa-check').addClass('fa-times');
                         $('#statusU').css('display', 'block');
-                        $('#statusU').css('color', 'hsl(348, 100%, 61%)');
+                        $('#statusU').removeClass('has-text-success').addClass('has-text-danger');
                         $("#errorUser").text("Username gia in uso");
                         $("#errorUser").removeClass('has-text-success').addClass(
                             'has-text-danger');
@@ -203,7 +203,7 @@ $(document).ready(function () {
                     } else {
                         $('#statusU').removeClass('fa-times').addClass('fa-check');
                         $('#statusU').css('display', 'block');
-                        $('#statusU').css('color', '#14b64d');
+                        $('#statusU').removeClass('has-text-danger').addClass('has-text-success');
                         $("#errorUser").text("Username disponibile");
 
                         $("#errorUser").removeClass('has-text-danger').addClass(
@@ -216,6 +216,7 @@ $(document).ready(function () {
                 }
             });
         } else {
+           //("#errorUser").css("visibility", "visible");
             $("#errorUser").removeClass('has-text-success').addClass('has-text-danger');
             $("#usernameR").addClass('is-danger');
             $("#errorUser").text("Caratteri non ammessi");
@@ -369,14 +370,14 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-    $("#usernameR,#email,#pwdR,#rePwdR").on({
-        change :function () {
+    $("#usernameR,#email,#pwdR,#rePwdR").on("change keyup",function(){
+       
         var name = $("#usernameR").val().trim().toString();
         var mail = $("#email").val().trim()
         var psw = $("#pwdR").val();
         var rePsw = $("#rePwdR").val();
         
-        if ($("#upLetterIcon,#lowLetterIcon,#numberIcon,#lengthIcon,#email,#statusU,#statusP").hasClass("fa-check") && name != '' && mail != '' && psw != '' && rePsw != '' && $("#upLetter,#lowLetter,#number,#length").hasClass('has-text-success') && !$('#email').hasClass('is-danger') && !$('#statusP').hasClass('has-text-danger')) {
+        if ($("#upLetterIcon,#lowLetterIcon,#numberIcon,#lengthIcon,#email,#statusU,#statusP").hasClass("fa-check") && name != '' && mail != '' && psw != '' && rePsw != '' && $("#upLetter,#lowLetter,#number,#length,#errorUser").hasClass('has-text-success') && !$('#email').hasClass('is-danger') && !$('#statusP').hasClass('has-text-danger')) {
 
             $('#submitRegister').attr("disabled", false);
 
@@ -384,24 +385,7 @@ $(document).ready(function () {
             $('#submitRegister').attr("disabled", true);
         }
 
-
-    },
-
-    keyup :function () {
-        var name = $("#usernameR").val().trim().toString();
-        var mail = $("#email").val().trim();
-        var psw = $("#pwdR").val();
-        var rePsw = $("#rePwdR").val();
-        
-        if ($("#upLetterIcon,#lowLetterIcon,#numberIcon,#lengthIcon,#email,#statusU,#statusP").hasClass("fa-check") && name != '' && mail != '' && psw != '' && rePsw != '' && $("#upLetter,#lowLetter,#number,#length").hasClass('has-text-success') && !$('#email').hasClass('is-danger') && !$('#statusP').hasClass('has-text-danger')) {
-
-            $('#submitRegister').attr("disabled", false);
-
-        } else {
-            $('#submitRegister').attr("disabled", true);
-        }
-    }
-});
+    });
 });
 
 
