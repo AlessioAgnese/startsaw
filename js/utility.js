@@ -97,7 +97,7 @@ $(document).ready(function(){
                     $("#navbar-menu").css("visibility", "visible");
                     $('#loginRegisterButton').css("display", "none");
                     if(data.perm>2){
-                        $("#write").css("visibility", "visible");
+                        $("#write").css("display", "block");
                         $('#write').attr("href", "writearticle.html");}   
                 
                 }

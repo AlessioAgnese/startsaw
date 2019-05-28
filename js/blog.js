@@ -11,7 +11,7 @@ $(document).ready(function() {
                 success: function(data) {
                     if (data.ok) {
                         $.each(data.rows, function(index){
-                        console.log(data.rows[index].Testo);
+                        console.log(data.rows[index].Testo.replace(/(<([^>]+)>)/ig,""));
                         console.log(data.rows[index].User);
                         console.log(data.rows[index].Id_A);
                         console.log(data.rows[index].Data);});
