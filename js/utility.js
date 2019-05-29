@@ -8,7 +8,18 @@ $(document).ready(function () {
         $(".navbar-burger,#navbarBasicExample").toggleClass("is-active");
     });
 
-
+    $('#home,#blog').hover(function(){
+        $(this).addClass('has-text-warning');
+    },function(){
+        $(this).removeClass('has-text-warning');
+    });
+/*
+    $('#userProfile,#write,#logout').hover(function(){
+        $(this).css('background-color','#2f2f2f');
+    },function(){
+        $(this).removeClass("has-background-warning").css('color','');
+    });
+*/
     //funzione per il menu dropdown l
     $(".navbar-link").click(function () {
         $("#navbar-menu").toggleClass("is-active");
