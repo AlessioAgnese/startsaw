@@ -1,4 +1,43 @@
 $(document).ready(function(){
+
+    document.querySelector('#fileI').addEventListener('change', function(e) {
+        var file = this.files[0];
+        var fd = new FormData();
+        fd.append("fileI", file);
+        fd.append("token", localStorage.getItem('token'));
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', './php/manageImg.php', true);
+        xhr.send(fd);
+        xhr.upload.onprogress = function(e) {
+        var percentComplete=0;
+        while(1){  
+          if (e.lengthComputable) {
+            percentComplete = (e.loaded / e.total) * 100;
+          }
+          if(percentComplete == 100){location.reload(); break;} }
+        };
+      }, false);
+    //PRENDE IMG E LA METTE 
+    $.ajax({
+        url:'http://localhost/php/manageImg.php',
+        type:'GET',
+        dataType:'json',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('X-Authentication',localStorage.getItem('token'));
+        },
+        success:function(data){
+            if(data.ok){
+                $('#profilePic').attr("src",data.dataUrl);
+            }else{
+                alert("Errore nel recupero delle immagini");
+                }
+        },
+        error:function(errorThrown){
+            console.log(errorThrown);
+        }
+    })
+
+
     if('token' in localStorage){
         $.ajax({
             url:'http://localhost/php/userinfo.php',
