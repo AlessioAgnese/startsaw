@@ -20,6 +20,7 @@ $(document).ready(function () {
         $(this).removeClass("has-background-warning").css('color','');
     });
 */
+
     //funzione per il menu dropdown l
     $(".navbar-link").click(function () {
         $("#navbar-menu").toggleClass("is-active");
