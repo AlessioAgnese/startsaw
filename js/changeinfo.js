@@ -42,9 +42,8 @@ $(document).ready(function () {
             xhr.setRequestHeader('X-Authentication', localStorage.getItem('token'));
         },
         success: function (data) {
-            if (data.ok && data.dataUrl != null) {
-                $('#profilePic').attr("src", data.dataUrl);
-
+            if (data.ok) {
+                if(data.dataUrl != null) $('#profilePic').attr("src", data.dataUrl); 
             } else {
                 $("#notif").removeClass("is-link").addClass("is-danger");
                 $("#notif").css("display", "block");
