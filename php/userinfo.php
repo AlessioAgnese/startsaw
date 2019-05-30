@@ -19,9 +19,9 @@
         case 'change':
             changePwd($json);
             break;
-        case 'avt':
-            editAvt();
-            break;
+        case 'delete':
+            deleteAvt($token);
+            break;    
         default:
             echo json_encode(array('ok'=>false));
             break;        
@@ -101,24 +101,20 @@
                 echo json_encode($array);
     }
 
-    function editAvt(){
+    function deleteAvt($token){
         global $conn;
-        $image = $_FILES["image"];
-        $uploadFolder = 'img/userAvt/';
-        if(($_FILES["upload"]["tmp_name"]) || $_FILES["image"]["error"]>0){
-            $arr = array(
-                "ok"=>false
-            );
-            echo json_encode($arr);
+        $delete = $conn->prepare("UPDATE Utenti SET Avatar=null WHERE token=:token");
+        $delete->bindParam(":token",$token);
+        $delete->execute();
+        if($delete){
+            $array = array("ok" => true,);
+            echo json_encode($array);
+        }else{
+            $array = array("ok" => true,);
+            echo json_encode($array);
         }
-        else if (!move_uploaded_file($_FILES["image"]["tmp_name"], $uploadFolder.$_FILES["image"]["name"])){
-            $arr = array(
-                "ok"=>false
-            );
-            echo json_encode($arr);
-        }
-
     }
+
     
 
 
