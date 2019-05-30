@@ -1,9 +1,5 @@
 $(document).ready(function () {
-    function fixChrome(){
-        sUsrAg = navigator.userAgent;
-        if (sUsrAg.indexOf("Chrome") > -1) return true;
-        return false;
-        }
+
     document.querySelector('#fileI').addEventListener('change', function (e) {
         var file = this.files[0];
         if (file.size > 16777215) {
@@ -17,21 +13,9 @@ $(document).ready(function () {
             var xhr = new XMLHttpRequest();
             xhr.open('POST', './php/manageImg.php', true);
             xhr.send(fd);
-            if(fixChrome()){
-                $("#notif").removeClass("is-danger").addClass("is-link");
-                $("#notif").css("display", "block");
-                $("#notifText").text("Immagine modificata con successo");
-            }
-            xhr.upload.onprogress = function (e) {
-                var percentComplete = 0;
-                while (e.lengthComputable < 99) {
-                    if (e.lengthComputable) percentComplete = (e.loaded / e.total) * 100;
-                    if (percentComplete == 100) {break;}
-                }
-                $("#notif").removeClass("is-danger").addClass("is-link");
-                $("#notif").css("display", "block");
-                $("#notifText").text("Immagine modificata con successo");
-            }
+            $("#notif").removeClass("is-danger").addClass("is-link");
+            $("#notif").css("display", "block");
+            $("#notifText").text("Immagine modificata con successo");
         }).catch(y => {
             $("#notif").removeClass("is-link").addClass("is-danger");
                 $("#notif").css("display", "block");
@@ -39,10 +23,7 @@ $(document).ready(function () {
             return false;
         })
     }, false);
- 
 
-
-    //PRENDE IMG E LA METTE 
     $.ajax({
 
         url: 'http://localhost/php/manageImg.php',
