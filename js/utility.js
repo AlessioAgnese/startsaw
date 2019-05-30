@@ -122,7 +122,6 @@ $(document).ready(function () {
                         success: function (data) {
                             if (data.ok) {
                                 if(data.dataUrl != null) $('#profilePicUser').attr("src", data.dataUrl);
-                    
                             } else {
                                 alert("Errore nel caricare l'immagine");
                             }
