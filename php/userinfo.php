@@ -19,6 +19,9 @@
         case 'change':
             changePwd($json);
             break;
+        case 'avt':
+            editAvt();
+            break;
         default:
             echo json_encode(array('ok'=>false));
             break;        
@@ -97,5 +100,26 @@
                 );
                 echo json_encode($array);
     }
+
+    function editAvt(){
+        global $conn;
+        $image = $_FILES["image"];
+        $uploadFolder = 'img/userAvt/';
+        if(($_FILES["upload"]["tmp_name"]) || $_FILES["image"]["error"]>0){
+            $arr = array(
+                "ok"=>false
+            );
+            echo json_encode($arr);
+        }
+        else if (!move_uploaded_file($_FILES["image"]["tmp_name"], $uploadFolder.$_FILES["image"]["name"])){
+            $arr = array(
+                "ok"=>false
+            );
+            echo json_encode($arr);
+        }
+
+    }
+    
+
 
     
