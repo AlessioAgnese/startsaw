@@ -2,20 +2,29 @@ $(document).ready(function(){
 
     document.querySelector('#fileI').addEventListener('change', function(e) {
         var file = this.files[0];
-        var fd = new FormData();
-        fd.append("fileI", file);
-        fd.append("token", localStorage.getItem('token'));
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', './php/manageImg.php', true);
-        xhr.send(fd);
-        xhr.upload.onprogress = function(e) {
-        var percentComplete=0;
-        while(1){  
-          if (e.lengthComputable) {
-            percentComplete = (e.loaded / e.total) * 100;
-          }
-          if(percentComplete == 100){location.reload(); break;} }
-        };
+        if(file.size>16777215){alert("file troppo grosso"); return false;}
+        checkMIME(file).then(x=>{
+            var fd = new FormData();
+            fd.append("fileI", file);
+            fd.append("token", localStorage.getItem('token'));
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', './php/manageImg.php', true);
+            xhr.send(fd);
+            xhr.upload.onprogress = function(e) {
+            var percentComplete=0;
+            while(e.lengthComputable <99){  
+              if (e.lengthComputable) {
+                percentComplete = (e.loaded / e.total) * 100;
+              }
+              if(percentComplete == 100){location.reload(); break;}
+              else{
+                $('#profilePic').addClass('is-loading');
+              } 
+            }
+            }
+        }).catch(y=>{
+            alert("Inserisci una immagine");
+            return false;}) 
       }, false);
     //PRENDE IMG E LA METTE 
     $.ajax({
@@ -26,7 +35,7 @@ $(document).ready(function(){
             xhr.setRequestHeader('X-Authentication',localStorage.getItem('token'));
         },
         success:function(data){
-            if(data.ok){
+            if(data.ok && data.dataUrl != null){
                 $('#profilePic').attr("src",data.dataUrl);
             }else{
                 alert("Errore nel recupero delle immagini");
@@ -68,6 +77,27 @@ $(document).ready(function(){
         })
     }
 
+    $('#fileD').click(function () {
+        $.ajax({
+            url:'http://localhost/php/userinfo.php',
+            type:'get',
+            dataType:'json',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-Type', 'delete');
+                xhr.setRequestHeader('X-Authentication',localStorage.getItem('token'));
+            },
+            success: function (data) {
+                if (data.ok) {
+                    window.location.reload();
+                } else {
+                   alert("Cancellazione finita male");
+                }
+            },
+            error: function (errorThrown) {
+                console.log(errorThrown);
+            }
+        })
+    })
 
     $('#submitChange').click(function () {
         $.ajax({
@@ -135,6 +165,28 @@ $(document).ready(function(){
         })
     })
 });
+$('#fileI').on('change',function(e){
+    var formdata = new FormData();
+    formdata.append('image', $('input[type=file]')[0]);
+    e.preventDefault();
+    $.ajax({
+        url:'http://localhost/php/userinfo.php',
+        type:'POST',
+        beforeSend:function(xhr){
+            xhr.setRequestHeader('X-Type','avt');
+            xhr.setRequestHeader('X-Authentication',localStorage.getItem('token'));
+        },
+        data:formdata,
+        cache:false,
+        processData:false,
+        success:function(data){
+
+        },
+        error:function(errorThrown){
+            console.log(errorThrown);
+        }
+    })
+})
 
 /*
 

@@ -1,7 +1,11 @@
-function GetURLParameter(sParam){
-        var sPageURL= window.location.search.substring(1);
-        var sParameterName=sPageURL.split('=');
-        if(sParameterName[0]=sParam) return sParameterName[1];
+function GetURLParameter(){
+        var id= window.location.href.substr(window.location.href.indexOf('#',window.location.href.length));
+        if(id != undefined){
+            return id;
+        }
+        else{
+            alert("errore");
+        }
     }
 $(document).ready(function() {
     $.ajax({

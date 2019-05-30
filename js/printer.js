@@ -1,6 +1,5 @@
 $(document).ready(function(){
     if('token' in localStorage){
-
             $.ajax({
                 url:'http://localhost/php/checklogin.php',
                 type:'post',
