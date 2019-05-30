@@ -35,7 +35,7 @@ if($select){
 function sendImg(){
 global $conn;
 $fileContent = file_get_contents($_FILES['fileI']['tmp_name']);
-$update=$conn->prepare("UPDATE Utenti SET Avatar = :fileI WHERE Token=:token");
+$update=$conn->prepare("UPDATE Utenti SET Avatar = :fileI WHERE token=:token");
 $update->bindParam(":fileI",$fileContent);
 $update->bindParam(":token",$_REQUEST['token']);
 $update->execute();

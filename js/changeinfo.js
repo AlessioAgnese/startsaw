@@ -1,18 +1,27 @@
 $(document).ready(function () {
-
+    function fixChrome(){
+        sUsrAg = navigator.userAgent;
+        if (sUsrAg.indexOf("Chrome") > -1) return true;
+        return false;
+        }
     document.querySelector('#fileI').addEventListener('change', function (e) {
         var file = this.files[0];
         if (file.size > 16777215) {
             alert("file troppo grosso");
             return false;
         }
-        checkMIME(file).then(x => {
+        checkMIME(file).then(x => {            
             var fd = new FormData();
             fd.append("fileI", file);
             fd.append("token", localStorage.getItem('token'));
             var xhr = new XMLHttpRequest();
             xhr.open('POST', './php/manageImg.php', true);
             xhr.send(fd);
+            if(fixChrome()){
+                $("#notif").removeClass("is-danger").addClass("is-link");
+                $("#notif").css("display", "block");
+                $("#notifText").text("Immagine modificata con successo");
+            }
             xhr.upload.onprogress = function (e) {
                 var percentComplete = 0;
                 while (e.lengthComputable < 99) {
@@ -30,11 +39,12 @@ $(document).ready(function () {
             return false;
         })
     }, false);
-
+ 
 
 
     //PRENDE IMG E LA METTE 
     $.ajax({
+
         url: 'http://localhost/php/manageImg.php',
         type: 'GET',
         dataType: 'json',
@@ -43,6 +53,7 @@ $(document).ready(function () {
         },
         success: function (data) {
             if (data.ok) {
+                
                 if(data.dataUrl != null) $('#profilePic').attr("src", data.dataUrl); 
             } else {
                 $("#notif").removeClass("is-link").addClass("is-danger");

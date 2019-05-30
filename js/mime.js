@@ -2,7 +2,6 @@ function checkMIME(filet){
     return new Promise((resolve,reject)=>{getBlobType(filet).then(x=>{resolve(true);}).catch(e=>{reject(false);})})
 }
 
-
 function getBlobType(filet){
 
     return new Promise((resolve,reject)=>{
@@ -31,3 +30,5 @@ function convertHeader(header){
         default:
             return false;}  
 }
+
+  
