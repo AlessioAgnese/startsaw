@@ -25,7 +25,6 @@ $(document).ready(function () {
     }, false);
 
     $.ajax({
-
         url: 'http://localhost/php/manageImg.php',
         type: 'GET',
         dataType: 'json',
@@ -34,8 +33,7 @@ $(document).ready(function () {
         },
         success: function (data) {
             if (data.ok) {
-                
-                if(data.dataUrl != null) $('#profilePic,,#profilePicUser').attr("src", data.dataUrl); 
+                if(data.dataUrl != null) $('#profilePic').attr("src", data.dataUrl);
             } else {
                 $("#notif").removeClass("is-link").addClass("is-danger");
                 $("#notif").css("display", "block");
@@ -45,8 +43,6 @@ $(document).ready(function () {
         error: function (errorThrown) {
             console.log(errorThrown);
         }
-    
-    
 })
     
 

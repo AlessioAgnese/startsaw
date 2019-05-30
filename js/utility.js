@@ -120,8 +120,8 @@ $(document).ready(function () {
                             xhr.setRequestHeader('X-Authentication', localStorage.getItem('token'));
                         },
                         success: function (data) {
-                            if (data.ok && data.dataUrl != null) {
-                                $('#profilePicUser').attr("src", data.dataUrl);
+                            if (data.ok) {
+                                if(data.dataUrl != null) $('#profilePicUser').attr("src", data.dataUrl);
                     
                             } else {
                                 alert("Errore nel caricare l'immagine");
