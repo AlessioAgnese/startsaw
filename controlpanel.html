@@ -56,15 +56,14 @@
                                                 <div class="navbar-end">
                                                         <div id="navbar-menu"
                                                                 class="navbar-item has-dropdown is-hoverable "
-                                                                style="visibility:hidden">
+                                                                style="visibility:visible">
 
 
 
                                                                 <a class="navbar-link is-arrowless is-size-5">
                                                                         <span style="margin-right: 1rem">
                                                                                 <figure class="image is-24x24">
-                                                                                        <img
-                                                                                                src="./img/default-user.jpg" style="border-radius: 4px;">
+                                                                                        <img id="profilePicUser" src="./img/default-user.jpg" style="border-radius: 4px;">
                                                                                 </figure>
                                                                         </span>
                                                                         <span id="userNameNav">
@@ -74,12 +73,14 @@
 
                                                                 <div
                                                                         class="navbar-dropdown is-boxed is-hidden-mobile has-text-dark">
-                                                                        <a id="userProfile"
-                                                                                class="navbar-item is-size-5">
-                                                                                Profilo
+                                                                        <a id="userProfile" class="navbar-item is-size-6 ">
+                                                                                        Profilo
                                                                         </a>
-                                                                        <a id="logout" class="navbar-item is-size-5">
-                                                                                Log out
+                                                                        <a id="write" class="navbar-item is-size-6" style="display: none">
+                                                                        Scrivi articolo
+                                                                        </a>
+                                                                        <a id="logout" class="navbar-item is-size-6">
+                                                                        Log out
                                                                         </a>
                                                                 </div>
                                                         </div>
@@ -220,9 +221,9 @@
                                 </form>
 
                         </div>
-                        <div class="column" style="margin-right: -30%;margin-left: 5%" >
+                        <div id="imgProfile" class="column" style="margin-right: -30%;margin-left: 5%" >
                                 <h3 class="title is-4">Immagine del Profilo</h3>
-                                <figure class="image is-128x128" >
+                                <figure id="lala"class="image is-128x128" >
                                         <img id="profilePic" src="./img/default-user.jpg" style="border: 1px solid hsl(0, 0%, 71%);border-radius: 4px;  ">
                                 </figure>
                                 <br>

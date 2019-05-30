@@ -32,29 +32,30 @@ $(document).ready(function () {
     }, false);
 
 
+//PRENDE IMG E LA METTE 
 
-    //PRENDE IMG E LA METTE 
-    $.ajax({
-        url: 'http://localhost/php/manageImg.php',
-        type: 'GET',
-        dataType: 'json',
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader('X-Authentication', localStorage.getItem('token'));
-        },
-        success: function (data) {
-            if (data.ok && data.dataUrl != null) {
-                $('#profilePic').attr("src", data.dataUrl);
+$.ajax({
+    url: 'http://localhost/php/manageImg.php',
+    type: 'GET',
+    dataType: 'json',
+    beforeSend: function (xhr) {
+        xhr.setRequestHeader('X-Authentication', localStorage.getItem('token'));
+    },
+    success: function (data) {
+        if (data.ok && data.dataUrl != null) {
+            $('#profilePic,#profilePicUser').attr("src", data.dataUrl);
 
-            } else {
-                $("#notif").removeClass("is-link").addClass("is-danger");
-                $("#notif").css("display", "block");
-                $("#notifText").text("Errore nel recupero dell'immagine,riprova più tardi");
-            }
-        },
-        error: function (errorThrown) {
-            console.log(errorThrown);
+        } else {
+            $("#notif").removeClass("is-link").addClass("is-danger");
+            $("#notif").css("display", "block");
+            $("#notifText").text("Errore nel recupero dell'immagine,riprova più tardi");
         }
-    })
+    },
+    error: function (errorThrown) {
+        console.log(errorThrown);
+    }
+})
+    
 
 
     if ('token' in localStorage) {
@@ -97,11 +98,16 @@ $(document).ready(function () {
             },
             success: function (data) {
                 if (data.ok) {
-                $("#notif").removeClass("is-danger").addClass("is-link");
-                $("#notif").css("display", "block");
-                $("#notifText").text("Immagine Cancellata");
+                    $('#imgProfile').load(' #imgProfile > *  ');
+    
+                        $("#notif").removeClass("is-danger").addClass("is-link");
+                        $("#notif").css("display", "block");
+                        $("#notifText").text("Immagine Cancellata");
+                        setTimeout(function(){ $("#notif").css("display", "none");}, 5000);
+                  
+               
                 } else {
-                    alert("Cancellazione finita male");
+                    alert("Cancellazione non riuscita");
                 }
             },
             error: function (errorThrown) {
@@ -198,6 +204,8 @@ $('#fileI').on('change', function (e) {
         }
     })
 })
+
+
 
 /*
 

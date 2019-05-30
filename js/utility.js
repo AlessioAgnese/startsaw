@@ -112,6 +112,25 @@ $(document).ready(function () {
                     $('#userProfile').attr("href", "controlpanel.html");
                     $("#navbar-menu").css("visibility", "visible");
                     $('#loginRegisterButton').css("display", "none");
+                    $.ajax({
+                        url: 'http://localhost/php/manageImg.php',
+                        type: 'GET',
+                        dataType: 'json',
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader('X-Authentication', localStorage.getItem('token'));
+                        },
+                        success: function (data) {
+                            if (data.ok && data.dataUrl != null) {
+                                $('#profilePicUser').attr("src", data.dataUrl);
+                    
+                            } else {
+                                alert("Errore nel caricare l'immagine");
+                            }
+                        },
+                        error: function (errorThrown) {
+                            console.log(errorThrown);
+                        }
+                    })
                     if(data.perm>2){
                         $("#write").css("display", "block");
                         $('#write').attr("href", "writearticle.html");}   
@@ -140,7 +159,8 @@ $(document).ready(function () {
         $("#navbar-menu").css("visibility", "hidden");
         $("#write").css("visibility", "hidden");
         $('#loginRegisterButton').css("display", "block");
-        window.location.reload();
+        window.location.replace("index.html");
+        
     })
 
 
@@ -394,7 +414,7 @@ $(document).ready(function () {
 
     $("#closeNotif").click(function () {
         $("#notif").css("display", "none");
-        window.location.reload();
+       
     });
 
 
