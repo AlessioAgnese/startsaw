@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <title>Progetto SAW</title>
     <meta charset="utf-8">
@@ -15,6 +16,7 @@
 </head>
 
 <body>
+        
     <div class="modal">
         <div class="modal-background"></div>
         <div class="modal-card ">
@@ -65,9 +67,8 @@
                                 <label class="label">Username</label>
                                 <p class="control has-icons-left has-icons-right">
                                     <input id="usernameR" autocomplete="username" class="input is-loading" type="text"
-                                        placeholder="Nome Utente" 
-                                        title="Deve contenere almeno un numero una lettera maiuscola una minuscola "
-                                        >
+                                        placeholder="Nome Utente"
+                                        title="Deve contenere almeno un numero una lettera maiuscola una minuscola ">
                                     <span class="icon is-small is-left">
                                         <i class="fas fa-user"></i>
                                     </span>
@@ -223,7 +224,7 @@
                                 </div>
                             </div>
                             <div class="navbar-end">
-                                <div id="navbar-menu" class="navbar-item has-dropdown is-hoverable "
+                                <div id="navbar-menu" class="navbar-item has-dropdown is-hoverable"
                                     style="visibility:hidden">
 
 
@@ -239,8 +240,8 @@
                                         </span>
                                     </a>
 
-                                    <div class="navbar-dropdown is-boxed is-hidden-mobile has-text-dark">
-                                        <a id="userProfile" class="navbar-item is-size-5">
+                                    <div class="navbar-dropdown is-boxed is-hidden-mobile has-text-dark ">
+                                        <a id="userProfile" class="navbar-item is-size-5 ">
                                             Profilo
                                         </a>
                                         <a id="write" class="navbar-item is-size-5" style="display: none">
@@ -348,7 +349,7 @@
                         </li>
 
                         <li id="wiki">
-                            <a>Wiki</a>
+                            <a href="#" data-target="pageunderconstruction">Wiki</a>
                         </li>
                     </ul>
                 </div>
@@ -360,11 +361,47 @@
 
         </div>
     </section>
-    <footer class="footer">
-        <div class="content has-text-centered has-text-white">
-            <p>
-                <strong class="has-text-warning">&copy 2019 Saw</strong> by Alessio Agnese & Simone Risso.
-            </p>
+    <footer class="footer ">
+        <div class="container has-text-centered">
+            <div class="columns is-centered ">
+                <div class="column is-1" >
+
+                    <span class="icon  has-text-warning">
+                        <i class="fab fa-facebook-square fa-2x"></i>
+                    </span>
+
+                </div>
+                <div class="column is-1" >
+                    <span class="icon  has-text-warning">
+                        <i class="fab fa-instagram fa-2x"></i>
+                    </span>
+                    
+
+                </div>
+                <div class="column is-1">
+                    <span class="icon  has-text-warning">
+                        <i class="fab fa-twitter-square fa-2x"></i>
+                    </span>
+                    
+
+                </div>
+                <div class="column is-1">
+                        <span class="icon  has-text-warning">
+                                <i class="fab fa-github-square fa-2x"></i>
+                        </span>
+                        
+                    </div>
+
+            </div>
+            <div class="columns is-centered ">
+                <div class="column is-3 has-text-white">
+                    <p>
+                        <strong class="has-text-warning">&copy 2019</strong> You<strong
+                            class="has-text-warning">Fix</strong> by
+                        Alessio Agnese & Simone Risso.
+                    </p>
+                </div>
+            </div>
         </div>
     </footer>
 </body>
