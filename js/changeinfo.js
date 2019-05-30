@@ -6,23 +6,16 @@ $(document).ready(function () {
             alert("file troppo grosso");
             return false;
         }
-        checkMIME(file).then(x => {
+        checkMIME(file).then(x => {            
             var fd = new FormData();
             fd.append("fileI", file);
             fd.append("token", localStorage.getItem('token'));
             var xhr = new XMLHttpRequest();
             xhr.open('POST', './php/manageImg.php', true);
             xhr.send(fd);
-            xhr.upload.onprogress = function (e) {
-                var percentComplete = 0;
-                while (e.lengthComputable < 99) {
-                    if (e.lengthComputable) percentComplete = (e.loaded / e.total) * 100;
-                    if (percentComplete == 100) {break;}
-                }
-                $("#notif").removeClass("is-danger").addClass("is-link");
-                $("#notif").css("display", "block");
-                $("#notifText").text("Immagine modificata con successo");
-            }
+            $("#notif").removeClass("is-danger").addClass("is-link");
+            $("#notif").css("display", "block");
+            $("#notifText").text("Immagine modificata con successo");
         }).catch(y => {
             $("#notif").removeClass("is-link").addClass("is-danger");
                 $("#notif").css("display", "block");
@@ -31,29 +24,29 @@ $(document).ready(function () {
         })
     }, false);
 
+    $.ajax({
 
-//PRENDE IMG E LA METTE 
-
-$.ajax({
-    url: 'http://localhost/php/manageImg.php',
-    type: 'GET',
-    dataType: 'json',
-    beforeSend: function (xhr) {
-        xhr.setRequestHeader('X-Authentication', localStorage.getItem('token'));
-    },
-    success: function (data) {
-        if (data.ok && data.dataUrl != null) {
-            $('#profilePic,#profilePicUser').attr("src", data.dataUrl);
-
-        } else {
-            $("#notif").removeClass("is-link").addClass("is-danger");
-            $("#notif").css("display", "block");
-            $("#notifText").text("Errore nel recupero dell'immagine,riprova più tardi");
+        url: 'http://localhost/php/manageImg.php',
+        type: 'GET',
+        dataType: 'json',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('X-Authentication', localStorage.getItem('token'));
+        },
+        success: function (data) {
+            if (data.ok) {
+                
+                if(data.dataUrl != null) $('#profilePic,,#profilePicUser').attr("src", data.dataUrl); 
+            } else {
+                $("#notif").removeClass("is-link").addClass("is-danger");
+                $("#notif").css("display", "block");
+                $("#notifText").text("Errore nel recupero dell'immagine,riprova più tardi");
+            }
+        },
+        error: function (errorThrown) {
+            console.log(errorThrown);
         }
-    },
-    error: function (errorThrown) {
-        console.log(errorThrown);
-    }
+    
+    
 })
     
 
