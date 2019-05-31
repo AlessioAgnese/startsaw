@@ -20,9 +20,10 @@ $(document).ready(function() {
                 }),
                 success: function(data) {
                     if (data.ok) {
-                        console.log(data.Testo);
-                        console.log(data.User);
-                        console.log(data.Data);
+                        console.log("testo "+data.Testo);
+                        console.log("user "+data.User);
+                        console.log("data "+data.Data);
+                        $("#contentArticle").append(data.Testo+'<br><time >'+data.Data+'</time>');
                         //riesco a recuperare i dati nell'array come si publicano nella pagina???
                     } else {
                         alert("errore nella pubblicazione");
@@ -46,9 +47,10 @@ $(document).ready(function() {
                         success: function(data) {
                             if (data.ok) {
                                 $.each(data.rows, function(index){
-                                    console.log(data.rows[index].Testo);
-                                    console.log(data.rows[index].User);
-                                    console.log(data.rows[index].Data);});
+                                    console.log("testo2 "+data.rows[index].Testo);
+                                    console.log("user2 "+data.rows[index].User);
+                                    console.log("data2 "+data.rows[index].Data);});
+                                    
                                 //riesco a recuperare i dati nell'array come si publicano nella pagina???
                             } else {
                                 alert("errore nella pubblicazione");

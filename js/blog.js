@@ -23,11 +23,10 @@ $(document).ready(function() {
                         //.replace(/(<([^>]+)>)/ig,"")
                         string = data.rows[index].Testo.substring(data.rows[index].Testo.indexOf('<h1>'),data.rows[index].Testo.indexOf("</h1>"));
                         var titolo = string.substring(string.indexOf('>')+1);
-                        
                         if(!titolo) titolo="Empty Title";
-                        console.log('string '+string);
+                        //console.log('string '+string);
                         var html = '<div class="column is-4 ">'+
-                                    '<div class="card">'+
+                                    '<a href="articolo.html#'+data.rows[index].Id_A+'" class="card">'+
                                     '<div class="card-content has-background-white">'+
                                     '<p class="title is-4">'+
                                         titolo.toUpperCase() +
@@ -55,7 +54,7 @@ $(document).ready(function() {
                                     '<time >'+data.rows[index].Data+'</time>'+
                                     '</div>'+
                                     '</div>'+
-                                    '</div>'+
+                                    '</a>'+
                                     '</div>';
                         
                         if(counter == 0 || Number.isInteger(counter/3)){

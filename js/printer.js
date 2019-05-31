@@ -33,7 +33,7 @@ $(document).ready(function(){
 
         $('#publish').click(function() {
             tmp=tinymce.get('articolo').getContent().toString().length;
-           if(tmp>0 && tmp<3200){
+           if(tmp>0 && tmp<320000){
             $.ajax({
                 url: 'http://localhost/php/pubarticle.php',
                 type: 'POST',
