@@ -38,8 +38,14 @@ $(document).ready(function () {
         success: function (data) {
             if (data.ok) {
                 if(data.dataUrl != null){
+                   
+                   // $("#profilePic").attr("src", data.dataUrl+"?"+d.getTime());
                     $('#profilePic').attr("src", data.dataUrl);
-                    
+                    //$('#profilePic').remove();
+
+                    //$('#containerImg').append('<img id="profilePic"  style="border: 1px solid hsl(0, 0%, 71%);border-radius: 4px;" src="' + data.dataUrl + '"/>');
+                   // $("#profilePic").attr("src", "/myimg.jpg?timestamp=" + new Date().getTime());
+                   
                 } 
             } else {
                 $("#notif").removeClass("is-link").addClass("is-danger");
@@ -95,14 +101,11 @@ $(document).ready(function () {
             },
             success: function (data) {
                 if (data.ok) {
-                    $('#imgProfile').load(' #imgProfile > *  ');
-    
+                    //$('html').load('#imgProfile > *');
                         $("#notif").removeClass("is-danger").addClass("is-link");
                         $("#notif").css("display", "block");
                         $("#notifText").text("Immagine Cancellata");
-                        setTimeout(function(){ $("#notif").css("display", "none");}, 5000);
-                  
-               
+                        //setTimeout(function(){ $("#notif").css("display", "none");}, 5000);
                 } else {
                     alert("Cancellazione non riuscita");
                 }
@@ -178,7 +181,7 @@ $(document).ready(function () {
             }
         })
     })
-});
+
 $('#fileI').on('change', function (e) {
     var formdata = new FormData();
     formdata.append('image', $('input[type=file]')[0]);
@@ -202,7 +205,7 @@ $('#fileI').on('change', function (e) {
     })
 })
 
-
+});
 
 /*
 

@@ -1,25 +1,23 @@
-
-
 $(document).ready(function () {
-    
+
     //funzione per il menu burger    
     $("#content").load("description.html");
     $(".navbar-burger").click(function () {
         $(".navbar-burger,#navbarBasicExample").toggleClass("is-active");
     });
 
-    $('#home,#blog').hover(function(){
+    $('#home,#blog').hover(function () {
         $(this).addClass('has-text-warning');
-    },function(){
+    }, function () {
         $(this).removeClass('has-text-warning');
     });
-/*
-    $('#userProfile,#write,#logout').hover(function(){
-        $(this).css('background-color','#2f2f2f');
-    },function(){
-        $(this).removeClass("has-background-warning").css('color','');
-    });
-*/
+    /*
+        $('#userProfile,#write,#logout').hover(function(){
+            $(this).css('background-color','#2f2f2f');
+        },function(){
+            $(this).removeClass("has-background-warning").css('color','');
+        });
+    */
 
     //funzione per il menu dropdown l
     $(".navbar-link").click(function () {
@@ -52,11 +50,10 @@ $(document).ready(function () {
                 password: $('#pwdL').val()
             }),
             success: function (data) {
-                if (data.ok) {                  
-                    localStorage.setItem('token',data.token);
-                    location.reload();   
-                }
-                else{
+                if (data.ok) {
+                    localStorage.setItem('token', data.token);
+                    location.reload();
+                } else {
                     $("#loginAppender").empty();
                     $("#loginAppender").append("Username o password errati");
                 }
@@ -68,31 +65,31 @@ $(document).ready(function () {
         })
     });
 
-$(document).ready(function () {
-    $('#submitRegister').click(function () {
-        $.ajax({
-            url: 'http://localhost/php/register.php',
-            type: 'POST',
-            dataType: 'json',
-            data: JSON.stringify({
-                username: $('#usernameR').val().trim().toString(),
-                pwd: $('#pwdR').val(),
-                email: $('#email').val().trim().toString()
-            }),
-            success: function (data) {
-                if (data.ok) {
-                    localStorage.setItem('token',data.token);
-                    window.location.reload();
-                } else {
-                    $('#submitRegister').text('Si è verificato un problema');
+    $(document).ready(function () {
+        $('#submitRegister').click(function () {
+            $.ajax({
+                url: 'http://localhost/php/register.php',
+                type: 'POST',
+                dataType: 'json',
+                data: JSON.stringify({
+                    username: $('#usernameR').val().trim().toString(),
+                    pwd: $('#pwdR').val(),
+                    email: $('#email').val().trim().toString()
+                }),
+                success: function (data) {
+                    if (data.ok) {
+                        localStorage.setItem('token', data.token);
+                        window.location.reload();
+                    } else {
+                        $('#submitRegister').text('Si è verificato un problema');
+                    }
+                },
+                error: function (errorThrown) {
+                    console.log(errorThrown);
                 }
-            },
-            error: function (errorThrown) {
-                console.log(errorThrown);
-            }
+            })
         })
-    })
-});
+    });
 
 
 
@@ -104,9 +101,9 @@ $(document).ready(function () {
             data: JSON.stringify({
                 token: localStorage.getItem('token')
             }),
-        
-            success:function(data){
-                if(data.ok && data.utente != null){            
+
+            success: function (data) {
+                if (data.ok && data.utente != null) {
                     $('#userNameNav').text(data.utente);
                     $('.modal').removeClass("is-active");
                     $('#userProfile').attr("href", "controlpanel.html");
@@ -121,7 +118,7 @@ $(document).ready(function () {
                         },
                         success: function (data) {
                             if (data.ok) {
-                                if(data.dataUrl != null) $('#profilePicUser').attr("src", data.dataUrl);
+                                if (data.dataUrl != null) $('#profilePicUser').attr("src", data.dataUrl);
                             } else {
                                 alert("Errore nel caricare l'immagine");
                             }
@@ -130,12 +127,12 @@ $(document).ready(function () {
                             console.log(errorThrown);
                         }
                     })
-                    if(data.perm>2){
+                    if (data.perm > 2) {
                         $("#write").css("display", "block");
-                        $('#write').attr("href", "writearticle.html");}   
-                
-                }
-                else{
+                        $('#write').attr("href", "writearticle.html");
+                    }
+
+                } else {
                     alert("La sessione è scaduta");
                     localStorage.removeItem('token');
                     $('#userProfile').removeAttr("href", "controlpanel.html");
@@ -159,7 +156,7 @@ $(document).ready(function () {
         $("#write").css("visibility", "hidden");
         $('#loginRegisterButton').css("display", "block");
         window.location.replace("index.html");
-        
+
     })
 
 
@@ -413,11 +410,10 @@ $(document).ready(function () {
 
     $("#closeNotif").click(function () {
         $("#notif").css("display", "none");
-       
+        window.location.reload();
     });
 
 
+    
 
 });
-
-
