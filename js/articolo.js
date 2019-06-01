@@ -25,6 +25,7 @@ $(document).ready(function() {
                         console.log("user "+data.User);
                         console.log("data "+data.Data);
                         $("#contentArticle").append(data.Testo+'<br><time>'+data.Data+'</time>');
+                        $("*#author").append(data.User);
                         //riesco a recuperare i dati nell'array come si publicano nella pagina???
                     } else {
                         alert("errore nella pubblicazione");
@@ -47,10 +48,32 @@ $(document).ready(function() {
                         }),
                         success: function(data) {
                             if (data.ok) {
+                                
                                 $.each(data.rows, function(index){
+                                    var html = '<article class="media">'+
+                                            '<figure class="media-left">'+
+                                            '<p class="image is-64x64">'+
+                                            '<img id ="userImg" src="https://bulma.io/images/placeholders/128x128.png">'+
+                                            '</p>'+
+                                            '</figure>'+
+                                            '<div class="media-content">'+
+                                            '<div class="content">'+
+                                            '<p>'+
+                                            '<strong id ="userName">'+data.rows[index].User+'</strong>'+
+                                            '<br>'+
+                                            '<p id="comment">'+data.rows[index].Testo+'</p>'+
+                                            '<small>'+data.rows[index].Data+'</small>'+
+                                            '<br>'+
+                                            '</p>'+
+                                            '</div>'+
+                                            '</div>'+
+                                            '</article>';
+
                                     console.log("testo2 "+data.rows[index].Testo);
                                     console.log("user2 "+data.rows[index].User);
-                                    console.log("data2 "+data.rows[index].Data);});
+                                    console.log("data2 "+data.rows[index].Data);
+                                    $("#comments").append(html);
+                                });
                                     
                                 //riesco a recuperare i dati nell'array come si publicano nella pagina???
                             } else {
@@ -72,15 +95,17 @@ $(document).ready(function() {
                         }),
                         success:function(data){
                             if(data.ok && data.utente != null){
-
+                                    
+                                          // $("#containerMedia").append(html);
                                 tinymce.init({
                                     selector: 'textarea',
                                     language_url: './js/it_IT.js',
                                     language: 'it_IT',});
                                     //test?
                                     console.log(data.utente);
-                                    $('#commento').css("visibility", "visible");
-                                    $('#publish').css("visibility", "visible"); 
+                                    
+                                    $('#writeComment').css("visibility", "visible");
+                                    //$('#publish').css("visibility", "visible"); 
                             }
                             else{
                                 alert("Sessione invalida, consigliamo di rifare il login per poter commentare");
@@ -117,7 +142,7 @@ $(document).ready(function() {
                 })
                }else{
                    if(tmp>0)
-                    alert("Articolo troppo lungo");
+                    alert("commento troppo lungo");
                    else 
                     alert("Impossibile pubblicare articolo vuoto");
                    }

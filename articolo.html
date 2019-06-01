@@ -16,7 +16,7 @@
         </script>
         <script src="/js/articolo.js" type="text/javascript"></script>
         <script src="/js/utility.js" type="text/javascript"></script>
-        
+
 </head>
 
 
@@ -287,59 +287,55 @@
                                                 </div>
                                         </div>
                                 </div>
-                                </div>
                         </div>
+                </div>
         </nav>
         <br>
-        <div class="container is-fluid box">
+        <div class="container is-fluid ">
 
 
-                <figure class="image is-3by1">
-                        <img src="./img/testSfondo.jpg">
-                </figure>
-                <div class="container is-centered box">
+
+                <div class="container is-centered box " style="margin-top: 1rem">
                         <div class="columns is-centered">
-                                <div id="contentArticle" class="column is-9" >
+                                <div id="contentArticle" class="column is-9">
 
                                 </div>
                                 <br>
-                                
+
                         </div>
                         <div class="columns is-centered">
                                 <div class="column is-9 has-background-info is-fluid ">
 
                                         <article class="media">
 
-                                                <div class="media-content">
-                                                        <div class="content">
-                                                                <figure class="content">
-                                                                        <p class="image is-64x64">
-                                                                                <img
-                                                                                        src="https://bulma.io/images/placeholders/128x128.png">
-                                                                        </p>
-                                                                </figure>
-                                                                <p>
-                                                                        <strong>John Smith</strong>
-                                                                        <small>@johnsmith</small>
-                                                                        <br>
-                                                                        Lorem ipsum dolor sit amet, consectetur
-                                                                        adipiscing elit. Proin ornare magna eros, eu
-                                                                        pellentesque tortor vestibulum ut. Maecenas non
-                                                                        massa sem. Etiam finibus odio quis feugiat
-                                                                        facilisis.
-                                                                </p>
-                                                        </div>
-
+                                                <div class="media-left">
+                                                        <figure class="image is-128x128">
+                                                                <img src="./img/default-user.jpg"
+                                                                        alt="Placeholder image">
+                                                        </figure>
                                                 </div>
-
-                                        </article>
-
+                                                <div class="media-content">
+                                                        <p id="author" class="title is-4"></p>
+                                                        <p id="author" class="subtitle is-6">@</p>
+                                                        <div>
+                                                                <p id="bio"></p>
+                                                        </div>
+                                                </div>
                                 </div>
 
+                                </article>
 
                         </div>
-
+                        <br>
                         <div class="columns is-centered">
+                                <div id="comments" class="column is-9  is-fluid ">
+                                        
+
+
+
+                                </div>
+                        </div>
+                        <div id="writeComment"class="columns is-centered" style="visibility: hidden">
 
                                 <div class="column is-9">
                                         <p class="title is-4">
@@ -351,14 +347,15 @@
                                                 <div class="media-content">
                                                         <div class="field">
                                                                 <p class="control">
-                                                                        <textarea class="textarea"
-                                                                                placeholder="Add a comment..."></textarea>
+                                                                        <textarea maxlength="499"  id="commento" class="textarea"
+                                                                                placeholder="Aggiungi un commento..."></textarea>
                                                                 </p>
                                                         </div>
                                                         <nav class="level">
                                                                 <div class="level-left">
                                                                         <div class="level-item">
-                                                                                <a id="publish" class="button is-info">Submit</a>
+                                                                                <button id="publish"
+                                                                                        class="button is-info">Invia</button>
                                                                         </div>
                                                                 </div>
                                                                 <div class="level-right">
@@ -378,11 +375,9 @@
 
                 </div>
 
+
         </div>
-        <!--
-        <textarea id="commento" style="visibility: hidden"></textarea>
-        <button id="publish" class="button" style="visibility: hidden">Pubblica</button>
-        -->
+      
         <br>
         <footer class="footer">
                 <div class="container has-text-centered">
