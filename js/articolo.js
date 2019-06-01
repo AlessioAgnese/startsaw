@@ -1,5 +1,5 @@
 function GetURLParameter(){
-        var id= window.location.href.substr(window.location.href.indexOf('#',window.location.href.length));
+        var id= window.location.href.substr(window.location.href.indexOf('#')+1);
         if(id != undefined){
             return id;
         }
@@ -18,12 +18,13 @@ $(document).ready(function() {
                 data:JSON.stringify({
                 articolo : GetURLParameter('a'),
                 }),
+               
                 success: function(data) {
                     if (data.ok) {
                         console.log("testo "+data.Testo);
                         console.log("user "+data.User);
                         console.log("data "+data.Data);
-                        $("#contentArticle").append(data.Testo+'<br><time >'+data.Data+'</time>');
+                        $("#contentArticle").append(data.Testo+'<br><time>'+data.Data+'</time>');
                         //riesco a recuperare i dati nell'array come si publicano nella pagina???
                     } else {
                         alert("errore nella pubblicazione");

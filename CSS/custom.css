@@ -1,0 +1,13 @@
+#contentArticle h1{
+    font-size: 30px;
+    font-weight: bold;
+    text-transform: uppercase;                                                                                
+  }
+  
+  #contentArticle p{
+    font-size: 20px;
+  }
+
+  #contentArticle time{
+    font-size: 15px;
+  }
