@@ -1,13 +1,16 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 
-DROP DATABASE IF EXISTS blog ;
+/*DROP DATABASE IF EXISTS blog ;
+CREATE DATABASE IF NOT EXISTS S4396998 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE S4396998;
+*/
 CREATE DATABASE IF NOT EXISTS blog DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE blog;
 
 CREATE TABLE articoli (
   Id_A int(11) NOT NULL,
   Testo mediumtext NOT NULL,
-  Data datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  Data datetime NOT NULL DEFAULT CURRENT_TIMESTAMP , /*eliminare default current... quando si usa il server unige*/
   User varchar(16) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -17,10 +20,11 @@ INSERT INTO articoli (Id_A, Testo, `Data`, `User`) VALUES
 (7, '<h1 style=\"text-align: center;\">Hello there</h1>\n<p>ciao</p>', '2019-05-28 11:59:50', 'root'),
 (8, '<p>Hello there2</p>', '2019-05-28 14:19:06', 'root');
 
+
 CREATE TABLE commenti (
   Id_C int(11) NOT NULL,
   Testo mediumtext NOT NULL,
-  Data datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  Data datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ,/*eliminare default current... quando si usa il server unige*/
   Id_A int(11) NOT NULL,
   User varchar(16) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

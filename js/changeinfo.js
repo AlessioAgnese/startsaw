@@ -153,6 +153,8 @@ $(document).ready(function () {
 
 
     $('#ChangePdw').click(function () {
+        if($("#ChangePdw").has("#ChangePdw").attr("disabled",false))
+        {
         $.ajax({
             url: 'http://localhost/php/userinfo.php',
             type: 'post',
@@ -180,6 +182,7 @@ $(document).ready(function () {
                 console.log(errorThrown);
             }
         })
+    }
     })
 
 $('#fileI').on('change', function (e) {
