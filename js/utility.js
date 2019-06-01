@@ -386,32 +386,7 @@ $(document).ready(function () {
 
     })
 
-    $("#pwdR,#rePwdR,#oldPwd").on("change keyup", function () {
-        var oldPsw = $("#oldPwd").val();
-        var psw = $("#pwdR").val();
-        var rePsw = $("#rePwdR").val();
-
-        if ($("#upLetterIcon,#lowLetterIcon,#numberIcon,#lengthIcon,#statusP").hasClass("fa-check") && psw != '' && rePsw != '' && oldPsw != '' && $("#upLetter,#lowLetter,#number,#length").hasClass('has-text-success') && !$('#statusP').hasClass('has-text-danger') && $('#pwd_checkEqual').hasClass("has-text-success")) {
-
-            $('#ChangePdw').attr("disabled", false);
-
-        } else {
-            $('#ChangePdw').attr("disabled", true);
-        }
-    });
-
-    //funzioni controlpanel.html
-
-    $("#btnImg").click(function () {
-        $("#menuImg").toggleClass("is-active");
-    });
-
-
-
-    $("#closeNotif").click(function () {
-        $("#notif").css("display", "none");
-        window.location.reload();
-    });
+   
 
 
     
