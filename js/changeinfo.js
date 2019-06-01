@@ -14,7 +14,7 @@ $(document).ready(function () {
             fd.append("token", localStorage.getItem('token'));
             var xhr = new XMLHttpRequest();
             xhr.open('POST', './php/manageImg.php', true);
-            xhr.send(fd);
+            xhr.send(fd); 
            
             $("#notif").removeClass("is-danger").addClass("is-link");
             $("#notif").css("display", "block");
@@ -22,8 +22,8 @@ $(document).ready(function () {
             
         }).catch(y => {
             $("#notif").removeClass("is-link").addClass("is-danger");
-                $("#notif").css("display", "block");
-                $("#notifText").text("Inserisci un'immagine");
+            $("#notif").css("display", "block");
+            $("#notifText").text("Inserisci un'immagine");
             return false;
         })
     }, false);
