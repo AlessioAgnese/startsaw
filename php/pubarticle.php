@@ -9,9 +9,14 @@ $insert = $conn->prepare("INSERT INTO Articoli(Testo,User)VALUES(:testo,:autore)
 $insert->bindParam(":testo", $json["articolo"]);
 $insert->bindParam(":autore",$array["utente"]);
 $insert->execute();
-if ($insert) {
+$select = $conn->prepare("SELECT Id_A,Data FROM Articoli WHERE User=:user ORDER BY Data DESC LIMIT 1");
+$select->bindParam(":user",$array["utente"]);
+$select->execute();
+if ($insert&&$select) {
+	$res=$select->fetch(PDO::FETCH_ASSOC);
 	$array = array(
-		"ok" => true
+		"ok" => true,
+		"id" => $res["Id_A"]
 	);
 	echo json_encode($array);
 } else {

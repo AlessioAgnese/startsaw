@@ -51,7 +51,7 @@ $(document).ready(function () {
                         $("#notifyArticle").css("display", "block");
                         $("html, body").animate({scrollTop: 0}, 1000);
                        
-                        window.location.replace("http://localhost/blog.html");
+                        window.location.replace("http://localhost/articolo.html#"+data.id);
                         
                     } else {
                         $("#notifyArticle").removeClass("is-link").addClass("is-danger");
