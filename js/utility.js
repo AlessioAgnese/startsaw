@@ -91,6 +91,30 @@ $(document).ready(function () {
         })
     });
 
+    $('#search').click(function () {
+        console.log($("#text").val().trim().toString());
+        $.ajax({
+            url: 'http://localhost/php/searchengine.php',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                text: $("#text").val().trim().toString(),
+            }),
+            success: function (response) {
+                if(response.ok){
+                    console.log($("#text").val().trim().toString(),);
+                    $.each(response.rows, function(index){
+                        console.log(response.rows[index].Testo);
+                        console.log(response.rows[index].User);
+                        console.log(response.rows[index].Id_A);
+                        console.log(response.rows[index].Data);});
+                }else{
+                    alert("Qualcosa e andato storto, riprova");
+                }
+            }
+        });
+    });
+
 
 
     if ('token' in localStorage) {
