@@ -4,7 +4,12 @@
 
     function genToken($utente){
         global $conn;
-        $json=password_hash($utente, PASSWORD_BCRYPT);
+        $date = date('U = Y-m-d H:i:s');
+        $array = array(
+            "utente"=>$utente,
+            "data"=>$date,
+        );
+        $json=password_hash(json_encode($array), PASSWORD_BCRYPT);
         $insert = $conn->prepare("UPDATE Utenti SET token = :token WHERE User = :user");
         $insert->bindParam(":token",$json);
         $insert->bindParam(":user",$utente);
@@ -26,14 +31,15 @@
 
     function getUser($token){
         global $conn;
-        $user = $conn->prepare("SELECT User,Id_R FROM Utenti WHERE token =:token");
+        $user = $conn->prepare("SELECT User,Id_R,token FROM Utenti WHERE token =:token");
         $user->execute(array(":token"=>$token));
         if($user){
             $result=$user->fetch(PDO::FETCH_ASSOC);
             $array = array(
                 "ok"=>true,
                 "utente"=>$result["User"],
-                "perm"=>$result["Id_R"]
+                "perm"=>$result["Id_R"],
+                "token"=>$result["token"]
             );
             return $array;
         }

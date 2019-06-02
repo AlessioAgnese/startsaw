@@ -67,7 +67,6 @@
         }else{
             $array = array(
                 "ok" => false,
-    
         );
         echo json_encode($array);
         }

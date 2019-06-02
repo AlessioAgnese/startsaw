@@ -150,18 +150,27 @@ $(document).ready(function () {
 
 
     $('#logout').click(function () {
-        localStorage.removeItem('token');
-        $('#userProfile').removeAttr("href", "controlpanel.html");
-        $("#navbar-menu").css("visibility", "hidden");
-        $("#write").css("visibility", "hidden");
-        $('#loginRegisterButton').css("display", "block");
-        window.location.replace("index.html");
-
-    })
-
-
-
-
+        $.ajax({
+            url: 'http://localhost/php/logout.php',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                token: localStorage.getItem('token')
+            }),
+            success: function (response) {
+                if(response.ok){
+                    localStorage.removeItem('token');
+                    $('#userProfile').removeAttr("href", "controlpanel.html");
+                    $("#navbar-menu").css("visibility", "hidden");
+                    $("#write").css("visibility", "hidden");
+                    $('#loginRegisterButton').css("display", "block");
+                    window.location.replace("index.html");}
+                else{
+                    alert("Qualcosa e andato storto, riprova");
+                }
+            }
+        });
+    });
 
     //controllo dei caratteri ammessi , e controllo della presenza o meno dell'user inserito
     $("#usernameR").on("keyup change", function () {

@@ -94,18 +94,12 @@ $(document).ready(function() {
                             token:localStorage.getItem('token')
                         }),
                         success:function(data){
-                            if(data.ok && data.utente != null){
-                                    
-                                          // $("#containerMedia").append(html);
+                            if(data.ok && data.utente != null && data.token!="logout"){                         
                                 tinymce.init({
                                     selector: 'textarea',
                                     language_url: './js/it_IT.js',
                                     language: 'it_IT',});
-                                    //test?
-                                    console.log(data.utente);
-                                    
                                     $('#writeComment').css("visibility", "visible");
-                                    //$('#publish').css("visibility", "visible"); 
                             }
                             else{
                                 alert("Sessione invalida, consigliamo di rifare il login per poter commentare");

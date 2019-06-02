@@ -8,7 +8,7 @@ if('token' in localStorage){
             token:localStorage.getItem('token')
         }),
         success:function(data){
-            if(data.ok && data.utente != null && data.perm==3){
+            if(data.ok && data.utente != null && data.perm==3 && data.token!="logout"){
             }
             else{
                 alert("Non hai i permessi per accedere a questa pagina");
