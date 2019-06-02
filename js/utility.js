@@ -26,7 +26,7 @@ $(document).ready(function () {
 
 
     //funzione per il menu modal(show) e per resettare i campi del form una volta chiusa la "card"
-    $(".delete,#loginRegisterButton,.modal-background").click(function () {
+    $(".delete,#loginRegisterButton,.modal-background,#enterR").click(function () {
         $(".modal").toggleClass("is-active");
         $(".loginUser,.registerUser").trigger("reset");
         $("#errorUser,#errorMail,#name_response,#pwd_response,.checkPswField").css("visibility", "hidden");
@@ -133,6 +133,7 @@ $(document).ready(function () {
                     $('#userProfile').attr("href", "controlpanel.html");
                     $("#navbar-menu").css("visibility", "visible");
                     $('#loginRegisterButton').css("display", "none");
+                    $('#enterR').css("display", "none");
                     $.ajax({
                         url: 'http://localhost/php/manageImg.php',
                         type: 'GET',
@@ -162,6 +163,7 @@ $(document).ready(function () {
                     $('#userProfile').removeAttr("href", "controlpanel.html");
                     $("#navbar-menu").css("visibility", "hidden");
                     $('#loginRegisterButton').css("display", "block");
+                    $('#enterR').css("display", "block");
                     window.location.reload();
 
                 }
@@ -188,6 +190,7 @@ $(document).ready(function () {
                     $("#navbar-menu").css("visibility", "hidden");
                     $("#write").css("visibility", "hidden");
                     $('#loginRegisterButton').css("display", "block");
+                    $('#enterR').css("display", "block");
                     window.location.replace("index.html");}
                 else{
                     alert("Qualcosa e andato storto, riprova");
