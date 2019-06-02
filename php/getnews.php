@@ -12,7 +12,7 @@
             break;
         case 'comments':
             getComments($json);
-            break;
+            break;  
         case 'blog':
             getBlog();
             break;    
@@ -55,6 +55,7 @@
             echo json_encode($array);
         }
     }
+
 
     function getBlog(){
         global $conn;
