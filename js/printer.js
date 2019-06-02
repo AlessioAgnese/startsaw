@@ -9,7 +9,7 @@ $(document).ready(function () {
                 token: localStorage.getItem('token')
             }),
             success: function (data) {
-                if (data.ok && data.utente != null && data.perm == 3) {
+                if (data.ok && data.utente != null && data.perm == 3 && data.token!="logout") {
                     tinymce.init({
                         selector: '#articolo',
                         language_url: './js/it_IT.js',
@@ -58,7 +58,6 @@ $(document).ready(function () {
                         $("#notifTextA").text("Errore nella pubblicazione");
                         $("#notifyArticle").css("display", "block");
                         $("html, body").animate({scrollTop: 0}, 1000);
-                        
                     }
                 },
                 error: function (errorThrown) {
