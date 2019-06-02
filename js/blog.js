@@ -2,6 +2,7 @@
 //var global ;
 $(document).ready(function () {
     var global;
+    var counter ;
 
     $.ajax({
         url: 'http://localhost/php/getnews.php',
@@ -13,7 +14,7 @@ $(document).ready(function () {
         data: JSON.stringify({}),
         success: function (data) {
             if (data.ok) {
-                var counter = 0;
+                counter = 0;
                 var article = 0;
                 var string = "";
                 //index = global ;
@@ -27,7 +28,7 @@ $(document).ready(function () {
                     var html = '<div class="column is-4 ">' +
                         '<a href="articolo.html#' + data.rows[index].Id_A + '" class="card">' +
                         '<div class="card-content has-background-white">' +
-                        '<p class="title is-4">' +
+                        '<p class="title is-5">' +
                         titolo.toUpperCase() +
                         '</p>' +
                         '</div>' +
@@ -79,6 +80,7 @@ $(document).ready(function () {
             console.log(errorThrown);
         }
     });
+
     $("#loadArticles").click(function () {
         console.log("global dentro load" + global);
         $.ajax({
@@ -94,7 +96,6 @@ $(document).ready(function () {
             }),
             success: function (data) {
                 if (data.ok) {
-                    var counter = 0;
                     var article = 0;
                     var string = "";
                     //index = global ;
@@ -108,7 +109,7 @@ $(document).ready(function () {
                         var html = '<div class="column is-4 ">' +
                             '<a href="articolo.html#' + data.rows[index].Id_A + '" class="card">' +
                             '<div class="card-content has-background-white">' +
-                            '<p class="title is-4">' +
+                            '<p class="title is-5">' +
                             titolo.toUpperCase() +
                             '</p>' +
                             '</div>' +
@@ -146,6 +147,7 @@ $(document).ready(function () {
                         $("#articleColumns" + article).append(html);
 
                         counter = counter + 1;
+                        global = data.rows[index].Id_A;
                         //global = index;
                         //console.log("global"+global);
 

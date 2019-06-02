@@ -14,7 +14,7 @@
             getComments($json);
             break;
         case 'loadA':
-            loadArticle($json);
+            loadArticles($json);
             break;    
         case 'blog':
             getBlog();
@@ -44,6 +44,7 @@
             echo json_encode($array);
         }
     }
+
     function getComments($json){
         global $conn;
         $select = $conn->prepare("SELECT Testo,Data,User FROM Commenti WHERE Id_A=:id");
@@ -70,8 +71,9 @@
             echo json_encode($array);       
         }else{
             $array=array("ok"=>false);
-            echo json_encode($array);}    
+            echo json_encode($array);    
         }
+    }
 
 
     function getBlog(){
@@ -84,6 +86,7 @@
             echo json_encode($array);       
         }else{
             $array=array("ok"=>false);
-            echo json_encode($array);}    
+            echo json_encode($array);    
         }
+    }
     
