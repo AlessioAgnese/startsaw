@@ -50,8 +50,9 @@ $(document).ready(function () {
                         $("#notifTextA").text("Articolo Pubblicato");
                         $("#notifyArticle").css("display", "block");
                         $("html, body").animate({scrollTop: 0}, 1000);
-                       
+                        setTimeout(function(){
                         window.location.replace("http://localhost/articolo.html#"+data.id);
+                        },1000);
                         
                     } else {
                         $("#notifyArticle").removeClass("is-link").addClass("is-danger");

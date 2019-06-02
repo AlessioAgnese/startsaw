@@ -12,7 +12,10 @@
             break;
         case 'comments':
             getComments($json);
-            break;  
+            break;
+        case 'loadA':
+            loadArticle($json);
+            break;    
         case 'blog':
             getBlog();
             break;    
@@ -56,10 +59,24 @@
         }
     }
 
+    function loadArticles($json){
+        global $conn;
+        $select = $conn->prepare("SELECT * FROM Articoli WHERE Id_A<:id ORDER BY Data DESC LIMIT 6");
+        $select->bindParam(":id",$json["idB"]);
+        $select->execute();
+        if($select){
+            $rows = $select->fetchAll(PDO::FETCH_ASSOC);
+            $array=array("ok"=>true,"rows"=>$rows); 
+            echo json_encode($array);       
+        }else{
+            $array=array("ok"=>false);
+            echo json_encode($array);}    
+        }
+
 
     function getBlog(){
         global $conn;
-        $select = $conn->prepare("SELECT * FROM Articoli ORDER BY Data DESC");
+        $select = $conn->prepare("SELECT * FROM Articoli ORDER BY Data DESC LIMIT 6");
         $select->execute();
         if($select){
             $rows = $select->fetchAll(PDO::FETCH_ASSOC);
