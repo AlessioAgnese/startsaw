@@ -22,6 +22,17 @@ $(document).ready(function () {
                 $.each(data.rows, function (index) {
                     //.replace(/(<([^>]+)>)/ig,"")
                     string = data.rows[index].Testo.substring(data.rows[index].Testo.indexOf('<h1>'), data.rows[index].Testo.indexOf("</h1>"));
+                    if(data.rows[index].Testo.includes('src="')){
+                        immagine = data.rows[index].Testo.substring(data.rows[index].Testo.indexOf('src="')+5, data.rows[index].Testo.indexOf('.jpg')+4);
+                        
+                    }
+                    else{
+                        immagine="./img/image-not-available.jpg";
+                    }
+                   
+                    
+                   
+                    console.log("immagine"+immagine);
                     var titolo = string.substring(string.indexOf('>') + 1);
                     if (!titolo) titolo = "Empty Title";
                     //console.log('string '+string);
@@ -34,7 +45,7 @@ $(document).ready(function () {
                         '</div>' +
                         '<div class="card-image">' +
                         '<figure class="image is-4by3">' +
-                        '<img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">' +
+                        '<img src="'+immagine+'" alt="Placeholder image">' +
                         '</figure>' +
                         '</div>' +
                         '<div class="card-content has-background-white">' +
@@ -82,7 +93,7 @@ $(document).ready(function () {
     });
 
     $("#loadArticles").click(function () {
-        console.log("global dentro load" + global);
+        
         $.ajax({
             url: 'http://localhost/php/getnews.php',
             type: 'POST',
@@ -103,6 +114,13 @@ $(document).ready(function () {
                     $.each(data.rows, function (index) {
                         //.replace(/(<([^>]+)>)/ig,"")
                         string = data.rows[index].Testo.substring(data.rows[index].Testo.indexOf('<h1>'), data.rows[index].Testo.indexOf("</h1>"));
+                        if(data.rows[index].Testo.includes('<img src="')){
+                            immagine = data.rows[index].Testo.substring(data.rows[index].Testo.indexOf('<img src="'), data.rows[index].Testo.indexOf('.jpg')+4);
+                            
+                        }
+                        else{
+                            immagine="./img/image-not-available.jpg";
+                        }
                         var titolo = string.substring(string.indexOf('>') + 1);
                         if (!titolo) titolo = "Empty Title";
                         //console.log('string '+string);
@@ -115,7 +133,7 @@ $(document).ready(function () {
                             '</div>' +
                             '<div class="card-image">' +
                             '<figure class="image is-4by3">' +
-                            '<img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">' +
+                            '<img src="'+immagine+'" alt="Placeholder image">' +
                             '</figure>' +
                             '</div>' +
                             '<div class="card-content has-background-white">' +
