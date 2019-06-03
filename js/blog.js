@@ -18,11 +18,13 @@ $(document).ready(function () {
                 counter = 0;
                 var article = 0;
                 var string = "";
-
+                var rex = /<img.*?src="([^">]*\/([^">]*?))".*?>/g;
                 $.each(data.id, function (index) {
+                    immagine = rex.exec( data.testo[index] );
                     string = data.testo[index].substring(data.testo[index].indexOf('<h1>'), data.testo[index].indexOf("</h1>"));
-                    if(data.testo[index].includes('src="')){
-                        immagine = data.testo[index].substring(data.testo[index].indexOf('src="')+5, data.testo[index].indexOf('.jpg')+4);
+                    if(data.testo[index].includes('<img')){
+                        
+                        immagine = immagine[1];
                         
                     }
                     else{
@@ -76,8 +78,7 @@ $(document).ready(function () {
                     counter = counter + 1;
                     global = data.id[index];
                     //global = index;
-                    console.log("global" + global);
-
+                   
                 });
                 //riesco a recuperare i dati nell'array come si publicano nella pagina???
             } else {
@@ -106,10 +107,14 @@ $(document).ready(function () {
                 if (data.ok) {
                     var article = 0;
                     var string = "";
+                    var rex = /<img.*?src="([^">]*\/([^">]*?))".*?>/g;
                     $.each(data.id, function (index) {
+                        immagine = rex.exec( data.testo[index] );
                         string = data.testo[index].substring(data.testo[index].indexOf('<h1>'), data.testo[index].indexOf("</h1>"));
-                        if(data.testo[index].includes('<img src="')){
-                            immagine = data.testo[index].substring(data.testo[index].indexOf('<img src="'), data.testo[index].indexOf('.jpg')+4);
+                        if(data.rows[index].Testo.includes('<img src="')){
+                            immagine = immagine[1];
+                             
+                            
                         }
                         else{
                             immagine="./img/image-not-available.jpg";
