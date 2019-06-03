@@ -111,18 +111,9 @@ $(document).ready(function () {
             success: function (response) {
                 if(response.ok){
                     $.each(response.rows, function(index){
-<<<<<<< HEAD
-                        var html ='<a class="list-item" href="articolo.html#'+response.rows[index].Id_A+'">'+response.rows[index].Testo+'</a>';
-                        $("#searchRes").append(html);
-                        console.log(response.rows[index].Testo);
-                        //console.log(response.rows[index].User);
-                        console.log(response.rows[index].Id_A);
-                        console.log(response.rows[index].Data);});
-=======
                         var html ='<a href="articolo.html#'+ response.rows[index].Id_A+'" class="list-item" >'+ response.rows[index].Testo+'</a>';
                         $("#searchRes").append(html);
                         });
->>>>>>> e1384798cc95d375a9cb413b25ca3cc8e7bee98a
                 }else{
                     $("#noRes").css("visibility","visible");
                     $("#searchRes").append("Nessun risultato trovato");
