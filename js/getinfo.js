@@ -4,10 +4,10 @@ function GetURLParameter(){
         return user;
     }
     else{
-        alert("errore");
+        alert("error 404 user not found");
     }
 }
-console.log(GetURLParameter());
+$(document).ready(function(){
 $.ajax({
     url: 'http://localhost/php/manageImg.php',
     type: 'GET',
@@ -17,7 +17,10 @@ $.ajax({
     },
     success: function (data) {
         if (data.ok) {
-            if(data.dataUrl != null){$('#profilePic').attr("src", data.dataUrl);} 
+
+            if(data.dataUrl != null ) {
+                $('#profilePic').attr('src', data.dataUrl); 
+            } 
         } else {
             $("#notif").removeClass("is-link").addClass("is-danger");
             $("#notif").css("display", "block");
@@ -32,7 +35,7 @@ $.ajax({
 
 $.ajax({
     url: 'http://localhost/php/userinfo.php',
-    type: 'get',
+    type: 'GET',
     dataType: 'json',
     beforeSend: function (xhr) {
         xhr.setRequestHeader('X-Type', 'view');
@@ -46,13 +49,11 @@ $.ajax({
             $('#residenza').val(data.residenza);
             $('#biografia').val(data.biografia);
         } else {
-            alert("La sessione è scaduta");
-
-            localStorage.removeItem('token');
-
+            alert("Errore nel recupero dei dati");
         }
     },
     error: function (errorThrown) {
         console.log(errorThrown);
     }
+})
 })

@@ -1,5 +1,6 @@
 <?php
     include_once('dbconfig.php');
+    include_once('tokenizer.php');
     $headers = apache_request_headers();
     $type = $headers["X-Type"];
     if($_SERVER['REQUEST_METHOD']=='GET'){
@@ -32,6 +33,8 @@
     
     function viewInfo($token){
         global $conn;
+        if(strlen($token)<60) {$swap=getToken($token);
+            $token=$swap["Token"];}
         $select = $conn->prepare("SELECT Nome,Cognome,Residenza,Biografia FROM Utenti WHERE token=:token");
         $select->bindParam(":token",$token);
         $select->execute();

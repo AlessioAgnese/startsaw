@@ -100,7 +100,11 @@ $(document).ready(function () {
 
     //funzione per ricercare articoli all'interno del blog
     $('#search').click(function () {
+<<<<<<< HEAD
         $("#searchRes").empty();
+=======
+        if($("#text").val().trim().toString().length>3){
+>>>>>>> 3d25b2205f6b67afd1b751212f9aa96f74d9b216
         $.ajax({
             url: 'http://localhost/php/searchengine.php',
             type: 'post',
@@ -131,6 +135,7 @@ $(document).ready(function () {
                 }
             }
         });
+    }else{alert("ricerca troppo corta");}
     });
 
 //controlliamo se l'utente è loggato

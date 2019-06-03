@@ -50,5 +50,22 @@
             return $array;
         }
     }
+    function getToken($user){
+        global $conn;
+        $user=substr($user, 1);
+        $select = $conn->prepare("SELECT Token FROM Utenti WHERE User =:user");
+        $select->bindParam(":user",$user);
+        $select->execute();
+        if($select){
+            $res=$select->fetch(PDO::FETCH_ASSOC);
+            return $res;
+        }
+        else{
+            $array = array(
+                "ok"=>false
+            );
+            return $array;
+        }
+    }
 
 ?> 
