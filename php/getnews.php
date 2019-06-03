@@ -25,16 +25,19 @@
     } 
     function getArticle($json){
         global $conn;
-        $select = $conn->prepare("SELECT Testo,Data,User FROM Articoli WHERE Id_A=:id");
+        $select = $conn->prepare("SELECT Testo,Data,User,Avatar FROM Articoli NATURAL JOIN Utenti WHERE Id_A=:id");
         $select->bindParam(":id",$json["articolo"]);
         $select->execute();
         if($select){
             $result = $select->fetch(PDO::FETCH_ASSOC);
+            if($result["Avatar"] != null){
+                $Avatar = 'data:image; base64,'.base64_encode($result["Avatar"]);}
             $array = array(
                 "ok" => true,
                 "Testo"=>$result["Testo"],
                 "Data"=>$result["Data"],
                 "User"=>$result["User"],
+                "Avatar"=>$Avatar,
             );
             echo json_encode($array);
         }else{
@@ -47,13 +50,30 @@
 
     function getComments($json){
         global $conn;
-        $select = $conn->prepare("SELECT Testo,Data,User FROM Commenti WHERE Id_A=:id");
+        $select = $conn->prepare("SELECT Testo,Data,User,Avatar FROM Commenti NATURAL JOIN Utenti WHERE Id_A=:id");
         $select->bindParam(":id",$json["articolo"]);
         $select->execute();
         if($select){
-            $rows = $select->fetchAll(PDO::FETCH_ASSOC);
-            $array = array("ok" => true, "rows"=>$rows);
-            echo json_encode($array);
+            $i=0;
+            $user=null;
+            while($tmp=$select->fetch(PDO::FETCH_NUM)){
+                $testo[$i]=$tmp[0];
+                $data[$i]=$tmp[1];
+                $user[$i]=$tmp[2];
+                $dataUrl[$i]='data:image; base64,'.base64_encode($tmp[3]);
+                $i++;
+            }
+            if($user==null){
+                $array=array("ok"=>false);
+                echo json_encode($array);
+                exit();    
+            }
+            $array=array("ok"=>true,
+                        "testo"=>$testo,
+                        "data"=>$data,
+                        "user"=>$user,
+                        "avatar"=>$dataUrl);
+            echo json_encode($array);     
         }else{
             $array = array("ok" => false);
             echo json_encode($array);
@@ -62,13 +82,32 @@
 
     function loadArticles($json){
         global $conn;
-        $select = $conn->prepare("SELECT * FROM Articoli WHERE Id_A<:id ORDER BY Data DESC LIMIT 6");
+        $select = $conn->prepare("SELECT Id_A,Testo,Data,User,Avatar FROM Articoli NATURAL JOIN Utenti WHERE Id_A<:id ORDER BY Data DESC LIMIT 6");
         $select->bindParam(":id",$json["idB"]);
         $select->execute();
         if($select){
-            $rows = $select->fetchAll(PDO::FETCH_ASSOC);
-            $array=array("ok"=>true,"rows"=>$rows); 
-            echo json_encode($array);       
+            $i=0;
+            $id=null;
+            while($tmp=$select->fetch(PDO::FETCH_NUM)){
+                $id[$i]=$tmp[0];
+                $testo[$i]=$tmp[1];
+                $data[$i]=$tmp[2];
+                $user[$i]=$tmp[3];
+                $dataUrl[$i]='data:image; base64,'.base64_encode($tmp[4]);
+                $i++;
+            }
+            if($id==null){
+                $array=array("ok"=>false);
+                echo json_encode($array);
+                exit();    
+            }
+            $array=array("ok"=>true,
+                        "id"=>$id,
+                        "testo"=>$testo,
+                        "data"=>$data,
+                        "user"=>$user,
+                        "avatar"=>$dataUrl);
+            echo json_encode($array);     
         }else{
             $array=array("ok"=>false);
             echo json_encode($array);    
@@ -78,15 +117,27 @@
 
     function getBlog(){
         global $conn;
-        $select = $conn->prepare("SELECT * FROM Articoli ORDER BY Data DESC LIMIT 6");
+        $select = $conn->prepare("SELECT Id_A,Testo,Data,User,Avatar FROM Articoli NATURAL JOIN Utenti ORDER BY Data DESC LIMIT 6");
         $select->execute();
         if($select){
-            $rows = $select->fetchAll(PDO::FETCH_ASSOC);
-            $array=array("ok"=>true,"rows"=>$rows); 
+            $i=0;
+            while($tmp=$select->fetch(PDO::FETCH_NUM)){
+                $id[$i]=$tmp[0];
+                $testo[$i]=$tmp[1];
+                $data[$i]=$tmp[2];
+                $user[$i]=$tmp[3];
+                $dataUrl[$i]='data:image; base64,'.base64_encode($tmp[4]);
+                $i++;
+            }
+            $array=array("ok"=>true,
+                        "id"=>$id,
+                        "testo"=>$testo,
+                        "data"=>$data,
+                        "user"=>$user,
+                        "avatar"=>$dataUrl);
             echo json_encode($array);       
         }else{
             $array=array("ok"=>false);
-            echo json_encode($array);    
+            echo json_encode($array);
         }
     }
-    

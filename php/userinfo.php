@@ -19,9 +19,12 @@
         case 'change':
             changePwd($json);
             break;
+        case 'update':
+            updateAvt($token);
+            break;
         case 'delete':
-            deleteAvt($token);
-            break;    
+            deleteAccount($token);
+            break;        
         default:
             echo json_encode(array('ok'=>false));
             break;        
@@ -100,9 +103,23 @@
                 echo json_encode($array);
     }
 
-    function deleteAvt($token){
+    function updateAvt($token){
         global $conn;
-        $delete = $conn->prepare("UPDATE Utenti SET Avatar=null WHERE token=:token");
+        $update = $conn->prepare("UPDATE Utenti SET Avatar=null WHERE token=:token");
+        $update->bindParam(":token",$token);
+        $update->execute();
+        if($update){
+            $array = array("ok" => true,);
+            echo json_encode($array);
+        }else{
+            $array = array("ok" => true,);
+            echo json_encode($array);
+        }
+    }
+    
+    function deleteAccount($token){
+        global $conn;
+        $delete = $conn->prepare("DELETE FROM Utenti WHERE token=:token");
         $delete->bindParam(":token",$token);
         $delete->execute();
         if($delete){

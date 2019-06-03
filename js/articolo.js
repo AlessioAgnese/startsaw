@@ -21,12 +21,9 @@ $(document).ready(function() {
                
                 success: function(data) {
                     if (data.ok) {
-                        console.log("testo "+data.Testo);
-                        console.log("user "+data.User);
-                        console.log("data "+data.Data);
                         $("#contentArticle").append(data.Testo+'<br><time>'+data.Data+'</time>');
                         $("*#author").append(data.User);
-                        //riesco a recuperare i dati nell'array come si publicano nella pagina???
+                        if(data.Avatar != null) $("#avt").attr("src",data.Avatar);
                     } else {
                         alert("errore nella pubblicazione");
                     }
@@ -49,30 +46,28 @@ $(document).ready(function() {
                         success: function(data) {
                             if (data.ok) {
                                 
-                                $.each(data.rows, function(index){
+                                $.each(data.user, function(index){
                                     var html = '<article class="media">'+
                                             '<figure class="media-left">'+
                                             '<p class="image is-64x64">'+
-                                            '<img id ="userImg" src="https://bulma.io/images/placeholders/128x128.png">'+
+                                            '<img id="userImg'+index+'" src="https://bulma.io/images/placeholders/128x128.png">'+
                                             '</p>'+
                                             '</figure>'+
                                             '<div class="media-content">'+
                                             '<div class="content">'+
                                             '<p>'+
-                                            '<strong id ="userName">'+data.rows[index].User+'</strong>'+
+                                            '<strong id ="userName">'+data.user[index]+'</strong>'+
                                             '<br>'+
-                                            '<p id="comment">'+data.rows[index].Testo+'</p>'+
-                                            '<small>'+data.rows[index].Data+'</small>'+
+                                            '<p id="comment">'+data.testo[index]+'</p>'+
+                                            '<small>'+data.data[index]+'</small>'+
                                             '<br>'+
                                             '</p>'+
                                             '</div>'+
                                             '</div>'+
                                             '</article>';
-
-                                    console.log("testo2 "+data.rows[index].Testo);
-                                    console.log("user2 "+data.rows[index].User);
-                                    console.log("data2 "+data.rows[index].Data);
                                     $("#comments").append(html);
+                                    
+                                    if(data.avatar[index]!=null)$("#userImg" + index).attr('src',data.avatar[index]);    
                                 });
                                     
                                 //riesco a recuperare i dati nell'array come si publicano nella pagina???
