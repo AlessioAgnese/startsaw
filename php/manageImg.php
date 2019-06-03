@@ -1,5 +1,6 @@
 <?php
 include_once('dbconfig.php');
+include_once('tokenizer.php');
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         getImg();
@@ -13,6 +14,8 @@ function getImg(){
 global $conn;
 $headers = apache_request_headers();
 $token = $headers["X-Authentication"];
+if(strlen($token)<60) {$swap=getToken($token);
+$token=$swap["Token"];}
 $select=$conn->prepare("SELECT Avatar FROM Utenti WHERE token=:token");
 $select->bindValue(":token",$token);
 $select->execute();
@@ -21,7 +24,7 @@ if($select){
     $array=array();
     if($res["Avatar"] != null){
         $dataUrl = 'data:image; base64,'.base64_encode($res["Avatar"]);
-        $array = array("ok" => true, "dataUrl" => $dataUrl,);
+        $array = array("ok" => true, "dataUrl" => $dataUrl);
     }else{
         $array=array("ok" => true,"dataUrl" => null);
     }
