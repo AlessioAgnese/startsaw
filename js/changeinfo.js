@@ -89,14 +89,39 @@ $(document).ready(function () {
             }
         })
     }
+    //elimina account
+    $('#accountD').click(function () {
+        $.ajax({
+            url: 'http://localhost/php/userinfo.php',
+            type: 'get',
+            dataType: 'json',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-Type','delete');
+                xhr.setRequestHeader('X-Authentication', localStorage.getItem('token'));
+            },
+            success: function (data) {
+                if (data.ok) {
+                    alert("account cancellato correttametamente");
+                    localStorage.removeItem('token');
+                    window.location.replace("http://localhost");
 
+                } else {
+                    alert("Cancellazione non riuscita");
+                }
+            },
+            error: function (errorThrown) {
+                console.log(errorThrown);
+            }
+        })
+    })
+    //cancella l'avatar
     $('#fileD').click(function () {
         $.ajax({
             url: 'http://localhost/php/userinfo.php',
             type: 'get',
             dataType: 'json',
             beforeSend: function (xhr) {
-                xhr.setRequestHeader('X-Type', 'delete');
+                xhr.setRequestHeader('X-Type','update');
                 xhr.setRequestHeader('X-Authentication', localStorage.getItem('token'));
             },
             success: function (data) {
