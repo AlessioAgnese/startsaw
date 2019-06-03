@@ -8,16 +8,16 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="./CSS/style.css">
-    
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script defer src="./js/utility.js" type="text/javascript"></script>
-    <script src="/js/changeinfo.js" type="text/javascript"></script>        
+    <script src="/js/changeinfo.js" type="text/javascript"></script>
     <!-- script  per il reCaptcha-->
     <script src="https://www.google.com/recaptcha/api.js?render=reCAPTCHA_site_key"></script>
 </head>
 
 <body>
-        
+
     <div class="modal">
         <div class="modal-background"></div>
         <div class="modal-card ">
@@ -38,7 +38,7 @@
                                     <span class="icon is-small is-left">
                                         <i class="fas fa-user"></i>
                                     </span>
-                                    
+
                                 </p>
                             </div>
                             <div class="field">
@@ -223,36 +223,35 @@
                                 </div>
                             </div>
                             <div class="navbar-end">
-                                    <div id="navbar-menu"
-                                    class="navbar-item has-dropdown is-hoverable "
+                                <div id="navbar-menu" class="navbar-item has-dropdown is-hoverable "
                                     style="visibility:hidden">
 
 
 
                                     <a class="navbar-link is-arrowless is-size-5">
-                                            <span style="margin-right: 1rem">
-                                                    <figure class="image is-24x24">
-                                                            <img id="profilePicUser" src="./img/default-user.jpg" style="border-radius: 4px;">
-                                                    </figure>
-                                            </span>
-                                            <span id="userNameNav">
+                                        <span style="margin-right: 1rem">
+                                            <figure class="image is-24x24">
+                                                <img id="profilePicUser" src="./img/default-user.jpg"
+                                                    style="border-radius: 4px;">
+                                            </figure>
+                                        </span>
+                                        <span id="userNameNav">
 
-                                            </span>
+                                        </span>
                                     </a>
 
-                                    <div
-                                            class="navbar-dropdown is-boxed is-hidden-mobile has-text-dark">
-                                            <a id="userProfile" class="navbar-item is-size-6 ">
-                                                            Profilo
-                                            </a>
-                                            <a id="write" class="navbar-item is-size-6" style="display: none">
+                                    <div class="navbar-dropdown is-boxed is-hidden-mobile has-text-dark">
+                                        <a id="userProfile" class="navbar-item is-size-6 ">
+                                            Profilo
+                                        </a>
+                                        <a id="write" class="navbar-item is-size-6" style="display: none">
                                             Scrivi articolo
-                                            </a>
-                                            <a id="logout" class="navbar-item is-size-6">
+                                        </a>
+                                        <a id="logout" class="navbar-item is-size-6">
                                             Log out
-                                            </a>
+                                        </a>
                                     </div>
-                            </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -276,13 +275,26 @@
             <br>
             <div class="field has-addons has-addons-centered">
                 <div class="control">
-                    <input class="input  is-large has-text-dark" type="text" maxlength="25"
-                        placeholder="Cosa vuoi riparare ?" autocomplete="off" required id="text">
+                    <p class="control  has-icons-right">
+                        <input class="input  is-large has-text-dark " style="border-radius:4px 4px 0px 0px" type="text"
+                            maxlength="25" placeholder="Cosa vuoi riparare ?" autocomplete="off" required id="text">
+                        <span id="noRes" class="icon  is-right has-text-danger" style="visibility: hidden">
+                            <i class="fas fa-times"></i>
+                        </span>
+
+                        <div id="searchRes"class="list is-hoverable has-text-dark" style="border-radius:0px 0px 4px 4px">
+                         
+
+                        </div>
+                    </p>
+
+
+
                 </div>
                 <div class="control ">
 
                     <a class="button is-warning is-large" id="search">
-                        <span class="icon is-medium is-left ">
+                        <span class="icon is-medium is-left">
                             <i id="searchIcon" class="fas fa-search "></i>
                         </span>
                         <strong>Cerca</strong>
@@ -343,8 +355,8 @@
                             <a href="#" data-target="description">Descrizione</a>
                         </li>
                         <li id="contact">
-                                <a href="#" data-target="contact">Contattaci</a>
-                            </li>
+                            <a href="#" data-target="contact">Contattaci</a>
+                        </li>
                         <li id="lastNews">
                             <a href="#" data-target="pageunderconstruction">Ultime News</a>
                         </li>
@@ -364,33 +376,37 @@
     <footer class="footer ">
         <div class="container has-text-centered">
             <div class="columns is-centered ">
-                <div class="column is-1" >
+                <div class="column is-1">
 
                     <span class="icon  has-text-warning">
-                        <a class="has-text-warning" href="https://www.facebook.com/"><i class="fab fa-facebook-square fa-2x"></i></a>
+                        <a class="has-text-warning" href="https://www.facebook.com/"><i
+                                class="fab fa-facebook-square fa-2x"></i></a>
                     </span>
 
                 </div>
-                <div class="column is-1" >
+                <div class="column is-1">
                     <span class="icon  ">
-                        <a class="has-text-warning" href="https://www.instagram.com/?hl=it"><i class="fab fa-instagram fa-2x"></i></a>
+                        <a class="has-text-warning" href="https://www.instagram.com/?hl=it"><i
+                                class="fab fa-instagram fa-2x"></i></a>
                     </span>
-                    
+
 
                 </div>
                 <div class="column is-1">
                     <span class="icon  has-text-warning">
-                        <a class="has-text-warning" href="https://twitter.com"><i class="fab fa-twitter-square fa-2x" ></i></a>
+                        <a class="has-text-warning" href="https://twitter.com"><i
+                                class="fab fa-twitter-square fa-2x"></i></a>
                     </span>
-                    
+
 
                 </div>
                 <div class="column is-1">
-                        <span class="icon  has-text-warning">
-                            <a class="has-text-warning" href="https://github.com/"><i class="fab fa-github-square fa-2x"></i></a>
-                        </span>
-                        
-                    </div>
+                    <span class="icon  has-text-warning">
+                        <a class="has-text-warning" href="https://github.com/"><i
+                                class="fab fa-github-square fa-2x"></i></a>
+                    </span>
+
+                </div>
 
             </div>
             <div class="columns is-centered ">

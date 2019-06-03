@@ -24,6 +24,12 @@ $(document).ready(function () {
         $("#navbar-menu").toggleClass("is-active");
     });
 
+//funzione per la list sotto la search bar
+    $("#searchRes *a").hover(function(){
+        $(this).addClass("is-active");
+    }, function(){
+        $(this).removeClass("is-active");
+    })
 
     //funzione per il menu modal(show) e per resettare i campi del form una volta chiusa la "card"
     $(".delete,#loginRegisterButton,.modal-background,#enterR").click(function () {
@@ -39,7 +45,7 @@ $(document).ready(function () {
         $("#upLetter,#lowLetter,#number,#length").removeClass('has-text-success').addClass('has-text-danger');
     });
 
-
+//funzione per gestire il login
     $('#submitlogin').click(function () {
         $.ajax({
             url: 'http://localhost/php/login.php',
@@ -65,6 +71,7 @@ $(document).ready(function () {
         })
     });
 
+    //funzione per gestire la register
     $(document).ready(function () {
         $('#submitRegister').click(function () {
             $.ajax({
@@ -91,8 +98,8 @@ $(document).ready(function () {
         })
     });
 
+    //funzione per ricercare articoli all'interno del blog
     $('#search').click(function () {
-        console.log($("#text").val().trim().toString());
         $.ajax({
             url: 'http://localhost/php/searchengine.php',
             type: 'post',
@@ -102,20 +109,21 @@ $(document).ready(function () {
             }),
             success: function (response) {
                 if(response.ok){
-                    console.log($("#text").val().trim().toString(),);
                     $.each(response.rows, function(index){
+                        var html ='<a class="list-item" >'+ response.rows[index].Testo+'</a>'
+                        $("#searchRes").appen(html);
                         console.log(response.rows[index].Testo);
-                        console.log(response.rows[index].User);
+                        //console.log(response.rows[index].User);
                         console.log(response.rows[index].Id_A);
                         console.log(response.rows[index].Data);});
                 }else{
-                    alert("Qualcosa e andato storto, riprova");
+                    $("#noRes").css("visibility","visible");
                 }
             }
         });
     });
 
-
+//controlliamo se l'utente è loggato
 
     if ('token' in localStorage) {
         $.ajax({
@@ -173,7 +181,7 @@ $(document).ready(function () {
             }
         })
     }
-
+//funzione per il log out dell'utente
 
     $('#logout').click(function () {
         $.ajax({
@@ -424,7 +432,7 @@ $(document).ready(function () {
 
    
 
-
+    
     
 
 });
