@@ -18,12 +18,16 @@ $(document).ready(function () {
                 var article = 0;
                 var string = "";
                 //index = global ;
-
+                var rex = /<img.*?src="([^">]*\/([^">]*?))".*?>/g;
                 $.each(data.rows, function (index) {
                     //.replace(/(<([^>]+)>)/ig,"")
+                    immagine = rex.exec( data.rows[index].Testo );
+                        
+                    //console.log( "url"+urls[0] ); 
                     string = data.rows[index].Testo.substring(data.rows[index].Testo.indexOf('<h1>'), data.rows[index].Testo.indexOf("</h1>"));
-                    if(data.rows[index].Testo.includes('src="')){
-                        immagine = data.rows[index].Testo.substring(data.rows[index].Testo.indexOf('src="')+5, data.rows[index].Testo.indexOf('.jpg')+4);
+                    if(data.rows[index].Testo.includes('<img')){
+                        
+                        immagine = immagine[1];
                         
                     }
                     else{
@@ -31,8 +35,8 @@ $(document).ready(function () {
                     }
                    
                     
-                   
                     console.log("immagine"+immagine);
+                    
                     var titolo = string.substring(string.indexOf('>') + 1);
                     if (!titolo) titolo = "Empty Title";
                     //console.log('string '+string);
@@ -79,8 +83,7 @@ $(document).ready(function () {
                     counter = counter + 1;
                     global = data.rows[index].Id_A;
                     //global = index;
-                    console.log("global" + global);
-
+                   
                 });
                 //riesco a recuperare i dati nell'array come si publicano nella pagina???
             } else {
@@ -110,12 +113,14 @@ $(document).ready(function () {
                     var article = 0;
                     var string = "";
                     //index = global ;
-
+                    var rex = /<img.*?src="([^">]*\/([^">]*?))".*?>/g;
                     $.each(data.rows, function (index) {
                         //.replace(/(<([^>]+)>)/ig,"")
+                        immagine = rex.exec( data.rows[index].Testo );
                         string = data.rows[index].Testo.substring(data.rows[index].Testo.indexOf('<h1>'), data.rows[index].Testo.indexOf("</h1>"));
                         if(data.rows[index].Testo.includes('<img src="')){
-                            immagine = data.rows[index].Testo.substring(data.rows[index].Testo.indexOf('<img src="'), data.rows[index].Testo.indexOf('.jpg')+4);
+                            immagine = immagine[1];
+                             
                             
                         }
                         else{
