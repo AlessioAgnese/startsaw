@@ -110,12 +110,9 @@ $(document).ready(function () {
             success: function (response) {
                 if(response.ok){
                     $.each(response.rows, function(index){
-                        var html ='<a href="articolo.html#'+ response.rows[index].Id_A+'" class="list-item" >'+ response.rows[index].Testo.trim().toString()+'</a>';
+                        var html ='<a href="articolo.html#'+ response.rows[index].Id_A+'" class="list-item" >'+ response.rows[index].Testo+'</a>';
                         $("#searchRes").append(html);
-                        console.log(response.rows[index].Testo);
-                        //console.log(response.rows[index].User);
-                        console.log(response.rows[index].Id_A);
-                        console.log(response.rows[index].Data);});
+                        });
                 }else{
                     $("#noRes").css("visibility","visible");
                     $("#searchRes").append("Nessun risultato trovato");
