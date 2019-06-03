@@ -100,6 +100,7 @@ $(document).ready(function () {
 
     //funzione per ricercare articoli all'interno del blog
     $('#search').click(function () {
+        $("#searchRes").empty();
         $.ajax({
             url: 'http://localhost/php/searchengine.php',
             type: 'post',
@@ -110,7 +111,18 @@ $(document).ready(function () {
             success: function (response) {
                 if(response.ok){
                     $.each(response.rows, function(index){
-                        var html ='<a href="articolo.html#'+ response.rows[index].Id_A+'" class="list-item" >'+ response.rows[index].Testo+'</a>';
+                        var resarchText = $("#text").val().toString();
+                        
+                        console.log("text: "+resarchText);
+                       
+                        var resultText = response.rows[index].Testo.replace(/(<([^>]+)>|&nbsp;)/ig,"");
+                        resultText = resultText.substring(resarchText,resultText.indexOf("\n",resarchText))
+                        //fare in modo di <mark> la parola simile
+                        if (s.match(/hello.*/)) {
+                            // do something
+                          }
+                        console.log("resUUUtext: "+resultText);
+                        var html ='<a href="articolo.html#'+ response.rows[index].Id_A+'" class="list-item" >'+ resultText+'</a>';
                         $("#searchRes").append(html);
                         });
                 }else{
