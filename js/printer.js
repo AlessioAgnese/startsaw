@@ -14,7 +14,8 @@ $(document).ready(function () {
                         selector: '#articolo',
                         language_url: './js/it_IT.js',
                         language: 'it_IT',
-                        content_css : '/style.css'  
+                        content_css : '/style.css',
+                        plugins:'link image codesample table anchor wordcount',
                     });
                     $('#articolo').css("visibility", "visible");
                     $('#publish').css("visibility", "visible");

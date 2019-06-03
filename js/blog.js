@@ -13,31 +13,27 @@ $(document).ready(function () {
         },
         data: JSON.stringify({}),
         success: function (data) {
+            console.log("ciao");
             if (data.ok) {
                 counter = 0;
                 var article = 0;
                 var string = "";
-                //index = global ;
 
-                $.each(data.rows, function (index) {
-                    //.replace(/(<([^>]+)>)/ig,"")
-                    string = data.rows[index].Testo.substring(data.rows[index].Testo.indexOf('<h1>'), data.rows[index].Testo.indexOf("</h1>"));
-                    if(data.rows[index].Testo.includes('src="')){
-                        immagine = data.rows[index].Testo.substring(data.rows[index].Testo.indexOf('src="')+5, data.rows[index].Testo.indexOf('.jpg')+4);
+                $.each(data.id, function (index) {
+                    string = data.testo[index].substring(data.testo[index].indexOf('<h1>'), data.testo[index].indexOf("</h1>"));
+                    if(data.testo[index].includes('src="')){
+                        immagine = data.testo[index].substring(data.testo[index].indexOf('src="')+5, data.testo[index].indexOf('.jpg')+4);
                         
                     }
                     else{
                         immagine="./img/image-not-available.jpg";
                     }
                    
-                    
-                   
-                    console.log("immagine"+immagine);
+    
                     var titolo = string.substring(string.indexOf('>') + 1);
                     if (!titolo) titolo = "Empty Title";
-                    //console.log('string '+string);
                     var html = '<div class="column is-4 ">' +
-                        '<a href="articolo.html#' + data.rows[index].Id_A + '" class="card">' +
+                        '<a href="articolo.html#' + data.id[index] + '" class="card">' +
                         '<div class="card-content has-background-white">' +
                         '<p class="title is-5">' +
                         titolo.toUpperCase() +
@@ -52,21 +48,22 @@ $(document).ready(function () {
                         '<div class="media">' +
                         '<div class="media-left">' +
                         '<figure class="image is-48x48">' +
-                        '<img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">' +
+                        '<img id="Auth'+data.id[index]+'" src="https://bulma.io/images/placeholders/96x96.png"  alt="Placeholder image">' +
                         '</figure>' +
                         '</div>' +
                         '<div class="media-content">' +
-                        '<p class="title is-4">' + data.rows[index].User + '</p>' +
+                        '<p class="title is-4">' + data.user[index] + '</p>' +
                         '</div>' +
                         '</div>' +
                         '<div class="content ">' +
 
                         '<br>' +
-                        '<time >' + data.rows[index].Data + '</time>' +
+                        '<time >' + data.data[index] + '</time>' +
                         '</div>' +
                         '</div>' +
                         '</a>' +
                         '</div>';
+                    if(data.avatar[index]!=null) $("#Auth" + index).attr('src',data.avatar[index]);
 
                     if (counter == 0 || Number.isInteger(counter / 3)) {
 
@@ -77,7 +74,7 @@ $(document).ready(function () {
                     $("#articleColumns" + article).append(html);
 
                     counter = counter + 1;
-                    global = data.rows[index].Id_A;
+                    global = data.id[index];
                     //global = index;
                     console.log("global" + global);
 
@@ -109,23 +106,18 @@ $(document).ready(function () {
                 if (data.ok) {
                     var article = 0;
                     var string = "";
-                    //index = global ;
-
-                    $.each(data.rows, function (index) {
-                        //.replace(/(<([^>]+)>)/ig,"")
-                        string = data.rows[index].Testo.substring(data.rows[index].Testo.indexOf('<h1>'), data.rows[index].Testo.indexOf("</h1>"));
-                        if(data.rows[index].Testo.includes('<img src="')){
-                            immagine = data.rows[index].Testo.substring(data.rows[index].Testo.indexOf('<img src="'), data.rows[index].Testo.indexOf('.jpg')+4);
-                            
+                    $.each(data.id, function (index) {
+                        string = data.testo[index].substring(data.testo[index].indexOf('<h1>'), data.testo[index].indexOf("</h1>"));
+                        if(data.testo[index].includes('<img src="')){
+                            immagine = data.testo[index].substring(data.testo[index].indexOf('<img src="'), data.testo[index].indexOf('.jpg')+4);
                         }
                         else{
                             immagine="./img/image-not-available.jpg";
                         }
                         var titolo = string.substring(string.indexOf('>') + 1);
                         if (!titolo) titolo = "Empty Title";
-                        //console.log('string '+string);
                         var html = '<div class="column is-4 ">' +
-                            '<a href="articolo.html#' + data.rows[index].Id_A + '" class="card">' +
+                            '<a href="articolo.html#' + data.id[index] + '" class="card">' +
                             '<div class="card-content has-background-white">' +
                             '<p class="title is-5">' +
                             titolo.toUpperCase() +
@@ -140,38 +132,36 @@ $(document).ready(function () {
                             '<div class="media">' +
                             '<div class="media-left">' +
                             '<figure class="image is-48x48">' +
-                            '<img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">' +
+                            '<img id="auth'+data.id[index]+'" src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">' +
                             '</figure>' +
                             '</div>' +
                             '<div class="media-content">' +
-                            '<p class="title is-4">' + data.rows[index].User + '</p>' +
+                            '<p class="title is-4">' + data.user[index] + '</p>' +
                             '</div>' +
                             '</div>' +
                             '<div class="content ">' +
 
                             '<br>' +
-                            '<time >' + data.rows[index].Data + '</time>' +
+                            '<time >' + data.data[index] + '</time>' +
                             '</div>' +
                             '</div>' +
                             '</a>' +
                             '</div>';
 
+                        if(data.avatar[index]!=null) $("#auth" + data.id[index]).attr('src',data.avatar[index]);   
+                        
                         if (counter == 0 || Number.isInteger(counter / 3)) {
 
                             $("#articlesContainer").append('<div id="articleColumns' + counter + '" class="columns is-centered " style="margin-top: 2rem;margin-bottom: 2rem"></div>');
-                            //id="articleColumns" class="columns is-centered " style="margin-top: 2rem;margin-bottom: 2rem;
                             article = counter;
                         }
                         $("#articleColumns" + article).append(html);
 
                         counter = counter + 1;
-                        global = data.rows[index].Id_A;
-                        //global = index;
-                        //console.log("global"+global);
+                        global = data.id[index];
 
                     });
-                    //riesco a recuperare i dati nell'array come si publicano nella pagina???
-                } else {
+                 } else {
                     alert("errore nella pubblicazione");
                 }
             },
