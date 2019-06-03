@@ -100,6 +100,7 @@ $(document).ready(function () {
 
     //funzione per ricercare articoli all'interno del blog
     $('#search').click(function () {
+        if($("#text").val().trim().toString().length>3){
         $.ajax({
             url: 'http://localhost/php/searchengine.php',
             type: 'post',
@@ -110,8 +111,8 @@ $(document).ready(function () {
             success: function (response) {
                 if(response.ok){
                     $.each(response.rows, function(index){
-                        var html ='<a class="list-item" >'+ response.rows[index].Testo+'</a>'
-                        $("#searchRes").appen(html);
+                        var html ='<a class="list-item" href="articolo.html#'+response.rows[index].Id_A+'">'+response.rows[index].Testo+'</a>';
+                        $("#searchRes").append(html);
                         console.log(response.rows[index].Testo);
                         //console.log(response.rows[index].User);
                         console.log(response.rows[index].Id_A);
@@ -121,6 +122,7 @@ $(document).ready(function () {
                 }
             }
         });
+    }else{alert("ricerca troppo corta");}
     });
 
 //controlliamo se l'utente è loggato
