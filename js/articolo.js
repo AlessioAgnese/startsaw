@@ -72,7 +72,7 @@ $(document).ready(function() {
                                     
                                 //riesco a recuperare i dati nell'array come si publicano nella pagina???
                             } else {
-                                alert("errore nella pubblicazione");
+                                alert("nessun commento");
                             }
                         },
                         error: function(errorThrown) {     
