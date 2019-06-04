@@ -5,11 +5,11 @@ global $conn;
 $data = file_get_contents('php://input');
 $json = json_decode($data, true);
 $array=getUser($json["token"]);
-$insert = $conn->prepare("INSERT INTO Articoli(Testo,User)VALUES(:testo,:autore)");
+$insert = $conn->prepare("INSERT INTO articoli(Testo,User)VALUES(:testo,:autore)");
 $insert->bindParam(":testo", $json["articolo"]);
 $insert->bindParam(":autore",$array["utente"]);
 $insert->execute();
-$select = $conn->prepare("SELECT Id_A,Data FROM Articoli WHERE User=:user ORDER BY Data DESC LIMIT 1");
+$select = $conn->prepare("SELECT Id_A,Data FROM articoli WHERE User=:user ORDER BY Data DESC LIMIT 1");
 $select->bindParam(":user",$array["utente"]);
 $select->execute();
 if ($insert&&$select) {

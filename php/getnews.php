@@ -25,7 +25,7 @@
     } 
     function getArticle($json){
         global $conn;
-        $select = $conn->prepare("SELECT Testo,Data,User,Avatar FROM Articoli NATURAL JOIN utenti WHERE Id_A=:id");
+        $select = $conn->prepare("SELECT Testo,Data,User,Avatar,Biografia FROM articoli NATURAL JOIN utenti WHERE Id_A=:id");
         $select->bindParam(":id",$json["articolo"]);
         $select->execute();
         if($select){
@@ -37,6 +37,7 @@
                 "Testo"=>$result["Testo"],
                 "Data"=>$result["Data"],
                 "User"=>$result["User"],
+                "Bio"=>$result["Biografia"],
                 "Avatar"=>$Avatar,
             );
             echo json_encode($array);
@@ -60,7 +61,8 @@
                 $testo[$i]=$tmp[0];
                 $data[$i]=$tmp[1];
                 $user[$i]=$tmp[2];
-                $dataUrl[$i]='data:image; base64,'.base64_encode($tmp[3]);
+                if($tmp[3]!=null) {$dataUrl[$i]='data:image; base64,'.base64_encode($tmp[3]);}
+                else{$dataUrl[$i]=null;}
                 $bio[$i]=$tmp[4];
                 $i++;
             }
@@ -84,7 +86,7 @@
 
     function loadArticles($json){
         global $conn;
-        $select = $conn->prepare("SELECT Id_A,Testo,Data,User,Avatar FROM Articoli NATURAL JOIN utenti WHERE Id_A<:id ORDER BY Data DESC LIMIT 6");
+        $select = $conn->prepare("SELECT Id_A,Testo,Data FROM articoli WHERE Id_A<:id ORDER BY Data DESC LIMIT 6");
         $select->bindParam(":id",$json["idB"]);
         $select->execute();
         if($select){
@@ -94,8 +96,6 @@
                 $id[$i]=$tmp[0];
                 $testo[$i]=$tmp[1];
                 $data[$i]=$tmp[2];
-                $user[$i]=$tmp[3];
-                $dataUrl[$i]='data:image; base64,'.base64_encode($tmp[4]);
                 $i++;
             }
             if($id==null){
@@ -107,8 +107,7 @@
                         "id"=>$id,
                         "testo"=>$testo,
                         "data"=>$data,
-                        "user"=>$user,
-                        "avatar"=>$dataUrl);
+                    );
             echo json_encode($array);     
         }else{
             $array=array("ok"=>false);
@@ -119,7 +118,7 @@
 
     function getBlog(){
         global $conn;
-        $select = $conn->prepare("SELECT Id_A,Testo,Data,User,Avatar FROM Articoli NATURAL JOIN utenti ORDER BY Data DESC LIMIT 6");
+        $select = $conn->prepare("SELECT Id_A,Testo,Data FROM articoli ORDER BY Data DESC LIMIT 6");
         $select->execute();
         if($select){
             $i=0;
@@ -127,16 +126,13 @@
                 $id[$i]=$tmp[0];
                 $testo[$i]=$tmp[1];
                 $data[$i]=$tmp[2];
-                $user[$i]=$tmp[3];
-                $dataUrl[$i]='data:image; base64,'.base64_encode($tmp[4]);
                 $i++;
             }
             $array=array("ok"=>true,
                         "id"=>$id,
                         "testo"=>$testo,
                         "data"=>$data,
-                        "user"=>$user,
-                        "avatar"=>$dataUrl);
+                    );
             echo json_encode($array);       
         }else{
             $array=array("ok"=>false);

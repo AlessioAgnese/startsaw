@@ -36,8 +36,8 @@ CREATE TABLE Ruoli (
 
 INSERT INTO Ruoli (Id_R, Ruolo) VALUES
 (1, 'Utente'),
-(2, 'Moderatore'),
-(3, 'Admin');
+(2, 'Admin');
+
 
 CREATE TABLE Utenti (
   User varchar(16) NOT NULL,

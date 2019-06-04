@@ -205,7 +205,7 @@ $('#sendMail').click(function () {
                             console.log(errorThrown);
                         }
                     })
-                    if (data.perm > 2) {
+                    if (data.perm > 1) {
                         $("#write").css("display", "block");
                         $('#write').attr("href", "writearticle.html");
                     }
