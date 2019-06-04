@@ -211,7 +211,8 @@ $(document).ready(function () {
                                 });
                                     
                             } else {
-                                alert("nessun commento");
+                                //riesci a mettere una scritta con "nessun commento fin ora?"
+                                //alert("nessun commento");
                             }
                         },
                         error: function(errorThrown) {     
