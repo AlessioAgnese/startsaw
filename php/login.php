@@ -4,7 +4,7 @@
     global $conn;
     $content = file_get_contents('php://input');
     $json = json_decode($content,true);
-    $select = $conn->prepare("SELECT User,Psw,Id_R FROM Utenti WHERE User = :user");
+    $select = $conn->prepare("SELECT User,Psw,Id_R FROM utenti WHERE User = :user");
     $select->bindParam(":user",$json["name"]);
     $select->execute();
     if($select){

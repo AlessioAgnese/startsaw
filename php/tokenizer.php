@@ -10,7 +10,7 @@
             "data"=>$date,
         );
         $json=password_hash(json_encode($array), PASSWORD_BCRYPT);
-        $insert = $conn->prepare("UPDATE Utenti SET token = :token WHERE User = :user");
+        $insert = $conn->prepare("UPDATE utenti SET token = :token WHERE User = :user");
         $insert->bindParam(":token",$json);
         $insert->bindParam(":user",$utente);
         $insert->execute();
@@ -31,7 +31,7 @@
 
     function getUser($token){
         global $conn;
-        $user = $conn->prepare("SELECT User,Id_R,token FROM Utenti WHERE token =:token");
+        $user = $conn->prepare("SELECT User,Id_R,token FROM utenti WHERE token =:token");
         $user->execute(array(":token"=>$token));
         if($user){
             $result=$user->fetch(PDO::FETCH_ASSOC);
@@ -53,7 +53,7 @@
     function getToken($user){
         global $conn;
         $user=substr($user, 1);
-        $select = $conn->prepare("SELECT Token FROM Utenti WHERE User =:user");
+        $select = $conn->prepare("SELECT Token FROM utenti WHERE User =:user");
         $select->bindParam(":user",$user);
         $select->execute();
         if($select){
