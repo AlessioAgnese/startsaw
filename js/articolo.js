@@ -20,7 +20,7 @@ $(document).ready(function () {
 
         success: function (data) {
             if (data.ok) {
-                $("#contentArticle").append(data.Testo + '<br><time>' + data.Data + '</time>');
+                $("#contentArticle").append(data.Testo + '<br><time>' + data.Data.substring(0,data.Data.length-3) + '</time>');
                 $("#author").append(data.User).attr("href", "userprofile.html#" + data.User);
                 if (data.Avatar != null) $("#avt").attr("src", data.Avatar);
             } else {

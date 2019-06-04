@@ -46,25 +46,14 @@ $(document).ready(function () {
                         '</figure>' +
                         '</div>' +
                         '<div class="card-content has-background-white">' +
-                        /*'<div class="media">' +
-                        '<div class="media-left">' +
-                        '<figure class="image is-48x48">' +
-                        '<img id="auth'+ index +'" src="https://bulma.io/images/placeholders/96x96.png"  alt="Placeholder image">' +
-                        '</figure>' +
-                        '</div>' +
-                        '<div class="media-content">' +
-                        '<p  class="title is-4">' + data.user[index] + '</p>' +
-                        '</div>' +
-                        '</div>' +*/
                         '<div class="content ">' +
-
                         '<br>' +
                         '<time >' + data.data[index].substring(0,data.data[index].length-3) + '</time>' +
                         '</div>' +
                         '</div>' +
                         '</a>' +
                         '</div>';
-                    if(data.avatar[index]!=null) $("#auth" + index).attr('src',data.avatar[index]);
+                    
                     
                     if (counter == 0 || Number.isInteger(counter / 3)) {
 
@@ -132,27 +121,15 @@ $(document).ready(function () {
                             '</figure>' +
                             '</div>' +
                             '<div class="card-content has-background-white">' +
-                            '<div class="media">' +
-                            '<div class="media-left">' +
-                            '<figure class="image is-48x48">' +
-                            '<img id="auth'+counter+'" src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">' +
-                            '</figure>' +
-                            '</div>' +
-                            '<div class="media-content">' +
-                            '<p class="title is-4">' + data.user[index] + '</p>' +
-                            '</div>' +
-                            '</div>' +
                             '<div class="content ">' +
 
                             '<br>' +
-                            '<time >' + data.data[index] + '</time>' +
+                            '<time >' + data.data[index].substring(0,data.data[index].length-3) + '</time>' +
                             '</div>' +
                             '</div>' +
                             '</a>' +
                             '</div>';
 
-                        if(data.avatar[index]!=null) $("#auth" + counter).attr('src',data.avatar[index]);   
-                        
                         if (counter == 0 || Number.isInteger(counter / 3)) {
 
                             $("#articlesContainer").append('<div id="articleColumns' + counter + '" class="columns is-centered " style="margin-top: 2rem;margin-bottom: 2rem"></div>');
