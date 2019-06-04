@@ -167,7 +167,8 @@ $(document).ready(function () {
 
                     });
                  } else {
-                    alert("errore nella pubblicazione");
+                     $("#contLoad").html("<p class='subtitle has-text-danger'>Non ci sono altri articoli da caricare</p>");
+                    $("#loadArticles").css("display","none");
                 }
             },
             error: function (errorThrown) {
