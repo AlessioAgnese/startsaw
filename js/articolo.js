@@ -87,7 +87,7 @@ $(document).ready(function () {
                         '<strong id ="userName">' + data.user[index] + '</strong>' +
                         '<br>' +
                         '<p id="comment">' + data.testo[index] + '</p>' +
-                        '<small>' + data.data[index] + '</small>' +
+                        '<small>' + data.data[index].substring(0,data.data[index].length-3) + '</small>' +
                         '<br>' +
                         '</p>' +
                         '</div>' +
@@ -229,35 +229,4 @@ $(document).ready(function () {
                         }
                     })
                 }
-            $('#publish').click(function() {
-                tmp=tinymce.get('commento').getContent().toString().length;
-               if(tmp>0 && tmp<500){
-                $.ajax({
-                    url: './php/pubcomment.php',
-                    type: 'POST',
-                    dataType: 'json',
-                    data: JSON.stringify({
-                        commento: tinymce.get("commento").getContent(),
-                        token: localStorage.getItem('token'),
-                        id: GetURLParameter('a'),
-                    }),
-                    success: function(data) {
-                        if (data.ok) {
-                            alert("Commento pubblicato");
-                            location.reload();
-                        } else {
-                            alert("errore nella pubblicazione");
-                        }
-                    },
-                    error: function(errorThrown) {
-                        console.log(errorThrown);
-                    }
-                })
-               }else{
-                   if(tmp>0)
-                    alert("commento troppo lungo");
-                   else 
-                    alert("Impossibile pubblicare articolo vuoto");
-                   }
-            })
         });

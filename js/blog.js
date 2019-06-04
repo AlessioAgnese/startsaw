@@ -1,7 +1,7 @@
 
 $(document).ready(function () {
     var global;
-    var counter ;
+    var counter = 0;
 
     $.ajax({
         url: './php/getnews.php',
@@ -12,12 +12,12 @@ $(document).ready(function () {
         },
         data: JSON.stringify({}),
         success: function (data) {
-            console.log("ciao");
             if (data.ok) {
-                counter = 0;
+                
                 var article = 0;
                 var string = "";
                 var rex = /<img.*?src="([^">]*\/([^">]*?))".*?>/g;
+                
                 $.each(data.id, function (index) {
                     immagine = rex.exec( data.testo[index] );
                     string = data.testo[index].substring(data.testo[index].indexOf('<h1>'), data.testo[index].indexOf("</h1>"));
@@ -46,26 +46,26 @@ $(document).ready(function () {
                         '</figure>' +
                         '</div>' +
                         '<div class="card-content has-background-white">' +
-                        '<div class="media">' +
+                        /*'<div class="media">' +
                         '<div class="media-left">' +
                         '<figure class="image is-48x48">' +
-                        '<img id="Auth'+data.id[index]+'" src="https://bulma.io/images/placeholders/96x96.png"  alt="Placeholder image">' +
+                        '<img id="auth'+ index +'" src="https://bulma.io/images/placeholders/96x96.png"  alt="Placeholder image">' +
                         '</figure>' +
                         '</div>' +
                         '<div class="media-content">' +
                         '<p  class="title is-4">' + data.user[index] + '</p>' +
                         '</div>' +
-                        '</div>' +
+                        '</div>' +*/
                         '<div class="content ">' +
 
                         '<br>' +
-                        '<time >' + data.data[index] + '</time>' +
+                        '<time >' + data.data[index].substring(0,data.data[index].length-3) + '</time>' +
                         '</div>' +
                         '</div>' +
                         '</a>' +
                         '</div>';
-                    if(data.avatar[index]!=null) $("#Auth" + index).attr('src',data.avatar[index]);
-
+                    if(data.avatar[index]!=null) $("#auth" + index).attr('src',data.avatar[index]);
+                    
                     if (counter == 0 || Number.isInteger(counter / 3)) {
 
                         $("#articlesContainer").append('<div id="articleColumns' + counter + '" class="columns is-centered " style="margin-top: 2rem;margin-bottom: 2rem"></div>');
@@ -73,7 +73,7 @@ $(document).ready(function () {
                     }
                     $("#articleColumns" + article).append(html);
 
-                    counter = counter + 1;
+                    counter++;
                     global = data.id[index];
                    
                 });
@@ -105,10 +105,11 @@ $(document).ready(function () {
                     var article = 0;
                     var string = "";
                     var rex = /<img.*?src="([^">]*\/([^">]*?))".*?>/g;
+
                     $.each(data.id, function (index) {
                         immagine = rex.exec( data.testo[index] );
                         string = data.testo[index].substring(data.testo[index].indexOf('<h1>'), data.testo[index].indexOf("</h1>"));
-                        if(data.rows[index].Testo.includes('<img src="')){
+                        if(data.testo[index].includes('<img src="')){
                             immagine = immagine[1];
                              
                             
@@ -134,7 +135,7 @@ $(document).ready(function () {
                             '<div class="media">' +
                             '<div class="media-left">' +
                             '<figure class="image is-48x48">' +
-                            '<img id="auth'+data.id[index]+'" src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">' +
+                            '<img id="auth'+counter+'" src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">' +
                             '</figure>' +
                             '</div>' +
                             '<div class="media-content">' +
@@ -150,7 +151,7 @@ $(document).ready(function () {
                             '</a>' +
                             '</div>';
 
-                        if(data.avatar[index]!=null) $("#auth" + data.id[index]).attr('src',data.avatar[index]);   
+                        if(data.avatar[index]!=null) $("#auth" + counter).attr('src',data.avatar[index]);   
                         
                         if (counter == 0 || Number.isInteger(counter / 3)) {
 
@@ -159,7 +160,7 @@ $(document).ready(function () {
                         }
                         $("#articleColumns" + article).append(html);
 
-                        counter = counter + 1;
+                        counter++;
                         global = data.id[index];
 
                     });
