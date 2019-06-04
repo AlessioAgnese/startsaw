@@ -3,7 +3,7 @@ include_once('dbconfig.php');
 global $conn;
 $data = file_get_contents('php://input');
 $json = json_decode($data, true);
-$select = $conn->prepare("SELECT * FROM Articoli WHERE Testo LIKE :keyword");
+$select = $conn->prepare("SELECT * FROM articoli WHERE Testo LIKE :keyword");
 $param = "%" . $json["text"] . "%";
 $select->bindParam(":keyword",$param);
 $select->execute();
