@@ -45,6 +45,35 @@ $(document).ready(function () {
         $("#upLetter,#lowLetter,#number,#length").removeClass('has-text-success').addClass('has-text-danger');
     });
 
+
+//funzione per gestire la mail WORK IN PROGRESS
+/*
+$('#sendMail').click(function () {
+    $.ajax({
+        url: 'http://localhost/php/mail.php',
+        type: 'POST',
+        dataType: 'json',
+        data: JSON.stringify({
+            mail: $("#mailCon").val().trim().toString()
+        }),
+        success: function (data) {
+            if (data.ok) {
+               
+                
+            } else {
+               
+            }
+        },
+        error: function (errorThrown) {
+            console.log(errorThrown);
+        }
+    })
+});
+
+*/
+
+
+
 //funzione per gestire il login
     $('#submitlogin').click(function () {
         $.ajax({
