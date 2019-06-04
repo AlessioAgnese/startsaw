@@ -5,7 +5,7 @@ $(document).ready(function () {
     var counter ;
 
     $.ajax({
-        url: 'http://localhost/php/getnews.php',
+        url: './php/getnews.php',
         type: 'GET',
         dataType: 'json',
         beforeSend: function (xhr) {
@@ -93,7 +93,7 @@ $(document).ready(function () {
     $("#loadArticles").click(function () {
         
         $.ajax({
-            url: 'http://localhost/php/getnews.php',
+            url: './php/getnews.php',
             type: 'POST',
             dataType: 'json',
             beforeSend: function (xhr) {

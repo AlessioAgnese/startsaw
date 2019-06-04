@@ -1,5 +1,20 @@
-$(document).ready(function () {
+function GetURLParameter(){
+    var id= window.location.href.substr(window.location.href.indexOf('#')+1);
+    if(id != undefined){
+        return id;
+    }
+    else{
+        alert("errore");
+    }
+}
+$(document).on('loadstar' , function(){
 
+})
+$(document).on('load' , function(){
+
+})
+$(document).ready(function () {
+    //controllo permessi
     if ('token' in localStorage) {
         $.ajax({
             url: './php/checklogin.php',
@@ -32,35 +47,43 @@ $(document).ready(function () {
         alert("Devi effetuare il login");
         window.location.replace("http://localhost");
     }
+    $.ajax({
+        url: './php/getArt.php',
+        type: 'POST',
+        dataType: 'json',
+        data: JSON.stringify({
+            id: GetURLParameter(),}),
+            success: function (data) {
+                if (data.ok) {
+                    $('#articolo').html(data.testo.toString());
+                }
+                    
+                 else {
+                     alert("error nel get");
+                    }
+            },
+            error: function (errorThrown) {
+                console.log(errorThrown);
+            }
+})
 
+    
 
+    //funzione che pubblica
     $('#publish').click(function () {
         tmp = tinymce.get('articolo').getContent().toString().length;
         if (tmp > 0 && tmp < 32000) {
             $.ajax({
-                url: './php/pubarticle.php',
+                url: './php/editArt.php',
                 type: 'POST',
                 dataType: 'json',
                 data: JSON.stringify({
-                    articolo: tinymce.get("articolo").getContent(),
-                    token: localStorage.getItem('token')
-                }),
+                    id: GetURLParameter(),
+                    articolo: tinymce.get("articolo").getContent(),}),
                 success: function (data) {
                     if (data.ok) {
-                        $("#notifyArticle").removeClass("is-danger").addClass("is-link");
-                        $("#notifTextA").text("Articolo Pubblicato");
-                        $("#notifyArticle").css("display", "block");
-                        $("html, body").animate({scrollTop: 0}, 1000);
-                        setTimeout(function(){
-                        window.location.replace("http://localhost/articolo.html#"+data.id);
-                        },1000);
-                        
-                    } else {
-                        $("#notifyArticle").removeClass("is-link").addClass("is-danger");
-                        $("#notifTextA").text("Errore nella pubblicazione");
-                        $("#notifyArticle").css("display", "block");
-                        $("html, body").animate({scrollTop: 0}, 1000);
-                    }
+                        console.log(tinymce.get("articolo").getContent());
+                        windows.location.reaload();}
                 },
                 error: function (errorThrown) {
                     console.log(errorThrown);
