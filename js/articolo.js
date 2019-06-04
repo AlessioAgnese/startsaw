@@ -22,6 +22,8 @@ $(document).ready(function () {
             if (data.ok) {
                 $("#contentArticle").append(data.Testo + '<br><time>' + data.Data + '</time>');
                 $("#author").append(data.User).attr("href", "userprofile.html#" + data.User);
+                console.log(data.Biografia);
+                $("#bio").text(data.Biografia);
                 if (data.Avatar != null) $("#avt").attr("src", data.Avatar);
             } else {
                 alert("errore nella pubblicazione");
@@ -72,9 +74,9 @@ $(document).ready(function () {
         }),
         success: function (data) {
             if (data.ok) {
-                var c=0;
+                var c = 0;
                 $.each(data.user, function (index) {
-                    
+
                     var html = '<article class="media">' +
                         '<figure class="media-left">' +
                         '<p class="image is-64x64">' +
@@ -100,8 +102,8 @@ $(document).ready(function () {
                 });
 
             } else {
-                 //riesci a mettere una scritta con "nessun commento fin ora?"
-                 //alert("nessun commento");
+                //riesci a mettere una scritta con "nessun commento fin ora?"
+                //alert("nessun commento");
             }
         },
         error: function (errorThrown) {
@@ -175,89 +177,98 @@ $(document).ready(function () {
             })
         }
     })
-           
-                    $('#edit').click(function () {
-                        window.location.replace("editArt.html#"+GetURLParameter()+"");
-                    });
-                    
-                    $('#delete').click(function () {
-                        $.ajax({
-                            url: './php/delArt.php',
-                            type: 'post',
-                            dataType: 'json',
-                            data: JSON.stringify({
-                                id: GetURLParameter(),
-                            }),
-                            success: function (response) {
-                                if(response.ok){
-                                    alert("Articolo cancellato ti stiamo riporatando al blog");
-                                   // window.location.replace("blog.html");
-                                }else{
-                                    alert("Qualcosa e andato storto, riprova");
-                                }
-                            }
-                        });
-                    });
-                  
-                    
-        if('token' in localStorage){
-            $.ajax({
-                     url:'./php/checklogin.php',
-                        type:'post',
-                        dataType:'json',
-                        data:JSON.stringify({
-                            token:localStorage.getItem('token')
-                        }),
-                        success:function(data){
-                            if(data.ok && data.utente != null && data.token!="logout"){                         
-                                tinymce.init({
-                                    selector: 'textarea',
-                                    language_url: './js/it_IT.js',
-                                    language: 'it_IT',});
-                                    $('#writeComment').css("visibility", "visible");
-                                    if(data.perm>2){
-                                        $('#edit').css("visibility", "visible");    
-                                        $('#delete').css("visibility", "visible");
-                                    }
-                            }
-                            else{
-                                alert("Sessione invalida, consigliamo di rifare il login per poter commentare");
-                            }
-                        },
-                        error:function(errorThrown){
-                            console.log(errorThrown);
-                        }
-                    })
+
+    $('#edit').click(function () {
+        window.location.replace("editArt.html#" + GetURLParameter() + "");
+    });
+
+    $('#delete').click(function () {
+        $.ajax({
+            url: './php/delArt.php',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                id: GetURLParameter(),
+            }),
+            success: function (response) {
+                if (response.ok) {
+                    $("#notifyArticle").removeClass("is-danger").addClass("is-link");
+                    $("#notifTextA").text("Articolo Eliminato ,ti stiamo ripordando alla pagina principale");
+                    $("#notifyArticle").css("display", "block");
+                    $("html, body").animate({
+                        scrollTop: 0
+                    }, 1000);
+                    setTimeout(function () {
+                        window.location.replace("./blog.html");
+                    }, 1000);
+                } else {
+                    $("#notifyArticle").removeClass("is-link").addClass("is-danger");
+                    $("#notifTextA").text("Qualcosa è andato storto, riprova");
+                    $("#notifyArticle").css("display", "block");
                 }
-            $('#publish').click(function() {
-                tmp=tinymce.get('commento').getContent().toString().length;
-               if(tmp>0 && tmp<500){
-                $.ajax({
-                    url: './php/pubcomment.php',
-                    type: 'POST',
-                    dataType: 'json',
-                    data: JSON.stringify({
-                        commento: tinymce.get("commento").getContent(),
-                        token: localStorage.getItem('token'),
-                        id: GetURLParameter('a'),
-                    }),
-                    success: function(data) {
-                        if (data.ok) {
-                            alert("Commento pubblicato");
-                            location.reload();
-                        } else {
-                            alert("errore nella pubblicazione");
-                        }
-                    },
-                    error: function(errorThrown) {
-                        console.log(errorThrown);
-                    }
-                })
-               }else{
-                   if(tmp>0)
-                    alert("commento troppo lungo");
-                   else 
-                    alert("Impossibile pubblicare articolo vuoto");
-                   }
-            })
+            }
         });
+    });
+
+
+    if ('token' in localStorage) {
+        $.ajax({
+            url: './php/checklogin.php',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                token: localStorage.getItem('token')
+            }),
+            success: function (data) {
+                if (data.ok && data.utente != null && data.token != "logout") {
+                    tinymce.init({
+                        selector: 'textarea',
+                        language_url: './js/it_IT.js',
+                        language: 'it_IT',
+                    });
+                    $('#writeComment').css("visibility", "visible");
+                    if (data.perm > 2) {
+                        $('#edit').css("visibility", "visible");
+                        $('#delete').css("visibility", "visible");
+                    }
+                } else {
+                    alert("Sessione invalida, consigliamo di rifare il login per poter commentare");
+                }
+            },
+            error: function (errorThrown) {
+                console.log(errorThrown);
+            }
+        })
+    }
+    $('#publish').click(function () {
+        tmp = tinymce.get('commento').getContent().toString().length;
+        if (tmp > 0 && tmp < 500) {
+            $.ajax({
+                url: './php/pubcomment.php',
+                type: 'POST',
+                dataType: 'json',
+                data: JSON.stringify({
+                    commento: tinymce.get("commento").getContent(),
+                    token: localStorage.getItem('token'),
+                    id: GetURLParameter('a'),
+                }),
+                success: function (data) {
+                    if (data.ok) {
+                        alert("Commento pubblicato");
+                        location.reload();
+                    } else {
+                        alert("errore nella pubblicazione");
+                    }
+                },
+                error: function (errorThrown) {
+                    console.log(errorThrown);
+                }
+            })
+        } else {
+            if (tmp > 0)
+                alert("commento troppo lungo");
+            else
+                alert("Impossibile pubblicare articolo vuoto");
+        }
+    })
+});

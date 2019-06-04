@@ -129,8 +129,9 @@ $('#sendMail').click(function () {
         })
     });
 
-    //funzione per ricercare articoli all'interno del blog
-    $('#search').click(function () {
+    
+     //funzione per ricercare articoli all'interno del blog
+     $('#search').click(function () {
         $("#searchRes").empty();
         if($("#text").val().trim().toString().length>3){
         $.ajax({
@@ -150,9 +151,7 @@ $('#sendMail').click(function () {
                         var resultText = response.rows[index].Testo.replace(/(<([^>]+)>|&nbsp;)/ig,"");
                         resultText = resultText.substring(resarchText,resultText.indexOf("\n",resarchText))
                         //fare in modo di <mark> la parola simile
-                        if (s.match(/hello.*/)) {
-                            // do something
-                          }
+                        
                         console.log("resUUUtext: "+resultText);
                         var html ='<a href="articolo.html#'+ response.rows[index].Id_A+'" class="list-item" >'+ resultText+'</a>';
                         $("#searchRes").append(html);
@@ -163,7 +162,10 @@ $('#sendMail').click(function () {
                 }
             }
         });
-    }else{alert("ricerca troppo corta");}
+    }else{
+        $("#noRes").css("visibility","visible");
+        $("#searchRes").append("ricerca minima di 4 lettere");
+        }
     });
 
 //controlliamo se l'utente è loggato

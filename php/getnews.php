@@ -50,7 +50,7 @@
 
     function getComments($json){
         global $conn;
-        $select = $conn->prepare("SELECT Testo,Data,User,Avatar FROM commenti NATURAL JOIN utenti WHERE Id_A=:id");
+        $select = $conn->prepare("SELECT Testo,Data,User,Avatar,Biografia FROM commenti NATURAL JOIN utenti WHERE Id_A=:id");
         $select->bindParam(":id",$json["articolo"]);
         $select->execute();
         if($select){
@@ -61,6 +61,7 @@
                 $data[$i]=$tmp[1];
                 $user[$i]=$tmp[2];
                 $dataUrl[$i]='data:image; base64,'.base64_encode($tmp[3]);
+                $bio[$i]=$tmp[4];
                 $i++;
             }
             if($user==null){
@@ -72,7 +73,8 @@
                         "testo"=>$testo,
                         "data"=>$data,
                         "user"=>$user,
-                        "avatar"=>$dataUrl);
+                        "avatar"=>$dataUrl,
+                        "biografia"=>$bio);
             echo json_encode($array);     
         }else{
             $array = array("ok" => false);
