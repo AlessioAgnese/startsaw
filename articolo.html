@@ -290,26 +290,32 @@
                         </div>
                 </div>
         </nav>
+        
         <br>
-        <div class="container is-fluid " style="margin-top:2rem">
-
+        
 
 
                 <div class="container is-centered box " style="margin-top: 1rem">
+                                <div id="notifyArticle" class="notification has-text-centered " style="display: none">
+                                                <button id="closeNotif" class="delete"></button>
+                                                <p id="notifTextA"></p>
+                                        </div>
+                                <div class="container is-fluid " style="margin-top:2rem">
+                        
                         <div class="columns is-centered">
                                 <div id="contentArticle" class="column is-9">
 
                                 </div>
                                 <br>
-                                
+
                         </div>
                         <div class="columns is-centered">
-                                        <div class="column is-9">
-                                                <button id="edit" class="button is-link">Modifica</button>
-                                                <button id="delete" class="button is-danger">Elimina</button>
-                                        </div>
-                                      
+                                <div class="column is-9">
+                                        <button id="edit" class="button is-link">Modifica</button>
+                                        <button id="delete" class="button is-danger">Elimina</button>
                                 </div>
+
+                        </div>
                         <div class="columns is-centered">
                                 <div class="column is-9 has-background-info is-fluid ">
 
@@ -323,7 +329,7 @@
                                                 </div>
                                                 <div class="media-content">
                                                         <a id="author" class="title is-4"></a>
-                                                        
+
                                                         <div>
                                                                 <p id="bio"></p>
                                                         </div>
