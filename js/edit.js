@@ -7,12 +7,6 @@ function GetURLParameter(){
         alert("errore");
     }
 }
-$(document).on('loadstar' , function(){
-
-})
-$(document).on('load' , function(){
-
-})
 $(document).ready(function () {
     //controllo permessi
     if ('token' in localStorage) {
@@ -82,7 +76,7 @@ $(document).ready(function () {
                     articolo: tinymce.get("articolo").getContent(),}),
                 success: function (data) {
                     if (data.ok) {
-                        console.log(tinymce.get("articolo").getContent());
+
                         windows.location.reaload();}
                 },
                 error: function (errorThrown) {
