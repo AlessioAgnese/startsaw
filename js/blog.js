@@ -1,5 +1,4 @@
-//WORKIN PROGRESS
-//var global ;
+
 $(document).ready(function () {
     var global;
     var counter ;
@@ -70,17 +69,15 @@ $(document).ready(function () {
                     if (counter == 0 || Number.isInteger(counter / 3)) {
 
                         $("#articlesContainer").append('<div id="articleColumns' + counter + '" class="columns is-centered " style="margin-top: 2rem;margin-bottom: 2rem"></div>');
-                        //id="articleColumns" class="columns is-centered " style="margin-top: 2rem;margin-bottom: 2rem;
                         article = counter;
                     }
                     $("#articleColumns" + article).append(html);
 
                     counter = counter + 1;
                     global = data.id[index];
-                    //global = index;
                    
                 });
-                //riesco a recuperare i dati nell'array come si publicano nella pagina???
+
             } else {
                 alert("errore nella pubblicazione");
             }

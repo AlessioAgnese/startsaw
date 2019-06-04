@@ -93,7 +93,7 @@ $(document).ready(function() {
                             success: function (response) {
                                 if(response.ok){
                                     alert("Articolo cancellato ti stiamo riporatando al blog");
-                                    window.location.replace("blog.html");
+                                   // window.location.replace("blog.html");
                                 }else{
                                     alert("Qualcosa e andato storto, riprova");
                                 }
