@@ -122,7 +122,6 @@ $(document).ready(function () {
                             '</div>' +
                             '<div class="card-content has-background-white">' +
                             '<div class="content ">' +
-
                             '<br>' +
                             '<time >' + data.data[index].substring(0,data.data[index].length-3) + '</time>' +
                             '</div>' +

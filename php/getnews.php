@@ -25,7 +25,7 @@
     } 
     function getArticle($json){
         global $conn;
-        $select = $conn->prepare("SELECT Testo,Data,User,Avatar FROM articoli NATURAL JOIN utenti WHERE Id_A=:id");
+        $select = $conn->prepare("SELECT Testo,Data,User,Avatar,Biografia FROM articoli NATURAL JOIN utenti WHERE Id_A=:id");
         $select->bindParam(":id",$json["articolo"]);
         $select->execute();
         if($select){
@@ -37,6 +37,7 @@
                 "Testo"=>$result["Testo"],
                 "Data"=>$result["Data"],
                 "User"=>$result["User"],
+                "Bio"=>$result["Biografia"],
                 "Avatar"=>$Avatar,
             );
             echo json_encode($array);
@@ -60,7 +61,8 @@
                 $testo[$i]=$tmp[0];
                 $data[$i]=$tmp[1];
                 $user[$i]=$tmp[2];
-                $dataUrl[$i]='data:image; base64,'.base64_encode($tmp[3]);
+                if($tmp[3]!=null) {$dataUrl[$i]='data:image; base64,'.base64_encode($tmp[3]);}
+                else{$dataUrl[$i]=null;}
                 $i++;
             }
             if($user==null){

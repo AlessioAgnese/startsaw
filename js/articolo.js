@@ -21,6 +21,7 @@ $(document).ready(function () {
         success: function (data) {
             if (data.ok) {
                 $("#contentArticle").append(data.Testo + '<br><time>' + data.Data.substring(0,data.Data.length-3) + '</time>');
+                $("#bio").append(data.Bio);
                 $("#author").append(data.User).attr("href", "userprofile.html#" + data.User);
                 if (data.Avatar != null) $("#avt").attr("src", data.Avatar);
             } else {
@@ -78,13 +79,17 @@ $(document).ready(function () {
                     var html = '<article class="media">' +
                         '<figure class="media-left">' +
                         '<p class="image is-64x64">' +
-                        '<img id="userImg' + c + '" src="https://bulma.io/images/placeholders/128x128.png">' +
+                        '<img id="userImg' + c + '" src="./img/default-user.jpg">' +
                         '</p>' +
                         '</figure>' +
                         '<div class="media-content">' +
                         '<div class="content">' +
                         '<p>' +
-                        '<strong id ="userName">' + data.user[index] + '</strong>' +
+                        '<strong id ="userName">' +
+                        '<a href="userprofile.html#' + data.user[index] + '">' + 
+                        data.user[index] + 
+                        '</a>' +
+                        '</strong>' +
                         '<br>' +
                         '<p id="comment">' + data.testo[index] + '</p>' +
                         '<small>' + data.data[index].substring(0,data.data[index].length-3) + '</small>' +
@@ -95,7 +100,7 @@ $(document).ready(function () {
                         '</article>';
                     $("#comments").append(html);
 
-                    if (data.avatar[index] != null) $("#userImg" + c).attr('src', data.avatar[index]);
+                    if (data.avatar[index] != null) {$("#userImg" + c).attr('src', data.avatar[index]);}
                     c++;
                 });
 
