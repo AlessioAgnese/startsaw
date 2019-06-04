@@ -6,7 +6,6 @@ try {
     $conn = new PDO($dsn, $username, $password);
 } catch (PDOException $Exception) {
     try {
-        $dsn = 'mysql:host=localhost;dbname=S4366276';
         $username = 'root';
         $password = '';
         $conn = new PDO($dsn, $username, $password);
