@@ -6,7 +6,7 @@
     $password = '';
         
 try {
-    $conn = new PDO($dsn, $username, $password); // PDO Driver DSN. Throws A PDOException.
+    $conn = new PDO($dsn, $username, $password);
 }
 catch( PDOException $Exception ) {
     throw new MyDatabaseException( $Exception->getMessage( ) , $Exception->getCode( ) );

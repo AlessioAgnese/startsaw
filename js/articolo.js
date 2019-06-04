@@ -9,7 +9,7 @@ function GetURLParameter(){
     }
 $(document).ready(function() {
     $.ajax({
-                url: 'http://localhost/php/getnews.php',
+                url: './php/getnews.php',
                 type: 'POST',
                 dataType: 'json',
                 beforeSend: function (xhr) {
@@ -34,7 +34,7 @@ $(document).ready(function() {
             })
             
             $.ajax({
-                        url: 'http://localhost/php/getnews.php',
+                        url: './php/getnews.php',
                         type: 'POST',
                         dataType: 'json',
                         beforeSend: function (xhr) {
@@ -70,7 +70,6 @@ $(document).ready(function() {
                                     if(data.avatar[index]!=null)$("#userImg" + index).attr('src',data.avatar[index]);    
                                 });
                                     
-                                //riesco a recuperare i dati nell'array come si publicano nella pagina???
                             } else {
                                 alert("nessun commento");
                             }
@@ -79,10 +78,33 @@ $(document).ready(function() {
                             console.log(errorThrown);
                         }
                     })
+                    $('#edit').click(function () {
+                        window.location.replace("editArt.html#"+GetURLParameter()+"");
+                    });
+                    
+                    $('#delete').click(function () {
+                        $.ajax({
+                            url: './php/delArt.php',
+                            type: 'post',
+                            dataType: 'json',
+                            data: JSON.stringify({
+                                id: GetURLParameter(),
+                            }),
+                            success: function (response) {
+                                if(response.ok){
+                                    alert("Articolo cancellato ti stiamo riporatando al blog");
+                                    window.location.replace("blog.html");
+                                }else{
+                                    alert("Qualcosa e andato storto, riprova");
+                                }
+                            }
+                        });
+                    });
+                  
                     
         if('token' in localStorage){
             $.ajax({
-                     url:'http://localhost/php/checklogin.php',
+                     url:'./php/checklogin.php',
                         type:'post',
                         dataType:'json',
                         data:JSON.stringify({
@@ -95,6 +117,10 @@ $(document).ready(function() {
                                     language_url: './js/it_IT.js',
                                     language: 'it_IT',});
                                     $('#writeComment').css("visibility", "visible");
+                                    if(data.perm>2){
+                                        $('#edit').css("visibility", "visible");    
+                                        $('#delete').css("visibility", "visible");
+                                    }
                             }
                             else{
                                 alert("Sessione invalida, consigliamo di rifare il login per poter commentare");
@@ -109,7 +135,7 @@ $(document).ready(function() {
                 tmp=tinymce.get('commento').getContent().toString().length;
                if(tmp>0 && tmp<500){
                 $.ajax({
-                    url: 'http://localhost/php/pubcomment.php',
+                    url: './php/pubcomment.php',
                     type: 'POST',
                     dataType: 'json',
                     data: JSON.stringify({

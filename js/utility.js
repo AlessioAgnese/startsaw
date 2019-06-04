@@ -47,8 +47,10 @@ $(document).ready(function () {
 
 //funzione per gestire il login
     $('#submitlogin').click(function () {
+        console.log($('#usernameL').val().trim().toString());
+        console.log($('#pwdL').val());
         $.ajax({
-            url: 'http://localhost/php/login.php',
+            url: './php/login.php',
             type: "POST",
             dataType: 'json',
             data: JSON.stringify({
@@ -75,7 +77,7 @@ $(document).ready(function () {
     $(document).ready(function () {
         $('#submitRegister').click(function () {
             $.ajax({
-                url: 'http://localhost/php/register.php',
+                url: './php/register.php',
                 type: 'POST',
                 dataType: 'json',
                 data: JSON.stringify({
@@ -102,7 +104,7 @@ $(document).ready(function () {
     $('#search').click(function () {
         if($("#text").val().trim().toString().length>3){
         $.ajax({
-            url: 'http://localhost/php/searchengine.php',
+            url: './php/searchengine.php',
             type: 'post',
             dataType: 'json',
             data: JSON.stringify({
@@ -127,7 +129,7 @@ $(document).ready(function () {
 
     if ('token' in localStorage) {
         $.ajax({
-            url: 'http://localhost/php/checklogin.php',
+            url: './php/checklogin.php',
             type: 'post',
             dataType: 'json',
             data: JSON.stringify({
@@ -143,7 +145,7 @@ $(document).ready(function () {
                     $('#loginRegisterButton').css("display", "none");
                     $('#enterR').css("display", "none");
                     $.ajax({
-                        url: 'http://localhost/php/manageImg.php',
+                        url: './php/manageImg.php',
                         type: 'GET',
                         dataType: 'json',
                         beforeSend: function (xhr) {
@@ -152,10 +154,6 @@ $(document).ready(function () {
                         success: function (data) {
                             if (data.ok) {
                                 if (data.dataUrl != null) $('#profilePicUser').attr("src", data.dataUrl);
-                                if (data.perm>2){
-                                    $('#delete').attr("src", data.dataUrl);
-                                    $('#edit').attr("src", data.dataUrl);
-                                } 
                             } else {
                                 alert("Errore nel caricare l'immagine");
                             }
@@ -189,7 +187,7 @@ $(document).ready(function () {
 
     $('#logout').click(function () {
         $.ajax({
-            url: 'http://localhost/php/logout.php',
+            url: './php/logout.php',
             type: 'post',
             dataType: 'json',
             data: JSON.stringify({
@@ -221,7 +219,7 @@ $(document).ready(function () {
             $("#usernameR").removeClass("is-danger");
 
             $.ajax({
-                url: 'https://localhost/php/checker.php',
+                url: './php/checker.php',
                 type: 'post',
                 dataType: 'json',
                 beforeSend: function (xhr) {
@@ -275,7 +273,7 @@ $(document).ready(function () {
             $("#email").removeClass("is-danger");
 
             $.ajax({
-                url: 'http://localhost/php/checker.php',
+                url: './php/checker.php',
                 type: 'post',
                 dataType: 'json',
                 beforeSend: function (xhr) {
