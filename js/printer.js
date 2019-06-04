@@ -21,7 +21,7 @@ $(document).ready(function () {
                     $('#publish').css("visibility", "visible");
                 } else {
                     alert("Non hai i permessi per accedere a questa pagina");
-                    window.location.replace("http://localhost");
+                    window.location.replace("./index.html");
                 }
             },
             error: function (errorThrown) {
@@ -30,7 +30,7 @@ $(document).ready(function () {
         })
     } else {
         alert("Devi effetuare il login");
-        window.location.replace("http://localhost");
+        window.location.replace("./index.html");
     }
 
 
@@ -52,7 +52,7 @@ $(document).ready(function () {
                         $("#notifyArticle").css("display", "block");
                         $("html, body").animate({scrollTop: 0}, 1000);
                         setTimeout(function(){
-                        window.location.replace("http://localhost/articolo.html#"+data.id);
+                        window.location.replace("./articolo.html#"+data.id);
                         },1000);
                         
                     } else {

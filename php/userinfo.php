@@ -35,7 +35,7 @@
         global $conn;
         if(strlen($token)<60) {$swap=getToken($token);
             $token=$swap["Token"];}
-        $select = $conn->prepare("SELECT Nome,Cognome,Residenza,Biografia FROM Utenti WHERE token=:token");
+        $select = $conn->prepare("SELECT Nome,Cognome,Residenza,Biografia FROM utenti WHERE token=:token");
         $select->bindParam(":token",$token);
         $select->execute();
         if($select){
@@ -58,7 +58,7 @@
 
     function editInfo($json){
         global $conn;
-        $update = $conn->prepare("UPDATE Utenti SET Nome =:nome,Cognome=:cognome,Residenza=:residenza,Biografia=:biografia WHERE token = :token");
+        $update = $conn->prepare("UPDATE utenti SET Nome =:nome,Cognome=:cognome,Residenza=:residenza,Biografia=:biografia WHERE token = :token");
         $update->bindParam(":token",$json["token"]);
         $update->bindParam(":nome",$json["nome"]);
         $update->bindParam(":cognome",$json["cognome"]);
@@ -80,14 +80,14 @@
 
     function changePwd($json){
         global $conn;
-        $select = $conn->prepare("SELECT Psw FROM Utenti WHERE token=:token");
+        $select = $conn->prepare("SELECT Psw FROM utenti WHERE token=:token");
         $select->bindParam(":token",$json["token"]);
         $select->execute();
         if($select){
             $pwd=$select->fetch(PDO::FETCH_ASSOC);
             if(password_verify($json["oldPwd"],$pwd["Psw"])){
                 $passwordHashed = password_hash($json["newPwd"], PASSWORD_BCRYPT);
-                $update = $conn->prepare("UPDATE Utenti SET Psw=:psw WHERE token = :token");
+                $update = $conn->prepare("UPDATE utenti SET Psw=:psw WHERE token = :token");
                 $update->bindParam(":token",$json["token"]);
                 $update->bindParam(":psw",$passwordHashed);
                 $update->execute();
@@ -108,7 +108,7 @@
 
     function updateAvt($token){
         global $conn;
-        $update = $conn->prepare("UPDATE Utenti SET Avatar=null WHERE token=:token");
+        $update = $conn->prepare("UPDATE utenti SET Avatar=null WHERE token=:token");
         $update->bindParam(":token",$token);
         $update->execute();
         if($update){
@@ -122,7 +122,7 @@
     
     function deleteAccount($token){
         global $conn;
-        $delete = $conn->prepare("DELETE FROM Utenti WHERE token=:token");
+        $delete = $conn->prepare("DELETE FROM utenti WHERE token=:token");
         $delete->bindParam(":token",$token);
         $delete->execute();
         if($delete){

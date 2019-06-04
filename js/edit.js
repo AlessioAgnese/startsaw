@@ -6,12 +6,15 @@ function GetURLParameter() {
         alert("errore");
     }
 }
+<<<<<<< HEAD
 $(document).on('loadstar', function () {
 
 })
 $(document).on('load', function () {
 
 })
+=======
+>>>>>>> 9e4059102fc8e72676b2474fef8145358fc993b3
 $(document).ready(function () {
     //controllo permessi
     if ('token' in localStorage) {
@@ -35,7 +38,7 @@ $(document).ready(function () {
                     $('#publish').css("visibility", "visible");
                 } else {
                     alert("Non hai i permessi per accedere a questa pagina");
-                    window.location.replace("http://localhost");
+                    window.location.replace("./index.html");
                 }
             },
             error: function (errorThrown) {
@@ -44,7 +47,7 @@ $(document).ready(function () {
         })
     } else {
         alert("Devi effetuare il login");
-        window.location.replace("http://localhost");
+        window.location.replace("./index.html");
     }
     $.ajax({
         url: './php/getArt.php',
@@ -81,6 +84,7 @@ $(document).ready(function () {
                 }),
                 success: function (data) {
                     if (data.ok) {
+<<<<<<< HEAD
                         $("#notifyArticle").removeClass("is-danger").addClass("is-link");
                         $("#notifTextA").text("Articolo modificato con successo");
                         $("#notifyArticle").css("display", "block");
@@ -91,6 +95,10 @@ $(document).ready(function () {
                             window.location.replace('http://localhost/articolo.html#' + GetURLParameter());
                         }, 1000);
                     }
+=======
+
+                        windows.location.reaload();}
+>>>>>>> 9e4059102fc8e72676b2474fef8145358fc993b3
                 },
                 error: function (errorThrown) {
                     console.log(errorThrown);

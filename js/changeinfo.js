@@ -38,14 +38,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.ok) {
                     if (data.dataUrl != null) {
-
-                        // $("#profilePic").attr("src", data.dataUrl+"?"+d.getTime());
                         $('#profilePic').attr("src", data.dataUrl);
-                        //$('#profilePic').remove();
-
-                        //$('#containerImg').append('<img id="profilePic"  style="border: 1px solid hsl(0, 0%, 71%);border-radius: 4px;" src="' + data.dataUrl + '"/>');
-                        // $("#profilePic").attr("src", "/myimg.jpg?timestamp=" + new Date().getTime());
-
                     }
                 } else {
                     $("#notif").removeClass("is-link").addClass("is-danger");
@@ -62,7 +55,7 @@ $(document).ready(function () {
     //elimina account
     $('#accountD').click(function () {
         $.ajax({
-            url: 'http://localhost/php/userinfo.php',
+            url: './php/userinfo.php',
             type: 'get',
             dataType: 'json',
             beforeSend: function (xhr) {
@@ -77,7 +70,7 @@ $(document).ready(function () {
                         $("html, body").animate({scrollTop: 0}, 1000);
                         localStorage.removeItem('token');
                         setTimeout(function(){           
-                        window.location.replace("http://localhost");
+                        window.location.replace("./index.html");
                         },1000);
                 }
             }
@@ -106,15 +99,18 @@ $(document).ready(function () {
                         $('#biografia').val(data.biografia);
                     } else {
                         alert("La sessione è scaduta");
-
                         localStorage.removeItem('token');
-
+                        window.location.replace("./index.html")
                     }
                 },
                 error: function (errorThrown) {
                     console.log(errorThrown);
                 }
             })
+        }else{
+            alert("Loggati per modificare il tuo profilo");
+                    
+                        window.location.replace("./index.html")
         }
         //elimina account
         $('#accountD').click(function () {
@@ -130,7 +126,7 @@ $(document).ready(function () {
                     if (data.ok) {
                         alert("account cancellato correttametamente");
                         localStorage.removeItem('token');
-                        window.location.replace("http://localhost");
+                        window.location.replace("./index.html");
 
                     } else {
                         alert("Cancellazione non riuscita");
