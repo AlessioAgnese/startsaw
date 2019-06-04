@@ -129,7 +129,7 @@ $(document).ready(function () {
                         scrollTop: 0
                     }, 1000);
                     setTimeout(function () {
-                        window.location.replace("http://localhost/blog.html");
+                        window.location.replace("./blog.html");
                     }, 1000);
                 } else {
                     $("#notifyArticle").removeClass("is-link").addClass("is-danger");
