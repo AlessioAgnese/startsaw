@@ -50,7 +50,7 @@ $(document).ready(function () {
 /*
 $('#sendMail').click(function () {
     $.ajax({
-        url: 'http://localhost/php/mail.php',
+        url: './php/mail.php',
         type: 'POST',
         dataType: 'json',
         data: JSON.stringify({

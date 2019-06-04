@@ -30,7 +30,7 @@ $(document).ready(function () {
                     $('#publish').css("visibility", "visible");
                 } else {
                     alert("Non hai i permessi per accedere a questa pagina");
-                    window.location.replace("http://localhost");
+                    window.location.replace("./index.html");
                 }
             },
             error: function (errorThrown) {
@@ -39,7 +39,7 @@ $(document).ready(function () {
         })
     } else {
         alert("Devi effetuare il login");
-        window.location.replace("http://localhost");
+        window.location.replace("./index.html");
     }
     $.ajax({
         url: './php/getArt.php',
