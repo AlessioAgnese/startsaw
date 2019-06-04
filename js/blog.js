@@ -54,7 +54,7 @@ $(document).ready(function () {
                         '</figure>' +
                         '</div>' +
                         '<div class="media-content">' +
-                        '<p class="title is-4">' + data.user[index] + '</p>' +
+                        '<p  class="title is-4">' + data.user[index] + '</p>' +
                         '</div>' +
                         '</div>' +
                         '<div class="content ">' +

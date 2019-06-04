@@ -101,9 +101,17 @@ $(document).ready(function () {
             },
             success: function (data) {
                 if (data.ok) {
-                    alert("account cancellato correttametamente");
-                    localStorage.removeItem('token');
-                    window.location.replace("http://localhost");
+                    $("#notif").removeClass("is-danger").addClass("is-link");
+                        $("#notif").css("display", "block");
+                        $("#notifText").text("Cancellazione avvenuta con successo");
+                        $("html, body").animate({scrollTop: 0}, 1000);
+                        localStorage.removeItem('token');
+                        setTimeout(function(){
+                            
+                        window.location.replace("http://localhost");
+                        },1000);
+                    
+                   
 
                 } else {
                     alert("Cancellazione non riuscita");
