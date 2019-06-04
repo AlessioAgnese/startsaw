@@ -72,12 +72,13 @@ $(document).ready(function () {
         }),
         success: function (data) {
             if (data.ok) {
-
+                var c=0;
                 $.each(data.user, function (index) {
+                    
                     var html = '<article class="media">' +
                         '<figure class="media-left">' +
                         '<p class="image is-64x64">' +
-                        '<img id="userImg' + index + '" src="https://bulma.io/images/placeholders/128x128.png">' +
+                        '<img id="userImg' + c + '" src="https://bulma.io/images/placeholders/128x128.png">' +
                         '</p>' +
                         '</figure>' +
                         '<div class="media-content">' +
@@ -94,11 +95,13 @@ $(document).ready(function () {
                         '</article>';
                     $("#comments").append(html);
 
-                    if (data.avatar[index] != null) $("#userImg" + index).attr('src', data.avatar[index]);
+                    if (data.avatar[index] != null) $("#userImg" + c).attr('src', data.avatar[index]);
+                    c++;
                 });
 
             } else {
-                alert("nessun commento");
+                 //riesci a mettere una scritta con "nessun commento fin ora?"
+                 //alert("nessun commento");
             }
         },
         error: function (errorThrown) {
@@ -172,54 +175,7 @@ $(document).ready(function () {
             })
         }
     })
-            
-            $.ajax({
-                        url: './php/getnews.php',
-                        type: 'POST',
-                        dataType: 'json',
-                        beforeSend: function (xhr) {
-                            xhr.setRequestHeader('X-Type', 'comments');
-                        },
-                        data:JSON.stringify({
-                        articolo : GetURLParameter('a'),
-                        }),
-                        success: function(data) {
-                            if (data.ok) {
-                                
-                                $.each(data.user, function(index){
-                                    var html = '<article class="media">'+
-                                            '<figure class="media-left">'+
-                                            '<p class="image is-64x64">'+
-                                            '<img id="userImg'+index+'" src="https://bulma.io/images/placeholders/128x128.png">'+
-                                            '</p>'+
-                                            '</figure>'+
-                                            '<div class="media-content">'+
-                                            '<div class="content">'+
-                                            '<p>'+
-                                            '<strong id ="userName">'+data.user[index]+'</strong>'+
-                                            '<br>'+
-                                            '<p id="comment">'+data.testo[index]+'</p>'+
-                                            '<small>'+data.data[index]+'</small>'+
-                                            '<br>'+
-                                            '</p>'+
-                                            '</div>'+
-                                            '</div>'+
-                                            '</article>';
-                                    $("#comments").append(html);
-                                    
-                                    if(data.avatar[index]!=null)$("#userImg" + index).attr('src',data.avatar[index]);    
-                                });
-                                    
-                            } else {
-                                //riesci a mettere una scritta con "nessun commento fin ora?"
-                                //alert("nessun commento");
-                            }
-                        },
-                        error: function(errorThrown) {     
-                            console.log(errorThrown);
-                        }
-                    })
-
+           
                     $('#edit').click(function () {
                         window.location.replace("editArt.html#"+GetURLParameter()+"");
                     });
