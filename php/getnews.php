@@ -29,9 +29,9 @@
         $select->bindParam(":id",$json["articolo"]);
         $select->execute();
         if($select){
+            $Avatar=null;
             $result = $select->fetch(PDO::FETCH_ASSOC);
-            if($result["Avatar"] != null){
-                $Avatar = 'data:image; base64,'.base64_encode($result["Avatar"]);}
+            if($result["Avatar"] != null) $Avatar = 'data:image; base64,'.base64_encode($result["Avatar"]);
             $array = array(
                 "ok" => true,
                 "Testo"=>$result["Testo"],

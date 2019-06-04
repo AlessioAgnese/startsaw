@@ -152,6 +152,10 @@ $(document).ready(function () {
                         success: function (data) {
                             if (data.ok) {
                                 if (data.dataUrl != null) $('#profilePicUser').attr("src", data.dataUrl);
+                                if (data.perm>2){
+                                    $('#delete').attr("src", data.dataUrl);
+                                    $('#edit').attr("src", data.dataUrl);
+                                } 
                             } else {
                                 alert("Errore nel caricare l'immagine");
                             }
@@ -217,7 +221,7 @@ $(document).ready(function () {
             $("#usernameR").removeClass("is-danger");
 
             $.ajax({
-                url: 'http://localhost/php/checker.php',
+                url: 'https://localhost/php/checker.php',
                 type: 'post',
                 dataType: 'json',
                 beforeSend: function (xhr) {
