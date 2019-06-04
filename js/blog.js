@@ -176,14 +176,6 @@ $(document).ready(function () {
         });
     });
 
-
-
-    /*   $(window).bind('scroll', function() {
-           if($(window).scrollTop() >= $('#articlesContainer').offset().top + $('#articlesContainer').outerHeight() - window.innerHeight) {
-               $('#articlesContainer').append('<div class="columns is-centered " style="margin-top: 2rem;margin-bottom: 2rem;"><div class="column is-4 ">Giuse Merda</div></div>');
-           }
-       });*/
-
     $("#loadArticles").click(function () {
         var counter = 0;
         $("#articlesContainer").append();
