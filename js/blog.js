@@ -1,11 +1,10 @@
-//WORKIN PROGRESS
-//var global ;
+
 $(document).ready(function () {
     var global;
     var counter ;
 
     $.ajax({
-        url: 'http://localhost/php/getnews.php',
+        url: './php/getnews.php',
         type: 'GET',
         dataType: 'json',
         beforeSend: function (xhr) {
@@ -54,7 +53,7 @@ $(document).ready(function () {
                         '</figure>' +
                         '</div>' +
                         '<div class="media-content">' +
-                        '<p class="title is-4">' + data.user[index] + '</p>' +
+                        '<p  class="title is-4">' + data.user[index] + '</p>' +
                         '</div>' +
                         '</div>' +
                         '<div class="content ">' +
@@ -70,17 +69,15 @@ $(document).ready(function () {
                     if (counter == 0 || Number.isInteger(counter / 3)) {
 
                         $("#articlesContainer").append('<div id="articleColumns' + counter + '" class="columns is-centered " style="margin-top: 2rem;margin-bottom: 2rem"></div>');
-                        //id="articleColumns" class="columns is-centered " style="margin-top: 2rem;margin-bottom: 2rem;
                         article = counter;
                     }
                     $("#articleColumns" + article).append(html);
 
                     counter = counter + 1;
                     global = data.id[index];
-                    //global = index;
                    
                 });
-                //riesco a recuperare i dati nell'array come si publicano nella pagina???
+
             } else {
                 alert("errore nella pubblicazione");
             }
@@ -93,7 +90,7 @@ $(document).ready(function () {
     $("#loadArticles").click(function () {
         
         $.ajax({
-            url: 'http://localhost/php/getnews.php',
+            url: './php/getnews.php',
             type: 'POST',
             dataType: 'json',
             beforeSend: function (xhr) {
@@ -167,7 +164,8 @@ $(document).ready(function () {
 
                     });
                  } else {
-                    alert("errore nella pubblicazione");
+                     $("#contLoad").html("<p class='subtitle has-text-danger'>Non ci sono altri articoli da caricare</p>");
+                    $("#loadArticles").css("display","none");
                 }
             },
             error: function (errorThrown) {
@@ -175,14 +173,6 @@ $(document).ready(function () {
             }
         });
     });
-
-
-
-    /*   $(window).bind('scroll', function() {
-           if($(window).scrollTop() >= $('#articlesContainer').offset().top + $('#articlesContainer').outerHeight() - window.innerHeight) {
-               $('#articlesContainer').append('<div class="columns is-centered " style="margin-top: 2rem;margin-bottom: 2rem;"><div class="column is-4 ">Giuse Merda</div></div>');
-           }
-       });*/
 
     $("#loadArticles").click(function () {
         var counter = 0;

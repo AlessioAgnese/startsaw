@@ -25,13 +25,13 @@
     } 
     function getArticle($json){
         global $conn;
-        $select = $conn->prepare("SELECT Testo,Data,User,Avatar FROM Articoli NATURAL JOIN Utenti WHERE Id_A=:id");
+        $select = $conn->prepare("SELECT Testo,Data,User,Avatar FROM Articoli NATURAL JOIN utenti WHERE Id_A=:id");
         $select->bindParam(":id",$json["articolo"]);
         $select->execute();
         if($select){
+            $Avatar=null;
             $result = $select->fetch(PDO::FETCH_ASSOC);
-            if($result["Avatar"] != null){
-                $Avatar = 'data:image; base64,'.base64_encode($result["Avatar"]);}
+            if($result["Avatar"] != null) $Avatar = 'data:image; base64,'.base64_encode($result["Avatar"]);
             $array = array(
                 "ok" => true,
                 "Testo"=>$result["Testo"],
@@ -50,7 +50,7 @@
 
     function getComments($json){
         global $conn;
-        $select = $conn->prepare("SELECT Testo,Data,User,Avatar FROM Commenti NATURAL JOIN Utenti WHERE Id_A=:id");
+        $select = $conn->prepare("SELECT Testo,Data,User,Avatar FROM commenti NATURAL JOIN utenti WHERE Id_A=:id");
         $select->bindParam(":id",$json["articolo"]);
         $select->execute();
         if($select){
@@ -82,7 +82,7 @@
 
     function loadArticles($json){
         global $conn;
-        $select = $conn->prepare("SELECT Id_A,Testo,Data,User,Avatar FROM Articoli NATURAL JOIN Utenti WHERE Id_A<:id ORDER BY Data DESC LIMIT 6");
+        $select = $conn->prepare("SELECT Id_A,Testo,Data,User,Avatar FROM Articoli NATURAL JOIN utenti WHERE Id_A<:id ORDER BY Data DESC LIMIT 6");
         $select->bindParam(":id",$json["idB"]);
         $select->execute();
         if($select){
@@ -117,7 +117,7 @@
 
     function getBlog(){
         global $conn;
-        $select = $conn->prepare("SELECT Id_A,Testo,Data,User,Avatar FROM Articoli NATURAL JOIN Utenti ORDER BY Data DESC LIMIT 6");
+        $select = $conn->prepare("SELECT Id_A,Testo,Data,User,Avatar FROM Articoli NATURAL JOIN utenti ORDER BY Data DESC LIMIT 6");
         $select->execute();
         if($select){
             $i=0;

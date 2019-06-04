@@ -11,7 +11,7 @@
     
     function checkEmail($email){
         global $conn;
-        $select = $conn->prepare("SELECT COUNT(*) as cou FROM Utenti WHERE Mail=:mail");
+        $select = $conn->prepare("SELECT COUNT(*) as cou FROM utenti WHERE Mail=:mail");
         $select->bindParam(":mail",$email);
         $select->execute();
         $mail = $select->fetch(PDO::FETCH_ASSOC);
@@ -31,7 +31,7 @@
 
     function checkUser($user){
         global $conn;
-        $select = $conn->prepare("SELECT COUNT(*) as cou FROM Utenti WHERE User=:nam");
+        $select = $conn->prepare("SELECT COUNT(*) as cou FROM utenti WHERE User=:nam");
         $select->bindParam(":nam",$user);
         $select->execute();
         $user = $select->fetch(PDO::FETCH_ASSOC);

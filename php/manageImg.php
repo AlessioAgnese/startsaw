@@ -16,7 +16,7 @@ $headers = apache_request_headers();
 $token = $headers["X-Authentication"];
 if(strlen($token)<60) {$swap=getToken($token);
 $token=$swap["Token"];}
-$select=$conn->prepare("SELECT Avatar FROM Utenti WHERE token=:token");
+$select=$conn->prepare("SELECT Avatar FROM utenti WHERE token=:token");
 $select->bindValue(":token",$token);
 $select->execute();
 if($select){
@@ -38,7 +38,7 @@ if($select){
 function sendImg(){
 global $conn;
 $fileContent = file_get_contents($_FILES['fileI']['tmp_name']);
-$update=$conn->prepare("UPDATE Utenti SET Avatar = :fileI WHERE token=:token");
+$update=$conn->prepare("UPDATE utenti SET Avatar = :fileI WHERE token=:token");
 $update->bindParam(":fileI",$fileContent);
 $update->bindParam(":token",$_REQUEST['token']);
 $update->execute();

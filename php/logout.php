@@ -3,7 +3,7 @@
     global $conn;
     $content = file_get_contents('php://input');
     $json = json_decode($content,true);
-    $update = $conn->prepare("UPDATE Utenti SET token='logout' WHERE token = :token");
+    $update = $conn->prepare("UPDATE utenti SET token='logout' WHERE token = :token");
     $update->bindParam(":token",$json["token"]);
     $update->execute();
     if($update){

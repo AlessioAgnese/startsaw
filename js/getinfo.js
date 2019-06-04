@@ -9,7 +9,7 @@ function GetURLParameter(){
 }
 $(document).ready(function(){
 $.ajax({
-    url: 'http://localhost/php/manageImg.php',
+    url: './php/manageImg.php',
     type: 'GET',
     dataType: 'json',
     beforeSend: function (xhr) {
@@ -34,7 +34,7 @@ $.ajax({
 })
 
 $.ajax({
-    url: 'http://localhost/php/userinfo.php',
+    url: './php/userinfo.php',
     type: 'GET',
     dataType: 'json',
     beforeSend: function (xhr) {
