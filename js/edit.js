@@ -82,7 +82,7 @@ $(document).ready(function () {
                             scrollTop: 0
                         }, 1000);
                         setTimeout(function () {
-                            window.location.replace('http://localhost/articolo.html#' + GetURLParameter());
+                            window.location.replace('./articolo.html#' + GetURLParameter());
                         }, 1000);
                     }
                 },
