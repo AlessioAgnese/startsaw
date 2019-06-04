@@ -1,6 +1,4 @@
-(function () {
-    'use strict'
-    $(document).ready(function () {
+$(document).ready(function () {
 
         document.querySelector('#fileI').addEventListener('change', function (e) {
             var file = this.files[0];
@@ -60,6 +58,33 @@
                 console.log(errorThrown);
             }
         })
+    
+    //elimina account
+    $('#accountD').click(function () {
+        $.ajax({
+            url: 'http://localhost/php/userinfo.php',
+            type: 'get',
+            dataType: 'json',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-Type','delete');
+                xhr.setRequestHeader('X-Authentication', localStorage.getItem('token'));
+            },
+            success: function (data) {
+                if (data.ok) {
+                    $("#notif").removeClass("is-danger").addClass("is-link");
+                        $("#notif").css("display", "block");
+                        $("#notifText").text("Cancellazione avvenuta con successo");
+                        $("html, body").animate({scrollTop: 0}, 1000);
+                        localStorage.removeItem('token');
+                        setTimeout(function(){           
+                        window.location.replace("http://localhost");
+                        },1000);
+                }
+            }
+        }
+        )
+    })
+                   
 
 
 
@@ -260,45 +285,5 @@
             $("#notif").css("display", "none");
             window.location.reload();
         });
-
-    });
-
-    /*
+})
     
-    
-    
-    $(document).ready(function () {
-        $('#fileI').change(function () {
-            if ($("#fileI").val().files.length > 0) {
-            $.ajax({
-                url:'./php/userinfo.php',
-                type:'post',
-                dataType:'json',
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader('X-Type', 'change');
-                },
-                data:JSON.stringify({
-                    token:localStorage.getItem('token'),
-                    img:file.files[0].name,
-                }),
-                success: function (data) {
-                    if (data.ok) {
-                        $("#notif").removeClass("is-danger").addClass("is-link");
-                        $("#notif").css("display","block");
-                        $("#notifText").text("Password modificata con successo");
-                    } else {
-                        $("#notif").removeClass("is-link").addClass("is-danger");
-                        $("#notif").css("display","block");
-                        $("#notifText").text("Qualcosa è andato storto, ricontrolla i campi");
-                    }
-                },
-                error: function (errorThrown) {
-                    console.log(errorThrown);
-                }
-            })
-            }
-        })
-    });
-    
-    */
-})()

@@ -10,11 +10,6 @@ try {
 }
 catch( PDOException $Exception ) {
     throw new MyDatabaseException( $Exception->getMessage( ) , $Exception->getCode( ) );
-    /*$array = array(
-        "ok"=>false,
-        "message"=>$Exception->getMessage(),
-        "code"=>(int)$Exception->getCode());
-    echo json_encode($array);*/
 }
 /*
     Per connessione server unige(non funzionante)
