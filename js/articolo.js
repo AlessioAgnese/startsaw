@@ -47,7 +47,7 @@ $(document).ready(function () {
                         language: 'it_IT',
                     });
                     $('#writeComment').css("visibility", "visible");
-                    if (data.perm > 2) {
+                    if (data.perm > 1) {
                         $('#edit').css("visibility", "visible");
                         $('#delete').css("visibility", "visible");
                     }
@@ -215,7 +215,7 @@ $(document).ready(function () {
                                     language_url: './js/it_IT.js',
                                     language: 'it_IT',});
                                     $('#writeComment').css("visibility", "visible");
-                                    if(data.perm>2){
+                                    if(data.perm > 1){
                                         $('#edit').css("visibility", "visible");    
                                         $('#delete').css("visibility", "visible");
                                     }
