@@ -52,10 +52,9 @@ $(document).ready(function () {
                         language: 'it_IT',
                     });
                     $('#writeComment').css("visibility", "visible");
+                    console.log(data.perm);
                     if (data.perm > 1) {
-                        $('#edit').css("visibility", "visible");
-                        $('#delete').css("visibility", "visible");
-                    }
+                        $('#perm').css("display", "block");}
                 } else {
                     alert("Sessione invalida, consigliamo di rifare il login per poter commentare");
                 }
