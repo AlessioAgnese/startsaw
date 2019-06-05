@@ -2,7 +2,7 @@
 <html lang="it">
 
 <head>
-        <title>YouFixIt</title>
+        <title>YouFix</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
@@ -10,7 +10,7 @@
                 crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="./css/style.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"> </script>
-        <script src="./js/changeinfo.js" type="text/javascript"></script>        
+        <script src="./js/changeinfo.js" type="text/javascript"></script>
         <script src="./js/utility.js" type="text/javascript"></script>
         <script src="./js/mime.js" type="text/javascript"></script>
         <script src="./js/safeImport.js" type="text/javascript"></script>
@@ -24,7 +24,11 @@
                                 <div class="container ">
                                         <div class="navbar-brand">
                                                 <a class="navbar-item">
-                                                        <img src="./img/logo.png" width="60" height="60">
+                                                        <span class="icon is-left has-text-warning">
+                                                                <i class="fas fa-cogs fa-2x"></i>
+                                                        </span>
+                                                        <p class="title is-4 " style="margin-left: 5px">You<strong
+                                                                        class="has-text-warning">Fix</strong></p>
                                                 </a>
 
                                                 <a role="button" class="navbar-burger" aria-label="menu"
@@ -62,7 +66,9 @@
                                                                 <a class="navbar-link is-arrowless is-size-5">
                                                                         <span style="margin-right: 1rem">
                                                                                 <figure class="image is-24x24">
-                                                                                        <img id="profilePicUser" src="./img/default-user.jpg" style="border-radius: 4px;">
+                                                                                        <img id="profilePicUser"
+                                                                                                src="./img/default-user.jpg"
+                                                                                                style="border-radius: 4px;">
                                                                                 </figure>
                                                                         </span>
                                                                         <span id="userNameNav">
@@ -72,14 +78,16 @@
 
                                                                 <div
                                                                         class="navbar-dropdown is-boxed has-background-dark">
-                                                                        <a id="userProfile" class="navbar-item is-size-6 ">
-                                                                                        Profilo
+                                                                        <a id="userProfile"
+                                                                                class="navbar-item is-size-6 ">
+                                                                                Profilo
                                                                         </a>
-                                                                        <a id="write" class="navbar-item is-size-6" style="display: none">
-                                                                        Scrivi articolo
+                                                                        <a id="write" class="navbar-item is-size-6"
+                                                                                style="display: none">
+                                                                                Scrivi articolo
                                                                         </a>
                                                                         <a id="logout" class="navbar-item is-size-6">
-                                                                        Log out
+                                                                                Log out
                                                                         </a>
                                                                 </div>
                                                         </div>
@@ -101,11 +109,12 @@
         </div>
         <div class="container">
                 <br>
-                <div class="columns" style="margin-left: 10%">
+                <div class="columns">
                         <div class="column">
-                                      
+
                                 <h3 class="title is-4" style="display:inline-block;">Profilo</h3>
-                                <button id="accountD" style="display:inline-block;margin-left:2em;" class="button is-danger">Cancella profilo</button>
+                                <button id="accountD" style="display:inline-block;margin-left:2em;"
+                                        class="button is-danger">Cancella profilo</button>
                                 <form class="modifyUserinfo" action="javascript:void(0);">
                                         <div class="field">
                                                 <label class="label">Nome</label>
@@ -182,7 +191,8 @@
                                                 <label id="pwd_response" style="visibility:visible"
                                                         class="label is-size-6 has-text-danger"></label>
                                                 <br>
-                                                <button id="ChangePdw" class="button is-success" disabled="true">Aggiorna
+                                                <button id="ChangePdw" class="button is-success"
+                                                        disabled="true">Aggiorna
                                                         Password</button>
                                                 <div class="checkPswField" style="visibility:hidden">
                                                         <h3>La password deve contenere:</h3>
@@ -221,10 +231,11 @@
                                 </form>
 
                         </div>
-                        <div id="imgProfile" class="column" style="margin-right: -30%;margin-left: 5%" >
+                        <div id="imgProfile" class="column" style="margin-right: -30%;margin-left: 5%">
                                 <h3 class="title is-4">Immagine del Profilo</h3>
-                                <figure id="containerImg"class="image is-128x128" >
-                                        <img id="profilePic" src="./img/default-user.jpg" style="border: 1px solid hsl(0, 0%, 71%);border-radius: 4px;  ">
+                                <figure id="containerImg" class="image is-128x128">
+                                        <img id="profilePic" src="./img/default-user.jpg"
+                                                style="border: 1px solid hsl(0, 0%, 71%);border-radius: 4px;  ">
                                 </figure>
                                 <br>
                                 <div id="menuImg" class="dropdown ">
@@ -238,13 +249,14 @@
                                         <div class="dropdown-menu" id="dropdown-menu3" role="menu">
                                                 <div class="dropdown-content">
                                                         <a class="dropdown-item">
-                                                         <input id="fileI" class="file-input "type="file" name="resume" accept="image/*">
+                                                                <input id="fileI" class="file-input " type="file"
+                                                                        name="resume" accept="image/*">
                                                                 Carica foto
                                                         </a>
                                                         <a id="fileD" class="dropdown-item">
                                                                 Elimina foto
                                                         </a>
-                                                       
+
                                                 </div>
                                         </div>
                                 </div>
@@ -252,7 +264,7 @@
 
 
                         </div>
-                         
+
                 </div>
 
         </div>
@@ -260,48 +272,49 @@
         <footer class="footer">
                 <div class="container has-text-centered">
                         <div class="columns is-centered ">
-                            <div class="column is-1" >
-            
-                                <span class="icon  has-text-warning">
-                                     <a class="has-text-warning" href="https://www.facebook.com/"><i class="fab fa-facebook-square fa-2x"></i></a>
-                                </span>
-            
-                            </div>
-                            <div class="column is-1" >
-                                <span class="icon  has-text-warning">
-                                    <a class="has-text-warning" href="https://www.instagram.com/?hl=it"><i
-                                class="fab fa-instagram fa-2x"></i></a>
-                                </span>
-                                
-            
-                            </div>
-                            <div class="column is-1">
-                                <span class="icon  has-text-warning">
-                                    <a class="has-text-warning" href="https://twitter.com"><i
-                                class="fab fa-twitter-square fa-2x"></i></a>
-                                </span>
-                                
-            
-                            </div>
-                            <div class="column is-1">
-                                    <span class="icon  has-text-warning">
-                                            <a class="has-text-warning" href="https://github.com/"><i
-                                class="fab fa-github-square fa-2x"></i></a>
-                                    </span>
-                                    
+                                <div class="column is-1">
+
+                                        <span class="icon  has-text-warning">
+                                                <a class="has-text-warning" href="https://www.facebook.com/"><i
+                                                                class="fab fa-facebook-square fa-2x"></i></a>
+                                        </span>
+
                                 </div>
-            
+                                <div class="column is-1">
+                                        <span class="icon  has-text-warning">
+                                                <a class="has-text-warning" href="https://www.instagram.com/?hl=it"><i
+                                                                class="fab fa-instagram fa-2x"></i></a>
+                                        </span>
+
+
+                                </div>
+                                <div class="column is-1">
+                                        <span class="icon  has-text-warning">
+                                                <a class="has-text-warning" href="https://twitter.com"><i
+                                                                class="fab fa-twitter-square fa-2x"></i></a>
+                                        </span>
+
+
+                                </div>
+                                <div class="column is-1">
+                                        <span class="icon  has-text-warning">
+                                                <a class="has-text-warning" href="https://github.com/"><i
+                                                                class="fab fa-github-square fa-2x"></i></a>
+                                        </span>
+
+                                </div>
+
                         </div>
                         <div class="columns is-centered ">
-                            <div class="column is-3 has-text-white">
-                                <p>
-                                    <strong class="has-text-warning">&copy 2019</strong> You<strong
-                                        class="has-text-warning">Fix</strong> by
-                                    Alessio Agnese & Simone Risso.
-                                </p>
-                            </div>
+                                <div class="column is-3 has-text-white">
+                                        <p>
+                                                <strong class="has-text-warning">&copy 2019</strong> You<strong
+                                                        class="has-text-warning">Fix</strong> by
+                                                Alessio Agnese & Simone Risso.
+                                        </p>
+                                </div>
                         </div>
-                    </div>
+                </div>
         </footer>
 
 </body>

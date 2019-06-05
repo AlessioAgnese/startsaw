@@ -41,7 +41,7 @@ $(document).ready(function () {
                         '</p>' +
                         '</div>' +
                         '<div class="card-image">' +
-                        '<figure class="image is-4by3">' +
+                        '<figure class="image is-3by2">' +
                         '<img src="'+immagine+'" alt="Placeholder image">' +
                         '</figure>' +
                         '</div>' +

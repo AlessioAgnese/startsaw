@@ -2,7 +2,7 @@
 <html lang="it">
 
 <head>
-        <title>YouFixIt</title>
+        <title>YouFix</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
@@ -210,8 +210,12 @@
                 style="border-bottom: 1px solid hsl(0, 0%, 71%);box-shadow: 0px 1px 10px hsl(0, 0%, 71%);">
                 <div class="container ">
                         <div class="navbar-brand">
-                                <a class="navbar-item">
-                                        <img src="./img/logo.png" width="60" height="60">
+                                <a class="navbar-item" href="blog.html">
+                                        <span class="icon is-left has-text-dark">
+                                                <i class="fas fa-cogs fa-2x"></i>
+                                        </span>
+
+                                        <p style="margin-left: 5px" class="title has-text-link is-4">Blog</p>
                                 </a>
 
                                 <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
@@ -230,9 +234,7 @@
                                                 Home
                                         </a>
 
-                                        <a id="blog" class="navbar-item is-size-5" href="blog.html">
-                                                Blog
-                                        </a>
+
 
 
 
@@ -271,8 +273,7 @@
                                                                 </span>
                                                         </a>
 
-                                                        <div
-                                                                class="navbar-dropdown is-boxed has-text-dark">
+                                                        <div class="navbar-dropdown is-boxed has-text-dark">
                                                                 <a id="userProfile" class="navbar-item is-size-6 ">
                                                                         Profilo
                                                                 </a>
@@ -290,18 +291,18 @@
                         </div>
                 </div>
         </nav>
-        
+
         <br>
-        
 
 
-                <div class="container is-centered box " style="margin-top: 1rem">
-                                <div id="notifyArticle" class="notification has-text-centered " style="display: none">
-                                                <button id="closeNotif" class="delete"></button>
-                                                <p id="notifTextA"></p>
-                                        </div>
-                                <div class="container is-fluid " style="margin-top:2rem">
-                        
+
+        <div class="container is-centered box " style="margin-top: 1rem">
+                <div id="notifyArticle" class="notification has-text-centered " style="display: none">
+                        <button id="closeNotif" class="delete"></button>
+                        <p id="notifTextA"></p>
+                </div>
+                <div class="container is-fluid " style="margin-top:2rem">
+
                         <div class="columns is-centered">
                                 <div id="contentArticle" class="column is-9">
 
@@ -317,17 +318,16 @@
 
                         </div>
                         <div class="columns is-centered">
-                                <div class="column is-9 has-background-info is-fluid ">
+                                <div class="column is-9 has-background-link is-fluid ">
 
                                         <article class="media">
 
                                                 <div class="media-left">
                                                         <figure class="image is-128x128">
-                                                                <img id="avt" src="./img/default-user.jpg"
-                                                                        alt="Placeholder image">
+                                                                <img id="avt" src="./img/default-user.jpg" alt="Avatar">
                                                         </figure>
                                                 </div>
-                                                <div class="media-content">
+                                                <div class="media-content has-text-grey-darker">
                                                         <a id="author" class="title is-4"></a>
 
                                                         <div>
@@ -378,17 +378,10 @@
                                                                 <div class="level-left">
                                                                         <div class="level-item">
                                                                                 <button id="publish"
-                                                                                        class="button is-info">Invia</button>
+                                                                                        class="button is-link">Invia</button>
                                                                         </div>
                                                                 </div>
-                                                                <div class="level-right">
-                                                                        <div class="level-item">
-                                                                                <label class="checkbox">
-                                                                                        <input type="checkbox"> Premi
-                                                                                        enter per inviare
-                                                                                </label>
-                                                                        </div>
-                                                                </div>
+
                                                         </nav>
                                                 </div>
                                         </article>
@@ -402,46 +395,48 @@
         </div>
 
         <br>
-        <footer class="footer">
-                <div class="container has-text-centered">
+        <footer class="footer has-background-white-bis"
+                style="border-top: 1px solid hsl(0, 0%, 71%);box-shadow: 0px 1px 10px hsl(0, 0%, 71%);">
+                <div class="container has-text-centered ">
                         <div class="columns is-centered ">
                                 <div class="column is-1">
 
-                                        <span class="icon  has-text-warning">
-                                                 <a class="has-text-warning" href="https://www.facebook.com/"><i class="fab fa-facebook-square fa-2x"></i></a>
+                                        <span class="icon  has-text-black">
+                                                <a class="has-text-black" href="https://www.facebook.com/"><i
+                                                                class="fab fa-facebook-square fa-2x"></i></a>
                                         </span>
 
                                 </div>
                                 <div class="column is-1">
-                                        <span class="icon  has-text-warning">
-                                                <a class="has-text-warning" href="https://www.instagram.com/?hl=it"><i
-                                class="fab fa-instagram fa-2x"></i></a>
-                                        </span>
-
-
-                                </div>
-                                <div class="column is-1">
-                                        <span class="icon  has-text-warning">
-                                                <a class="has-text-warning" href="https://twitter.com"><i
-                                class="fab fa-twitter-square fa-2x"></i></a>
+                                        <span class="icon  has-text-black">
+                                                <a class="has-text-black" href="https://www.instagram.com/?hl=it"><i
+                                                                class="fab fa-instagram fa-2x"></i></a>
                                         </span>
 
 
                                 </div>
                                 <div class="column is-1">
-                                        <span class="icon  has-text-warning">
-                                                <a class="has-text-warning" href="https://github.com/"><i
-                                class="fab fa-github-square fa-2x"></i></a>
+                                        <span class="icon  has-text-black">
+                                                <a class="has-text-black" href="https://twitter.com"><i
+                                                                class="fab fa-twitter-square fa-2x"></i></a>
+                                        </span>
+
+
+                                </div>
+                                <div class="column is-1">
+                                        <span class="icon  has-text-black">
+                                                <a class="has-text-black" href="https://github.com/"><i
+                                                                class="fab fa-github-square fa-2x"></i></a>
                                         </span>
 
                                 </div>
 
                         </div>
                         <div class="columns is-centered ">
-                                <div class="column is-3 has-text-white">
+                                <div class="column is-3 has-text-black">
                                         <p>
-                                                <strong class="has-text-warning">&copy 2019</strong> You<strong
-                                                        class="has-text-warning">Fix</strong> by
+                                                <strong class="has-text-link">&copy 2019</strong> You<strong
+                                                        class="has-text-link">FixBlog</strong> by
                                                 Alessio Agnese & Simone Risso.
                                         </p>
                                 </div>

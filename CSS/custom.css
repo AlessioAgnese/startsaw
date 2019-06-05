@@ -1,8 +1,34 @@
 #contentArticle h1{
-    font-size: 30px;
+    font-size: 2em;
     font-weight: bold;
     text-transform: uppercase;                                                                                
   }
+  #contentArticle h2{
+    font-size: 1.5em;
+    font-weight: bold;
+    text-transform: uppercase;                                                                                
+  }
+  #contentArticle h3{
+    font-size: 1.3em;
+    font-weight: bold;
+    text-transform: uppercase;                                                                                
+  }
+  #contentArticle h4{
+    font-size: 1em;
+    font-weight: bold;
+    text-transform: uppercase;                                                                                
+  }
+  #contentArticle h5{
+    font-size: 0.8em;
+    font-weight: bold;
+    text-transform: uppercase;                                                                                
+  }
+  #contentArticle h6{
+    font-size: 0.7em;
+    font-weight: bold;
+    text-transform: uppercase;                                                                                
+  }
+
   
   #contentArticle p{
     font-size: 22px;
