@@ -23,7 +23,6 @@ $(document).ready(function () {
                 $("#contentArticle").append(data.Testo + '<br><time>' + data.Data.substring(0,data.Data.length-3) + '</time>');
                 $("#bio").append(data.Bio);
                 $("#author").append(data.User).attr("href", "userprofile.html#" + data.User);
-                console.log(data.Biografia);
                 $("#bio").text(data.Biografia);
                 if (data.Avatar != null) $("#avt").attr("src", data.Avatar);
             } else {
@@ -50,10 +49,9 @@ $(document).ready(function () {
                         language: 'it_IT',
                     });
                     $('#writeComment').css("visibility", "visible");
+                    console.log(data.perm);
                     if (data.perm > 1) {
-                        $('#edit').css("visibility", "visible");
-                        $('#delete').css("visibility", "visible");
-                    }
+                        $('#perm').css("display", "block");}
                 } else {
                     alert("Sessione invalida, consigliamo di rifare il login per poter commentare");
                 }
