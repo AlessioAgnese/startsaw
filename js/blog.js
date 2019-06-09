@@ -16,18 +16,21 @@ $(document).ready(function () {
                 
                 var article = 0;
                 var string = "";
-                var rex = /<img.*?src="([^">]*\/([^">]*?))".*?>/g;
+                var rex = new RegExp(/<img.*?src="([^">]*\/([^">]*?))".*?>/g);
                 
                 $.each(data.id, function (index) {
-                    immagine = rex.exec( data.testo[index] );
+                    //immagine = rex.exec( data.testo[index] );
                     string = data.testo[index].substring(data.testo[index].indexOf('<h1>'), data.testo[index].indexOf("</h1>"));
+                    
                     if(data.testo[index].includes('<img')){
                         
-                        immagine = immagine[1];
+                        immagine = rex.exec( data.testo[index] );
+                        console.log("immagine presente"+immagine);
                         
                     }
                     else{
                         immagine="./img/image-not-available.jpg";
+                        console.log("immagine  non presente"+immagine);
                     }
                    
     
@@ -41,8 +44,8 @@ $(document).ready(function () {
                         '</p>' +
                         '</div>' +
                         '<div class="card-image">' +
-                        '<figure class="image is-3by2">' +
-                        '<img src="'+immagine+'" alt="Placeholder image">' +
+                        '<figure class="image is-4by3">' +
+                        '<img src="'+immagine+'">' +
                         '</figure>' +
                         '</div>' +
                         '<div class="card-content has-background-white">' +
@@ -61,7 +64,7 @@ $(document).ready(function () {
                         article = counter;
                     }
                     $("#articleColumns" + article).append(html);
-
+                   
                     counter++;
                     global = data.id[index];
                    
@@ -93,13 +96,13 @@ $(document).ready(function () {
                 if (data.ok) {
                     var article = 0;
                     var string = "";
-                    var rex = /<img.*?src="([^">]*\/([^">]*?))".*?>/g;
+                    var rex = new RegExp(/<img.*?src="([^">]*\/([^">]*?))".*?>/g);
 
                     $.each(data.id, function (index) {
-                        immagine = rex.exec( data.testo[index] );
+                        
                         string = data.testo[index].substring(data.testo[index].indexOf('<h1>'), data.testo[index].indexOf("</h1>"));
-                        if(data.testo[index].includes('<img src="')){
-                            immagine = immagine[1];
+                        if(data.testo[index].includes('<img')){
+                            immagine = rex.exec( data.testo[index] );
                              
                             
                         }
@@ -117,7 +120,7 @@ $(document).ready(function () {
                             '</div>' +
                             '<div class="card-image">' +
                             '<figure class="image is-4by3">' +
-                            '<img src="'+immagine+'" alt="Placeholder image">' +
+                            '<img src="'+immagine+'">' +
                             '</figure>' +
                             '</div>' +
                             '<div class="card-content has-background-white">' +
@@ -151,10 +154,6 @@ $(document).ready(function () {
         });
     });
 
-    $("#loadArticles").click(function () {
-        var counter = 0;
-        $("#articlesContainer").append();
-    });
-
+ 
 
 })
