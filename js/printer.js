@@ -9,7 +9,8 @@ $(document).ready(function () {
                 token: localStorage.getItem('token')
             }),
             success: function (data) {
-                if (data.ok && data.utente != null && data.perm == 3 && data.token!="logout") {
+                console.log(data);
+                if (data.ok && data.utente != null && data.perm == 2 && data.token!="logout") {
                     tinymce.init({
                         selector: '#articolo',
                         language_url: './js/it_IT.js',
@@ -36,7 +37,7 @@ $(document).ready(function () {
 
     $('#publish').click(function () {
         tmp = tinymce.get('articolo').getContent().toString().length;
-        if (tmp > 0 && tmp < 32000) {
+        if (tmp > 0) {
             $.ajax({
                 url: './php/pubarticle.php',
                 type: 'POST',
@@ -67,14 +68,6 @@ $(document).ready(function () {
                 }
             })
         } else {
-            if (tmp > 0){
-                $("#notifyArticle").removeClass("is-link").addClass("is-danger");
-                $("#notifTextA").text("Articolo troppo lungo");
-                $("#notifyArticle").css("display", "block");
-                $("html, body").animate({scrollTop: 0}, 1000);
-            }
-                
-            else{
                 $("#notifyArticle").removeClass("is-link").addClass("is-danger");
                 $("#notifTextA").text("Impossibile pubblicare articolo vuoto");
                 $("#notifyArticle").css("display", "block");
@@ -82,8 +75,7 @@ $(document).ready(function () {
             }
 
                
-        }
-    });
+        });
 
 
 

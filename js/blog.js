@@ -98,10 +98,8 @@ $(document).ready(function () {
                     $.each(data.id, function (index) {
                         immagine = rex.exec( data.testo[index] );
                         string = data.testo[index].substring(data.testo[index].indexOf('<h1>'), data.testo[index].indexOf("</h1>"));
-                        if(data.testo[index].includes('<img src="')){
+                        if(data.testo[index].includes('<img')){
                             immagine = immagine[1];
-                             
-                            
                         }
                         else{
                             immagine="./img/image-not-available.jpg";
@@ -151,10 +149,7 @@ $(document).ready(function () {
         });
     });
 
-    $("#loadArticles").click(function () {
-        var counter = 0;
-        $("#articlesContainer").append();
-    });
+
 
 
 })
