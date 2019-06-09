@@ -102,9 +102,9 @@ $(document).ready(function () {
                         
                         string = data.testo[index].substring(data.testo[index].indexOf('<h1>'), data.testo[index].indexOf("</h1>"));
                         if(data.testo[index].includes('<img')){
-                            immagine = rex.exec( data.testo[index] );
-                             
                             
+                            immagine = rex.exec( data.testo[index] );
+ 
                         }
                         else{
                             immagine="./img/image-not-available.jpg";
