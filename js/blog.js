@@ -102,9 +102,13 @@ $(document).ready(function () {
                         
                         string = data.testo[index].substring(data.testo[index].indexOf('<h1>'), data.testo[index].indexOf("</h1>"));
                         if(data.testo[index].includes('<img')){
+<<<<<<< HEAD
                             
                             immagine = rex.exec( data.testo[index] );
  
+=======
+                            immagine = immagine[1];
+>>>>>>> a93dd7a5c0fe9d30e48fe62726a09f2bf9e03046
                         }
                         else{
                             immagine="./img/image-not-available.jpg";
@@ -154,6 +158,11 @@ $(document).ready(function () {
         });
     });
 
+<<<<<<< HEAD
  
+=======
+
+
+>>>>>>> a93dd7a5c0fe9d30e48fe62726a09f2bf9e03046
 
 })
