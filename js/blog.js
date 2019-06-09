@@ -52,8 +52,8 @@ $(document).ready(function () {
                         '</p>' +
                         '</div>' +
                         '<div class="card-image">' +
-                        '<figure class="image is-4by3">' +
-                        '<img src="'+immagine[0]+'">' +
+                        '<figure >' +
+                        '<img class="imageBlog" src="'+immagine[0]+'">' +
                         '</figure>' +
                         '</div>' +
                         '<div class="card-content has-background-white">' +
@@ -133,8 +133,8 @@ $(document).ready(function () {
                             '</p>' +
                             '</div>' +
                             '<div class="card-image">' +
-                            '<figure class="image is-4by3">' +
-                            '<img src="'+immagine[0]+'">' +
+                            '<figure >' +
+                            '<img class="imageBlog" src="'+immagine[0]+'">' +
                             '</figure>' +
                             '</div>' +
                             '<div class="card-content has-background-white">' +
