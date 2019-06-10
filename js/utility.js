@@ -204,6 +204,7 @@ $(document).ready(function () {
             success: function (response) {
                 if(response.ok){
                     localStorage.removeItem('token');
+                    localStorage.removeItem('tinymce-urò-history');
                     $('#userProfile').removeAttr("href", "controlpanel.html");
                     $("#navbar-menu").css("visibility", "hidden");
                     $("#write").css("visibility", "hidden");
