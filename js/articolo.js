@@ -128,6 +128,7 @@ $('#delete').click(function () {
         data: JSON.stringify({
             id: GetURLParameter("#"),
         }),
+<<<<<<< HEAD
         success: function (response) {
             if (response.ok) {
                 $("#notifyArticle").removeClass("is-danger").addClass("is-link");
@@ -143,15 +144,120 @@ $('#delete').click(function () {
                 $("#notifyArticle").removeClass("is-link").addClass("is-danger");
                 $("#notifTextA").text("Qualcosa è andato storto, riprova");
                 $("#notifyArticle").css("display", "block");
+=======
+        success: function (data) {
+            if (data.ok) {
+                var c = 0;
+                $.each(data.user, function (index) {
+
+                    var html = '<article class="media">' +
+                        '<figure class="media-left">' +
+                        '<p class="image is-64x64">' +
+                        '<img id="userImg' + c + '" src="./img/default-user.jpg">' +
+                        '</p>' +
+                        '</figure>' +
+                        '<div class="media-content">' +
+                        '<div class="content">' +
+                        '<p>' +
+                        '<strong id ="userName">' +
+                        '<a href="userprofile.html#' + data.user[index] + '">' +
+                        data.user[index] +
+                        '</a>' +
+                        '</strong>' +
+                        '<br>' +
+                        '<p id="comment">' + data.testo[index] + '</p>' +
+                        '<small>' + data.data[index].substring(0, data.data[index].length - 3) + '</small>' +
+                        '<br>' +
+                        '</p>' +
+                        '</div>' +
+                        '</div>' +
+                        '</article>';
+                    $("#comments").append(html);
+
+                    if (data.avatar[index] != null) {
+                        $("#userImg" + c).attr('src', data.avatar[index]);
+                    }
+                    c++;
+                });
+
+>>>>>>> d7f12c549bcf67b682f57a5ced8b34eca29b1bea
             }
         },
         error: function (errorThrown) {
             console.log(errorThrown);
         }
 
+<<<<<<< HEAD
+=======
+    $('#edit').click(function () {
+        window.location.replace("editArt.html#" + GetURLParameter("#") + "");
+>>>>>>> d7f12c549bcf67b682f57a5ced8b34eca29b1bea
     });
 });
 
+<<<<<<< HEAD
+=======
+    $('#delete').click(function () {
+        $.ajax({
+            url: './php/delArt.php',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                id: GetURLParameter("#"),
+            }),
+            success: function (response) {
+                if (response.ok) {
+                    $("#notifyArticle").removeClass("is-danger").addClass("is-link");
+                    $("#notifTextA").text("Articolo Eliminato ,ti stiamo ripordando alla pagina principale");
+                    $("#notifyArticle").css("display", "block");
+                    $("html, body").animate({
+                        scrollTop: 0
+                    }, 1000);
+                    setTimeout(function () {
+                        window.location.replace("./blog.html");
+                    }, 1000);
+                } else {
+                    $("#notifyArticle").removeClass("is-link").addClass("is-danger");
+                    $("#notifTextA").text("Qualcosa è andato storto, riprova");
+                    $("#notifyArticle").css("display", "block");
+                }
+            },
+            error: function (errorThrown) {
+                console.log(errorThrown);
+            }
+
+        });
+    });
+
+
+
+    $('#publish').click(function () {
+        tmp = tinymce.get('commento').getContent().toString().length;
+        if (tmp > 0 && tmp < 500) {
+            $.ajax({
+                url: './php/pubcomment.php',
+                type: 'POST',
+                dataType: 'json',
+                data: JSON.stringify({
+                    commento: tinymce.get("commento").getContent(),
+                    token: localStorage.getItem('token'),
+                    id: GetURLParameter("#"),
+                }),
+                success: function (data) {
+                    if (data.ok) {
+                        alert("Commento pubblicato");
+                        location.reload();
+                    } else {
+                        alert("errore nella pubblicazione");
+                    }
+                },
+                error: function (errorThrown) {
+                    console.log(errorThrown);
+                }
+            })
+        }
+    })
+>>>>>>> d7f12c549bcf67b682f57a5ced8b34eca29b1bea
 
 
 $('#publish').click(function () {
