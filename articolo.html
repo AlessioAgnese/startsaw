@@ -311,8 +311,8 @@
 
                         </div>
                         <div class="columns is-centered">
-                                <div id="perm"  style="display: none" class="column is-9">
-                                        <button id="edit" class="button is-link" >Modifica</button>
+                                <div id="perm" style="display: none" class="column is-9">
+                                        <button id="edit" class="button is-link">Modifica</button>
 
                                         <button id="delete" class="button is-danger">Elimina</button>
                                 </div>
@@ -342,6 +342,17 @@
                         </div>
                         <br>
                         <div class="columns is-centered">
+                                <div class="column is-9 has-text-centered is-fluid">
+                                        <div id="notifyComment" class="notification has-text-centered "
+                                                style="display: none">
+                                                <button id="closeNotifC" class="delete"></button>
+                                                <p id="notifyCommentText"></p>
+                                        </div>
+                                </div>
+
+                        </div>
+
+                        <div class="columns is-centered">
 
                                 <div id="comments" class="column is-9  is-fluid ">
 
@@ -358,9 +369,12 @@
                                                 commentare</a>
                                 </div>
                         </div>
+
                         <div id="writeComment" class="columns is-centered" style="visibility: hidden">
 
                                 <div class="column is-9">
+
+
                                         <p class="title is-4">
                                                 Lascia un commento:
                                         </p>
@@ -438,7 +452,8 @@
                                         <p>
                                                 <strong class="has-text-link">&copy 2019</strong> You<strong
                                                         class="has-text-link">FixBlog</strong> by
-                                                Alessio Agnese & Simone Risso.
+                                                        <br>Alessio Agnese & Simone Risso<br>
+                                                Optimized for Mozzila Firefox.
                                         </p>
                                 </div>
                         </div>

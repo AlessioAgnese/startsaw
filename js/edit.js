@@ -64,7 +64,7 @@ $(document).ready(function () {
     //funzione che pubblica
     $('#publish').click(function () {
         tmp = tinymce.get('articolo').getContent().toString().length;
-        if (tmp > 0 && tmp < 32000) {
+        if (tmp > 0) {
             $.ajax({
                 url: './php/editArt.php',
                 type: 'POST',
@@ -91,23 +91,12 @@ $(document).ready(function () {
                 }
             })
         } else {
-            if (tmp > 0) {
-                $("#notifyArticle").removeClass("is-link").addClass("is-danger");
-                $("#notifTextA").text("Articolo troppo lungo");
-                $("#notifyArticle").css("display", "block");
-                $("html, body").animate({
-                    scrollTop: 0
-                }, 1000);
-            } else {
                 $("#notifyArticle").removeClass("is-link").addClass("is-danger");
                 $("#notifTextA").text("Impossibile pubblicare articolo vuoto");
                 $("#notifyArticle").css("display", "block");
                 $("html, body").animate({
                     scrollTop: 0
                 }, 1000);
-            }
-
-
         }
     });
 
