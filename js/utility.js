@@ -44,40 +44,8 @@ $(document).ready(function () {
         $("#upLetterIcon,#lowLetterIcon,#numberIcon,#lengthIcon").removeClass('fa-check has-text-success').addClass('fa-times has-text-danger');
         $("#upLetter,#lowLetter,#number,#length").removeClass('has-text-success').addClass('has-text-danger');
     });
-
-
-//funzione per gestire la mail WORK IN PROGRESS
-/*
-$('#sendMail').click(function () {
-    $.ajax({
-        url: './php/mail.php',
-        type: 'POST',
-        dataType: 'json',
-        data: JSON.stringify({
-            mail: $("#mailCon").val().trim().toString()
-        }),
-        success: function (data) {
-            if (data.ok) {
-               
-                
-            } else {
-               
-            }
-        },
-        error: function (errorThrown) {
-            console.log(errorThrown);
-        }
-    })
-});
-
-*/
-
-
-
 //funzione per gestire il login
     $('#submitlogin').click(function () {
-        console.log($('#usernameL').val().trim().toString());
-        console.log($('#pwdL').val());
         $.ajax({
             url: './php/login.php',
             type: "POST",
@@ -145,14 +113,11 @@ $('#sendMail').click(function () {
                 if(response.ok){
                     $.each(response.rows, function(index){
                         var resarchText = $("#text").val().toString();
-                        
-                        console.log("text: "+resarchText);
                        
                         var resultText = response.rows[index].Testo.replace(/(<([^>]+)>|&nbsp;)/ig,"");
                         resultText = resultText.substring(resarchText,resultText.indexOf("\n",resarchText))
                         //fare in modo di <mark> la parola simile
-                        
-                        console.log("resUUUtext: "+resultText);
+
                         var html ='<a href="articolo.html#'+ response.rows[index].Id_A+'" class="list-item" >'+ resultText+'</a>';
                         $("#searchRes").append(html);
                         });

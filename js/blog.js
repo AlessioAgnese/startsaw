@@ -13,12 +13,10 @@ $(document).ready(function () {
         data: JSON.stringify({}),
         success: function (data) {
             if (data.ok) {
-                
                 var article = 0;
                 var string = "";
                 var immagine = [];
-                //var rex = new RegExp(/<img.*?src="([^">]*\/([^">]*?))".*?>/g);
-               var rex = new RegExp(/((?:https?\:\/\/)(?:[a-zA-Z]{1}(?:[\w\-]+\.)+(?:[\w]{2,5}))(?:\:[\d]{1,5})?\/(?:[^\s\/]+\/)*(?:[^\s]+\.(?:jpe?g|gif|png))(?:\?\w+=\w+(?:&\w+=\w+)*)?)/g);
+                var rex = new RegExp(/((?:https?\:\/\/)(?:[a-zA-Z]{1}(?:[\w\-]+\.)+(?:[\w]{2,5}))(?:\:[\d]{1,5})?\/(?:[^\s\/]+\/)*(?:[^\s]+\.(?:jpe?g|gif|png))(?:\?\w+=\w+(?:&\w+=\w+)*)?)|(data:image\/([a-zA-Z]*);base64,([^\"]*))/g);
                 
                 $.each(data.id, function (index) {
                     //immagine = rex.exec( data.testo[index] );
@@ -31,13 +29,10 @@ $(document).ready(function () {
                             
                            }
                            immagine = rex.exec( data.testo[index] );
-
-                        //console.log("immagine presente"+immagine);
                         
                     }
                     else{
                         immagine[0]="./img/image-not-available.jpg";
-                        //console.log("immagine  non presente"+immagine);
                     }
                   
                    
