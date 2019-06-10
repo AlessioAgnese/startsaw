@@ -436,19 +436,28 @@ $('#sendMail').click(function () {
             $('#statusP').css("visibility", "hidden");
             $('#statusP').removeClass('has-text-danger').addClass('has-text-success');
             $("#pwd_response").text("");
-
-
-
         }
     });
 
 
     $("#usernameR,#email,#pwdR,#rePwdR").on("change keyup", function () {
 
-        var name = $("#usernameR").val().trim().toString();
-        var mail = $("#email").val().trim()
-        var psw = $("#pwdR").val();
-        var rePsw = $("#rePwdR").val();
+        var name;
+        var mail;
+        var psw;
+        var rePsw;
+        if($('#usernameR').val().toString().length>0){
+            name = $("#usernameR").val().trim();
+        }
+        if($('#email').val().toString().length>0){
+            mail = $("#email").val().trim();
+        }
+        if($('#pwdR').val().toString().length>0){
+            psw = $("#pwdR").val();
+        }
+        if($('#rePwdR').val().toString().length>0){
+            rePsw = $("#rePwdR").val();
+        }
 
         if ($("#upLetterIcon,#lowLetterIcon,#numberIcon,#lengthIcon,#email,#statusU,#statusP").hasClass("fa-check") && name != '' && mail != '' && psw != '' && rePsw != '' && $("#upLetter,#lowLetter,#number,#length,#errorUser").hasClass('has-text-success') && !$('#email').hasClass('is-danger') && !$('#statusP').hasClass('has-text-danger')) {
 
