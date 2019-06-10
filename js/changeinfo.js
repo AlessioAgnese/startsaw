@@ -118,11 +118,10 @@ $(document).ready(function () {
                 },
                 success: function (data) {
                     if (data.ok) {
-                        //$('html').load('#imgProfile > *');
+
                         $("#notif").removeClass("is-danger").addClass("is-link");
                         $("#notif").css("display", "block");
                         $("#notifText").text("Immagine Cancellata");
-                        //setTimeout(function(){ $("#notif").css("display", "none");}, 5000);
                     } else {
                         alert("Cancellazione non riuscita");
                     }
