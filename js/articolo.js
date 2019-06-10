@@ -109,9 +109,6 @@ $(document).ready(function () {
                     c++;
                 });
 
-            } else {
-                //riesci a mettere una scritta con "nessun commento fin ora?"
-                //alert("nessun commento");
             }
         },
         error: function (errorThrown) {
@@ -120,12 +117,10 @@ $(document).ready(function () {
     })
 
     $('#edit').click(function () {
-        console.log("test2");
         window.location.replace("editArt.html#" + GetURLParameter("#") + "");
     });
 
     $('#delete').click(function () {
-        console.log("test");
         $.ajax({
             url: './php/delArt.php',
             type: 'post',

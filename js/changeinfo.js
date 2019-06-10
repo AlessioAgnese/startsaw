@@ -50,35 +50,6 @@ $(document).ready(function () {
                 console.log(errorThrown);
             }
         })
-    
-    //elimina account
-    $('#accountD').click(function () {
-        $.ajax({
-            url: './php/userinfo.php',
-            type: 'get',
-            dataType: 'json',
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader('X-Type','delete');
-                xhr.setRequestHeader('X-Authentication', localStorage.getItem('token'));
-            },
-            success: function (data) {
-                if (data.ok) {
-                    $("#notif").removeClass("is-danger").addClass("is-link");
-                        $("#notif").css("display", "block");
-                        $("#notifText").text("Cancellazione avvenuta con successo");
-                        $("html, body").animate({scrollTop: 0}, 1000);
-                        localStorage.removeItem('token');
-                        setTimeout(function(){           
-                        window.location.replace("./index.html");
-                        },1000);
-                }
-            }
-        }
-        )
-    })
-                   
-
-
 
         if ('token' in localStorage) {
             $.ajax({
@@ -147,11 +118,10 @@ $(document).ready(function () {
                 },
                 success: function (data) {
                     if (data.ok) {
-                        //$('html').load('#imgProfile > *');
+
                         $("#notif").removeClass("is-danger").addClass("is-link");
                         $("#notif").css("display", "block");
                         $("#notifText").text("Immagine Cancellata");
-                        //setTimeout(function(){ $("#notif").css("display", "none");}, 5000);
                     } else {
                         alert("Cancellazione non riuscita");
                     }
