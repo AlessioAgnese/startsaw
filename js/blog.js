@@ -40,8 +40,8 @@ $(document).ready(function () {
                     var html = '<div class="column is-4 ">' +
                         '<a href="articolo.html#' + data.id[index] + '" class="card">' +
                         '<div class="card-content has-background-white">' +
-                        '<p class="title is-5">' +
-                        titolo.toUpperCase() +
+                        '<p class="title is-5 is-capitalized">' +
+                        titolo.trim() +
                         '</p>' +
                         '</div>' +
                         '<div class="card-image">' +
@@ -120,8 +120,8 @@ $(document).ready(function () {
                         var html = '<div class="column is-4 ">' +
                             '<a href="articolo.html#' + data.id[index] + '" class="card">' +
                             '<div class="card-content has-background-white">' +
-                            '<p class="title is-5">' +
-                            titolo.toUpperCase() +
+                            '<p class="title is-5" is-capitalized>' +
+                            titolo.trim() +
                             '</p>' +
                             '</div>' +
                             '<div class="card-image">' +
