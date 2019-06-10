@@ -45,13 +45,8 @@ $(document).ready(function () {
                         '</p>' +
                         '</div>' +
                         '<div class="card-image">' +
-<<<<<<< HEAD
                         '<figure class="4by3">' +
                         '<img  src="'+immagine[0]+'">' +
-=======
-                        '<figure >' +
-                        '<img class="imageBlog" src="'+immagine[0]+'">' +
->>>>>>> d7f12c549bcf67b682f57a5ced8b34eca29b1bea
                         '</figure>' +
                         '</div>' +
                         '<div class="card-content has-background-white">' +
@@ -130,13 +125,8 @@ $(document).ready(function () {
                             '</p>' +
                             '</div>' +
                             '<div class="card-image">' +
-<<<<<<< HEAD
                             '<figure class="4by3">' +
                             '<img src="'+immagine[0]+'">' +
-=======
-                            '<figure >' +
-                            '<img class="imageBlog" src="'+immagine[0]+'">' +
->>>>>>> d7f12c549bcf67b682f57a5ced8b34eca29b1bea
                             '</figure>' +
                             '</div>' +
                             '<div class="card-content has-background-white">' +
